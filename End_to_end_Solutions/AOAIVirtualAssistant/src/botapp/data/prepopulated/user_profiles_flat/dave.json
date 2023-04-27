@@ -1,0 +1,28 @@
+{
+    "user_id": "dave",
+    "user_name": "Dave Huang",
+    "home_address": "100 Main Street, Seattle, WA",
+    "customer_since": "2019-03-01",
+    "auto_insurance": true,
+    "auto_insurance_deductible": 500,
+    "auto_insurance_claim_history": [
+        {
+            "claim_date": "2020-01-01",
+            "claim_amount": 500,
+            "claim_reason": "auto accident"
+        },
+        {
+            "claim_date": "2022-04-01",
+            "claim_amount": 900,
+            "claim_reason": "auto accident"
+        }
+    ],
+    "safe_driver_rating": 0.22,
+    "home_insurance": true,
+    "flood_insurance": false,
+    "flood_risk_factor": 0.8,
+    "bundling_discount": true,
+    "safe_driver_discount": false,
+    "tracking_device_discount": false,
+    "id": "dave"
+}

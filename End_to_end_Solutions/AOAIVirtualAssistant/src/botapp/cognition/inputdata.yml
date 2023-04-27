@@ -1,0 +1,44 @@
+data:
+  auto_insurance_data:
+    USER_INFO: |
+     Insurer's name: J. Kirk
+     Auto Insurance: Yes
+     Auto Insurance deductible: $500 per incident
+     Home Insurance: Yes
+     Bundling: Yes
+     Home Address: 100 Main Street, Seattle, WA
+     Flood risk factor: 6 of 10
+     Own or rent current residence: Own
+     Customer since: March 2019
+     Claims history: auto accident in Jan 2020; auto accident in Apr 2022
+     Safe driver rating: 22 out of 100
+    RELEVANT_INFO: |
+      Ways for users to lower their insurance premium:
+       1. Bundle your policies. If you have more than one type of insurance policy, consider bundling them. This can often result in a discount on your premium.
+       2. Increase your deductible. The higher your deductible, the lower your premium will be.
+       3. For auto insurance, take advantage of safe driver discounts. You can also install safety devices in your vehicle and get a discount.
+       4. Improve safe driver rating. The higher rating you have, the lower your premium will be.
+  flood_insurance_data:
+    USER_INFO: |
+     Insurer's name: J. Kirk
+     Auto Insurance: Yes
+     Auto Insurance deductible: $500 per incident
+     Home Insurance: Yes
+     Bundling: Yes
+     Home Address: 100 Main Street, Seattle, WA
+     Flood risk factor: 6 of 10
+     Own or rent current residence: Own
+     Customer since: March 2019
+     Claims history: auto accident in Jan 2020; auto accident in Apr 2022
+     Safe driver rating: 22 out of 100
+    RELEVANT_INFO: |
+      Reasons to buy flood insurance:  
+        1. Standard homeowner's insurance policies do not cover floods. So, it's wise to consider flood insurance even if you are not required to purchase it.  
+        2. Even if you live outside a high-risk flood zone, it's a wise decision to buy flood insurance. In fact, statistics show that people who live outside the high-risk areas file more than 25 percent of flood claims nationwide. If it can rain, it can flood. Flood zones are areas where there is a higher statistical probability of a flood occurring  
+        3. The Federal Emergency Management Agency calculations show that 1 inch of water can cause $25,000 worth of damage to your home. 18 inches or more of water could mean repairs to the electrical system and the heating and cooling system. It also means replacing doors, appliances and cabinetry..
+
+    AUX_INFO: |
+      Reasons to not buy flood insurance:  
+        1. You may live somewhere with a low risk of flooding  
+        2. Flood insurance only covers up to $250,000 for your property and $100,000 for your personal belongings  
+        3. The average cost of flood insurance was $780 per year in 2022

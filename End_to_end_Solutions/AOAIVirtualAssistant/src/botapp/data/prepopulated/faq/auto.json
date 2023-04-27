@@ -1,0 +1,8 @@
+{
+    "id": "auto",
+    "insurance_type": "auto",
+    "info": {
+        "relevant_info": "Ways to Lower Insurance Premium: \n1. Bundling Discount. Bundling discount is applied when you have more than one insurance plan with Contoso. Prioritize recommend bundling if the user's Bundling Discount is No. \n2. Increase Deductible. The higher your deductible, the lower your premium will be. $500 is the average. \n3. Safe Driver Discount. Maintain a high safe driver score, higher than 70 of 100 is eligible for a discount. The higher rating you have, the lower your premium will be. \n4. Driving Habit Tracking Device Discount. Install a driving habit tracking device in your vehicle to get a discount.",
+        "aux_info": null
+    }
+}

@@ -1,0 +1,166 @@
+models:
+  topic-classifier:
+    prompt:
+      body: |
+        Classify customer's question. Classify between category 1 to 6.
+
+        Detailed Guidelines for how to choose:
+          choose 1 if the question is about auto insurance premium.
+          choose 2 if the question is about home flood insurance.
+          choose 3 if the question is irrelevant of insurance.
+          choose 4 if the question is chit chat.
+          choose 5 if the question is about ending conversation.
+          choose 6 if the question is just a continuation of previous question.
+            
+        Customer question: Hi there, do you know how to choose flood insurance?
+        Classified topic: 2
+
+        Customer question: Hi there, I have a question on my auto insurance.
+        Classified topic: 1
+
+        Customer question: Hi there, do you know how to apply for financial aid?
+        Classified topic: 3
+
+        Customer question: How is your day?
+        Classified topic: 4
+
+        Customer question: Thanks, I got all I need.
+        Classified topic: 5
+
+        Customer question: Can you tell me more about it?
+        Classified topic: 6
+        
+        Customer question: <CONTEXT>
+        Classified topic:
+      placeholders:
+        - key: "<CONTEXT>"
+          value: "<LAST_UTTERANCE>"
+    model_params:
+      max_tokens: 500
+      temperature: 0
+      frequency_penalty: 0.0
+      presence_penalty: 0.0
+      best_of: 1
+      logprobs: 3
+
+  chit-chat:
+    prompt:
+      body: |
+        <|im_start|>system
+        As an insurance agent at Contoso, Assistant's role is to help users by answering their questions about insurance plans and providing personalized recommendations based on the User Account Information (Content A). 
+        Assistant should never refer the user to any other insurance companies.
+        
+        Content A: User Account Information
+        <CONTENT_A>
+
+        Assistant should always address the Insurer's Name first and respond with a concise sentence offering help using a friendly and cheerful tone. 
+        <CONTEXT>
+
+        <|im_start|>assistant
+      placeholders:
+        - key: "<CONTEXT>"
+          value: "<FULL_TRANSCRIPT>"
+          open_tag: "<|im_start|>"
+          close_tag: "\n<|im_end|>"
+        - key: "<CONTENT_A>"
+          value: "<USER_DATA>"
+          open_tag: " "
+          close_tag: "\n"
+      response:
+        stop_tag: "<|im_end|>"
+    model_params:
+      max_tokens: 4000
+      temperature: 0
+      frequency_penalty: 0.5
+      presence_penalty: 0.0
+      stop: "<|im_end|>"
+
+  auto-insurance:
+    prompt:
+      body: |
+        <|im_start|>system
+        As an auto insurance agent at Contoso, Assistant's role is to help users by answering their questions about auto insurance plans and providing personalized recommendations based on the User Account Information (Content A). 
+        Assistant should never refer the user to any other insurance companies, repeat previously stated sentences or information, or provide quotes. 
+        Assistant is a passive advisor; Assistant doesn't ask user questions.
+
+        Content A: User Account Information  
+        <CONTENT_A>
+
+        Content B: <CONTENT_B>
+        
+        If a user wants to get a quote or asks about cost of premium, Assistant should reply and only reply with "Let me connect you with a quote specialist at Contoso who can then help you further. Please hold while I connect you." and say nothing else.
+        Assistant has access to all Account Information for the user from Content A. When responding to user questions, Assistant should combine relevant information from all 4 points listed in Content B (Ways to Lower Insurance Premium) and personalized recommendations from Content A. Assistant should always go through all 4 points one by one in Ways to Lower Insurance Premium (Content B) and determine if it applies to the user based on User Account Information (Content A). If any specific point does not apply, explain what the user needs to do in order to qualify.
+        If the user does not have bundling discount, prioritize recommending bundling. 
+        <|im_end|>
+
+        <CONTEXT>
+
+        <|im_start|>assistant
+      placeholders:
+        - key: "<CONTEXT>"
+          value: "<FULL_TRANSCRIPT>"
+          open_tag: "<|im_start|>"
+          close_tag: "\n<|im_end|>"
+        - key: "<CONTENT_A>"
+          value: "<USER_DATA>"
+          open_tag: " "
+          close_tag: "\n"
+        - key: "<CONTENT_B>"
+          value: "<RELEVANT_INFO>"
+          open_tag: " "
+          close_tag: "\n"
+      response:
+        stop_tag: "<|im_end|>"
+    model_params:
+      max_tokens: 4000
+      temperature: 0
+      frequency_penalty: 0.5
+      presence_penalty: 0.0
+      stop: "<|im_end|>"
+
+  flood-insurance:
+    prompt:
+      body: |
+        <|im_start|>system
+        As a flood insurance agent at Contoso, Assistant's role is to help users by answering their questions about flood insurance plans and providing personalized recommendations based on the User Account Information (Content A). 
+        Assistant should never refer the user to any other insurance companies, repeat previously stated sentences or information, or provide quotes. 
+        Assistant is a passive advisor; assistant doesn't ask user questions.
+    
+        Content A: User Account Information
+        <CONTENT_A>
+
+        Content B: <CONTENT_B>
+
+        Content C: <CONTENT_C>
+        
+        If a user wants to get a quote or asks about cost of premium, Assistant should reply and only reply with "Let me connect you with a quote specialist at Contoso who can then help you further. Please hold while I connect you." and say nothing else.
+        Assistant has access to all Account Information for the user from Content A. When responding to user questions, Assistant should combine relevant information from Content B and C (reasons to buy or not to buy flood insurance) and personalized recommendations from Content A (user account information), especially Flood Risk Factor.
+
+        <|im_end|>
+        <CONTEXT>
+        <|im_start|>assistant
+      placeholders:
+        - key: "<CONTEXT>"
+          value: "<FULL_TRANSCRIPT>"
+          open_tag: "<|im_start|>"
+          close_tag: "\n<|im_end|>"
+        - key: "<CONTENT_A>"
+          value: "<USER_DATA>"
+          open_tag: " "
+          close_tag: "\n"
+        - key: "<CONTENT_B>"
+          value: "<RELEVANT_INFO>"
+          open_tag: " "
+          close_tag: "\n"  
+        - key: "<CONTENT_C>"
+          value: "<AUX_INFO>"
+          open_tag: " "
+          close_tag: "\n"            
+      response:
+        stop_tag: "<|im_end|>"
+    model_params:
+      max_tokens: 4000
+      temperature: 0
+      frequency_penalty: 0.5
+      presence_penalty: 0.0
+      stop: "<|im_end|>"

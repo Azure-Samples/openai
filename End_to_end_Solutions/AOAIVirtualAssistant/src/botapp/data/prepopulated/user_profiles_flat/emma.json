@@ -1,0 +1,17 @@
+{
+    "user_id": "emma",
+    "user_name": "Emma Miller",
+    "home_address": "44 170th Ave, Redmond, WA",
+    "customer_since": "2017-12-01",
+    "auto_insurance": true,
+    "auto_insurance_deductible": 500,
+    "auto_insurance_claim_history": [],
+    "safe_driver_rating": 0.9,
+    "home_insurance": false,
+    "flood_insurance": false,
+    "flood_risk_factor": 0.6,
+    "bundling_discount": false,
+    "safe_driver_discount": true,
+    "tracking_device_discount": false,
+    "id": "emma"
+}

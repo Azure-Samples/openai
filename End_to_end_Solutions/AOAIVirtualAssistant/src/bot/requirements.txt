@@ -1,0 +1,6 @@
+botbuilder-integration-aiohttp>=4.14.0
+python-dotenv
+azure-identity
+azure-keyvault-secrets
+requests_oauthlib
+azure-cosmos
