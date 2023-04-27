@@ -1,0 +1,4 @@
+jsonpointer==2.3
+jsonschema==4.17.3
+openai==0.27.2
+tiktoken==0.3.1
