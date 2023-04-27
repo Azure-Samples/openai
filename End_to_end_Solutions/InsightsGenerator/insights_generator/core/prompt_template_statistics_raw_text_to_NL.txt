@@ -1,0 +1,5 @@
+Comments about {product_category}:
+{comments}
+Summarize the comments
+
+

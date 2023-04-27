@@ -1,0 +1,16 @@
+### Document Body
+
+Review about {product_category}:
+{review_text}
+
+<EndOfText>
+
+As a marketing researcher, answer questions only referring to the review above.
+
+<EndOfText>
+
+### Questions
+
+1) Summarize the keyphrases about {top_aspect} as bulleted list
+
+

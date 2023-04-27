@@ -1,0 +1,19 @@
+Document Body
+
+Review of {product_category}
+
+{review_text}
+
+|endoftext|
+
+Write answer for questions only referring to the facts in document above.
+Sentiment can either be positive, negative, other or unmentioned.
+Topics are {top_aspects}
+
+|endoftext|
+
+### Questions
+1) List the topics and corresponding sentiments as key : value pairs. Separate the pairs by commas.
+
+Answer:
+
