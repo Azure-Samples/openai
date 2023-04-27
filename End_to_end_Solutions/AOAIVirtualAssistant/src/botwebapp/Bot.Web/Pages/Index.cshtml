@@ -1,0 +1,153 @@
+﻿@page
+@using Newtonsoft.Json
+@using Newtonsoft.Json.Linq
+@using static Bot.Web.Pages.IndexModel
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Web Chat: Cognitive Services Speech Services using JavaScript</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script crossorigin="anonymous" src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        #webchat {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-md-start gx-2">
+            <div class="col-3 p-3" 
+                style="border-color: whitesmoke; border-width:thin; border-style:solid;">
+                <h5>
+                    Select User profile to use for this demo
+                </h5>
+                
+                <div class="form-check">
+                    <input class="form-check-input" 
+                            type="radio" name="userProfileRadio" id="dave" />
+                    <label class="form-check-label" for="dave">
+                        Dave Huang
+                    </label>
+                </div>
+                
+                <div class="form-check">
+                  <input class="form-check-input" 
+                        type="radio" name="userProfileRadio" id="emma">
+                  <label class="form-check-label" for="emma">
+                        Emma Miller
+                  </label>
+                </div>
+
+                <p></p>
+                <div class="card card-body" id="userInfoCard"></div>
+
+                <p></p>
+                <div class="alert-light">
+                    <h6>Note on user profile selection</h6>
+                    <ol>
+                        <li>To select a user profile, simply click on the user's name. This will start a new conversation history for that user.</li>
+                        <li>If you switch to the same user again, the old conversation history of that user will be loaded in the backend. </li>
+                        <li>To clear all history and start again, please reload the page</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="col-9" id="webchat" role="main" 
+                style="height:720px; border-color: WhiteSmoke; border-width: thin; border-style: solid"> 
+            </div>
+        </div>
+    </div>
+    <script>
+        const styleSet = window.WebChat.createStyleSet({
+            rootHeight: '100%',
+            rootWidth: '100%',
+
+            bubbleBackground: 'rgba(155, 240, 11, .1)',
+            bubbleBorderRadius: 10,
+            bubbleMinWidth: 200,
+            bubbleMaxWidth: 600,
+            bubbleFromUserBackground: 'rgba(213, 157, 255, .1)',
+            bubbleFromUserBorderRadius: 10,
+
+            suggestedActionBorderRadius: 10,
+            suggestedActionLayout: 'stacked',
+            sendBoxBackground: "Snow"
+        });
+
+        let current_user = null;
+            
+        (async function () {
+
+            let dlToken = '@ViewData["WebChatToken"]';
+            let userId = '@ViewData["WebChatUserId"]';
+            let speechRegion = '@ViewData["SpeechRegion"]';
+            let speechToken = '@ViewData["SpeechToken"]';
+
+            let user_info = {
+                "emma": `Emma has existing car insurance. She just bought a home; however, she does not have home insurance with Contoso. She has been a cautious driver and has a very good safe driver rating.`,
+                "dave": `Dave has auto and home insurance with Contoso without coverage for flooding. Due to his recent driving incidents, he has a poor safe driving rating and has filed several claims.`
+            };
+
+            const store = window.WebChat.createStore({}, ({ dispatch }) => next => action => {
+                if (action.type === 'WEB_CHAT/SEND_MESSAGE') {
+                    action = window.simpleUpdateIn(
+                        action,
+                        ['payload', 'channelData', 'user_id'],
+                        () => current_user
+                    );
+                }
+
+                return next(action);
+            });
+
+            document.querySelectorAll('input[name="userProfileRadio"]').forEach((elem) => {
+                elem.addEventListener("change", function (event) {
+                    current_user = event.target.id;
+                    document.getElementById("userInfoCard").innerHTML = user_info[current_user];
+
+                    store.dispatch({
+                        type: 'WEB_CHAT/SEND_EVENT',
+                        payload: {
+                            name: 'webchat/clear_user',
+                            value: { user_id: current_user }
+                        }
+                    })
+                });
+            });
+
+            const webSpeechPonyfillFactory = await window.WebChat.createCognitiveServicesSpeechServicesPonyfillFactory({
+                credentials: { authorizationToken: speechToken, region: speechRegion, token: speechToken }
+            });
+
+            window.WebChat.renderWebChat(
+                {
+                    directLine: window.WebChat.createDirectLine( {secret: dlToken }),
+                    webSpeechPonyfillFactory,
+                    store,
+                    styleSet,
+                    UserID: userId
+                },
+                document.getElementById('webchat')
+            );
+
+            document.querySelector('#webchat > *').focus();
+        })().catch(err => console.error(err));
+
+    </script>
+</body>
+</html>
