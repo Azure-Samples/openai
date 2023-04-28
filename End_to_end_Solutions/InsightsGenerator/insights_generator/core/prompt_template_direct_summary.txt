@@ -1,0 +1,5 @@
+# Reviews
+{review_texts}
+
+As a marketing researcher, write a summary having supporting viewpoints and conflicting viewpoint to the question.
+Question: {question}

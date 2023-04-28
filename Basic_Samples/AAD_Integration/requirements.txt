@@ -1,0 +1,8 @@
+# Packages needed to call AOAI API with Azure Active Directory authentication
+azure-identity
+
+# Packages needed to call AOAI API with the OpenAI Python API
+openai
+
+# Packages needed to run the notebook samples
+jupyter

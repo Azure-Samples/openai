@@ -1,0 +1,14 @@
+Document Body
+
+{sentiment_aspects}
+
+|endoftext|
+
+The above is a list of topics and accompanying sentiments.
+Write answer for questions only referring to the facts in document above.
+
+|endoftext|
+
+### Questions
+1) Summarize the most common topics as a list of bullet points
+

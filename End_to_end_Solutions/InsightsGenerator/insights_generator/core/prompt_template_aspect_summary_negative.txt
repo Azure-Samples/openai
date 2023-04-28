@@ -1,0 +1,16 @@
+### Document Body
+
+Comments about {aspect}:
+{keyphrases}
+
+<EndOfText>
+
+As a marketing researcher, answer questions only referring to the comments above.
+
+<EndOfText>
+
+### Questions
+
+1. Summarize the negative comments about {aspect} in one sentence
+2. What are specific issues regarding {aspect}. How can the manufacturer improve {aspect}.
+

@@ -1,0 +1,10 @@
+### Document Body
+
+Comments about {product_category}:
+{aspect_summaries}
+
+<EndOfText>
+
+As a marketing researcher, summarize the comments, only referring to the above document
+
+

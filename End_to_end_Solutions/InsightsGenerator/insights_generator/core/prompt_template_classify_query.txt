@@ -1,0 +1,5 @@
+Classify as per the examples:
+Show me a sample of reviews with negative comments about battery life, in the last 3 months.|FILTER
+What is user response on noise cancellation|DIRECT
+Recreate the aspect summary with noise cancellation included.|ADD_ASPECT
+{nl_query}|

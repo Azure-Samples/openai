@@ -1,0 +1,18 @@
+Document Body
+
+Review of {product_category}
+
+{review_text}
+
+|endoftext|
+
+Write answer for questions only referring to the facts in document above.
+
+
+|endoftext|
+
+### Questions
+1) Which of the topics {top_aspects} are present in the document. Separate the topics by commas.
+
+Answer:
+

@@ -1,0 +1,13 @@
+Query:
+{question}
+
+List of aspects:
+{top_aspects}
+
+Answer the below questions as key value pairs
+
+1. What is the aspect mentioned in the query
+2. What is the sentiment mentioned in the query
+3. What is the recency mentioned in the query
+
+

@@ -1,0 +1,11 @@
+pyyaml
+requests
+tiktoken
+flask
+python-dotenv
+prefect==1.4.1
+azure-identity
+azure-keyvault-secrets
+requests_oauthlib
+tenacity
+azure-cosmos
