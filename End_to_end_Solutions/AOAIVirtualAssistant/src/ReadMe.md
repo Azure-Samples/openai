@@ -4,7 +4,7 @@ Please expect frequent updates and development of this demo to adapt to the chan
 and development of OpenAI offering in Azure. Your feedback and contributions are welcome!
 
 <em>This demo doesn't have full coverage of the scenario, and is more highlighting ideas with how to work with AOAI in this setup. The VA enables a few 
-scenarios and would function best within the boundaries of the script mentioned in this [document](./doc/Script.md)</em>
+scenarios and would function best within the boundaries of the script mentioned in this [document](./docs/Script.md)</em>
 
 # News
 
