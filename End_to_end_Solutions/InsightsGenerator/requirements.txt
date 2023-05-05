@@ -13,3 +13,5 @@ joblib
 scikit-learn
 python-dateutil
 numpy
+tiktoken
+azure-storage-blob
