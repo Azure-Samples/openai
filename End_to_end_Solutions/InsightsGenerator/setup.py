@@ -13,10 +13,10 @@ VERSION = "1.0.0"
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 
-REQUIRES = [
-    "connexion==2.14.1",
-    "aiohttp_jinja2==1.5.0",
-]
+#REQUIRES = [
+#    "connexion==2.14.1",
+#    "aiohttp_jinja2==1.5.0",
+#]
 
 setup(
     name=NAME,
@@ -25,7 +25,6 @@ setup(
     author_email="qnamakerteam@microsoft.com",
     url="",
     keywords=["Insights Generator"],
-    install_requires=REQUIRES,
     packages=find_packages(),
     package_data={'': [
         'core/prompt_template_NL.txt',

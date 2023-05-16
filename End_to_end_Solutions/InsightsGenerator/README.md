@@ -27,7 +27,7 @@ Insights generator is a proof of concept code sample. A list of limitations is i
 The helper functions and intermediate outputs are exposed and the notebooks can be extended beyond the current use cases easily.
 
 ## Requirements
-Python 3.5.2+
+Python 3.8+
 
 ## Usage
 Install the insights\_generator package by following the following commands.

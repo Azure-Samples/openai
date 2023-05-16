@@ -5,6 +5,7 @@ from sklearn.cluster import AgglomerativeClustering
 from joblib import Parallel, delayed
 import itertools
 import json
+import time
 
 
 def semantic_clustering(texts, distance_threshold):
@@ -13,9 +14,13 @@ def semantic_clustering(texts, distance_threshold):
 
     # 1) Calculate embeddings
     print("Calculating embeddings...")
-    n_jobs = 5
-    print("Starting " + str(n_jobs) + " parallel jobs.")
-    embeddings = Parallel(n_jobs = n_jobs)(delayed(OAI_client.calc_embedding)(text) for text in texts)
+    embeddings = []
+    rate_limit_seconds = 60
+    for text in texts:
+        time.sleep(rate_limit_seconds)
+        embedding = OAI_client.calc_embedding(text)
+        embeddings.append(embedding)
+        print("Calculated embedding")
     print("done.")
 
     # 2) Make into matrix of num_obs x embedding_dim

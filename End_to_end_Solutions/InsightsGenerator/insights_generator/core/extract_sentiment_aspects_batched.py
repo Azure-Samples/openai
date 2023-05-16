@@ -1,4 +1,3 @@
-from insights_generator.clients.storage_client import StorageClient
 from . import extract_sentiment_aspects
 
 async def get_per_review_aspects(project_object, reviews, batch_size):

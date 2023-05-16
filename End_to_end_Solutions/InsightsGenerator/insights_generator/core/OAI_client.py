@@ -5,7 +5,6 @@ import pdb
 import tiktoken
 
 def make_prompt_request(prompt, max_tokens = 2048, timeout = 4):
-    #url = "https://api.openai.com/v1/embeddings"
     url = os.getenv("AOAI_ENDPOINT")
     key = os.getenv("AOAI_KEY")
                   
@@ -69,7 +68,7 @@ def calc_embedding(input_text):
         print("Num tokens after truncation: " + str(num_tokens_from_string(input_text, encoding_name)))
 
     #pdb.set_trace()
-    url = "https://qnadevoai.openai.azure.com/openai/deployments/text-embedding-ada-002/embeddings?api-version=2022-12-01"
+    url = os.getenv("AOAI_EMBEDDING_ENDPOINT")
     key = os.getenv("AOAI_KEY")
                   
     payload_dict = {"input": input_text}

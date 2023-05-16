@@ -2,7 +2,6 @@ import re
 from . import OAI_client
 from collections import defaultdict
 from . import extract_sentiment_aspects_batched
-from ..clients.storage_client import StorageClient
 
 def parse_the_sentiment_aspects_key_value(reviews_with_sentiment_aspects):
 
