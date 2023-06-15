@@ -1,0 +1,11 @@
+cust_id,cust_name,cust_email,cust_phone,cust_address
+1,John Doe,john.doe@example.com,555-123-4567,"123 Main St, City A"
+2,Jane Smith,jane.smith@example.com,555-987-6543,"456 High St, City B"
+3,Michael Johnson,michael.johnson@example.com,555-456-7890,"789 First St, City C"
+4,Sara Williams,sara.williams@example.com,555-321-6549,"147 Second St, City D"
+5,Kevin Brown,kevin.brown@example.com,555-987-3214,"258 Third St, City E"
+6,Nancy Davis,nancy.davis@example.com,555-654-9870,"369 Fourth St, City F"
+7,Brian Miller,brian.miller@example.com,555-789-0123,"480 Fifth St, City G"
+8,Kimberly Wilson,kimberly.wilson@example.com,555-963-8521,"951 Sixth St, City H"
+9,Ava Moore,ava.moore@example.com,555-741-8520,"102 Ninth St, City I"
+10,Ethan Taylor,ethan.taylor@example.com,555-147-0258,"753 Tenth St, City J"

@@ -1,0 +1,29 @@
+users:
+  - user_id: "5a1c9aa9-c60b-487b-a1b2-04c275f6f542"
+    user_name: "Dave Huang"
+    description: "Dave is a regional sales manager who wants to predict sales prices and understand the trends from previous product releases. He is also keen to understand customer issues faced in previous releases to get himself familiar with potential issues to get prepared in advance."
+    sample_questions:
+      - "How much stock of Surface Go 3 are we currently carrying?"
+      - "How many tablets were sold last week?"
+      - "List all our products with their prices"
+  - user_id: "7b17fb37-c3d6-4df0-8a51-dc1d6aa0e267"
+    user_name: "Emma Miller"
+    description: "Emma is a marketing lead and is responsible for content creation for new Surface Laptops. She wants to first review the available information on the company website regarding previous Surface products and understand their capabilities. With this knowledge, she will have a better understanding of the new features of the surface laptop and will be able to emphasize them while creating the marketing collateral."
+    sample_questions:
+      - "What are the capabilities of Surface Go devices?"
+      - "Provide a list for the battery lives of Surface devices"
+      - "List the best features of Surface devices based on customer feedback"
+groups:
+  - group_id: "4cd9225c-5ab0-493e-b7fb-24f8daa22345"
+    group_name: "Marketing"
+    users: 
+      - user_id: "7b17fb37-c3d6-4df0-8a51-dc1d6aa0e267"
+  - group_id: "0ec8ebf5-620f-42ae-bb52-6f09f89cba09"
+    group_name: "Sales"
+    users: 
+      - user_id: "5a1c9aa9-c60b-487b-a1b2-04c275f6f542"
+resources:
+  - resource_id: "3c2e5577-55d6-4d98-bfc3-2dc6be17e0bc"
+    resource_type: "COGNITIVE_SEARCH"
+  - resource_id: "66b6899c-2bff-4892-b3d0-56488859d76d"
+    resource_type: "SQL_DB"

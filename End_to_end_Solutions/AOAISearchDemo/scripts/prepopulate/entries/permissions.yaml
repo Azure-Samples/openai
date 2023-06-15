@@ -1,0 +1,14 @@
+access_rules:
+  - rule_id: "1aa80c43-8f80-4403-91c3-b07a69ef74dc"
+    resources:
+    - resource_id: "3c2e5577-55d6-4d98-bfc3-2dc6be17e0bc"
+    members:
+      - id: "4cd9225c-5ab0-493e-b7fb-24f8daa22345"
+        member_type: "group"
+  - rule_id: "5db7ac39-a08f-4765-a8da-32a591e878a7"
+    resources:
+    - resource_id: "3c2e5577-55d6-4d98-bfc3-2dc6be17e0bc"
+    - resource_id: "66b6899c-2bff-4892-b3d0-56488859d76d"
+    members: 
+      - id: "0ec8ebf5-620f-42ae-bb52-6f09f89cba09"
+        member_type: "group"

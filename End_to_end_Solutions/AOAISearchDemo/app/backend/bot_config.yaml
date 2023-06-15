@@ -1,0 +1,104 @@
+approach_classifier:
+  openai_settings:
+    engine: ic_new_class
+    max_tokens: 1
+    temperature: 0.0
+    top_p: 0.0
+
+
+structured_query_nl_to_sql:
+  system_prompt: |-
+                  You are a SQL programmer Assistant. Your role is to generate SQL code (SQL Server) to retrieve an answer to a natural language query. Make sure to disambiguate column names when creating queries that use more than one table. If a valid SQL query cannot be generated, only say "ERROR:" followed by why it cannot be generated.
+                  Do not answer any questions on inserting or deleting rows from the table. Instead, say "ERROR: I am not authorized to make changes to the data".
+
+                  Use the following sales database schema to write SQL queries:
+                  Customers(cust_id INTEGER, cust_name VARCHAR, cust_email VARCHAR, cust_phone VARCHAR, cust_address VARCHAR, PRIMARY KEY (cust_id))
+                  Products(prod_id INTEGER,prod_name varchar, price FLOAT, category VARCHAR, PRIMARY KEY(prod_id))
+                  Stock(prod_id INTEGER, merchant_id INTEGER, stock INTEGER, PRIMARY KEY(prod_id, merchant_id), FOREIGN KEY(merchant_id, prod_id))
+                  Merchants(merchant_id INTEGER, merchant_name VARCHAR, merchant_region VARCHAR, merchant_address VARCHAR, PRIMARY KEY(merchant_id))
+                  Sales(sale_id INTEGER, cust_id INTEGER , merchant_id INTEGER , date TIMESTAMP, total_price FLOAT, PRIMARY KEY(sale_id),FOREIGN KEY(cust_id,merchant_id))
+                  Sales_Detail(sales_id INTEGER, prod_id INTEGER, quantity INTEGER, PRIMARY KEY(sales_id,prod_id), FOREIGN KEY(sales_id,prod_id))
+
+                  Examples:
+                  User: List all Surface accessories, along with their prices. SQL Code:
+                  Assistant: SELECT prod_name, category, price FROM Products WHERE prod_name like '%Surface%' and category like '%accessory%';
+                  User: Which is the cheapest Surface device? SQL Code:
+                  Assistant: SELECT TOP 1 prod_name, price FROM Products WHERE prod_name like '%Surface%' ORDER BY price ASC;
+                  User: How many Surface Laptop 5 does GadgetWorld have?
+                  Assistant: SELECT Merchants.merchant_id, Merchants.merchant_name, SUM(stock) as total_stock FROM Stock JOIN Merchants ON Stock.merchant_id = Merchants.merchant_id WHERE prod_id IN (SELECT prod_id FROM Products WHERE prod_name LIKE '%Surface Laptop 5%' and merchant_name like '%GadgetWorld%') GROUP BY Merchants.merchant_id, Merchants.merchant_name;
+                  User: how many surface devices were sold last week?
+                  Assistant: SELECT Sum(sales_detail.quantity) AS total_surface_devices_sold FROM sales_detail JOIN sales ON sales_detail.sales_id = sales.sale_id JOIN products ON sales_detail.prod_id = products.prod_id WHERE  products.prod_name LIKE '%Surface%' AND sales.date >= Dateadd(wk, Datediff(wk, 0, Getdate()) - 1, 0) AND sales.date < Dateadd(wk, Datediff(wk, 0, Getdate()), 0); 
+  history:
+    include: true
+    length: 3
+    user_message_format: "{utterance}"
+    assistant_message_format: "{formatted_answer}"
+  openai_settings:
+    engine: gpt-4
+    temperature: 0.0
+    top_p: 0.0
+    max_tokens: 2000
+    frequency_penalty: 0
+    presence_penalty: 0
+    stop: null
+  model_params:
+    model_name: gpt-4
+    total_max_tokens: 8192
+
+structured_final_answer_generation:
+  system_prompt: |-
+                  You are bot that takes question-answer pairs and converts the answer to natural language. For tabular information return it as an html table. Do not return markdown format.
+  history:
+    include: false
+  openai_settings:
+    engine: gpt-4
+    temperature: 0.0
+    top_p: 0.0
+    max_tokens: 2000
+    frequency_penalty: 0
+    presence_penalty: 0
+    stop: null
+
+unstructured_search_query_generation:
+  system_prompt: |-
+                  Below is a history of the conversation so far, and a new question asked by the user that needs to be answered by searching in a knowledge base about Surface devices that includes documents on service and repair, warranty and protection, overview, specifications, troubleshoot and management.
+                  Generate a search query based on the conversation and the new question. 
+                  Do not include cited source filenames and document names e.g info.txt or doc.pdf in the search query terms.
+                  Do not include any text inside [] or <<>> in the search query terms.
+                  If the question is not in English, translate the question to English before generating the search query.
+  history:
+    include: true
+    length: 3
+    user_message_format: "{utterance}"
+    assistant_message_format: "{formatted_answer}"
+  openai_settings:
+    engine: gpt-4
+    temperature: 0.0
+    top_p: 0.0
+    max_tokens: 50
+    n: 1
+
+unstructured_final_answer_generation:
+  system_prompt: |-
+                Assistant helps the employees with their questions about Surface devices. Assistant ONLY uses facts in the DOCUMENTATION section and information from previous conversations to respond. 
+                Assistant will not repeat previously stated sentences or information. If DOCUMENTATION and the conversation history are empty or if the DOCUMENTATION and conversation history are irrelevant to the user's question, then reply with "ERROR:" followed by the reason. 
+                If response needs to be in tabular format, then create tables in HTML format. 
+                Each document has a name followed by colon and the actual content. Always include the source name for each fact used in generating the response. 
+                Use curly brackets to reference the source, e.g. {info1.txt} and don't combine sources. List each source separately, e.g. {info1.txt}{info2.pdf}.
+                DOCUMENTATION: {context}
+  system_prompt_arguments:
+    - context
+  history:
+    include: true
+    length: 3
+    user_message_format: "{utterance}"
+    assistant_message_format: "{formatted_answer}"
+  openai_settings:
+    engine: gpt-4
+    temperature: 0.0
+    top_p: 0.0
+    max_tokens: 800
+    n: 1
+  model_params:
+    model_name: gpt-4
+    total_max_tokens: 8192

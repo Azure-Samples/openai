@@ -1,0 +1,14 @@
+azure-identity==1.13.0b3
+Flask==2.2.2
+langchain==0.0.139
+openai==0.27.4
+azure-search-documents==11.4.0b3
+azure-storage-blob==12.14.1
+azure-keyvault-secrets==4.7.0
+python-dotenv==1.0.0
+tenacity
+pyodbc
+opencensus-ext-azure == 1.1.9
+opencensus == 0.11.2
+pandas
+tiktoken==0.4.0
