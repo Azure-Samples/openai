@@ -7,7 +7,11 @@ The repo includes sample data so it's ready to try end to end. In this sample ap
 > 1. Cognitive Search is ingested with  publicly available documentation on [Microsoft Surface devices](https://learn.microsoft.com/en-us/surface/get-started),
 > 2. SQL server is loaded with some sample product availability, sales and merchant information about certain Surface devices
 
-The experience allows users to ask questions about the Surface Devices specifications, troubleshooting help, warranty as well as sales, availability and trend related questions.
+The experience allows users to ask questions about the Surface Devices specifications, troubleshooting help, warranty as well as sales, availability, and trend related questions. 
+
+There are two pre-recorded voiceovers that shows how enterprises can use this architecture for their different users/audiences. The demo uses two different personas:
+> 1. Emma is marketing lead [demo](./docs/Emma%20Miller_with%20voice.mp4)
+> 2. Dave is regional sales manager [demo](./docs/Dave%20Huang_with%20voice.mp4)
 
 ![RAG Architecture](docs/appcomponents.png)
 
