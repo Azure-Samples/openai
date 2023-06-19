@@ -1,0 +1,11 @@
+prod_id,prod_name,price,category
+1,Surface Pro 9,999.99,Tablet
+2,Surface Laptop 5,899.99,Laptop
+3,Surface Slim Pen 2,94.99,Accessory
+4,Surface Laptop SE,299.99,Laptop
+5,Surface Laptop Go 2,599.99,Laptop
+6,Surface Go 3,384.99,Tablet
+7,Surface Studio 2+,1199.99,Computer
+8,Surface Pen,99.99,Accessory
+9,Surface Duo 2,1099.99,Smartphone
+10,Surface Dock,199.99,Accessory

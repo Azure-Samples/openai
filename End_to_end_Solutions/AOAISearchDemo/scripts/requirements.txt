@@ -1,0 +1,13 @@
+pypdf==3.5.0
+azure-cosmos==4.3.1
+azure-identity==1.13.0b3
+azure-keyvault==4.2.0
+azure-search-documents==11.4.0b3
+azure-ai-formrecognizer==3.2.1
+azure-storage-blob==12.14.1
+opencensus==0.11.2
+opencensus-ext-azure==1.1.9
+python-dotenv==1.0.0
+PyYAML==6.0
+pyodbc==4.0.39
+pandas==2.0.1
