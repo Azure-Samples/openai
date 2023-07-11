@@ -39,8 +39,8 @@ resource sqlDatabase 'Microsoft.Sql/servers/databases@2022-08-01-preview' = {
   }
 }
 
-module sqlConnectionStringSecret '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'SQL-CONNECTION-STRING'
+module sqlConnectionStringSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'sql-secret-connection-string'
   params: {
     keyVaultName: keyVaultName
     secretName: 'SQL-CONNECTION-STRING'
@@ -50,7 +50,16 @@ module sqlConnectionStringSecret '../keyvault/keyvault_secret.bicep' = if(addKey
      ',1433;Database=', sqlDatabaseName, 
      ';UiD=', sqlAdminLogin, 
      ';Pwd=', sqlAdminPassword, 
-     ';Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;')
+     ';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;')
+  }
+}
+
+resource sqlAllowAllWindowsAzureIps 'Microsoft.Sql/servers/firewallRules@2022-05-01-preview' = {
+  name: 'AllowAllWindowsAzureIps'
+  parent: sqlServer
+  properties: {
+    startIpAddress: '0.0.0.0'
+    endIpAddress: '0.0.0.0'
   }
 }
 

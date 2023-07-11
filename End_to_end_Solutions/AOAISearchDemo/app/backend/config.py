@@ -9,8 +9,9 @@ from azure.identity import DefaultAzureCredential
 from common.logging.log_helper import CustomLogger
 from datetime import datetime
 
-# load value from .env file if it exists followed by environment variables
-load_dotenv(override=True)
+# load value from .env file if it exists, unless deploying in a production environment
+if os.getenv("ENVIRONMENT") != "PROD":
+    load_dotenv(override=True, dotenv_path=f"{os.getcwd()}/backend/.env")
 
 class Config_Reader():
     def __init__(self, logger: CustomLogger) -> None:
@@ -90,8 +91,8 @@ class DefaultConfig:
 
                 cls.SQL_CONNECTION_STRING = config_reader.read_config_value("SQL-CONNECTION-STRING")
 
-                cls.RATIO_OF_INDEX_TO_HISTORY = int(os.getenv("RATIO_OF_INDEX_TO_HISTORY", 5))
-                cls.SEARCH_THRESHOLD_PERCENTAGE = int(os.getenv("SEARCH_THRESHOLD_PERCENTAGE", 50))
+                cls.RATIO_OF_INDEX_TO_HISTORY = int(os.getenv("RATIO_OF_INDEX_TO_HISTORY", 5)) if os.getenv("RATIO_OF_INDEX_TO_HISTORY") != "" else 5
+                cls.SEARCH_THRESHOLD_PERCENTAGE = int(os.getenv("SEARCH_THRESHOLD_PERCENTAGE", 50)) if os.getenv("SEARCH_THRESHOLD_PERCENTAGE") != "" else 50
                 cls.logger.info(f"SEARCH_THRESHOLD_PERCENTAGE: {cls.SEARCH_THRESHOLD_PERCENTAGE}")
 
                 cls._initialized = True

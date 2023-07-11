@@ -29,8 +29,11 @@ param storageContainerName string = 'content'
 param openAiServiceName string = ''
 param openAiResourceGroupName string = ''
 param openAiResourceGroupLocation string = location
-
 param openAiSkuName string = 'S0'
+param gptDeploymentName string = ''
+param gptModelName string = ''
+param classifierGptDeploymentName string = ''
+param classifierGptModelName string = ''
 
 param cosmosAccountName string = ''
 param cosmosDatabaseName string = 'aoai-search-demo-cosmos-db'
@@ -50,13 +53,7 @@ param sqlResourceGroupName string = ''
 param formRecognizerServiceName string = ''
 param formRecognizerResourceGroupName string = ''
 param formRecognizerResourceGroupLocation string = location
-
 param formRecognizerSkuName string = 'S0'
-
-param gptDeploymentName string = 'gpt-4'
-param gptModelName string = 'gpt-4'
-param classifierGptDeploymentName string = 'curie'
-param classifierGptModelName string = 'text-curie-001'
 
 @description('Id of the user or app to assign application roles')
 param principalId string = ''
@@ -124,11 +121,11 @@ module keyVault 'core/keyvault/keyvault.bicep' = {
     name: '${abbrs.keyVaultVaults}${resourceToken}'
     location: location
     tags: tags
+    principalId: principalId
   }
 }
 
-
-// The application frontend
+// Application backend service
 module backend 'core/host/appservice.bicep' = {
   name: 'web'
   scope: resourceGroup
@@ -142,9 +139,15 @@ module backend 'core/host/appservice.bicep' = {
     scmDoBuildDuringDeployment: true
     managedIdentity: true
     appSettings: {
-      KEYVAULT_URI: keyVault.outputs.vaultUri
+      ENVIRONMENT: 'PROD'
     }
+    keyVaultName: keyVault.outputs.name
+    applicationInsightsName: appInsights.outputs.applicationInsightsName
+    appCommandLine: 'gunicorn --bind=0.0.0.0 backend.app:app'
   }
+  dependsOn: [
+    keyVault
+  ]
 }
 
 // Application data service
@@ -158,11 +161,68 @@ module dataService 'core/host/appservice.bicep' = {
     appServicePlanId: appServicePlan.outputs.id
     runtimeName: 'python'
     runtimeVersion: '3.10'
+    scmDoBuildDuringDeployment: true
     managedIdentity: true
     appSettings: {
-      KEYVAULT_URI: keyVault.outputs.vaultUri
+      ENVIRONMENT: 'PROD'
     }
+    keyVaultName: keyVault.outputs.name
+    applicationInsightsName: appInsights.outputs.applicationInsightsName
+    appCommandLine: 'gunicorn --bind=0.0.0.0 data.app:app'
   }
+  dependsOn: [
+    keyVault
+  ]
+}
+
+// Inbound access rules for data microservice
+module dataServiceInboundAccessRules 'core/host/appservice-config.bicep' = {
+  name: 'dataServiceInboundAccessRules'
+  scope: resourceGroup
+  params: {
+    appServiceName: dataService.outputs.name
+    allowedIpAddresses: backend.outputs.outboundIpAddresses
+  }
+  dependsOn: [
+    backend
+    dataService
+  ]
+}
+
+// Keyvault access policies for the services
+module servicesKeyVaultAccessPolicies 'core/keyvault/keyvault-access-policy.bicep' = {
+  name: 'servicesKeyVaultAccessPolicies'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    accessPolicies: [
+      {
+        objectId: backend.outputs.identityPrincipalId
+        permissions: {
+          secrets: [
+            'get'
+            'list'
+          ]
+        }
+        tenantId: subscription().tenantId
+      }
+      {
+        objectId: dataService.outputs.identityPrincipalId
+        permissions: {
+          secrets: [
+            'get'
+            'list'
+          ]
+        }
+        tenantId: subscription().tenantId
+      }
+    ]    
+  }
+  dependsOn: [
+    keyVault
+    backend
+    dataService
+  ]
 }
 
 module openAi 'core/ai/cognitiveservices.bicep' = {
@@ -189,7 +249,6 @@ module openAi 'core/ai/cognitiveservices.bicep' = {
           scaleType: 'Standard'
         }
       }
-
       {
         name: classifierGptDeploymentName
         model: {
@@ -239,6 +298,9 @@ module searchService 'core/search/search-services.bicep' = {
     semanticSearch: 'free'
     addKeysToVault: true
     keyVaultName: keyVault.outputs.name
+    kbFieldsContent: 'content'
+    kbFieldsCategory: 'category'
+    kbFieldsSourcePage: 'sourcepage'
   }
   dependsOn: [
     keyVault
@@ -288,6 +350,7 @@ module cosmosAccount 'core/database/cosmos-database.bicep' = {
     location: location
     addKeysToVault: true
     keyVaultName: keyVault.outputs.name
+    principalId: principalId
   }
   dependsOn: [
     keyVault
@@ -334,6 +397,7 @@ module openAiRoleUser 'core/security/role.bicep' = {
     principalId: principalId
     roleDefinitionId: '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd'
     principalType: 'User'
+    resourceGroupName: openAiResourceGroup.name
   }
 }
 
@@ -344,6 +408,7 @@ module formRecognizerRoleUser 'core/security/role.bicep' = {
     principalId: principalId
     roleDefinitionId: 'a97b65f3-24c7-4388-baec-2e87135dc908'
     principalType: 'User'
+    resourceGroupName: formRecognizerResourceGroup.name
   }
 }
 
@@ -354,6 +419,7 @@ module storageRoleUser 'core/security/role.bicep' = {
     principalId: principalId
     roleDefinitionId: '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1'
     principalType: 'User'
+    resourceGroupName: storageResourceGroup.name
   }
 }
 
@@ -364,6 +430,7 @@ module storageContribRoleUser 'core/security/role.bicep' = {
     principalId: principalId
     roleDefinitionId: 'ba92f5b4-2d11-453d-a403-e96b0029c9fe'
     principalType: 'User'
+    resourceGroupName: storageResourceGroup.name
   }
 }
 
@@ -374,6 +441,7 @@ module searchRoleUser 'core/security/role.bicep' = {
     principalId: principalId
     roleDefinitionId: '1407120a-92aa-4202-b7e9-c0e197c71c8f'
     principalType: 'User'
+    resourceGroupName: searchServiceResourceGroup.name
   }
 }
 
@@ -384,6 +452,7 @@ module searchContribRoleUser 'core/security/role.bicep' = {
     principalId: principalId
     roleDefinitionId: '8ebe5a00-799e-43f5-93ac-243d3dce84a7'
     principalType: 'User'
+    resourceGroupName: searchServiceResourceGroup.name
   }
 }
 
@@ -395,6 +464,7 @@ module openAiRoleBackend 'core/security/role.bicep' = {
     principalId: backend.outputs.identityPrincipalId
     roleDefinitionId: '5e0bd9bd-7b93-4f28-af87-19fc36ad61bd'
     principalType: 'ServicePrincipal'
+    resourceGroupName: openAiResourceGroup.name
   }
 }
 
@@ -405,6 +475,7 @@ module storageRoleBackend 'core/security/role.bicep' = {
     principalId: backend.outputs.identityPrincipalId
     roleDefinitionId: '2a2b9908-6ea1-4ae2-8e65-a410df84e7d1'
     principalType: 'ServicePrincipal'
+    resourceGroupName: storageResourceGroup.name
   }
 }
 
@@ -415,16 +486,17 @@ module searchRoleBackend 'core/security/role.bicep' = {
     principalId: backend.outputs.identityPrincipalId
     roleDefinitionId: '1407120a-92aa-4202-b7e9-c0e197c71c8f'
     principalType: 'ServicePrincipal'
+    resourceGroupName: searchServiceResourceGroup.name
   }
 }
 
-// Adding keys to keyvault. Todo: Move openAI and formRecognizer secrets to their own biceps. 
-module azureOpenAIService 'core/keyvault/keyvault_secret.bicep' = {
-  name: 'AZURE_OPENAI_SERVICE'
+// Adding secrets to keyvault. Todo: Move openAI and formRecognizer secrets to their own biceps. 
+module azureOpenAIGPTService 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-gpt-service'
   scope: resourceGroup
   params: {
     keyVaultName: keyVault.outputs.name
-    secretName: 'AZURE-OPENAI-SERVICE'
+    secretName: 'AZURE-OPENAI-GPT4-SERVICE'
     secretValue: openAi.outputs.name
   }
   dependsOn: [
@@ -433,13 +505,13 @@ module azureOpenAIService 'core/keyvault/keyvault_secret.bicep' = {
   ]
 }
 
-module azureOpenAIGPTDeployment 'core/keyvault/keyvault_secret.bicep' = {
-  name: 'AZURE_OPENAI_GPT_DEPLOYMENT'
+module azureOpenAIClassifierService 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-classifier-service'
   scope: resourceGroup
   params: {
     keyVaultName: keyVault.outputs.name
-    secretName: 'AZURE-OPENAI-GPT-DEPLOYMENT'
-    secretValue: gptDeploymentName
+    secretName: 'AZURE-OPENAI-CLASSIFIER-SERVICE'
+    secretValue: openAi.outputs.name
   }
   dependsOn: [
     keyVault
@@ -447,26 +519,12 @@ module azureOpenAIGPTDeployment 'core/keyvault/keyvault_secret.bicep' = {
   ]
 }
 
-module azureOpenAIChatGPTDeployment 'core/keyvault/keyvault_secret.bicep' = {
-  name: 'AZURE_OPENAI_CHATGPT_DEPLOYMENT'
+module azureOpenAIGptKey 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-gpt-api-key'
   scope: resourceGroup
   params: {
     keyVaultName: keyVault.outputs.name
-    secretName: 'AZURE-OPENAI-CHATGPT-DEPLOYMENT'
-    secretValue: gptDeploymentName
-  }
-  dependsOn: [
-    keyVault
-    openAi
-  ]
-}
-
-module azureOpenAIAPIKey 'core/keyvault/keyvault_secret.bicep' = {
-  name: 'AZURE_OPENAI_API_KEY'
-  scope: resourceGroup
-  params: {
-    keyVaultName: keyVault.outputs.name
-    secretName: 'AZURE-OPENAI-API-KEY'
+    secretName: 'AZURE-OPENAI-GPT4-API-KEY'
     secretValue: openAi.outputs.apiKey
   }
   dependsOn: [
@@ -475,8 +533,22 @@ module azureOpenAIAPIKey 'core/keyvault/keyvault_secret.bicep' = {
   ]
 }
 
-module azureFormRecognizerService 'core/keyvault/keyvault_secret.bicep' = {
-  name: 'AZURE_FORMRECOGNIZER_SERVICE'
+module azureOpenAIClassifierKey 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-classifier-api-key'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'AZURE-OPENAI-CLASSIFIER-API-KEY'
+    secretValue: openAi.outputs.apiKey
+  }
+  dependsOn: [
+    keyVault
+    openAi
+  ]
+}
+
+module azureFormRecognizerService 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'formrecognizer-secret-service-name'
   scope: resourceGroup
   params: {
     keyVaultName: keyVault.outputs.name
@@ -489,8 +561,8 @@ module azureFormRecognizerService 'core/keyvault/keyvault_secret.bicep' = {
   ]
 }
 
-module azureFormRecognizerKey 'core/keyvault/keyvault_secret.bicep' = {
-  name: 'AZURE_FORMRECOGNIZER_KEY'
+module azureFormRecognizerKey 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'formrecognizer-secret-key'
   scope: resourceGroup
   params: {
     keyVaultName: keyVault.outputs.name
@@ -503,32 +575,33 @@ module azureFormRecognizerKey 'core/keyvault/keyvault_secret.bicep' = {
   ]
 }
 
-output KEYVAULT_URI string = keyVault.outputs.vaultUri
+module azureSQLServerName 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'sqlserver-name'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'SQL-SERVER-NAME'
+    secretValue: sql.outputs.sqlServerName
+  }
+  dependsOn: [
+    keyVault
+    sql
+  ]
+}
 
-output AZURE_LOCATION string = location
-output AZURE_TENANT_ID string = tenant().tenantId
+module dataServiceUri 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'appservice-data-service-uri'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'DATA-SERVICE-URI'
+    secretValue:'https://${dataService.outputs.hostname}'
+  }
+  dependsOn: [
+    keyVault
+    dataService
+  ]
+}
+
+output KEYVAULT_NAME string = keyVault.outputs.name
 output AZURE_RESOURCE_GROUP string = resourceGroup.name
-
-output AZURE_OPENAI_SERVICE string = openAi.outputs.name
-output AZURE_OPENAI_RESOURCE_GROUP string = openAiResourceGroup.name
-output AZURE_OPENAI_GPT_DEPLOYMENT string = gptDeploymentName
-
-output AZURE_FORMRECOGNIZER_SERVICE string = formRecognizer.outputs.name
-output AZURE_FORMRECOGNIZER_RESOURCE_GROUP string = formRecognizerResourceGroup.name
-
-output AZURE_SEARCH_INDEX string = searchIndexName
-output AZURE_SEARCH_SERVICE string = searchService.outputs.name
-output AZURE_SEARCH_SERVICE_RESOURCE_GROUP string = searchServiceResourceGroup.name
-
-output AZURE_STORAGE_ACCOUNT string = storage.outputs.name
-output AZURE_STORAGE_CONTAINER string = storageContainerName
-output AZURE_STORAGE_RESOURCE_GROUP string = storageResourceGroup.name
-
-output BACKEND_URI string = backend.outputs.uri
-
-output AZURE_COSMOS_ENDPOINT string = cosmosAccount.outputs.cosmosEndpoint
-output AZURE_COSMOS_KEY string = cosmosAccount.outputs.cosmosKey
-output AZURE_COSMOS_DB_NAME string = cosmosDatabaseName
-output AZURE_COSMOS_DB_ENTITIES_CONTAINER_NAME string = cosmosEntitiesContainerName
-output AZURE_COSMOS_DB_PERMISSIONS_CONTAINER_NAME string = cosmosPermissionsContainerName
-output AZURE_COSMOS_DB_CHAT_SESSIONS_CONTAINER_NAME string = cosmosChatSessionsContainerName

@@ -5,33 +5,26 @@ metadata:
   template: azure-search-openai-demo@0.0.2-beta
 services:
   backend:
-    project: ./app/backend
+    project: ./app
     language: py
     host: appservice
   data:
-    project: ./app/data
+    project: ./app
     language: py
     host: appservice
 hooks:
-    postprovision:
-      windows:
-        shell: pwsh
-        run: ./scripts/prepdata.ps1
-        interactive: true
-        continueOnError: false
-      posix:
-        shell: sh
-        run: ./scripts/prepdata.sh
-        interactive: true
-        continueOnError: false
-    predeploy:
-      windows:
-        shell: pwsh
-        run:  cd ./app/frontend;npm install;npm run build
-        interactive: true
-        continueOnError: false
-      posix:
-        shell: sh
-        run:  cd ./app/frontend;npm install;npm run build
-        interactive: true
-        continueOnError: false
+  preprovision:
+    shell: pwsh
+    run: Install-Module AzureAD -Force;Connect-AzAccount;$principalId = (Get-AzADUser -UserPrincipalName (Get-AzContext).Account).Id;azd env set AZURE_PRINCIPAL_ID $principalId
+    continueOnError: false
+    interactive: true
+  postprovision:
+    shell: pwsh
+    run: ./scripts/prepdata.ps1
+    interactive: true
+    continueOnError: false
+  prepackage:
+    shell: pwsh
+    run:  cd ./app/frontend;npm install;npm run build
+    interactive: true
+    continueOnError: false

@@ -20,7 +20,6 @@ variables:
   environmentName: 'aoai-va-search-data-service'
 
   # Project root folder. Point to the folder containing manage.py file.
-  dataRoot: $(System.DefaultWorkingDirectory)/AOAISearchDemo/app/data/
   appRoot: $(System.DefaultWorkingDirectory)/AOAISearchDemo/app/
 
   # Python version: 3.9
@@ -45,14 +44,13 @@ stages:
         python -m pip install --upgrade pip
         pip install setup
         pip install -r requirements.txt
-        pip install $(appRoot)
-      workingDirectory: $(dataRoot)
+      workingDirectory: $(appRoot)
       displayName: "Install requirements"
     
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
-        rootFolderOrFile: '$(dataRoot)'
+        rootFolderOrFile: '$(appRoot)'
         includeRootFolder: false
         archiveType: zip
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
@@ -88,4 +86,4 @@ stages:
               appType: 'webAppLinux'
               appName: $(webAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              startUpCommand: 'gunicorn --bind=0.0.0.0 --timeout 600  app:app'
+              startUpCommand: 'gunicorn --bind=0.0.0.0 --timeout 600  data.app:app'

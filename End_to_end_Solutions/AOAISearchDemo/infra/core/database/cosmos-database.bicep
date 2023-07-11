@@ -5,7 +5,6 @@
 // > az deployment group create --template-file .\src\deployment\cosmos_deploy.bicep --resource-group <resource group name> --parameters cosmosAccountName="aoai-demo-db"
 //  
 
-
 targetScope = 'resourceGroup'
 
 @description('Name of Cosmos DB Account')
@@ -27,6 +26,8 @@ param cosmosEntitiesContainerName string
 
 param cosmosPermissionsContainerName string
 
+param principalId string
+
 // Cosmos Account
 
 resource account 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' = {
@@ -43,6 +44,38 @@ resource account 'Microsoft.DocumentDB/databaseAccounts@2022-05-15' = {
         locationName: location
       }
     ]
+  }
+}
+
+// Account roles
+
+resource sqlRoleDefinition 'Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions@2023-04-15' = {
+  parent: account
+  name: guid('sql-role-definition-', principalId, account.id)
+  properties: {
+    roleName: 'Cosmos DB metadata reader and container creator role'
+    type: 'CustomRole'
+    assignableScopes: [
+      account.id
+    ]
+    permissions: [
+      {
+        dataActions: [
+          'Microsoft.DocumentDB/databaseAccounts/readMetadata'
+          'Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/create'
+        ]
+      }
+    ]
+  }
+}
+
+resource sqlRoleAssignment 'Microsoft.DocumentDB/databaseAccounts/sqlRoleAssignments@2023-04-15' = {
+  parent: account
+  name: guid('sql-role-definition-', principalId, account.id)
+  properties: {
+    roleDefinitionId: sqlRoleDefinition.id
+    principalId: principalId
+    scope: account.id
   }
 }
 
@@ -181,8 +214,8 @@ resource cosmosPermissionsContainer 'Microsoft.DocumentDB/databaseAccounts/sqlDa
   }
 }
 
-module azureCosmosKeySecret '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-COSMOS-KEY'
+module azureCosmosKeySecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'cosmos-key'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-COSMOS-KEY'
@@ -190,8 +223,17 @@ module azureCosmosKeySecret '../keyvault/keyvault_secret.bicep' = if(addKeysToVa
   }
 }
 
-module azureCosmosDbNameSecret '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-COSMOS-DB-NAME'
+module azureCosmosEndpointSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'cosmos-endpoint'
+  params: {
+    keyVaultName: keyVaultName
+    secretName: 'AZURE-COSMOS-ENDPOINT'
+    secretValue: account.properties.documentEndpoint
+  }
+}
+
+module azureCosmosDbNameSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'cosmos-db-name'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-COSMOS-DB-NAME'
@@ -199,8 +241,8 @@ module azureCosmosDbNameSecret '../keyvault/keyvault_secret.bicep' = if(addKeysT
   }
 }
 
-module azureCosmosDbChatSessionsContainerNameSecret '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-COSMOS-DB-CHAT-SESSIONS-CONTAINER-NAME'
+module azureCosmosDbChatSessionsContainerNameSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'cosmos-chat-sessions-container-name'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-COSMOS-DB-CHAT-SESSIONS-CONTAINER-NAME'
@@ -208,8 +250,8 @@ module azureCosmosDbChatSessionsContainerNameSecret '../keyvault/keyvault_secret
   }
 }
 
-module azureCosmosDbEntitiesContainerNameSecret '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-COSMOS-DB-ENTITIES-CONTAINER-NAME'
+module azureCosmosDbEntitiesContainerNameSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'cosmos-entities-container-name'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-COSMOS-DB-ENTITIES-CONTAINER-NAME'
@@ -217,17 +259,11 @@ module azureCosmosDbEntitiesContainerNameSecret '../keyvault/keyvault_secret.bic
   }
 }
 
-module azureCosmosDbPermissionsContainerNameSecret '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-COSMOS-DB-PERMISSIONS-CONTAINER-NAME'
+module azureCosmosDbPermissionsContainerNameSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'cosmos-permissions-container-name'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-COSMOS-DB-PERMISSIONS-CONTAINER-NAME'
     secretValue: cosmosPermissionsContainerName
   }
 }
-
-output cosmosAccountID string = account.id
-
-output cosmosKey string = account.listKeys().primaryMasterKey
-
-output cosmosEndpoint string = account.properties.documentEndpoint

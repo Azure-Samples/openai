@@ -25,7 +25,7 @@ resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2021-06
     }
     retentionInDays: 30
     publicNetworkAccessForIngestion: 'Enabled'
-    publicNetworkAccessForQuery: 'Disabled'
+    publicNetworkAccessForQuery: 'Enabled'
   }
 }
 
@@ -41,13 +41,15 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
   }
 }
 
-module appInsightsConnectionStringSecret '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'APPLICATION-INSIGHTS-CNX-STRING'
+module appInsightsConnectionStringSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'application-insights-cnx-string'
   params: {
     keyVaultName: keyVaultName
-    secretName: 'APPLICATION-INSIGHTS-CNX-STRING'
+    secretName: 'APPLICATION-INSIGHTS-CNX-STR'
     secretValue: applicationInsights.properties.ConnectionString
   }
 }
 
+output applicationInsightsName string = applicationInsights.name
 output applicationInsightsId string = applicationInsights.id
+output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString

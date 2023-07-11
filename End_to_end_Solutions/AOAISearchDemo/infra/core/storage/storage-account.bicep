@@ -61,8 +61,8 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-05-01' = {
   }
 }
 
-module azureStorageAccount '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-STORAGE-ACCOUNT'
+module azureStorageAccount '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'azure-storage-account'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-STORAGE-ACCOUNT'
@@ -70,12 +70,23 @@ module azureStorageAccount '../keyvault/keyvault_secret.bicep' = if(addKeysToVau
   }
 }
 
-module azureStorageContainer '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-STORAGE-CONTAINER'
+module azureStorageContainer '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'azure-storage-container'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-STORAGE-CONTAINER'
     secretValue: storageContainerName
+  }
+}
+
+module azureBlobConnectionString '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'azure-blob-connection-string'
+  params: {
+    keyVaultName: keyVaultName
+    secretName: 'AZURE-BLOB-CONNECTION-STRING'
+    secretValue: concat('DefaultEndpointsProtocol=https;AccountName=${storage.name};',
+    'AccountKey=${listKeys(storage.id, storage.apiVersion).keys[0].value};',
+    'EndpointSuffix=${environment().suffixes.storage}')
   }
 }
 

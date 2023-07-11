@@ -16,7 +16,12 @@ const Layout = () => {
                         <ul className={styles.headerNavList}>
                             <li className={styles.headerNavLeftMargin}>
                                 {/** TODO: update github link below once new repo is setup.*/}
-                                <a className={styles.githubLink} href="https://aka.ms/entgptsearch" target={"_blank"} title="Github repository link">
+                                <a
+                                    className={styles.githubLink}
+                                    href="https://github.com/Azure-Samples/openai/tree/main/End_to_end_Solutions/AOAISearchDemo"
+                                    target={"_blank"}
+                                    title="Github repository link"
+                                >
                                     <img
                                         src={github}
                                         alt="Github logo"

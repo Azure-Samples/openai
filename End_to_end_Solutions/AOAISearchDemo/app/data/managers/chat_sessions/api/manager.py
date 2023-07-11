@@ -1,9 +1,8 @@
 from azure.cosmos import CosmosClient
-from data.config import DefaultConfig
+from common.contracts.chat_session import ChatSession, Dialog, DialogClassification, ParticipantType
 from data.cosmosdb.container import CosmosDBContainer, CosmosConflictError
 from datetime import datetime
-from common.contracts.chat_session import ChatSession, Dialog, DialogClassification, ParticipantType
-from typing import List, Optional
+from typing import Any, List, Optional
 
 class SessionNotFoundError(BaseException):
     pass
@@ -17,8 +16,8 @@ class ChatSessionManager:
         {"paths": [f"/{PARTITION_KEY_NAME}"]}
     ]
 
-    def __init__(self, cosmos_db_endpoint: str, cosmos_db_key: str, cosmos_db_name: str, cosmos_db_chat_sessions_container_name: str):
-        cosmos_client = CosmosClient(url=cosmos_db_endpoint, credential=cosmos_db_key)
+    def __init__(self, cosmos_db_endpoint: str, cosmos_db_credential: Any, cosmos_db_name: str, cosmos_db_chat_sessions_container_name: str):
+        cosmos_client = CosmosClient(url=cosmos_db_endpoint, credential=cosmos_db_credential, consistency_level="Session")
         self.container = CosmosDBContainer(cosmos_db_name, cosmos_db_chat_sessions_container_name, self.PARTITION_KEY_NAME, cosmos_client, self.UNIQUE_KEYS)
     
     """

@@ -1,5 +1,4 @@
-from typing import List, Optional
-from contracts.chat_response import ApproachType
+from backend.contracts.chat_response import ApproachType
 
 class OutOfScopeException(Exception):
     def __init__(self, message, suggested_classification: ApproachType):

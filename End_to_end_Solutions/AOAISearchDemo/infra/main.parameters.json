@@ -21,13 +21,13 @@
             "value": "S0"
         },
         "gptDeploymentName": {
-            "value": "${AZURE_OPENAI_GPT4_SERVICE}"
+            "value": "${AZURE_OPENAI_DEPLOYMENT}"
         },
         "gptModelName": {
-            "value": "${AZURE_OPENAI_GPT4_MODEL}"
+            "value": "${AZURE_OPENAI_MODEL}"
         },
         "classifierGptDeploymentName": {
-            "value": "${AZURE_OPENAI_CLASSIFIER_SERVICE}"
+            "value": "${AZURE_OPENAI_CLASSIFIER_DEPLOYMENT}"
         },
         "classifierGptModelName": {
             "value": "${AZURE_OPENAI_CLASSIFIER_MODEL}"

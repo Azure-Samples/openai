@@ -9,9 +9,9 @@
             "type": "python",
             "request": "launch",
             "module": "flask",
-            "cwd": "${workspaceFolder}/app/data",
+            "cwd": "${workspaceFolder}/app",
             "env": {
-                "FLASK_APP": "app.py",
+                "FLASK_APP": "data/app.py",
                 "FLASK_ENV": "development",
                 "FLASK_DEBUG": "0"
             },
@@ -24,16 +24,16 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "envFile": "${input:dotEnvFilePath}",
-            "preLaunchTask": "Data service: pip install dependencies"
+            "preLaunchTask": "pip install dependencies"
         },
         {
             "name": "Backend: Launch & Attach server",
             "type": "python",
             "request": "launch",
             "module": "flask",
-            "cwd": "${workspaceFolder}/app/backend",
+            "cwd": "${workspaceFolder}/app",
             "env": {
-                "FLASK_APP": "app.py",
+                "FLASK_APP": "backend/app.py",
                 "FLASK_ENV": "development",
                 "FLASK_DEBUG": "0"
             },
@@ -46,16 +46,16 @@
             "console": "integratedTerminal",
             "justMyCode": true,
             "envFile": "${input:dotEnvFilePath}",
-            "preLaunchTask": "Backend: pip install dependencies"
+            "preLaunchTask": "pip install dependencies"
         },
         {
             "name": "Backend: Launch & Attach server (No Install)",
             "type": "python",
             "request": "launch",
             "module": "flask",
-            "cwd": "${workspaceFolder}/app/backend",
+            "cwd": "${workspaceFolder}/app",
             "env": {
-                "FLASK_APP": "app.py",
+                "FLASK_APP": "backend/app.py",
                 "FLASK_ENV": "development",
                 "FLASK_DEBUG": "0"
             },

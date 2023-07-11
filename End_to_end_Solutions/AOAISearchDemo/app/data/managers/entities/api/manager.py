@@ -4,7 +4,7 @@ from common.contracts.user_profile import UserProfile
 from common.contracts.resource import ResourceProfile, ResourceTypes
 from data.cosmosdb.container import CosmosConflictError, CosmosDBContainer
 from enum import Enum
-from typing import Dict, List, Optional, Set
+from typing import Any, Dict, List, Optional, Set
 
 class UserGroupNotFoundError(BaseException):
     pass
@@ -23,8 +23,8 @@ class EntitiesManager:
         {"paths": [f"/user_id", "/group_id", "/resource_id"]}
     ]
 
-    def __init__(self, cosmos_db_endpoint: str, cosmos_db_key: str, cosmos_db_name: str, cosmos_db_entities_container_name: str):
-        cosmos_client = CosmosClient(url=cosmos_db_endpoint, credential=cosmos_db_key)
+    def __init__(self, cosmos_db_endpoint: str, cosmos_db_credential: Any, cosmos_db_name: str, cosmos_db_entities_container_name: str):
+        cosmos_client = CosmosClient(url=cosmos_db_endpoint, credential=cosmos_db_credential, consistency_level="Session")
         self.container = CosmosDBContainer(cosmos_db_name, cosmos_db_entities_container_name, self.PARTITION_KEY_NAME, cosmos_client, self.UNIQUE_KEYS)
     
     """

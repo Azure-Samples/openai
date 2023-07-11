@@ -10,6 +10,10 @@ param sku object = {
 param authOptions object = {}
 param semanticSearch string = 'disabled'
 
+param kbFieldsContent string
+param kbFieldsCategory string
+param kbFieldsSourcePage string
+
 @description('Key Vault ID')
 param keyVaultName string = ''
 
@@ -43,8 +47,8 @@ resource search 'Microsoft.Search/searchServices@2021-04-01-preview' = {
   sku: sku
 }
 
-module azureSearchService '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-SEARCH-SERVICE'
+module azureSearchService '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'azure-search-service'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-SEARCH-SERVICE'
@@ -52,8 +56,8 @@ module azureSearchService '../keyvault/keyvault_secret.bicep' = if(addKeysToVaul
   }
 }
 
-module azureSearchKey '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-SEARCH-KEY'
+module azureSearchKey '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'azure-search-key'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-SEARCH-KEY'
@@ -61,12 +65,39 @@ module azureSearchKey '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
   }
 }
 
-module azureSearchIndex '../keyvault/keyvault_secret.bicep' = if(addKeysToVault) {
-  name: 'AZURE-SEARCH-INDEX'
+module azureSearchIndex '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'azure-search-index'
   params: {
     keyVaultName: keyVaultName
     secretName: 'AZURE-SEARCH-INDEX'
     secretValue: searchIndexName
+  }
+}
+
+module kbFieldsContentSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'kb-fields-content'
+  params: {
+    keyVaultName: keyVaultName
+    secretName: 'KB-FIELDS-CONTENT'
+    secretValue: kbFieldsContent
+  }
+}
+
+module kbFieldsCategorySecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'kb-fields-category'
+  params: {
+    keyVaultName: keyVaultName
+    secretName: 'KB-FIELDS-CATEGORY'
+    secretValue: kbFieldsCategory
+  }
+}
+
+module kbFieldsSourcePageSecret '../keyvault/keyvault-secret.bicep' = if(addKeysToVault) {
+  name: 'kb-fields-sourcepage'
+  params: {
+    keyVaultName: keyVaultName
+    secretName: 'KB-FIELDS-SOURCEPAGE'
+    secretValue: kbFieldsSourcePage
   }
 }
 

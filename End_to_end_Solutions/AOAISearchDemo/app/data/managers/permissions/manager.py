@@ -3,7 +3,7 @@ from common.contracts.access_rule import AccessRule, Member, MemberType, Resourc
 from common.contracts.group import UserGroup
 from common.contracts.user_profile import UserProfile
 from data.cosmosdb.container import CosmosConflictError, CosmosDBContainer
-from typing import Dict, List, Set, Optional
+from typing import Any, Dict, List, Set, Optional
 
 """
 Manager API for creating and retrieving resources and resource access rules.
@@ -15,8 +15,8 @@ class PermissionsManager:
         {"paths": ["/rule_id"]}
     ]
 
-    def __init__(self, cosmos_db_endpoint: str, cosmos_db_key: str, cosmos_db_name: str, cosmos_db_permissions_container_name: str):
-        cosmos_client = CosmosClient(url=cosmos_db_endpoint, credential=cosmos_db_key)
+    def __init__(self, cosmos_db_endpoint: str, cosmos_db_credential: Any, cosmos_db_name: str, cosmos_db_permissions_container_name: str):
+        cosmos_client = CosmosClient(url=cosmos_db_endpoint, credential=cosmos_db_credential, consistency_level="Session")
         self.container = CosmosDBContainer(cosmos_db_name, cosmos_db_permissions_container_name, self.PARTITION_KEY_NAME, cosmos_client, self.UNIQUE_KEYS)
     
     """
