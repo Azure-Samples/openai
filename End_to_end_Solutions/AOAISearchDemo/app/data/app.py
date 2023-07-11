@@ -1,5 +1,4 @@
 import json
-
 from common.contracts.access_rule import Member, Resource
 from common.contracts.chat_session import Dialog, DialogClassification, ParticipantType
 from common.contracts.group import User

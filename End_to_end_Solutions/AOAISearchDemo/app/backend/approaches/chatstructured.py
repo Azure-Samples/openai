@@ -1,14 +1,15 @@
-import re
+import json
 import openai
 import pyodbc
-import json
-from approaches.approach import Approach
+import re
+import pandas as pd
+from backend.approaches.approach import Approach
+from backend.config import DefaultConfig
+from backend.contracts.chat_response import Answer, ApproachType, ChatResponse
 from backend.contracts.error import OutOfScopeException, UnauthorizedDBAccessException
 from backend.utilities.openai_utils import generate_history_messages
 from backend.utilities.prompt_composer_utils import trim_history, compute_tokens
 from common.logging.log_helper import CustomLogger
-from contracts.chat_response import Answer, ApproachType, ChatResponse
-import pandas as pd
 from textwrap import dedent
 
 # Structured information retrieval, using Azure SQL DB and Azure OpenAI APIs directly. It first uses OpenAI to generate 

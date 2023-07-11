@@ -1,7 +1,6 @@
 import tiktoken
+from backend.config import DefaultConfig
 from typing import List, Optional
-from config import DefaultConfig
-
 
 convert_history_to_text = lambda lst: ' '.join(f"{key}: {value}" for conversation in lst for key, value in conversation.items())
 combine_index = lambda idx_lst: ' '.join(idx_lst)

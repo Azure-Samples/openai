@@ -3,14 +3,15 @@
 # Licensed under the MIT License.
 
 import os
-from dotenv import load_dotenv
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
 from common.logging.log_helper import CustomLogger
 from datetime import datetime
+from dotenv import load_dotenv
 
 # load value from .env file if it exists followed by environment variables
-load_dotenv(override=True)
+if os.getenv("ENVIRONMENT") != "PROD":
+    load_dotenv(override=True, dotenv_path=f"{os.getcwd()}/data/.env")
 
 class Config_Reader():
     def __init__(self, logger: CustomLogger) -> None:
@@ -73,9 +74,8 @@ class DefaultConfig:
                 cls.COSMOS_DB_PERMISSIONS_CONTAINER_NAME = config_reader.read_config_value("AZURE-COSMOS-DB-PERMISSIONS-CONTAINER-NAME")
                 cls.COSMOS_DB_CHAT_SESSIONS_CONTAINER_NAME = config_reader.read_config_value("AZURE-COSMOS-DB-CHAT-SESSIONS-CONTAINER-NAME")
 
-                cls.DATA_SERVICE_PROTOCOL = config_reader.read_config_value("DATA-SERVICE-PROTOCOL")
-                cls.DATA_SERVICE_HOST = config_reader.read_config_value("DATA-SERVICE-HOST")
-                cls.DATA_SERVICE_PORT = config_reader.read_config_value("DATA-SERVICE-PORT")
+                cls.DATA_SERVICE_HOST = os.getenv("DATA-SERVICE-HOST", "") if os.getenv("DATA-SERVICE-HOST") != "" else ""
+                cls.DATA_SERVICE_PORT = os.getenv("DATA-SERVICE-PORT", "") if os.getenv("DATA-SERVICE-PORT") != "" else ""
 
                 cls._initialized = True
                 

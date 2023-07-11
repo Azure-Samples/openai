@@ -35,60 +35,36 @@
             "problemMatcher": []
         },
         {
-            "label": "Root folder: pip install app package",
+            "label": "pip install dependencies",
             "type": "shell",
-            "command": "${command:python.interpreterPath} -m pip install -e .",
+            "command": "${command:python.interpreterPath} -m pip install -r requirements.txt",
             "problemMatcher": [],
             "options": {
                 "cwd": "${workspaceFolder}/app"
             }
         },
         {
-            "label": "Data service: pip install dependencies",
-            "type": "shell",
-            "command": "${command:python.interpreterPath} -m pip install -r requirements.txt",
-            "problemMatcher": [],
-            "options": {
-                "cwd": "${workspaceFolder}/app/data"
-            },
-            "dependsOn": [
-                "Root folder: pip install app package",
-            ]
-        },
-        {
             "label": "Data service: Start",
             "type": "shell",
-            "command": "pwsh ./launchPythonWithEnvVars.ps1 ${command:python.interpreterPath} app.py",
+            "command": "pwsh ./scripts/launchPythonWithEnvVars.ps1 ${command:python.interpreterPath} app/data/app.py",
             "problemMatcher": [],
             "options": {
-                "cwd": "${workspaceFolder}/app/data"
+                "cwd": "${workspaceFolder}"
             },
             "dependsOn": [
-              "Data service: pip install dependencies"
-            ]
-        },
-        {
-            "label": "Backend: pip install dependencies",
-            "type": "shell",
-            "command": "${command:python.interpreterPath} -m pip install -r requirements.txt",
-            "problemMatcher": [],
-            "options": {
-                "cwd": "${workspaceFolder}/app/backend"
-            },
-            "dependsOn": [
-                "Root folder: pip install app package",
+              "pip install dependencies"
             ]
         },
         {
             "label": "Backend: Start",
             "type": "shell",
-            "command": "pwsh ./launchPythonWithEnvVars.ps1 ${command:python.interpreterPath} backend/app.py",
+            "command": "pwsh ./scripts/launchPythonWithEnvVars.ps1 ${command:python.interpreterPath} app/backend/app.py",
             "problemMatcher": [],
             "options": {
-                "cwd": "${workspaceFolder}/app"
+                "cwd": "${workspaceFolder}"
             },
             "dependsOn": [
-              "Backend: pip install dependencies"
+              "pip install dependencies"
             ],
             "detail": "Install virtual env [Python: Create Environment...] and select in VS Code [Python: Select Interpreter]"
         },

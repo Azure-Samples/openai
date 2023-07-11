@@ -8,6 +8,7 @@ param sku object = {
 param enabledForDeployment bool = false
 param enabledForDiskEncryption bool = false
 param enabledForTemplateDeployment bool = false
+param principalId string
 
 resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   name: name
@@ -16,7 +17,15 @@ resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
   properties: {
     sku: sku
     tenantId: subscription().tenantId
-    accessPolicies: []
+    accessPolicies: [
+      {
+        tenantId: subscription().tenantId
+        objectId: principalId
+        permissions: {
+          secrets: ['get', 'list', 'set', 'delete']
+        }
+      }
+    ]
     enabledForDeployment: enabledForDeployment
     enabledForDiskEncryption: enabledForDiskEncryption
     enabledForTemplateDeployment: enabledForTemplateDeployment
@@ -25,4 +34,3 @@ resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' = {
 
 output id string = keyVault.id
 output name string = keyVault.name
-output vaultUri string = 'https://${keyVault.name}.vault.azure.net/'

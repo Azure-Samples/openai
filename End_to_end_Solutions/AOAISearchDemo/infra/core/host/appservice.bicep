@@ -70,7 +70,7 @@ resource appService 'Microsoft.Web/sites@2022-03-01' = {
         ENABLE_ORYX_BUILD: string(enableOryxBuild)
       },
       !empty(applicationInsightsName) ? { APPLICATIONINSIGHTS_CONNECTION_STRING: applicationInsights.properties.ConnectionString } : {},
-      !empty(keyVaultName) ? { AZURE_KEY_VAULT_ENDPOINT: keyVault.properties.vaultUri } : {})
+      !empty(keyVaultName) ? { KEYVAULT_URI: keyVault.properties.vaultUri } : {})
   }
 
   resource configLogs 'config' = {
@@ -97,4 +97,5 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing
 
 output identityPrincipalId string = managedIdentity ? appService.identity.principalId : ''
 output name string = appService.name
-output uri string = 'https://${appService.properties.defaultHostName}'
+output hostname string = appService.properties.defaultHostName
+output outboundIpAddresses array = split(appService.properties.outboundIpAddresses, ',')

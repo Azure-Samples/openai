@@ -12,16 +12,15 @@ variables:
   azureServiceConnectionId: 'aoai-va-search-service-connection'
 
   # Web app name
-  webAppName: 'aoai-va-search-backend-service'
+  webAppName: 'aoaisearchdemo'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
   # Environment name
-  environmentName: 'aoai-va-search-backend-service'
+  environmentName: 'aoaisearchdemo'
 
   # Project root folder. Point to the folder containing manage.py file.
-  backendRoot: $(System.DefaultWorkingDirectory)/AOAISearchDemo/app/backend/
   frontendRoot: $(System.DefaultWorkingDirectory)/AOAISearchDemo/app/frontend/
   appRoot: $(System.DefaultWorkingDirectory)/AOAISearchDemo/app/
 
@@ -62,13 +61,12 @@ stages:
         python -m pip install --upgrade pip
         pip install setup
         pip install -r requirements.txt
-        pip install $(appRoot)
-      workingDirectory: $(backendRoot)
+      workingDirectory: $(appRoot)
       displayName: "Install requirements"
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
-        rootFolderOrFile: '$(backendRoot)'
+        rootFolderOrFile: '$(appRoot)'
         includeRootFolder: false
         archiveType: zip
         archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
@@ -104,4 +102,4 @@ stages:
               appType: 'webAppLinux'
               appName: $(webAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
-              startUpCommand: 'gunicorn --bind=0.0.0.0 --timeout 600  app:app'
+              startUpCommand: 'gunicorn --bind=0.0.0.0 --timeout 600  backend.app:app'

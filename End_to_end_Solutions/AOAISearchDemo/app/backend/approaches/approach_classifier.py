@@ -1,7 +1,8 @@
 import openai
-from approaches.approach import Approach
+from backend.approaches.approach import Approach
+from backend.config import DefaultConfig
+from backend.contracts.chat_response import ApproachType
 from common.logging.log_helper import CustomLogger
-from contracts.chat_response import ApproachType
 from typing import List
 
 class ApproachClassifier(Approach):

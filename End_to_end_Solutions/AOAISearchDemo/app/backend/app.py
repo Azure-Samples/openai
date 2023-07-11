@@ -1,24 +1,23 @@
 import datetime
 import json
 import mimetypes
-from backend.contracts.error import OutOfScopeException, UnauthorizedDBAccessException
 import openai
 import time
+import yaml
 from azure.core.credentials import AzureKeyCredential
 from azure.identity import DefaultAzureCredential
-from azure.core.credentials import AzureKeyCredential
 from azure.search.documents import SearchClient
-from approaches.approach_classifier import ApproachClassifier
-from approaches.chatunstructured import ChatUnstructuredApproach
-from approaches.chatstructured import ChatStructuredApproach
 from azure.storage.blob import BlobServiceClient
-import yaml
+from backend.approaches.approach_classifier import ApproachClassifier
+from backend.approaches.chatunstructured import ChatUnstructuredApproach
+from backend.approaches.chatstructured import ChatStructuredApproach
 from common.contracts.chat_session import ChatSession, ParticipantType, DialogClassification
-from config import DefaultConfig
-from contracts.chat_response import Answer, ApproachType, ChatResponse
-from data_client.data_client import DataClient
+from backend.config import DefaultConfig
+from backend.contracts.chat_response import Answer, ApproachType, ChatResponse
+from backend.contracts.error import OutOfScopeException, UnauthorizedDBAccessException
+from backend.data_client.data_client import DataClient
+from backend.utilities.access_management import AccessManager
 from flask import Flask, request, jsonify
-from utilities.access_management import AccessManager
 
 # Use the current user identity to authenticate with Azure OpenAI, Cognitive Search and Blob Storage (no secrets needed, 
 # just use 'az login' locally, and managed identity when deployed on Azure). If you need to use keys, use separate AzureKeyCredential instances with the 
@@ -122,7 +121,7 @@ def chat():
     history = [{"participant_type": dialog.participant_type.value, "utterance": dialog.utterance, "question_type": dialog.classification.value} for dialog in chat_session.conversation]
     history.append({"participant_type": ParticipantType.user.value, "utterance": user_message})
     
-    bot_config = yaml.safe_load(open("bot_config.yaml", "r"))
+    bot_config = yaml.safe_load(open("backend/bot_config.yaml", "r"))
     question_classification = None
 
     try:

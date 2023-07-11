@@ -1,20 +1,16 @@
 import json
-from backend.contracts.error import OutOfScopeException
 import openai
-from approaches.approach import Approach
 from azure.search.documents import SearchClient
 from azure.search.documents.models import QueryType
+from backend.approaches.approach import Approach
+from backend.contracts.chat_response import Answer, ApproachType, ChatResponse
+from backend.contracts.error import OutOfScopeException
+from backend.config import DefaultConfig
 from backend.utilities.openai_utils import generate_history_messages, generate_system_prompt
 from backend.utilities.prompt_composer_utils import trim_history_and_index_combined
-from approaches.approach import Approach
-from text import nonewlines
-from typing import List
+from backend.utilities.text import nonewlines
 from common.logging.log_helper import CustomLogger
-import json
 from textwrap import dedent
-from common.logging.log_helper import CustomLogger
-from contracts.chat_response import Answer, ApproachType, ChatResponse
-from text import nonewlines
 from typing import List
 
 # Unstructured information retrieval, using the Cognitive Search and Azure OpenAI APIs directly. It first uses OpenAI to generate 
@@ -102,8 +98,6 @@ class ChatUnstructuredApproach(Approach):
             for doc in parsed_results:
                 if doc[score_field] >= lower_bound:
                     filtered_results.append(doc[self.sourcepage_field] + ": " + nonewlines(doc[self.content_field]))
-        
-        content = "\n".join(filtered_results)
 
         addl_dimensions = {"search_results_length": len(filtered_results)}
         properties = self.logger.get_updated_properties(addl_dimensions)

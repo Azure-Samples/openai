@@ -1,4 +1,4 @@
-from contracts.chat_response import ApproachType
+from backend.contracts.chat_response import ApproachType
 
 
 class AccessManager:

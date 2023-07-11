@@ -3,15 +3,11 @@
 This sample demonstrates a few approaches for creating ChatGPT-like experiences over your own data using the Retrieval Augmented Generation pattern. It uses Azure OpenAI Service to access the GPT model - gpt-4(8k tokens), Azure Cognitive Search for data indexing and retrieval of unstructured content (pdf files) and SQL Server for retrieving data from SQL server tables.
 
 The repo includes sample data so it's ready to try end to end. In this sample application we used two sources of data:
->
-> 1. Cognitive Search is ingested with  publicly available documentation on [Microsoft Surface devices](https://learn.microsoft.com/en-us/surface/get-started),
-> 2. SQL server is loaded with some sample product availability, sales and merchant information about certain Surface devices
 
-The experience allows users to ask questions about the Surface Devices specifications, troubleshooting help, warranty as well as sales, availability, and trend related questions. 
+1. An Azure Cognitive Search Index, indexed with unstructured .pdf data consisting of publicly available documentation on [Microsoft Surface devices](https://learn.microsoft.com/en-us/surface/get-started)
+2. A SQL database pre-loaded with some sample product availability, sales and merchant information about certain Surface devices
 
-There are two pre-recorded voiceovers that shows how enterprises can use this architecture for their different users/audiences. The demo uses two different personas:
-> 1. Emma is marketing lead [demo](./docs/Emma%20Miller_with%20voice.mp4)
-> 2. Dave is regional sales manager [demo](./docs/Dave%20Huang_with%20voice.mp4)
+The experience allows users to ask questions about the Surface Devices specifications, troubleshooting help, warranty as well as sales, availability and trend related questions.
 
 ![RAG Architecture](docs/appcomponents.png)
 
@@ -40,7 +36,7 @@ There are two pre-recorded voiceovers that shows how enterprises can use this ar
 
 #### To Run Locally
 
-- [Azure Developer CLI](https://aka.ms/azure-dev/install)
+- [Azure Developer CLI 2.20.0 or greater](https://aka.ms/azure-dev/install)
 * [Python 3+](https://www.python.org/downloads/)
   * **Important**: Python and the pip package manager must be in the path in Windows for the setup scripts to work.
   * **Important**: Ensure you can run `python --version` from console. On Ubuntu, you might need to run `sudo apt install python-is-python3` to link `python` to `python3`.
@@ -55,44 +51,93 @@ There are two pre-recorded voiceovers that shows how enterprises can use this ar
 
 #### Project Initialization
 
-1. Create a new folder and switch to it in the terminal
-1. Run `azd login`
-1. Run `azd init -t AOAISearchDemo`
-    * For the target location, the regions that currently support the models used in this sample are **East US** or **South Central US**. For an up-to-date list of regions and models, check [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models)
+1. Clone this repo into a new folder and navigate to the repo root folder in the terminal.
+2. Run `azd auth login`.
+
+#### Use existing resources
+
+Due to high demand, Azure OpenAI resources can be difficult to spin up on the fly due to quota limitations. For this reason, we've excluded the OpenAI resource provisioning from the provisioning script. If you wish to use your own Azure Open AI resource, you can:
+
+1. Run `azd env set {VARIABLE_NAME} {VALUE}` to set the following variables in your azd environment:
+   - `AZURE_OPENAI_SERVICE {Name of existing OpenAI resource where the OpenAI models have been deployed}`.
+   - `AZURE_OPENAI_RESOURCE_GROUP {Name of existing resource group where the Azure OpenAI service resource is provisioned to}`.
+   - `AZURE_OPENAI_MODEL {Name of the Azure OpenAI model used for completion tasks other than classification}`.
+   - `AZURE_OPENAI_DEPLOYMENT {Name of existing Azure OpenAI model deployment to be used for completion tasks other than classification}`.
+   - `AZURE_OPENAI_CLASSIFIER_MODEL {Name of Azure OpenAI model to be used to do dialog classification}`.
+   - `AZURE_OPENAI_CLASSIFIER_DEPLOYMENT {Name of existing Azure OpenAI model deployment to be used for dialog classification}`.
+    * Ensure the model you specify for `AZURE_OPENAI_DEPLOYMENT` and `AZURE_OPENAI_MODEL` is a Chat GPT model, since the demo utilizes the ChatCompletions API when requesting completions from this model.
+    * You can also use existing Search and Storage Accounts.  See `./infra/main.parameters.json` for list of environment variables to pass to `azd env set` to configure those existing resources.
+2. Go to `app/backend/bot_config.yaml`. This file contains the model configuration definitions for the Azure OpenAI models that will be used. It defines request parameters like temperature, max_tokens, etc., as well as the the deployment name (`engine`) and model name (`model_name`) of the deployed models to use from your Azure OpenAI resource. These are broken down by task, so the request parameters and model for doing question classification on a user utterance can differ from those used to turn natural language into SQL for example. You will want the deployment name (`engine`) for the `approach_classifier` to match the one set for `AZURE_OPENAI_CLASSIFIER_DEPLOYMENT`. For the rest, you wil want the deployment name (`engine`) and model name (`model_name`) to match `AZURE_OPENAI_DEPLOYMENT` and `AZURE_OPENAI_MODEL` respectively. For the models which specify a `total_max_tokens`, you will want to set this value to the maximum number of tokens your deployed GPT model allows for a completions request. This will allow the backend service to know when prompts need to be trimmed to avoid a token limit error.
+    * Note that the config for `approach_classifier` doesn't contain a system prompt, this is because the demo expects this model to be a fine-tuned GPT model rather than one trained using few-shot training. You will need to provide a fine-tuned model trained on some sample data for the dialog classification to work well. For more information on how to do this, checkout the [fine-tuning section](README.md#fine-tuning).
+3. Run `azd up`
 
 #### Starting from scratch
 
 Execute the following command, if you don't have any pre-existing Azure services and want to start from a fresh deployment.
 
-1. Run `azd up`. This will:
+1. Uncomment the Azure Open AI deployments inside the main [Bicep template](./infra/main.bicep). By default, no GPT models are deployed.
+2. Go to `app/backend/bot_config.yaml`. This file contains the model configuration definitions for the Azure OpenAI models that will be used. It defines request parameters like temperature, max_tokens, etc., as well as the deployment name (`engine`) and model name (`model_name`) of the deployed models to use from your Azure OpenAI resource. These are broken down by task, so the request parameters and model for doing question classification on a user utterance can differ from those used to turn natural language into SQL for example. You will want the deployment name (`engine`) for the `approach_classifier` to match the one set for the classifier model deployed in the last step. For the rest, you will want the deployment name (`engine`) and model name (`model_name`) to match those for the GPT model deployed in the last step. For the models which specify a `total_max_tokens`, you will want to set this value to the maximum number of tokens your deployed GPT model allows for a completions request. This will allow the backend service to know when prompts need to be trimmed to avoid a token limit error.
+    * Note that the config for `approach_classifier` doesn't contain a system prompt, this is because the demo expects this model to be a fine-tuned GPT model rather than one trained using few-shot training. You will need to provide a fine-tuned model trained on some sample data for the dialog classification to work well. For more information on how to do this, checkout the [fine-tuning section](README.md#fine-tuning)
+3. Run `azd up`
+    * For the target location, the regions that currently support the OpenAI models used in this sample at the time of writing this are **East US** or **South Central US**. For an up-to-date list of regions and models, check [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models)
 
+#### azd up
+
+Running `azd up` will:
+
+* Install needed Node.js dependencies and build the app's front-end UI and store the static files in the backend directory.
+* Package the different service directories and get them ready for deployment.
 * Start a deployment that will provision the necessary Azure resources needed for the sample to run, as well as upload secrets to Azure Keyvault and save environment variables in your azd env needed to access those resources.
   * **Note**: You must make sure every deployment runs successfully. A failed deployment could lead to missing resources, secrets or env variables that will be needed downstream.
-* Prepare and upload the data needed for the sample to run, including building the search index based on the files found in the `./data` folder and pre-populating some Cosmos DB containers with starter data for user profiles, access rules, resources, etc.
-* Install needed Node.js dependencies and build the app's front-end.
+* Prepare and upload the data needed for the sample to run, including building the search index based on the files found in the `./data` folder and pre-populating some Cosmos DB containers with starter data for user profiles, access rules, resources, etc., as well as the SQL database containing the sample sales data.
 * Deploy the services needed for the app to run to Azure. This will include a data-management micro-service as well as the backend service that the front-end UI will communicate with.
 
-1. Once this is all done, the application is successfully deployed and you will see 2 URLs printed on the console.  Click the backend URL to interact with the application in your browser.
+#### After running azd up
+* Once this is all done, the application is successfully deployed and you will see 2 URLs printed on the console. Click the backend URL to interact with the application in your browser.
 
 It will look like the following:
 
 !['Output from running azd up'](docs/endpoint.png)
 
+* When doing fine-tuning for classification purposes, the Azure OpenAI resource used could be different than the one where gpt-4 model is deployed. Even if the same Azure OpenAI resource is used, do manually populate these two secrets created in the keyvault and restart both the web applications so they get the latest values.
+```
+AZURE-OPENAI-CLASSIFIER-SERVICE   This is the name of Azure OpenAI resource where the fine tuned model is deployed.
+AZURE-OPENAI-CLASSIFIER-API-KEY   This is the API Key of the above Azure OpenAI resource.
+```
+
 > NOTE: It may take a minute for the application to be fully deployed. If you see a "Python Developer" welcome screen, then wait a minute and refresh the page.
 
-#### Use existing resources
+### Handling Known failures:
+1. Populating data in SQL Server fails due to IP restriction
+The populate_sql.py in the scripts/prepopulate folder tries to register the client IP address as a firewall rule so connection to SQL Server can be established from the terminal. However sometimes, this IP address changes. So if you see an error like below:
+```
+cnxn = pyodbc.connect(args.sqlconnectionstring)
+pyodbc.ProgrammingError: ('42000', "[42000] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Cannot open server 'sql-server-name' requested by the login. Client with IP address 'client ip address' is not allowed to access the server.  
+```
 
-If you wish to use your own Azure Open AI resource, you can
+> Go to Azure portal --> resource group --> SQL Server
 
-1. Add to KeyVault secret `AZURE-OPENAI-GPT4-SERVICE {Name of existing OpenAI service where GPT4 model has been deployed}`
-1. Add to KeyVault secret `AZURE-OPENAI-GPT4-DEPLOYMENT {Name of GPT4 deployed model}`
-1. Add to KeyVault secret `AZURE-OPENAI-RESOURCE-GROUP {Name of existing resource group that OpenAI service is provisioned to}`
-1. Add to KeyVault secret `AZURE-OPENAI-CLASSIFIER-SERVICE {Name of existing OpenAI service where classifier is deployed}`.
-1. Add to KeyVault secret `AZURE-OPENAI-CLASSIFIER-DEPLOYMENT {Name of existing classifier deployment name}`.
-1. Uncomment the classifier deployment inside the main [Bicep template](./infra/main.bicep). By default, no GPT models are deployed.
-1. Run `azd up`
+> In the left panel, under Security, click on "Networking" 
 
-> NOTE: You can also use existing Search and Storage Accounts.  See `./infra/main.parameters.json` for list of environment variables to pass to `azd env set` to configure those existing resources.
+> Under Firewall Rules, click on "Add your client IPV4 address"
+
+> Click Save
+
+> From the Powershell terminal, re-run the prepdata script manually as shown below.
+```
+Connect-AzAccount (hit enter)
+
+.\scripts\prepdata.ps1
+```
+
+2. When making a search on the web app, if you seen an error: 
+```
+The API deployment for this resource does not exist. If you created the deployment within the last 5 minutes, please wait a moment and try again.
+```
+
+> Ensure that the `AZURE-OPENAI-CLASSIFIER-SERVICE` and `AZURE-OPENAI-CLASSIFIER-API-KEY` secrets in the keyvault are pointing to the right resources.
+
+> Ensure that model and engine name palceholders in the app/backend/bot_config.yaml file have be updated.
 
 #### Deploying or re-deploying a local clone of the repo
 
@@ -102,29 +147,23 @@ If you wish to use your own Azure Open AI resource, you can
 
 ### Running locally
 
-1. Run `azd login`
-2. Change dir to `app`
-3. Run `./start.ps1` or `./start.sh` or run the VS Code Launch - "Frontend: build", "Data service: Launch & Attach Server" and "Backend: Launch & Attach Server" to start the project locally.
+1. Skip this step, if you have already ran `azd up`; otherwise run `azd provision`, if you wish to deploy all resources from scratch. Keep in mind the needed Azure OpenAI GPT models are skipped during deployment by default. Uncomment the Azure Open AI deployments inside the main [Bicep template](./infra/main.bicep) if you wish to deploy them as part of this step. This step will also pre-populate the resources after they've been provisioned with all the necessary data for the demo to run. This includes indexing all the sample documents in the Azure Cognitive Search Index, uploading the sample table data to the SQL database, as well as uploading some necessary starter data for the Cosmos DB.
+2. For the `app/backend` and `app/data` directories, copy the contents of `app/backend/.env.template` and `app/data/.env.template` into a new `.env` file in each directory. Fill in every blank environment variable with the keys and names of the resources that were deployed in the previous step, or with the resources you've deployed on your own.
+3. Go to `app/backend/bot_config.yaml`. This file contains the model configuration definitions for the Azure OpenAI models that will be used. It defines request parameters like temperature, max_tokens, etc., as well as the the deployment name (`engine`) and model name (`model_name`) of the deployed models to use from your Azure OpenAI resource. These are broken down by task, so the request parameters and model for doing question classification on a user utterance can differ from those used to turn natural language into SQL for example. You will want the deployment name (`engine`) for the `approach_classifier` to match the one set for the classifier model deployed in the last step. For the rest, you will want the deployment name (`engine`) and model name (`model_name`) to match those for the GPT model deployed in the first step. For the models which specify a `total_max_tokens`, you will want to set this value to the maximum number of tokens your deployed GPT model allows for a completions request. This will allow the backend service to know when prompts need to be trimmed to avoid a token limit error.
+    * Note that the config for `approach_classifier` doesn't contain a system prompt, this is because the demo expects this model to be a fine-tuned GPT model rather than one trained using few-shot training. You will need to provide a fine-tuned model trained on some sample data for the dialog classification to work well. For more information on how to do this, checkout the [fine-tuning section](README.md#fine-tuning)
+4. Change dir to `app`.
+5. Run `../scripts/start.ps1` or run the VS Code Launch - "Frontend: build", "Data service: Launch & Attach Server" and "Backend: Launch & Attach Server" to start the project locally.
 
-#### Sharing Environments
-
-Run the following if you want to give someone else access to completely deployed and existing environment.
-
-1. Install the [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
-1. Run `azd init -t AOAISearchDemo`
-1. Run `azd env refresh -e {environment name}` - Note that they will need the azd environment name, subscription Id, and location to run this command - you can find those values in your `./azure/{env name}/.env` file.  This will populate their azd environment's .env file with all the settings needed to run the app locally.
-1. Run `pwsh ./scripts/roles.ps1` - This will assign all of the necessary roles to the user so they can run the app locally.  If they do not have the necessary permission to create roles in the subscription, then you may need to run this script for them. Just be sure to set the `AZURE_PRINCIPAL_ID` environment variable in the azd .env file or in the active shell to their Azure Id, which they can get with `az account show`.
-
-### Quickstart
+### QuickStart
 
 * In Azure: navigate to the Backend Azure WebApp deployed by azd. The URL is printed out when azd completes (as "Endpoint"), or you can find it in the Azure portal.
 * Running locally: navigate to 127.0.0.1:5000
 
 Once in the web app:
 
-* Try different topics in chat or Q&A context. For chat, try follow up questions, clarifications, ask to simplify or elaborate on answer, etc.
+* Try different topics in chat or Q&A context. For chat, try follow up questions, clarifications, ask to simplify or elaborate on answers, etc.
 * Explore citations and sources
-* Click on "settings" to try distinct roles, options, etc.
+* Click on "settings" to try distinct roles, search options, etc.
 
 ## Fine-tuning
 
