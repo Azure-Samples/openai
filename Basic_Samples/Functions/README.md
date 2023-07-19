@@ -35,7 +35,7 @@ One can get the OPENAI_API_KEY value from the Azure Portal. Go to https://portal
 One can start with using your model name as "gpt-35-turbo-0613" or "gpt-4."
 
 - To find your "OPENAI_API_BASE" go to https://portal.azure.com, find your resource and then under "Resource Management" -> "Keys and Endpoints" look for the "Endpoint" value.
-- Current OpenAI api version is "2022-12-01". Check out versions [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference).
+- Current, function calling can only be used with the "2023-07-01-preview" API version. Check out versions [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference).
 
 
 ## Requirements
