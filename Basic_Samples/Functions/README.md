@@ -1,5 +1,5 @@
 # Introduction
-This repository contains samples demonstrating how to use functions to extend the current capabilities of GPT Models
+This repository contains samples demonstrating how to use functions to extend the current capabilities of GPT Models.
 
 ## Installation
 Install all Python modules and packages listed in the requirements.txt file using the below command.
@@ -9,7 +9,7 @@ pip install -r requirements.txt
 ```
 
 ### Microsoft Azure Endpoints
-In order to use the Open AI library or REST API with Microsoft Azure endpoints, you need to set DEPLOYMENT_NAME, OPENAI_API_BASE & OPENAI_API_VERSION in _config.json_ file. 
+In order to use the Open AI library or REST API with Microsoft Azure endpoints, you need to set DEPLOYMENT_ID, OPENAI_API_BASE & OPENAI_API_VERSION in _config.json_ file. 
 
 ```js
 {
