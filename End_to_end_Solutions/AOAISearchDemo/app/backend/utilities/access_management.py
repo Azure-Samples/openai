@@ -11,10 +11,10 @@ class AccessManager:
             allowed_approaches.append(self.map_resource_to_approach(resource.resource_type.value))
         return allowed_approaches
     
-    def is_user_allowed(self, allowed_approaches, approach_type):
+    def is_user_allowed(self, allowed_approaches, approach_type: ApproachType):
         return approach_type.value in allowed_approaches
     
-    def map_approach_to_resource(self, approach):
+    def map_approach_to_resource(self, approach: ApproachType):
         if approach == ApproachType.unstructured:
             return "COGNITIVE_SEARCH"
         elif approach == ApproachType.structured:
