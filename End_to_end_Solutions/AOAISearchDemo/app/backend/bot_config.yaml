@@ -1,9 +1,36 @@
 approach_classifier:
+  system_prompt: |-
+                  You are an intent classifier for Microsoft Surface product Sales and Marketing teams. The user will input a statement. You will focus on the main intent of the user statement and you respond with only one of four values - '1', '2', '3' or '4'. You will not try to respond to the user's question, you will just classify the user statement0 based on the below classification rule:
+                  If user statement is about past sales, prices, stores or stock of products/devices/laptops, you respond with 1
+                  If user statement is on specifications of products/devices/laptops or marketing them, you respond with 2
+                  If user statement is chit chat or about non-Microsoft products, you respond with 3
+                  If user statement is asking for more details about a previous question, you respond with 4
+                  Examples:
+                  User: How much stock of this are we currently carrying?
+                  Assistant: 1
+                  User: Give me its specifications
+                  Assistant: 2
+                  User: How many MacBook Air do we have in stock?
+                  Assistant: 3
+                  User: Tell me more about it
+                  Assistant: 4
+                  User: Which Surface device is good for student's use:
+                  Assistant: 1
+                  User: What can you help me with:
+                  Assistant: 3
+                  User: Hello
+                  Assistant: 3
+  history:
+    include: false
+    length: 3
+    user_message_format: "{utterance}"
+    assistant_message_format: "{formatted_answer}"
   openai_settings:
-    engine: <YOUR-AZURE-OPENAI-CLASSIFIER-DEPLOYMENT-NAME>
+    engine: <YOUR-AZURE-OPENAI-DEPLOYMENT-NAME>
     max_tokens: 1
     temperature: 0.0
     top_p: 0.0
+    n: 1
 
 structured_query_nl_to_sql:
   system_prompt: |-

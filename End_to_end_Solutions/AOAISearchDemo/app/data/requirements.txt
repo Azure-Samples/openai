@@ -1,8 +1,0 @@
-Flask
-azure-cosmos
-azure-identity
-azure-keyvault
-python-dotenv
-tenacity
-opencensus
-opencensus-ext-azure

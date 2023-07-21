@@ -1,17 +1,20 @@
 import json
+from textwrap import dedent
+from typing import List
+
 import openai
 from azure.search.documents import SearchClient
 from azure.search.documents.models import QueryType
 from backend.approaches.approach import Approach
 from backend.contracts.chat_response import Answer, ApproachType, ChatResponse
 from backend.contracts.error import OutOfScopeException
-from backend.config import DefaultConfig
-from backend.utilities.openai_utils import generate_history_messages, generate_system_prompt
-from backend.utilities.prompt_composer_utils import trim_history_and_index_combined
+from backend.utilities.openai_utils import (generate_history_messages,
+                                            generate_system_prompt)
+from backend.utilities.prompt_composer_utils import \
+    trim_history_and_index_combined
 from backend.utilities.text import nonewlines
 from common.logging.log_helper import CustomLogger
-from textwrap import dedent
-from typing import List
+
 
 # Unstructured information retrieval, using the Cognitive Search and Azure OpenAI APIs directly. It first uses OpenAI to generate 
 # a search query to retrieve top documents from a Cognitive Search index using dialog from the user. Then, after retrieving the 
@@ -40,7 +43,7 @@ class ChatUnstructuredApproach(Approach):
             }
         ]
 
-        if bot_config["structured_query_nl_to_sql"]["history"]["include"]:
+        if bot_config["unstructured_search_query_generation"]["history"]["include"]:
             query_generation_messages.extend(generate_history_messages(history[:-1], bot_config["unstructured_search_query_generation"]["history"]))
 
         query_generation_messages.append({ "role": "user", "content": history[-1]["utterance"] + " Search Query: "})

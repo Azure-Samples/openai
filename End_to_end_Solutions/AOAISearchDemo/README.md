@@ -9,6 +9,10 @@ The repo includes sample data so it's ready to try end to end. In this sample ap
 
 The experience allows users to ask questions about the Surface Devices specifications, troubleshooting help, warranty as well as sales, availability and trend related questions.
 
+There are two pre-recorded voiceovers that shows how enterprises can use this architecture for their different users/audiences. The demo uses two different personas:
+> 1. Emma is marketing lead [demo](./docs/Emma%20Miller_with%20voice.mp4)
+> 2. Dave is regional sales manager [demo](./docs/Dave%20Huang_with%20voice.mp4)
+
 ![RAG Architecture](docs/appcomponents.png)
 
 ## Features
@@ -22,6 +26,7 @@ The experience allows users to ask questions about the Surface Devices specifica
 * Handling failures gracefully and ability to retry failed queries against other data sources
 * Handling token limitations
 * Using fine-tuned model for classification in the orchestrator
+* > *Due to unavailability of fine-tuned models in certain regions, we have updated the code to use gpt-4 based few-shot classifer. Added a new section on how to test this classifier in [promptFlow](./docs/prompt_flow.md)*
 * Using instrumentation for debugging and also for driving certain usage reports from the logs
 
 ![Chat screen](docs/chatscreen.png)
@@ -42,8 +47,11 @@ The experience allows users to ask questions about the Surface Devices specifica
   * **Important**: Ensure you can run `python --version` from console. On Ubuntu, you might need to run `sudo apt install python-is-python3` to link `python` to `python3`.
 * [Node.js](https://nodejs.org/en/download/)
 * [Git](https://git-scm.com/downloads)
-* [Powershell 7+ (pwsh)](https://github.com/powershell/powershell) - For Windows users only.
+* [PowerShell 7+ (pwsh)](https://github.com/powershell/powershell)
   * **Important**: Ensure you can run `pwsh.exe` from a PowerShell command. If this fails, you likely need to upgrade PowerShell.
+* [The AzureAD PowerShell module version 2.0.2.180 or above](https://learn.microsoft.com/en-us/powershell/module/azuread/?view=azureadps-2.0)
+* [ODBC Driver for SQL Server v18](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server)
+
 
 >NOTE: Your Azure Account must have `Microsoft.Authorization/roleAssignments/write` permissions, such as [User Access Administrator](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator) or [Owner](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles#owner).  
 
@@ -66,6 +74,7 @@ Due to high demand, Azure OpenAI resources can be difficult to spin up on the fl
    - `AZURE_OPENAI_CLASSIFIER_MODEL {Name of Azure OpenAI model to be used to do dialog classification}`.
    - `AZURE_OPENAI_CLASSIFIER_DEPLOYMENT {Name of existing Azure OpenAI model deployment to be used for dialog classification}`.
     * Ensure the model you specify for `AZURE_OPENAI_DEPLOYMENT` and `AZURE_OPENAI_MODEL` is a Chat GPT model, since the demo utilizes the ChatCompletions API when requesting completions from this model.
+    * Ensure the model you specify for `AZURE_OPENAI_CLASSIFIER_DEPLOYMENT` and `AZURE_OPENAI_CLASSIFIER_MODEL` is compatible with the Completions API, since the demo utilizes the Completions API when requesting completions from this model.
     * You can also use existing Search and Storage Accounts.  See `./infra/main.parameters.json` for list of environment variables to pass to `azd env set` to configure those existing resources.
 2. Go to `app/backend/bot_config.yaml`. This file contains the model configuration definitions for the Azure OpenAI models that will be used. It defines request parameters like temperature, max_tokens, etc., as well as the the deployment name (`engine`) and model name (`model_name`) of the deployed models to use from your Azure OpenAI resource. These are broken down by task, so the request parameters and model for doing question classification on a user utterance can differ from those used to turn natural language into SQL for example. You will want the deployment name (`engine`) for the `approach_classifier` to match the one set for `AZURE_OPENAI_CLASSIFIER_DEPLOYMENT`. For the rest, you wil want the deployment name (`engine`) and model name (`model_name`) to match `AZURE_OPENAI_DEPLOYMENT` and `AZURE_OPENAI_MODEL` respectively. For the models which specify a `total_max_tokens`, you will want to set this value to the maximum number of tokens your deployed GPT model allows for a completions request. This will allow the backend service to know when prompts need to be trimmed to avoid a token limit error.
     * Note that the config for `approach_classifier` doesn't contain a system prompt, this is because the demo expects this model to be a fine-tuned GPT model rather than one trained using few-shot training. You will need to provide a fine-tuned model trained on some sample data for the dialog classification to work well. For more information on how to do this, checkout the [fine-tuning section](README.md#fine-tuning).
@@ -202,6 +211,10 @@ You can find helpful resources on how to fine-tune a model on the Azure OpenAI w
 ***Question***: Are there examples of usage reports derived from the logging
 
 ***Answer***: Yes, as part of the development of the application, we included some basic logging to capture what is happening around a user conversation. Application Insights was used as the logging backend. The [log reports](docs/log_reports.md) document has some sample KQL queries and reports based on these logs
+
+***Question***: Are there suggestions on how to develop and test prompts
+
+***Answer***: Yes, we have included documentation on how you could leverage Prompt Flow for developing and testing prompts. An example of developing and performing bulk test on few-shot classifier is included in the [prompt flow](docs/prompt_flow.md) document.
 
 ### Troubleshooting
 
