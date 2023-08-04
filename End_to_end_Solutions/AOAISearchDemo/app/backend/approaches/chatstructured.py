@@ -1,43 +1,50 @@
 import json
-import openai
-import pyodbc
 import re
-import pandas as pd
-from backend.approaches.approach import Approach
-from backend.config import DefaultConfig
-from backend.contracts.chat_response import Answer, ApproachType, ChatResponse
-from backend.contracts.error import OutOfScopeException, UnauthorizedDBAccessException
-from backend.utilities.openai_utils import generate_history_messages
-from backend.utilities.prompt_composer_utils import trim_history, compute_tokens
-from common.logging.log_helper import CustomLogger
 from textwrap import dedent
 
-# Structured information retrieval, using Azure SQL DB and Azure OpenAI APIs directly. It first uses OpenAI to generate 
+import openai
+import pandas as pd
+import pyodbc
+from backend.approaches.approach import Approach
+from backend.contracts.chat_response import Answer, ApproachType, ChatResponse
+from backend.contracts.error import (OutOfScopeException,
+                                     UnauthorizedDBAccessException)
+from backend.utilities.openai_utils import generate_history_messages
+from backend.utilities.prompt_composer_utils import (compute_tokens,
+                                                     trim_history)
+from common.logging.log_helper import CustomLogger
+
+# Structured information retrieval, using Azure SQL DB and Azure OpenAI APIs directly. It first uses OpenAI to generate
 # a SQL query to retrieve data from a SQL database using dialog from the user. Then, after retrieving the data,
 # it constructs a prompt injected with the retrieved table. Finally, it uses this prompt to request OpenAI to generate a
 # completion (answer) that the user can understand.
+
+
 class ChatStructuredApproach(Approach):
     def __init__(self, sql_connection_string: str, logger: CustomLogger):
-        self.sql_connection_string = sql_connection_string 
+        self.sql_connection_string = sql_connection_string
         self.logger = logger
 
-    def run(self, history, bot_config, overrides: dict) -> any:        
-        unauthorized_error_messages = ["I am not authorized to make changes to the data"]
+    def run(self, history, bot_config, overrides: dict) -> any:
+        unauthorized_error_messages = [
+            "I am not authorized to make changes to the data"]
 
         # STEP 1: Generate an SQL query using the chat history
         message_list = [{
-                "role": "system",
-                "content": dedent(bot_config["structured_query_nl_to_sql"]["system_prompt"])
-                 }
-            ]
-        
+            "role": "system",
+            "content": dedent(bot_config["structured_query_nl_to_sql"]["system_prompt"])
+        }
+        ]
+
         if bot_config["structured_query_nl_to_sql"]["history"]["include"]:
-            chat_history = generate_history_messages(history[:-1], bot_config["structured_query_nl_to_sql"]["history"])
-            chat_history = trim_history(chat_history, 
-                                        bot_config["structured_query_nl_to_sql"]["model_params"]["total_max_tokens"] - compute_tokens(bot_config["structured_query_nl_to_sql"]["system_prompt"]) - bot_config["structured_query_nl_to_sql"]["openai_settings"]["max_tokens"],
+            chat_history = generate_history_messages(
+                history[:-1], bot_config["structured_query_nl_to_sql"]["history"])
+            chat_history = trim_history(chat_history,
+                                        bot_config["structured_query_nl_to_sql"]["model_params"]["total_max_tokens"] - compute_tokens(
+                                            bot_config["structured_query_nl_to_sql"]["system_prompt"]) - bot_config["structured_query_nl_to_sql"]["openai_settings"]["max_tokens"],
                                         bot_config["structured_query_nl_to_sql"]["model_params"]["model_name"])
             message_list.extend(chat_history)
-        
+
         message_list.append({"role": "user", "content": history[-1]['utterance'] + " SQL Code: "})
 
         nl_to_sql_response = openai.ChatCompletion.create(
@@ -68,19 +75,18 @@ class ChatStructuredApproach(Approach):
             raise OutOfScopeException(message=str(e), suggested_classification=ApproachType.unstructured)
         except Exception as e:
             raise Exception(f"Unknown error when querying SQL database: {str(e)}")
-               
+
         # STEP 3: Format the SQL query and SQL result into a natural language response
         if sql_result is not None:
             answer.query_result = sql_result
             message_list = [{
-                    "role": "system",
-                    "content": dedent(bot_config["structured_final_answer_generation"]["system_prompt"])
-                    }
-                ]
+                "role": "system",
+                "content": dedent(bot_config["structured_final_answer_generation"]["system_prompt"])
+            }]
 
             if bot_config["structured_final_answer_generation"]["history"]["include"]:
                 message_list.extend(generate_history_messages(history[:-1], bot_config["structured_final_answer_generation"]["history"]))
-            
+
             message_list.append({"role": "user", "content": "Question: " + history[-1]['utterance'] + "\nAnswer:\n" + sql_result})
 
             sql_result_to_nl_response = openai.ChatCompletion.create(
@@ -90,7 +96,8 @@ class ChatStructuredApproach(Approach):
 
             formatted_sql_result = sql_result_to_nl_response['choices'][0]['message']['content']
 
-            self.log_aoai_response_details(json.dumps(message_list), json.dumps(formatted_sql_result), sql_result_to_nl_response)
+            self.log_aoai_response_details(json.dumps(message_list), json.dumps(
+                formatted_sql_result), sql_result_to_nl_response)
 
             answer.formatted_answer = formatted_sql_result
 
@@ -104,4 +111,5 @@ class ChatStructuredApproach(Approach):
             "aoai_response[MS]": aoai_response.response_ms
         }
         addl_properties = self.logger.get_updated_properties(addl_dimensions)
-        self.logger.info(f"prompt: {prompt}, response: {result}", extra=addl_properties)
+        self.logger.info(
+            f"prompt: {prompt}, response: {result}", extra=addl_properties)
