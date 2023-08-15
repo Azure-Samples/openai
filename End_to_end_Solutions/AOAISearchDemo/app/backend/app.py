@@ -1,23 +1,26 @@
 import datetime
 import json
 import mimetypes
-import openai
 import time
+
+import openai
 import yaml
 from azure.core.credentials import AzureKeyCredential
 from azure.identity import DefaultAzureCredential
 from azure.search.documents import SearchClient
 from azure.storage.blob import BlobServiceClient
 from backend.approaches.approach_classifier import ApproachClassifier
-from backend.approaches.chatunstructured import ChatUnstructuredApproach
 from backend.approaches.chatstructured import ChatStructuredApproach
-from common.contracts.chat_session import ChatSession, ParticipantType, DialogClassification
+from backend.approaches.chatunstructured import ChatUnstructuredApproach
 from backend.config import DefaultConfig
 from backend.contracts.chat_response import Answer, ApproachType, ChatResponse
-from backend.contracts.error import OutOfScopeException, UnauthorizedDBAccessException
+from backend.contracts.error import (OutOfScopeException,
+                                     UnauthorizedDBAccessException)
 from backend.data_client.data_client import DataClient
 from backend.utilities.access_management import AccessManager
-from flask import Flask, request, jsonify
+from common.contracts.chat_session import (ChatSession, DialogClassification,
+                                           ParticipantType)
+from flask import Flask, jsonify, request
 
 # Use the current user identity to authenticate with Azure OpenAI, Cognitive Search and Blob Storage (no secrets needed, 
 # just use 'az login' locally, and managed identity when deployed on Azure). If you need to use keys, use separate AzureKeyCredential instances with the 
@@ -44,9 +47,9 @@ blob_container = blob_client.get_container_client(DefaultConfig.AZURE_STORAGE_CO
 logger = DefaultConfig.logger
 
 chat_approaches = {
-    ApproachType.unstructured.value: ChatUnstructuredApproach(search_client, DefaultConfig.KB_FIELDS_SOURCEPAGE,
+    ApproachType.unstructured.name: ChatUnstructuredApproach(search_client, DefaultConfig.KB_FIELDS_SOURCEPAGE,
                                         DefaultConfig.KB_FIELDS_CONTENT, logger, search_threshold_percentage = DefaultConfig.SEARCH_THRESHOLD_PERCENTAGE),
-    ApproachType.structured.value: ChatStructuredApproach(DefaultConfig.SQL_CONNECTION_STRING, logger)                        
+    ApproachType.structured.name: ChatStructuredApproach(DefaultConfig.SQL_CONNECTION_STRING, logger)                        
 }
 
 
@@ -129,11 +132,11 @@ def chat():
         if classification_override:
             approach_type = ApproachType(classification_override)
         else:
-            openai.api_base = f"https://{DefaultConfig.AZURE_OPENAI_CLASSIFIER_SERVICE}.openai.azure.com"
-            openai.api_key = DefaultConfig.AZURE_OPENAI_CLASSIFIER_API_KEY
+            openai.api_base = f"https://{DefaultConfig.AZURE_OPENAI_GPT4_SERVICE}.openai.azure.com"
+            openai.api_key = DefaultConfig.AZURE_OPENAI_GPT4_API_KEY
             approach_type = approach_classifier.run(history, bot_config)
         
-        logger.info(f"question_type: {approach_type.value}", extra=properties)
+        logger.info(f"question_type: {approach_type.name}", extra=properties)
 
         if approach_type == ApproachType.chit_chat:
             chit_chat_canned_response =  "I'm sorry, but the question you've asked is outside my area of expertise. I'd be happy to help with any questions related to Microsoft Surface PCs and Laptops. Please feel free to ask about those, and I'll do my best to assist you!"
@@ -162,7 +165,7 @@ def chat():
         simplified_history = [{"participant_type": dialog.participant_type.value, "utterance": dialog.utterance} for dialog in filtered_chat_session.conversation]
         simplified_history.append({"participant_type": ParticipantType.user.value, "utterance": user_message})
 
-        impl = chat_approaches.get(approach_type.value)
+        impl = chat_approaches.get(approach_type.name)
 
         if not impl:
             return jsonify({"error": "unknown approach"}), 400

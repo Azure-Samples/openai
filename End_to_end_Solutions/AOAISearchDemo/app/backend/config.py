@@ -3,11 +3,12 @@
 # Licensed under the MIT License.
 
 import os
-from dotenv import load_dotenv
-from azure.keyvault.secrets import SecretClient
-from azure.identity import DefaultAzureCredential
-from common.logging.log_helper import CustomLogger
 from datetime import datetime
+
+from azure.identity import DefaultAzureCredential
+from azure.keyvault.secrets import SecretClient
+from common.logging.log_helper import CustomLogger
+from dotenv import load_dotenv
 
 # load value from .env file if it exists, unless deploying in a production environment
 if os.getenv("ENVIRONMENT") != "PROD":
@@ -83,9 +84,6 @@ class DefaultConfig:
                 cls.AZURE_STORAGE_ACCOUNT = config_reader.read_config_value("AZURE-STORAGE-ACCOUNT")
                 cls.AZURE_STORAGE_CONTAINER = config_reader.read_config_value("AZURE-STORAGE-CONTAINER")
                 cls.AZURE_BLOB_CONNECTION_STRING = config_reader.read_config_value("AZURE-BLOB-CONNECTION-STRING")
-
-                cls.AZURE_FORMRECOGNIZER_SERVICE = config_reader.read_config_value("AZURE-FORMRECOGNIZER-SERVICE")
-                cls.AZURE_FORMRECOGNIZER_KEY = config_reader.read_config_value("AZURE-FORMRECOGNIZER-KEY")
 
                 cls.DATA_SERVICE_URI = config_reader.read_config_value("DATA-SERVICE-URI")
 

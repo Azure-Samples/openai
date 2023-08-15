@@ -32,8 +32,10 @@ param openAiResourceGroupLocation string = location
 param openAiSkuName string = 'S0'
 param gptDeploymentName string = ''
 param gptModelName string = ''
+param gptModelVersion string = '0314'
 param classifierGptDeploymentName string = ''
 param classifierGptModelName string = ''
+param classifierGptModelVersion string = '0301'
 
 param cosmosAccountName string = ''
 param cosmosDatabaseName string = 'aoai-search-demo-cosmos-db'
@@ -229,21 +231,32 @@ module openAi 'core/ai/cognitiveservices.bicep' = {
   name: 'openai'
   scope: openAiResourceGroup
   params: {
-    name: !empty(openAiServiceName) ? openAiServiceName : '${abbrs.cognitiveServicesAccounts}${resourceToken}'
+    name: !empty(openAiServiceName) ? openAiServiceName : '${abbrs.cognitiveServicesOpenAI}${resourceToken}'
     location: openAiResourceGroupLocation
     tags: tags
     sku: {
       name: openAiSkuName
     }
     deployments: [
-      /* 
+      /*
       NOTE: Uncomment if you want to deploy OpenAI models from scratch
       {
-        name: gptDeploymentName
+        name: !empty(gptDeploymentName) ? gptDeploymentName : 'gpt-4'
         model: {
           format: 'OpenAI'
-          name: gptModelName
-          version: '1'
+          name: !empty(gptModelName) ? gptModelName : 'gpt-4'
+          version: gptModelVersion
+        }
+        scaleSettings: {
+          scaleType: 'Standard'
+        }
+      }
+      {
+        name: !empty(classifierGptDeploymentName) ? classifierGptDeploymentName : 'gpt-35-turbo'
+        model: {
+          format: 'OpenAI'
+          name: !empty(classifierGptModelName) ? classifierGptModelName : 'gpt-35-turbo'
+          version: classifierGptModelVersion
         }
         scaleSettings: {
           scaleType: 'Standard'
