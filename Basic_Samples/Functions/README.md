@@ -9,13 +9,18 @@ pip install -r requirements.txt
 ```
 
 ### Microsoft Azure Endpoints
-In order to use the Open AI library or REST API with Microsoft Azure endpoints, you need to set DEPLOYMENT_ID, OPENAI_API_BASE & OPENAI_API_VERSION in _config.json_ file. 
+In order to use the Open AI library or REST API with Microsoft Azure endpoints, you need to set DEPLOYMENT_ID, OPENAI_API_BASE & OPENAI_API_VERSION in the _config.json_ file. 
 
-```js
+```json
 {
     "DEPLOYMENT_ID":"<Model Deployment Name>",
     "OPENAI_API_BASE":"https://<Your Azure Resource Name>.openai.azure.com",
-    "OPENAI_API_VERSION":"<OpenAI API Version>"
+    "OPENAI_API_VERSION":"<OpenAI API Version>",
+
+    // Only required for the functions_with_azure_search.ipynb notebook
+    "SEARCH_SERVICE_ENDPOINT": "https://<Your Search Service Name>.search.windows.net",
+    "SEARCH_INDEX_NAME": "recipes-vectors",
+    "SEARCH_ADMIN_KEY": ""
 }
 ``` 
 
