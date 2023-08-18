@@ -1,7 +1,7 @@
 
 # Introduction
 
-This repository contains samples demonstrating how to use GPT/ ChatGPT for Completions via Python SDK or REST API.
+This repository contains samples demonstrating how to use GPT for Completions via Python SDK or REST API.
 
 ## Installation
 Install all Python modules and packages listed in the requirements.txt file using the below command.
@@ -11,11 +11,10 @@ pip install -r requirements.txt
 ```
 
 ### Microsoft Azure Endpoints
-In order to use the Open AI library or REST API with Microsoft Azure endpoints, you need to set CHATGPT_MODEL/COMPLETIONS_MODEL, OPENAI_API_BASE & OPENAI_API_VERSION in _config.json_ file. 
+In order to use the Open AI library or REST API with Microsoft Azure endpoints, you need to set COMPLETIONS_MODEL, OPENAI_API_BASE & OPENAI_API_VERSION in _config.json_ file. 
 
 ```js
 {
-    "CHATGPT_MODEL":"<ChatGPT Model Name>",
     "COMPLETIONS_MODEL":"<Completions Model Name>",
     "OPENAI_API_BASE":"https://<Your Azure Resource Name>.openai.azure.com",
     "OPENAI_API_VERSION":"<OpenAI API Version>"
@@ -35,10 +34,9 @@ One can get the OPENAI_API_KEY value from the Azure Portal. Go to https://portal
          export OPENAI_API_KEY="REPLACE_WITH_YOUR_KEY_VALUE_HERE"
 
 - For _Completions_ scenario, one can start with using your model name ("COMPLETIONS_MODEL" in _config.json_ file) as "text_davinci_003". <br>
-And for ChatGPT Completions, one can start with using your model name as "gpt-35-turbo" ("CHATGPT_MODEL" in _config.json_ file).
 
 - To find your "OPENAI_API_BASE" go to https://portal.azure.com, find your resource and then under "Resource Management" -> "Keys and Endpoints" look for the "Endpoint" value.
-- Current OpenAI api version is "2022-12-01". Check out versions [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference).
+- Current OpenAI api version is "2023-05-15". Check out versions [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference).
 
 Learn more about Azure OpenAI Service REST API [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference).
 
