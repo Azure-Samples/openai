@@ -1,4 +1,4 @@
-pypdf==3.5.0
+pypdf==3.9.0
 azure-cosmos==4.4.0
 azure-identity==1.13.0b3
 azure-keyvault==4.2.0
