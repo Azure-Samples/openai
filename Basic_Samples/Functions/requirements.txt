@@ -8,3 +8,5 @@ jupyter
 json
 pytz
 pandas
+tenacity
+azure-search-documents==11.4.0b8
