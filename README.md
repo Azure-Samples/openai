@@ -105,7 +105,7 @@ More details on the RAI guidelines for the Azure OpenAI Service can be found [he
 This repository contains samples demonstrating how to use GPT and ChatGPT via Python SDK or REST API. It also contains samples and guidelines to create more end to end scenario based solutions using the Azure OpenAI Service.
 
 * Basic samples: These are small code samples and snippets which complete small sets of actions and can be integrated into the user code.
-* End to end solutions: These are complete solutions for some usen cases and industry scenarios. These include appropriate workflows and reference architectures, which can be easily customized and built into full scale production systems.
+* End to end solutions: These are complete solutions for some use cases and industry scenarios. These include appropriate workflows and reference architectures, which can be easily customized and built into full scale production systems.
 
 ## Requirements
 Python 3.8+ <br>
