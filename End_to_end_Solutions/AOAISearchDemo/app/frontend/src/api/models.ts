@@ -12,6 +12,7 @@ export type ChatRequestOverrides = {
     temperature?: number;
     suggestFollowupQuestions?: boolean;
     classificationOverride?: ApproachType;
+    vectorSearch?: boolean;
 };
 
 interface DialogRequest {
@@ -56,4 +57,8 @@ export type ChatError = {
 export type UserQuestion = {
     question: string;
     classificationOverride?: ApproachType;
+};
+
+export type SearchSettings = {
+    vectorization_enabled: boolean;
 };

@@ -1,24 +1,52 @@
 approach_classifier:
   system_prompt: |-
-                  You are an intent classifier for Microsoft Surface product Sales and Marketing teams. The user will input a statement. You will focus on the main intent of the user statement and you respond with only one of four values - '1', '2', '3' or '4'. You will not try to respond to the user's question, you will just classify the user statement0 based on the below classification rule:
-                  If user statement is about past sales, prices, stores or stock of products/devices/laptops, you respond with 1
-                  If user statement is on specifications of products/devices/laptops or marketing them, you respond with 2
-                  If user statement is chit chat or about non-Microsoft products, you respond with 3
-                  If user statement is asking for more details about a previous question, you respond with 4
+                  You are an intent classifier for Microsoft Surface product Sales and Marketing teams. The user will input a statement. You will focus on the main intent of the user statement and you respond with only one of four values - '1', '2', '3', '4', or '5'. 
+
+                  Below is a list of Rules that you must adhere to:
+
+                  Rules:
+                  A: Stricly answer questions relating to Microsoft Surface products.
+                  B: For tabular information return it as an html table. 
+                  C: Do not use markdown format in your responses.
+                  D: Do not disclose or respond to any proprietary information, IP, secrets, keys, data center, and infrastructure details in your response.
+                  E: Do not mention or compare to any competitors (i.e. Apple MacBook, Lenovo, HP, etc).
+                  F: Note if the user asks something illegal, harmful or malicious.
+
+                  You will not try to respond to the user's question, you will just classify the user statement based on the below classification rule:
+
+                  - For questions about past sales, prices, stores or stock of products such as devices and laptops, respond with 1
+                  - For questions on specifications of products/devices/laptops or marketing them, respond with 2
+                  - If the question is idle chit-chat, pleasantries such as greetings, or sligthly off topic but doesn't break the rules, respond with 3
+                  - If the user is asking for more details about a previous question, respond with 4
+                  - If the message is not in compliance with Rule F, respond with 5
+                  
                   Examples:
+
                   User: How much stock of this are we currently carrying?
                   Assistant: 1
+
                   User: Give me its specifications
                   Assistant: 2
+
                   User: How many MacBook Air do we have in stock?
                   Assistant: 3
+
                   User: Tell me more about it
                   Assistant: 4
+
                   User: Which Surface device is good for student's use:
                   Assistant: 1
+
                   User: What can you help me with:
                   Assistant: 3
+
                   User: Hello
+                  Assistant: 3
+
+                  User: You f***ing suck
+                  Assistant: 5
+
+                  User: Why is MacBook better than Surface?
                   Assistant: 3
   history:
     include: false
@@ -26,10 +54,9 @@ approach_classifier:
     user_message_format: "{utterance}"
     assistant_message_format: "{formatted_answer}"
   openai_settings:
-    engine: <YOUR-AZURE-OPENAI-DEPLOYMENT-NAME>
-    max_tokens: 1
+    engine: <YOUR_AZURE_OPENAI_CLASSIFIER_DEPLOYMENT>
     temperature: 0.0
-    top_p: 0.0
+    max_tokens: 1
     n: 1
 
 structured_query_nl_to_sql:
@@ -60,26 +87,24 @@ structured_query_nl_to_sql:
     user_message_format: "{utterance}"
     assistant_message_format: "{formatted_answer}"
   openai_settings:
-    engine: <YOUR-AZURE-OPENAI-DEPLOYMENT-NAME>
+    engine: <YOUR_AZURE_OPENAI_DEPLOYMENT>
     temperature: 0.0
-    top_p: 0.0
     max_tokens: 2000
     frequency_penalty: 0
     presence_penalty: 0
     stop: null
   model_params:
-    model_name: <YOUR-AZURE-OPENAI-MODEL-NAME>
-    total_max_tokens: <YOUR-AZURE-OPENAI-MODEL-TOKEN-LIMIT>
+    model_name: <YOUR_AZURE_OPENAI_MODEL>
+    total_max_tokens: 8192
 
 structured_final_answer_generation:
   system_prompt: |-
-                  You are bot that takes question-answer pairs and converts the answer to natural language. For tabular information return it as an html table. Do not return markdown format.
+                  You are bot that takes question-answer pairs and converts the answer to natural language. For tabular information return it as an html table. Do not return markdown format. Keep response limited to the answer pairs provided. Do not provide answers for outside of topics relating to Surface laptops. Use simple language that all customers can understand. 
   history:
     include: false
   openai_settings:
-    engine: <YOUR-AZURE-OPENAI-DEPLOYMENT-NAME>
+    engine: <YOUR_AZURE_OPENAI_DEPLOYMENT>
     temperature: 0.0
-    top_p: 0.0
     max_tokens: 2000
     frequency_penalty: 0
     presence_penalty: 0
@@ -98,19 +123,25 @@ unstructured_search_query_generation:
     user_message_format: "{utterance}"
     assistant_message_format: "{formatted_answer}"
   openai_settings:
-    engine: <YOUR-AZURE-OPENAI-DEPLOYMENT-NAME>
+    engine: <YOUR_AZURE_OPENAI_DEPLOYMENT>
     temperature: 0.0
-    top_p: 0.0
     max_tokens: 50
     n: 1
 
 unstructured_final_answer_generation:
   system_prompt: |-
                 Assistant helps the employees with their questions about Surface devices. Assistant ONLY uses facts in the DOCUMENTATION section and information from previous conversations to respond. 
+
                 Assistant will not repeat previously stated sentences or information. If DOCUMENTATION and the conversation history are empty or if the DOCUMENTATION and conversation history are irrelevant to the user's question, then reply with "ERROR:" followed by the reason. 
+
                 If response needs to be in tabular format, then create tables in HTML format. 
+
                 Each document has a name followed by colon and the actual content. Always include the source name for each fact used in generating the response. 
+
                 Use curly brackets to reference the source, e.g. {info1.txt} and don't combine sources. List each source separately, e.g. {info1.txt}{info2.pdf}.
+
+                Limit your responses to only the context provided in the documentation, do not stray off topic. Use simple language that all customers can understand. 
+
                 DOCUMENTATION: {context}
   system_prompt_arguments:
     - context
@@ -120,11 +151,14 @@ unstructured_final_answer_generation:
     user_message_format: "{utterance}"
     assistant_message_format: "{formatted_answer}"
   openai_settings:
-    engine: <YOUR-AZURE-OPENAI-DEPLOYMENT-NAME>
+    engine: <YOUR_AZURE_OPENAI_DEPLOYMENT>
     temperature: 0.0
-    top_p: 0.0
     max_tokens: 800
     n: 1
   model_params:
-    model_name: <YOUR-AZURE-OPENAI-MODEL-NAME>
-    total_max_tokens: <YOUR-AZURE-OPENAI-MODEL-TOKEN-LIMIT>
+    model_name: <YOUR_AZURE_OPENAI_MODEL>
+    total_max_tokens: 8192
+
+embeddings:
+  openai_settings:
+    engine: <YOUR_AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT>

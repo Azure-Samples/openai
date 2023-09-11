@@ -4,7 +4,18 @@ import { Delete24Regular, Person24Regular, Settings24Regular, SparkleFilled } fr
 
 import styles from "./Chat.module.css";
 
-import { chatApi, clearChatSession, ChatResponse, ChatRequest, UserProfile, ApproachType, ChatError, ChatResponseError, UserQuestion } from "../../api";
+import {
+    chatApi,
+    clearChatSession,
+    ChatResponse,
+    ChatRequest,
+    UserProfile,
+    ApproachType,
+    ChatError,
+    ChatResponseError,
+    UserQuestion,
+    SearchSettings
+} from "../../api";
 import { Answer, AnswerLoading } from "../../components/Answer";
 import { QuestionInput } from "../../components/QuestionInput";
 import { ExampleList } from "../../components/Example";
@@ -15,9 +26,10 @@ import { ErrorToast } from "../../components/ErrorToast";
 
 type Props = {
     users: UserProfile[];
+    searchSettings: SearchSettings;
 };
 
-const Chat = ({ users }: Props) => {
+const Chat = ({ users, searchSettings }: Props) => {
     const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
     const [isConfigPanelOpen, setIsConfigPanelOpen] = useState(false);
     const [retrieveCount, setRetrieveCount] = useState<number>(20);
@@ -25,6 +37,7 @@ const Chat = ({ users }: Props) => {
     const [useSemanticCaptions, setUseSemanticCaptions] = useState<boolean>(false);
     const [excludeCategory, setExcludeCategory] = useState<string>("");
     const [useSuggestFollowupQuestions, setUseSuggestFollowupQuestions] = useState<boolean>(false);
+    const [useVectorSearch, setUseVectorSearch] = useState<boolean>(searchSettings.vectorization_enabled);
 
     const chatMessageStreamEnd = useRef<HTMLDivElement | null>(null);
 
@@ -84,6 +97,7 @@ const Chat = ({ users }: Props) => {
                     semanticRanker: useSemanticRanker,
                     semanticCaptions: useSemanticCaptions,
                     suggestFollowupQuestions: useSuggestFollowupQuestions,
+                    vectorSearch: useVectorSearch,
                     classificationOverride
                 }
             };
@@ -149,6 +163,10 @@ const Chat = ({ users }: Props) => {
 
     const onUseSemanticCaptionsChange = (_ev?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => {
         setUseSemanticCaptions(!!checked);
+    };
+
+    const onUseVectorSearchChange = (_ev?: React.FormEvent<HTMLElement | HTMLInputElement>, checked?: boolean) => {
+        setUseVectorSearch(!!checked);
     };
 
     const onExcludeCategoryChanged = (_ev?: React.FormEvent, newValue?: string) => {
@@ -341,6 +359,13 @@ const Chat = ({ users }: Props) => {
                         label="Use query-contextual summaries instead of whole documents"
                         onChange={onUseSemanticCaptionsChange}
                         disabled={!useSemanticRanker}
+                    />
+                    <Checkbox
+                        className={styles.chatSettingsSeparator}
+                        checked={useVectorSearch}
+                        label="Use vector search for retrieval"
+                        onChange={onUseVectorSearchChange}
+                        disabled={!searchSettings.vectorization_enabled}
                     />
                     {/* <Checkbox
                         className={styles.chatSettingsSeparator}

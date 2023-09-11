@@ -17,6 +17,7 @@ param resourceGroupName string = ''
 param searchServiceName string = ''
 param searchServiceResourceGroupName string = ''
 param searchServiceResourceGroupLocation string = location
+param searchSkipVectorization bool = false
 
 param searchServiceSkuName string = 'standard'
 param searchIndexName string = 'gptkbindex'
@@ -30,12 +31,19 @@ param openAiServiceName string = ''
 param openAiResourceGroupName string = ''
 param openAiResourceGroupLocation string = location
 param openAiSkuName string = 'S0'
+param deployOpenAIModels bool = false
 param gptDeploymentName string = ''
 param gptModelName string = ''
-param gptModelVersion string = '0314'
+param gptModelVersion string = ''
 param classifierGptDeploymentName string = ''
 param classifierGptModelName string = ''
-param classifierGptModelVersion string = '0301'
+param classifierGptModelVersion string = ''
+param embeddingsGptDeploymentName string = ''
+param embeddingsGptModelName string = ''
+param embeddingsGptModelVersion string = ''
+param embeddingsApiVersion string = '2023-03-15-preview'
+param embeddingsTokenLimit string = ''
+param embeddingsDimensions string = ''
 
 param cosmosAccountName string = ''
 param cosmosDatabaseName string = 'aoai-search-demo-cosmos-db'
@@ -145,7 +153,7 @@ module backend 'core/host/appservice.bicep' = {
     }
     keyVaultName: keyVault.outputs.name
     applicationInsightsName: appInsights.outputs.applicationInsightsName
-    appCommandLine: 'gunicorn --bind=0.0.0.0 backend.app:app'
+    appCommandLine: 'gunicorn --bind=0.0.0.0 --timeout 600 backend.app:app'
   }
   dependsOn: [
     keyVault
@@ -170,7 +178,7 @@ module dataService 'core/host/appservice.bicep' = {
     }
     keyVaultName: keyVault.outputs.name
     applicationInsightsName: appInsights.outputs.applicationInsightsName
-    appCommandLine: 'gunicorn --bind=0.0.0.0 data.app:app'
+    appCommandLine: 'gunicorn --bind=0.0.0.0 --timeout 600 data.app:app'
   }
   dependsOn: [
     keyVault
@@ -237,44 +245,64 @@ module openAi 'core/ai/cognitiveservices.bicep' = {
     sku: {
       name: openAiSkuName
     }
-    deployments: [
-      /*
-      NOTE: Uncomment if you want to deploy OpenAI models from scratch
-      {
-        name: !empty(gptDeploymentName) ? gptDeploymentName : 'gpt-4'
-        model: {
-          format: 'OpenAI'
-          name: !empty(gptModelName) ? gptModelName : 'gpt-4'
-          version: gptModelVersion
+    deployments: deployOpenAIModels && !searchSkipVectorization ? [
+        {
+          name: !empty(gptDeploymentName) ? gptDeploymentName : 'gpt-4'
+          model: {
+            format: 'OpenAI'
+            name: !empty(gptModelName) ? gptModelName : 'gpt-4'
+            version: !empty(gptModelVersion) ? gptModelVersion : '0314'
+          }
+          scaleSettings: {
+            scaleType: 'Standard'
+          }
         }
-        scaleSettings: {
-          scaleType: 'Standard'
+        {
+          name: !empty(classifierGptDeploymentName) ? classifierGptDeploymentName : 'gpt-35-turbo'
+          model: {
+            format: 'OpenAI'
+            name: !empty(classifierGptModelName) ? classifierGptModelName : 'gpt-35-turbo'
+            version: !empty(classifierGptModelVersion) ? classifierGptModelVersion : '0301'
+          }
+          scaleSettings: {
+            scaleType: 'Standard'
+          }
         }
-      }
-      {
-        name: !empty(classifierGptDeploymentName) ? classifierGptDeploymentName : 'gpt-35-turbo'
-        model: {
-          format: 'OpenAI'
-          name: !empty(classifierGptModelName) ? classifierGptModelName : 'gpt-35-turbo'
-          version: classifierGptModelVersion
+        {
+          name: !empty(embeddingsGptDeploymentName) ? embeddingsGptDeploymentName : 'text-embedding-ada-002'
+          model: {
+            format: 'OpenAI'
+            name: !empty(embeddingsGptModelName) ? embeddingsGptModelName : 'text-embedding-ada-002'
+            version: !empty(embeddingsGptModelVersion) ? embeddingsGptModelVersion : '2'
+          }
+          scaleSettings: {
+            scaleType: 'Standard'
+          }
         }
-        scaleSettings: {
-          scaleType: 'Standard'
+      ] : deployOpenAIModels ? [
+        {
+          name: !empty(gptDeploymentName) ? gptDeploymentName : 'gpt-4'
+          model: {
+            format: 'OpenAI'
+            name: !empty(gptModelName) ? gptModelName : 'gpt-4'
+            version: !empty(gptModelVersion) ? gptModelVersion : '0314'
+          }
+          scaleSettings: {
+            scaleType: 'Standard'
+          }
         }
-      }
-      {
-        name: classifierGptDeploymentName
-        model: {
-          format: 'OpenAI'
-          name: classifierGptModelName
-          version: '1'
+        {
+          name: !empty(classifierGptDeploymentName) ? classifierGptDeploymentName : 'gpt-35-turbo'
+          model: {
+            format: 'OpenAI'
+            name: !empty(classifierGptModelName) ? classifierGptModelName : 'gpt-35-turbo'
+            version: !empty(classifierGptModelVersion) ? classifierGptModelVersion : '0301'
+          }
+          scaleSettings: {
+            scaleType: 'Standard'
+          }
         }
-        scaleSettings: {
-          scaleType: 'Standard'
-        }
-      }
-      */
-    ]
+      ] : []
   }
 }
 
@@ -532,6 +560,20 @@ module azureOpenAIClassifierService 'core/keyvault/keyvault-secret.bicep' = {
   ]
 }
 
+module azureOpenAIEmbeddingsService 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-embeddings-service'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'AZURE-OPENAI-EMBEDDINGS-SERVICE'
+    secretValue: openAi.outputs.name
+  }
+  dependsOn: [
+    keyVault
+    openAi
+  ]
+}
+
 module azureOpenAIGptKey 'core/keyvault/keyvault-secret.bicep' = {
   name: 'openai-secret-gpt-api-key'
   scope: resourceGroup
@@ -557,6 +599,73 @@ module azureOpenAIClassifierKey 'core/keyvault/keyvault-secret.bicep' = {
   dependsOn: [
     keyVault
     openAi
+  ]
+}
+
+module azureOpenAIEmbeddingsKey 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-embeddings-api-key'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'AZURE-OPENAI-EMBEDDINGS-API-KEY'
+    secretValue: openAi.outputs.apiKey
+  }
+  dependsOn: [
+    keyVault
+    openAi
+  ]
+}
+
+module azureOpenAIEmbeddingsEngineName 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-embeddings-engine-name'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'AZURE-OPENAI-EMBEDDINGS-ENGINE-NAME'
+    secretValue: embeddingsGptModelName
+  }
+  dependsOn: [
+    keyVault
+    openAi
+  ]
+}
+
+module azureOpenAIEmbeddingsDimensions 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-embeddings-dimensions'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'AZURE-OPENAI-EMBEDDINGS-DIMENSIONS'
+    secretValue: embeddingsDimensions
+  }
+  dependsOn: [
+    keyVault
+  ]
+}
+
+module azureOpenAIEmbeddingsTokenLimit 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'openai-secret-embeddings-token-limit'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'AZURE-OPENAI-EMBEDDINGS-TOKEN-LIMIT'
+    secretValue: embeddingsTokenLimit
+  }
+  dependsOn: [
+    keyVault
+  ]
+}
+
+module searchSkipVectorizationSecret 'core/keyvault/keyvault-secret.bicep' = {
+  name: 'search-secret-skip-vectorization'
+  scope: resourceGroup
+  params: {
+    keyVaultName: keyVault.outputs.name
+    secretName: 'SEARCH-SKIP-VECTORIZATION'
+    secretValue: searchSkipVectorization ? 'true' : 'false'
+  }
+  dependsOn: [
+    keyVault
   ]
 }
 

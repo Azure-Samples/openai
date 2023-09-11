@@ -74,12 +74,16 @@ class DefaultConfig:
                 cls.AZURE_OPENAI_CLASSIFIER_SERVICE = config_reader.read_config_value("AZURE-OPENAI-CLASSIFIER-SERVICE")
                 cls.AZURE_OPENAI_CLASSIFIER_API_KEY = config_reader.read_config_value("AZURE-OPENAI-CLASSIFIER-API-KEY")
 
+                cls.AZURE_OPENAI_EMBEDDINGS_SERVICE = config_reader.read_config_value("AZURE-OPENAI-EMBEDDINGS-SERVICE")
+                cls.AZURE_OPENAI_EMBEDDINGS_API_KEY = config_reader.read_config_value("AZURE-OPENAI-EMBEDDINGS-API-KEY")
+
                 cls.AZURE_SEARCH_SERVICE = config_reader.read_config_value("AZURE-SEARCH-SERVICE")
                 cls.AZURE_SEARCH_INDEX = config_reader.read_config_value("AZURE-SEARCH-INDEX")
                 cls.AZURE_SEARCH_KEY = config_reader.read_config_value("AZURE-SEARCH-KEY")
                 cls.KB_FIELDS_CONTENT = config_reader.read_config_value("KB-FIELDS-CONTENT")
                 cls.KB_FIELDS_CATEGORY = config_reader.read_config_value("KB-FIELDS-CATEGORY")
                 cls.KB_FIELDS_SOURCEPAGE = config_reader.read_config_value("KB-FIELDS-SOURCEPAGE")
+                cls.SEARCH_SKIP_VECTORIZATION = config_reader.read_config_value("SEARCH-SKIP-VECTORIZATION")
 
                 cls.AZURE_STORAGE_ACCOUNT = config_reader.read_config_value("AZURE-STORAGE-ACCOUNT")
                 cls.AZURE_STORAGE_CONTAINER = config_reader.read_config_value("AZURE-STORAGE-CONTAINER")

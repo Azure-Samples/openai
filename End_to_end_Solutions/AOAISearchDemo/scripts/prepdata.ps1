@@ -78,6 +78,12 @@ $predocsArguments = "./scripts/indexing/prepdocs.py", "./data/surface_device_doc
   "--searchservice", $env:AZURE_SEARCH_SERVICE, 
   "--index", $env:AZURE_SEARCH_INDEX, 
   "--formrecognizerservice", $env:AZURE_FORMRECOGNIZER_SERVICE,
+  "--skipvectorization", $env:SEARCH_SKIP_VECTORIZATION,
+  "--openAIService", $env:AZURE_OPENAI_EMBEDDINGS_SERVICE,
+  "--openAIKey", $env:AZURE_OPENAI_EMBEDDINGS_API_KEY,
+  "--openAIEngine", $env:AZURE_OPENAI_EMBEDDINGS_ENGINE_NAME,
+  "--openAITokenLimit", $env:AZURE_OPENAI_EMBEDDINGS_TOKEN_LIMIT,
+  "--openAIDimensions", $env:AZURE_OPENAI_EMBEDDINGS_DIMENSIONS,
   "-v"
 $process = Start-Process -FilePath $venvPythonPath -ArgumentList $predocsArguments -Wait -NoNewWindow -PassThru
 
