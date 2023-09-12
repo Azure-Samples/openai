@@ -41,15 +41,18 @@ There are two pre-recorded voiceovers that shows how enterprises can use this ar
 
 #### To Run Locally
 
-- [Azure Developer CLI 2.20.0 or greater](https://aka.ms/azure-dev/install)
+* [PowerShell 7+ (pwsh)](https://github.com/powershell/powershell)
+  * **Important**: Ensure you can run `pwsh.exe` from a PowerShell command. If this fails, you likely need to upgrade PowerShell.
+* [Azure PowerShell Az Module](https://learn.microsoft.com/en-us/powershell/azure/install-azure-powershell)
+  * **Important**: Ensure you can run `Az` from PowerShell.
+* [The AzureAD PowerShell module version 2.0.2.180 or above](https://learn.microsoft.com/en-us/powershell/module/azuread/?view=azureadps-2.0)
+* [Azure Developer CLI 2.20.0 or greater](https://aka.ms/azure-dev/install)
+  * **Important**: Ensure you can run `azd` from PowerShell.
 * [Python 3+](https://www.python.org/downloads/)
   * **Important**: Python and the pip package manager must be in the path in Windows for the setup scripts to work.
   * **Important**: Ensure you can run `python --version` from console. On Ubuntu, you might need to run `sudo apt install python-is-python3` to link `python` to `python3`.
 * [Node.js](https://nodejs.org/en/download/)
 * [Git](https://git-scm.com/downloads)
-* [PowerShell 7+ (pwsh)](https://github.com/powershell/powershell)
-  * **Important**: Ensure you can run `pwsh.exe` from a PowerShell command. If this fails, you likely need to upgrade PowerShell.
-* [The AzureAD PowerShell module version 2.0.2.180 or above](https://learn.microsoft.com/en-us/powershell/module/azuread/?view=azureadps-2.0)
 * [ODBC Driver for SQL Server v18](https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server)
 
 
