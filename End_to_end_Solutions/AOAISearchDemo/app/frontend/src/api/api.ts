@@ -1,4 +1,4 @@
-import { ChatRequest, ChatResponse, UserProfile } from "./models";
+import { ChatRequest, ChatResponse, SearchSettings, UserProfile } from "./models";
 
 export class ChatResponseError extends Error {
     public retryable: boolean;
@@ -28,7 +28,8 @@ export async function chatApi(options: ChatRequest): Promise<ChatResponse> {
                 temperature: options.overrides?.temperature,
                 exclude_category: options.overrides?.excludeCategory,
                 suggest_followup_questions: options.overrides?.suggestFollowupQuestions,
-                classification_override: options.overrides?.classificationOverride
+                classification_override: options.overrides?.classificationOverride,
+                vector_search: options.overrides?.vectorSearch
             }
         })
     });
@@ -63,6 +64,19 @@ export async function clearChatSession(userID: string, conversationID: string): 
     if (response.status > 299 || !response.ok) {
         throw Error(`Received error response when attemping to clear chat session: ${await response.text()}.`);
     }
+}
+
+export async function getSearchSettings(): Promise<SearchSettings> {
+    const response = await fetch("/search-settings", {
+        method: "GET"
+    })
+
+    if (response.status > 299 || !response.ok) {
+        throw Error("Received error response when fetching search settings.");
+    }
+
+    const searchSettings: SearchSettings = await response.json();
+    return searchSettings;
 }
 
 export function getCitationFilePath(citation: string): string {

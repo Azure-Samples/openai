@@ -20,17 +20,41 @@
         "openAiSkuName": {
             "value": "S0"
         },
+        "deployOpenAIModels": {
+            "value": false
+        },
         "gptDeploymentName": {
             "value": "${AZURE_OPENAI_DEPLOYMENT}"
         },
         "gptModelName": {
             "value": "${AZURE_OPENAI_MODEL}"
         },
+        "gptModelVersion": {
+            "value": "${AZURE_OPENAI_MODEL_VERSION}"
+        },
         "classifierGptDeploymentName": {
             "value": "${AZURE_OPENAI_CLASSIFIER_DEPLOYMENT}"
         },
         "classifierGptModelName": {
             "value": "${AZURE_OPENAI_CLASSIFIER_MODEL}"
+        },
+        "classifierGptModelVersion": {
+            "value": "${AZURE_OPENAI_CLASSIFIER_MODEL_VERSION}"
+        },
+        "embeddingsGptDeploymentName": {
+            "value": "${AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT}"
+        },
+        "embeddingsGptModelName": {
+            "value": "${AZURE_OPENAI_EMBEDDINGS_MODEL}"
+        },
+        "embeddingsGptModelVersion": {
+            "value": "${AZURE_OPENAI_EMBEDDINGS_MODEL_VERSION}"
+        },
+        "embeddingsTokenLimit": {
+            "value": "${AZURE_OPENAI_EMBEDDINGS_TOKEN_LIMIT}"
+        },
+        "embeddingsDimensions": {
+            "value": "${AZURE_OPENAI_EMBEDDINGS_DIMENSIONS}"
         },
         "formRecognizerServiceName": {
             "value": "${AZURE_FORMRECOGNIZER_SERVICE}"
@@ -49,6 +73,9 @@
         },
         "searchServiceSkuName": {
             "value": "standard"
+        },
+        "searchSkipVectorization": {
+            "value": false
         },
         "storageAccountName": {
             "value": "${AZURE_STORAGE_ACCOUNT}"

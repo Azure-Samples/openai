@@ -24,6 +24,9 @@
         "static": true
     },
     "python.analysis.extraPaths": [
-        "./app/backend"
+        "./app/backend",
+        "./app/common",
+        "./app/data",
+        "./app"
     ]
 }

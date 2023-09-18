@@ -1,9 +1,11 @@
 import argparse
 import html
 import io
+import openai
 import os
 import re
 import time
+import tiktoken
 from azure.ai.formrecognizer import DocumentAnalysisClient
 from azure.core.credentials import AzureKeyCredential
 from azure.identity import AzureDeveloperCliCredential
@@ -17,7 +19,11 @@ from azure.search.documents.indexes.models import (
     SemanticSettings,
     SimpleField,
     SearchableField,
-    PrioritizedFields
+    SearchField,
+    PrioritizedFields,
+    VectorSearch,
+    VectorSearchAlgorithmConfiguration,
+    HnswParameters
 )
 from azure.storage.blob import BlobServiceClient
 from typing import List
@@ -53,6 +59,13 @@ parser.add_argument("--formrecognizerservice", required=False,
                     help="Optional. Name of the Azure Form Recognizer service which will be used to extract text, tables and layout from the documents (must exist already)")
 parser.add_argument("--formrecognizerkey", required=False,
                     help="Optional. Use this Azure Form Recognizer account key instead of the current user identity to login (use az login to set current user for Azure)")
+parser.add_argument("--skipvectorization", help="Skip vectorization of document content")
+parser.add_argument("--openAIService", required=False, help="Azure OpenAI service resource name")
+parser.add_argument("--openAIKey", required=False, help="OpenAI API key")
+parser.add_argument("--openAIEngine", required=False, help="OpenAI embeddings model engine name")
+parser.add_argument("--openAITokenLimit", required=False, help="The max token limit for requests to the specidied OpenAI embeddings model")
+parser.add_argument("--openAIDimensions", required=False,
+                    help="The max number of dimensions allowed for an embeddings request to the specified OpenAI model")
 parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
 args = parser.parse_args()
 
@@ -60,7 +73,12 @@ args = parser.parse_args()
 azd_credential = AzureDeveloperCliCredential() if args.tenantid == None else AzureDeveloperCliCredential(
     tenant_id=args.tenantid)
 default_creds = azd_credential if args.searchkey == None or args.storagekey == None else None
-search_creds = default_creds if args.searchkey == None else AzureKeyCredential(args.searchkey)
+search_creds = default_creds if args.searchkey == None and default_creds is not None else AzureKeyCredential(args.searchkey)
+openai.api_type = "azure"
+openai.api_version = "2023-03-15-preview"
+skipvectorization = True if args.skipvectorization.lower() == "true" else False if args.skipvectorization.lower() == "false" else None
+if skipvectorization is None:
+    raise ValueError("skipvectorization must be 'true' or 'false'")
 if not args.skipblobs:
     storage_creds = default_creds if args.storagekey == None else args.storagekey
 if not args.localpdfparser:
@@ -69,7 +87,7 @@ if not args.localpdfparser:
         print(
             "Error: Azure Form Recognizer service is not provided. Please provide formrecognizerservice or use --localpdfparser for local pypdf parser.")
         exit(1)
-    formrecognizer_creds = default_creds if args.formrecognizerkey == None else AzureKeyCredential(
+    formrecognizer_creds = default_creds if args.formrecognizerkey == None and default_creds is not None else AzureKeyCredential(
         args.formrecognizerkey)
 
 def blob_name_from_file_page(filename, page=0):
@@ -187,15 +205,58 @@ def get_document_text(filename):
 
     return page_map
 
+def chunk_content(content):
+    token_limit = int(args.openAITokenLimit)
+    enc = tiktoken.encoding_for_model("gpt-4")
+    tokenized_content = enc.encode(content)
+    section_chunks: List[str] = []
+
+    if len(tokenized_content) > token_limit:
+        if args.verbose: print("\tTokenized content is over the token limit. Chunking section...")
+        # If the section content is too long, we need to chunk it into multiple inputs
+        num_chunks = len(tokenized_content) // token_limit if len(tokenized_content) % token_limit == 0 else len(tokenized_content) // token_limit + 1
+        chunk_size = len(tokenized_content) // num_chunks if len(tokenized_content) % num_chunks == 0 else len(tokenized_content) // num_chunks + 1
+        tokenized_chunks: List[List[int]] = []
+        for i in range(num_chunks):
+            start = i * chunk_size
+            end = min((i + 1) * chunk_size, len(content))
+            tokenized_chunks.append(tokenized_content[start:end])
+        section_chunks.extend([enc.decode(tokenized_chunk) for tokenized_chunk in tokenized_chunks])
+
+        if args.verbose: print(f"\tChunked content into {num_chunks} chunks.")
+    else:
+        section_chunks.append(content)
+
+    return section_chunks
+
+def vectorize_content(content):
+    openai.api_base = f"https://{args.openAIService}.openai.azure.com"
+    openai.api_key = args.openAIKey
+    response = openai.Embedding.create(engine=args.openAIEngine, input=content)
+    return response['data'][0]['embedding']
+
 def create_sections(filename, page_map):
     for i, (pagenum, _, section) in enumerate(page_map):
-        yield {
-            "id": re.sub("[^0-9a-zA-Z_-]", "_", f"{filename}-{i}"),
-            "content": section,
-            "category": args.category,
-            "sourcepage": blob_name_from_file_page(filename, pagenum),
-            "sourcefile": filename
-        }
+        if skipvectorization:
+            yield {
+                "id": re.sub("[^0-9a-zA-Z_-]", "_", f"{filename}-{i}"),
+                "content": section,
+                "category": args.category,
+                "sourcepage": blob_name_from_file_page(filename, pagenum),
+                "sourcefile": filename
+            }
+        else:
+            section_chunks = chunk_content(section) # Chunk the section content if it's over the token limit
+            for chunk in section_chunks:
+                vectorized_content = vectorize_content(chunk)
+                yield {
+                    "id": re.sub("[^0-9a-zA-Z_-]", "_", f"{filename}-{i}"),
+                    "content": chunk,
+                    "contentVector": vectorized_content,
+                    "category": args.category,
+                    "sourcepage": blob_name_from_file_page(filename, pagenum),
+                    "sourcefile": filename
+                }
 
 def create_search_index():
     if args.verbose: print(f"Ensuring search index {args.index} exists")
@@ -203,6 +264,36 @@ def create_search_index():
                                      credential=search_creds)
     if args.index not in index_client.list_index_names():
         index = SearchIndex(
+            name=args.index,
+            fields=[
+                SimpleField(name="id", type="Edm.String", key=True),
+                SearchableField(name="content", type="Edm.String", analyzer_name="en.microsoft"),
+                SearchField(name="contentVector", type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+                    searchable=True, vector_search_dimensions=args.openAIDimensions, vector_search_configuration="default"),
+                SimpleField(name="category", type="Edm.String", filterable=True, facetable=True),
+                SimpleField(name="sourcepage", type="Edm.String", filterable=True, facetable=True),
+                SimpleField(name="sourcefile", type="Edm.String", filterable=True, facetable=True)
+            ],
+            vector_search=VectorSearch(
+                algorithm_configurations=[
+                    VectorSearchAlgorithmConfiguration(
+                        name="default",
+                        kind="hnsw",
+                        hnsw_parameters=HnswParameters(
+                            m=4,
+                            ef_construction=400,
+                            ef_search=1000,
+                            metric="cosine"
+                        )
+                    )
+                ]
+            ),
+            semantic_settings=SemanticSettings(
+                configurations=[SemanticConfiguration(
+                    name='default',
+                    prioritized_fields=PrioritizedFields(
+                        title_field=None, prioritized_content_fields=[SemanticField(field_name='content')]))])
+        ) if not skipvectorization else SearchIndex(
             name=args.index,
             fields=[
                 SimpleField(name="id", type="Edm.String", key=True),

@@ -1,13 +1,8 @@
-## [project-title] Changelog
+## Changelog
 
-<a name="x.y.z"></a>
-# x.y.z (yyyy-mm-dd)
+<a name="1.1.0"></a>
+# 1.1.0 (2023-09-11)
 
-*Features*
-* ...
-
-*Bug Fixes*
-* ...
-
-*Breaking Changes*
-* ...
+* Adds new vector search option for unstructured information retrieval approach.
+* Adds new content safety guardrails for GPT model prompts.
+* Deployment process improvements.

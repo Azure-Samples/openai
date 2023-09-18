@@ -1,40 +1,42 @@
 import { useState, useEffect } from "react";
 
-import { UserProfile, getAllUsers } from "../api";
+import { SearchSettings, UserProfile, getAllUsers, getSearchSettings } from "../api";
 import Chat from "./chat/Chat";
 import { LoadingPanel } from "../components/LoadingPanel";
 import { ErrorPanel } from "../components/ErrorPanel";
 
 const PageContainer = () => {
-    const [areUsersLoading, setAreUsersLoading] = useState<boolean>(true);
-    const [usersError, setUsersError] = useState<unknown>();
+    const [isDataLoading, setIsDataLoading] = useState<boolean>(true);
+    const [dataError, setDataError] = useState<unknown>();
     const [users, setUsers] = useState<UserProfile[]>([]);
+    const [searchSettings, setSearchSettings] = useState<SearchSettings>({ vectorization_enabled: false });
 
-    const processUsers = async () => {
-        setAreUsersLoading(true);
+    const fetchData = async () => {
         try {
             const users = await getAllUsers();
+            const searchSettings = await getSearchSettings();
             setUsers(users);
-            setUsersError(undefined);
+            setSearchSettings(searchSettings);
+            setDataError(undefined);
         } catch (e) {
-            setUsersError(e);
+            setDataError(e);
         } finally {
-            setAreUsersLoading(false);
+            setIsDataLoading(false);
         }
     };
 
     useEffect(() => {
-        processUsers();
+        fetchData();
     }, []);
 
     return (
         <div>
-            {areUsersLoading ? (
+            {isDataLoading ? (
                 <LoadingPanel />
-            ) : usersError ? (
-                <ErrorPanel error={usersError.toString()} onRetry={() => processUsers()} />
+            ) : dataError ? (
+                <ErrorPanel error={dataError.toString()} onRetry={() => fetchData()} />
             ) : (
-                <Chat users={users} />
+                <Chat users={users} searchSettings={searchSettings} />
             )}
         </div>
     );

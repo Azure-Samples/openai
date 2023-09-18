@@ -6,9 +6,18 @@ class ApproachType(Enum):
     structured = "1"
     unstructured = "2"
     chit_chat = "3"
-    
+    continuation = "4"
+    inappropriate = "5"
+
+
 class Answer:
-    def __init__(self, formatted_answer: str = "", query_generation_prompt: Optional[str] = None, query: Optional[str] = None, query_result: Optional[str] = None):
+    def __init__(
+        self,
+        formatted_answer: str = "",
+        query_generation_prompt: Optional[str] = None,
+        query: Optional[str] = None,
+        query_result: Optional[str] = None,
+    ):
         self.formatted_answer = formatted_answer
         self.query_generation_prompt = query_generation_prompt
         self.query = query
@@ -24,7 +33,15 @@ class Answer:
 
 
 class ChatResponse:
-    def __init__(self, answer: Answer, classification: Optional[ApproachType] = None, data_points: List[str] = [], error: Optional[str] = None, suggested_classification: Optional[ApproachType] = None, show_retry: bool = False):
+    def __init__(
+        self,
+        answer: Answer,
+        classification: Optional[ApproachType] = None,
+        data_points: List[str] = [],
+        error: Optional[str] = None,
+        suggested_classification: Optional[ApproachType] = None,
+        show_retry: bool = False,
+    ):
         self.answer = answer
         self.classification = classification
         self.data_points = data_points
@@ -34,10 +51,14 @@ class ChatResponse:
 
     def to_item(self):
         return {
-            "classification": self.classification.name if self.classification is not None else None,
+            "classification": self.classification.name
+            if self.classification is not None
+            else None,
             "answer": self.answer.to_item(),
             "data_points": [str(data_point) for data_point in self.data_points],
             "error": self.error,
-            "suggested_classification": self.suggested_classification.value if self.suggested_classification is not None else None,
-            "show_retry": self.show_retry
+            "suggested_classification": self.suggested_classification.value
+            if self.suggested_classification is not None
+            else None,
+            "show_retry": self.show_retry,
         }
