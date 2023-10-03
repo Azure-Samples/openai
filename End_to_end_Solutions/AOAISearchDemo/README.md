@@ -72,6 +72,7 @@ Due to high demand, Azure OpenAI resources can be difficult to spin up on the fl
 1. Run `azd env set {VARIABLE_NAME} {VALUE}` to set the following variables in your azd environment:
    - `AZURE_OPENAI_SERVICE {Name of existing OpenAI resource where the OpenAI models have been deployed}`.
    - `AZURE_OPENAI_RESOURCE_GROUP {Name of existing resource group where the Azure OpenAI service resource is provisioned to}`.
+   - `AZURE_OPENAI_LOCATION {Name of Azure region where the OpenAI resource is deployed ie. eastus, canadaeast, etc.}`.
    - `AZURE_OPENAI_MODEL {Name of the Azure OpenAI model used for completion tasks other than classification}`.
    - `AZURE_OPENAI_MODEL_VERSION {Version of the Azure OpenAI model used for completion tasks other than classification}`.
    - `AZURE_OPENAI_DEPLOYMENT {Name of existing Azure OpenAI model deployment to be used for completion tasks other than classification}`.
