@@ -1,0 +1,7 @@
+{
+    "GPT-4V_MODEL":"<GPT-4V Model Name>",
+    "OPENAI_API_BASE":"https://<Your Azure Resource Name>.openai.azure.com",
+    "OPENAI_API_VERSION":"<OpenAI API Version>",
+
+    "VISION_API_ENDPOINT": "https://<Your Azure Vision Resource Name>.cognitiveservices.azure.com"
+}
