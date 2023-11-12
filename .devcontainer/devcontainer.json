@@ -6,7 +6,8 @@
     "customizations":{
         "vscode": {
             "extensions": [
-                "ms-dotnettools.dotnet-interactive-vscode"
+                "ms-dotnettools.dotnet-interactive-vscode",
+                "ms-python.python"
             ]
         }
     }
