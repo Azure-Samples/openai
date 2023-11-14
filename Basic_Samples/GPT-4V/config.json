@@ -3,5 +3,8 @@
     "OPENAI_API_BASE":"https://<Your Azure Resource Name>.openai.azure.com",
     "OPENAI_API_VERSION":"<OpenAI API Version>",
 
-    "VISION_API_ENDPOINT": "https://<Your Azure Vision Resource Name>.cognitiveservices.azure.com"
+    "VISION_API_ENDPOINT": "https://<Your Azure Vision Resource Name>.cognitiveservices.azure.com",
+
+    "AZURE_SEARCH_SERVICE_ENDPOINT": "https://<Your Azure Search Resource Name>.search.windows.net",
+    "AZURE_SEARCH_INDEX_NAME": "<Your Azure Search Index Name>"
 }
