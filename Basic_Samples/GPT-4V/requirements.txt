@@ -5,3 +5,4 @@ jupyter
 requests
 pillow
 matplotlib
+moviepy
