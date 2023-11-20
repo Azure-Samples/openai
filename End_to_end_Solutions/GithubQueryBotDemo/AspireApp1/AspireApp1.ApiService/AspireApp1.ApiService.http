@@ -1,0 +1,6 @@
+﻿@WebApplication2_HostAddress = https://localhost:7010
+
+POST {{WebApplication2_HostAddress}}/chat
+Content-Type: application/json
+
+"Hello World"

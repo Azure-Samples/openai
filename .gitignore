@@ -1,3 +1,12 @@
 
 Basic_Samples/Embeddings/dotnet/csharp/fine_food_reviews_with_embeddings_1k.csv
 **/qdrant_storage/*
+
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+[Rr]eleases/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
