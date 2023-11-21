@@ -8,7 +8,7 @@ public static class ConfigurationExtensions
     {
         var apiKey = configuration["AIOptions:ApiKey"];
         var endpoint = configuration["AIOptions:Endpoint"];
-        var chatModel = configuration["AIOptions:ChatDeployment"] ?? "gpt-3.5-turbo-16k";
+        var chatModel = configuration["AIOptions:ChatDeployment"];
         var embeddingName = configuration["AIOptions:EmbeddingDeployment"];
         result =
             !string.IsNullOrWhiteSpace(apiKey) &&
