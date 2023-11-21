@@ -1,0 +1,54 @@
+﻿@page "/teams"
+@using System.Diagnostics.CodeAnalysis
+@inject IConfiguration Configuration
+@rendermode InteractiveServer
+
+<PageTitle>Microsoft Teams</PageTitle>
+
+<div class="description">
+    <h1>Microsoft Teams</h1>
+    <p>
+        This <bold>sample</bold> that shows how to make a Teams Chat Bot.
+    </p>
+    <p>
+        The bot in this sample answers <a href="https://github.com/dotnet/runtime/">dotnet/runtime</a> repo specific questions.
+    </p>
+    <p>
+        To see this works navigate to you <a href="https://teams.microsoft.com/">Microsoft Teams</a> on the browser.
+    </p>
+</div>
+
+@if (missingConfiguration)
+{
+    @* <p class="message message-assistant"><strong>The chatbot is missing required configuration.</strong> Please edit appsettings.json in the WebApp project. You'll need an API key to enable AI features.</p> *@
+}
+
+@code {
+
+    public record ChatConfig(string ApiKey, string ChatModel, string CollectionName)
+    {
+        public static bool TryReadFromConfig(IConfiguration configuration, [NotNullWhen(true)] out ChatConfig? result)
+        {
+            var apiKey = configuration["OpenAIApiKey"];
+            var chatModel = configuration["OpenAIChatDeployment"] ?? "gpt-3.5-turbo-16k";
+            var collectionName = configuration["gh_issues"];
+            result = !string.IsNullOrWhiteSpace(apiKey) && !string.IsNullOrWhiteSpace(collectionName) ? new ChatConfig(apiKey, chatModel, collectionName) : null;
+            return result is not null;
+        }
+    }
+
+    bool missingConfiguration;
+
+    protected override void OnInitialized()
+    {
+        if (ChatConfig.TryReadFromConfig(Configuration, out var chatConfig))
+        {
+            // no op
+        }
+        else
+        {
+            missingConfiguration = true;
+        }
+    }
+}
+

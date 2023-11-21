@@ -1,0 +1,51 @@
+﻿@page "/rules"
+@attribute [StreamRendering(true)]
+@attribute [OutputCache(Duration = 5)]
+
+@inject RuleApiClient RuleApiClient
+
+<PageTitle>Rules</PageTitle>
+
+<h1>Rules</h1>
+
+<p>This component demonstrates showing data loaded from a backend API service.</p>
+
+@if (rules == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rule in rules)
+            {
+                <tr>
+                    <td>@rule.Number</td>
+                    <td>
+                    @foreach (var line in rule.Lines)
+                    {
+                        @line<br/>
+                    }
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Rule[]? rules;
+
+    protected override async Task OnInitializedAsync()
+    {
+        rules = await RuleApiClient.GetRulesAsync();
+    }
+}

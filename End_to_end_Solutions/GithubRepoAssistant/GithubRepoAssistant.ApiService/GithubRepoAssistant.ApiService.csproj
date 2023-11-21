@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	  <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+	  <PackageReference Include="Qdrant.Client" Version="1.6.0-alpha.1" />
+	  <PackageReference Include="Microsoft.SemanticKernel" Version="1.0.0-beta5" />
+	<PackageReference Include="Microsoft.SemanticKernel.Connectors.AI.OpenAI" Version="1.0.0-beta5" />
+	<PackageReference Include="Microsoft.SemanticKernel.Connectors.Memory.Qdrant" Version="1.0.0-beta5" />
+  </ItemGroup>
+
+  <ItemGroup>
+	  <ProjectReference Include="..\GithubRepoAssistant.ServiceDefaults\GithubRepoAssistant.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>
