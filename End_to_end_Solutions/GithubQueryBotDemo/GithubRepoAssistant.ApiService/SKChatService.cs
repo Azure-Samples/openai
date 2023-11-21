@@ -5,90 +5,94 @@ using Microsoft.SemanticKernel.AI.ChatCompletion;
 using Microsoft.SemanticKernel.Memory;
 using System.Text;
 
-namespace WebApplication2
+namespace GithubRepoAssistant.ApiService;
+
+public class SKChatService
 {
-    public class SKChatService
+    private readonly IKernel _kernel;
+    private readonly ISemanticTextMemory _semanticTextMemory;
+    private readonly string _collectionName;
+    private readonly string _embeddingDeployment;
+    private readonly OpenAIClient _openAiClient;
+    private readonly Qdrant.Client.QdrantClient _qdrantClient;
+    private bool _chatWasReset;
+
+
+    public ChatHistory History { get; }
+
+    public SKChatService(ISemanticTextMemory semanticTextMemory, IConfiguration configuration, Qdrant.Client.QdrantClient qdrantClient)
     {
-        private readonly IKernel _kernel;
-        private readonly ISemanticTextMemory _semanticTextMemory;
-        private readonly string _collectionName;
-        private readonly string _embeddingDeployment;
-        private readonly OpenAIClient _openAiClient;
-        private readonly Qdrant.Client.QdrantClient _qdrantClient;
-        private bool _chatWasReset;
-
-
-        public ChatHistory History { get; }
-
-        public SKChatService(ISemanticTextMemory semanticTextMemory, IConfiguration configuration, Qdrant.Client.QdrantClient qdrantClient)
+        _chatWasReset = false;
+        if (!configuration.TryReadFromConfig(out AIOptions? aiOptions))
         {
-            _chatWasReset = false;
-            string openAiApiKey = configuration["OpenAIApiKey"];
-            string openAiEndpoint = configuration["OpenAIEndpoint"];
-            string openAiChatDeployment = configuration["OpenAIChatDeployment"];
-            _embeddingDeployment = configuration["OpenAIEmbeddingDeployment"];
-            _qdrantClient = qdrantClient;
+            throw new ArgumentNullException(nameof(aiOptions));
+        }
 
-            _openAiClient = new(new System.Uri(openAiEndpoint), new AzureKeyCredential(openAiApiKey));
-            var kernel = new KernelBuilder()
-                .WithAzureChatCompletionService(openAiChatDeployment, openAiEndpoint, openAiApiKey)
-                .Build();
+        string openAiApiKey = aiOptions.ApiKey;
+        string openAiEndpoint = aiOptions.Endpoint;
+        _embeddingDeployment = aiOptions.EmbeddingDeployment;
+        _qdrantClient = qdrantClient;
 
-            _kernel = kernel;
-            _semanticTextMemory = semanticTextMemory;
-            _collectionName = "gh_issues";
-            History = _kernel.GetService<IChatCompletion>().CreateNewChat("""
-                You are a helpful AI agent that has access to information about GitHub Issues in a specific repository.
-                You are an expert in all the APIs of .NET libraries, the CLR runtime and the SDK, and the .NET ecosystem.
-                You are an expert in the .NET runtime and the .NET SDK.
-                You are an expert in triaging issues and labeling them.
-                You are an expert in finding issues that are related to a specific theme, namespace, or package in .NET
-                This repository you are about to triage is called dotnet/runtime.
-                You have access to issues in this repository.
-                Each issue has a title, a description, an area label, and a URL.
-                Use only those retrieved information from those documents to answer user questions.
-                """);
+        _openAiClient = new(new System.Uri(openAiEndpoint), new AzureKeyCredential(openAiApiKey));
+        var kernel = new KernelBuilder()
+            .WithAzureChatCompletionService(aiOptions.ChatDeployment, openAiEndpoint, openAiApiKey)
+            .Build();
 
-            History.AddAssistantMessage($"""
+        _kernel = kernel;
+        _semanticTextMemory = semanticTextMemory;
+        _collectionName = "gh_issues";
+        History = _kernel.GetService<IChatCompletion>().CreateNewChat("""
+            You are a helpful AI agent that has access to information about GitHub Issues in a specific repository.
+            You are an expert in all the APIs of .NET libraries, the CLR runtime and the SDK, and the .NET ecosystem.
+            You are an expert in the .NET runtime and the .NET SDK.
+            You are an expert in triaging issues and labeling them.
+            You are an expert in finding issues that are related to a specific theme, namespace, or package in .NET
+            This repository you are about to triage is called dotnet/runtime.
+            You have access to issues in this repository.
+            Each issue has a title, a description, an area label, and a URL.
+            Use only those retrieved information from those documents to answer user questions.
+            """);
+
+        History.AddAssistantMessage($"""
                 Hi! I'm the dotnet/runtime assistant. I can help with finding issues matching a theme.
                 What issues are you interested to find in this repository?
                 """);
+    }
+
+    public void ResetSystemRule(string newSystemRule)
+    {
+        _chatWasReset = true;
+        History.RemoveAll(m => true);
+        History.AddSystemMessage(newSystemRule);
+    }
+
+    public async Task<string> AskQuestionAsync(string userQuestion)
+    {
+        if (_chatWasReset)
+        {
+            History.AddUserMessage(userQuestion);
+            var msg = await _kernel.GetService<IChatCompletion>().GenerateMessageAsync(History);
+            History.AddAssistantMessage(msg);
+            return msg;
         }
 
-        public void ResetSystemRule(string newSystemRule)
+        var searchResults = _semanticTextMemory.SearchAsync(_collectionName, userQuestion, 3, 0.5);
+
+        var message = new StringBuilder();
+        message.AppendLine("Given the following issues:");
+
+        await foreach (var item in searchResults)
         {
-            _chatWasReset = true;
-            History.RemoveAll(m => true);
-            History.AddSystemMessage(newSystemRule);
+            message.AppendLine("<issue>");
+            message.AppendLine(item?.Metadata?.Text);
+            float[]? floats = item?.Embedding?.ToArray();
+            double? scoreZeroToOne = item?.Relevance;
+            Type? type = item?.GetType();
+            string? stringRepresentation = item?.ToString();
+            message.AppendLine("</issue>");
         }
 
-        public async Task<string> AskQuestionAsync(string userQuestion)
-        {
-            if (_chatWasReset)
-            {
-                History.AddUserMessage(userQuestion);
-                var msg = await _kernel.GetService<IChatCompletion>().GenerateMessageAsync(History);
-                History.AddAssistantMessage(msg);
-                return msg;
-            }
-
-            var searchResults = _semanticTextMemory.SearchAsync(_collectionName, userQuestion, 3, 0.5);
-
-            var message = new StringBuilder();
-            message.AppendLine("Given the following issues:");
-
-            await foreach (var item in searchResults)
-            {
-                message.AppendLine("<issue>");
-                message.AppendLine(item?.Metadata?.Text);
-                float[]? floats = item?.Embedding?.ToArray();
-                double? scoreZeroToOne = item?.Relevance;
-                Type? type = item?.GetType();
-                string? stringRepresentation = item?.ToString();
-                message.AppendLine("</issue>");
-            }
-
-            message.AppendLine($"""
+        message.AppendLine($"""
                     Answer only using the issues provided.
                     Make sure to report only unique issues and don't make up fake URLs.
                     For each issue, provide the title, the URL, and a one-sentence compact summary of the issue.
@@ -109,8 +113,8 @@ namespace WebApplication2
                                 - "Thank you for your feedback. This is not a bug. Please use the following link to submit a feature request."
                         - If no, then give me three proposed responses next to keeping them open, so I could pick out of your recommendations.
                     """);
- 
-            message.AppendLine($"""
+
+        message.AppendLine($"""
                 Use the following format:
                 
                 These are the issues and the common themes are AOT and Reflection. 
@@ -137,33 +141,32 @@ namespace WebApplication2
                 2. 
                 """);
 
-            message.AppendLine($"Question: {userQuestion}");
-            message.AppendLine($"Answer: ");
-            History.AddUserMessage(message.ToString());
+        message.AppendLine($"Question: {userQuestion}");
+        message.AppendLine($"Answer: ");
+        History.AddUserMessage(message.ToString());
 
-            var chatService = _kernel.GetService<IChatCompletion>();
-            var reply = await chatService.GenerateMessageAsync(History);
+        var chatService = _kernel.GetService<IChatCompletion>();
+        var reply = await chatService.GenerateMessageAsync(History);
 
-            History.AddAssistantMessage(reply);
+        History.AddAssistantMessage(reply);
 
-            return reply;
-        }
+        return reply;
+    }
 
-        public async Task<string[]> SearchQueryAsync(string query)
+    public async Task<string[]> SearchQueryAsync(string query)
+    {
+        var collections = await _qdrantClient.ListCollectionsAsync();
+
+        if (collections == null || !collections.Any())
         {
-            var collections = await _qdrantClient.ListCollectionsAsync();
-
-            if (collections == null || !collections.Any())
-            {
-                // TODO log error
-                return [];
-            }
-
-            var embeddingResponse = await _openAiClient.GetEmbeddingsAsync(_embeddingDeployment, new EmbeddingsOptions(new[] { query }));
-            var embeddingVector = embeddingResponse.Value.Data[0].Embedding.ToArray();
-
-            var results = await _qdrantClient.SearchAsync(_collectionName, embeddingVector, limit: (ulong)2);
-            return results.Select(r => r.Payload["text"].StringValue).ToArray();
+            // TODO log error
+            return [];
         }
+
+        var embeddingResponse = await _openAiClient.GetEmbeddingsAsync(_embeddingDeployment, new EmbeddingsOptions(new[] { query }));
+        var embeddingVector = embeddingResponse.Value.Data[0].Embedding.ToArray();
+
+        var results = await _qdrantClient.SearchAsync(_collectionName, embeddingVector, limit: (ulong)2);
+        return results.Select(r => r.Payload["text"].StringValue).ToArray();
     }
 }

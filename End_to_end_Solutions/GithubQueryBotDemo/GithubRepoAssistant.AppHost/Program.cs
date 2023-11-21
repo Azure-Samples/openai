@@ -1,12 +1,12 @@
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var apiservice = builder.AddProject<Projects.AspireApp1_ApiService>("apiservice");
+var apiservice = builder.AddProject<Projects.GithubRepoAssistant_ApiService>("apiservice");
 
-builder.AddProject<Projects.AspireApp1_Web>("webfrontend")
+builder.AddProject<Projects.Web>("webfrontend")
     .WithReference(apiservice);
 
-builder.AddProject<Projects.AspireApp1_TeamsApp>("myteamsapp")
+builder.AddProject<Projects.TeamsApp>("teamsapp")
     .WithReference(apiservice);
 
 builder.Build().Run();

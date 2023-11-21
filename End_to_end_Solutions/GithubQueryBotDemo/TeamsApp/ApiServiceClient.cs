@@ -1,4 +1,4 @@
-﻿namespace AspireApp1.TeamsApp;
+﻿namespace TeamsApp;
 
 public class ApiServiceClient(HttpClient httpClient)
 {

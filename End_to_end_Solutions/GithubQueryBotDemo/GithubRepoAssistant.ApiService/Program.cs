@@ -1,3 +1,4 @@
+using GithubRepoAssistant.ApiService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.SemanticKernel;
 using Microsoft.SemanticKernel.AI.ChatCompletion;
@@ -6,7 +7,6 @@ using Microsoft.SemanticKernel.Connectors.Memory.Qdrant;
 using Microsoft.SemanticKernel.Memory;
 using Microsoft.SemanticKernel.Plugins.Memory;
 using Qdrant.Client;
-using WebApplication2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,26 +20,28 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddSingleton<SKChatService>();
 builder.Services.AddSingleton<QdrantClient>(sp =>
 {
-    IConfiguration configuration = sp.GetRequiredService<IConfiguration>();
-    string qdrantEndpoint = configuration["QdrantEndpoint"];
-
     return new QdrantClient(host: "localhost", port: 6334, https: false);
 });
 
 builder.Services.AddSingleton<ISemanticTextMemory>(sp =>
 {
-    IConfiguration configuration = sp.GetRequiredService<IConfiguration>();
-    string openAiApiKey = configuration["OpenAIApiKey"];
-    string openAiEndpoint = configuration["OpenAIEndpoint"];
-    string openAiEmbeddingDeployment = configuration["OpenAIEmbeddingDeployment"];
-    string qdrantEndpoint = configuration["QdrantEndpoint"];
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    if (!configuration.TryReadFromConfig(out AIOptions? aiOptions))
+    {
+        throw new ArgumentNullException(nameof(aiOptions));
+    }
 
-    var qdrantMemoryBuilder = new MemoryBuilder();
-    var textEmbedding = new AzureTextEmbeddingGeneration(openAiEmbeddingDeployment, openAiEndpoint, openAiApiKey);
-    qdrantMemoryBuilder.WithTextEmbeddingGeneration(textEmbedding);
-    qdrantMemoryBuilder.WithQdrantMemoryStore(qdrantEndpoint, 1536);
+    if (!configuration.TryReadFromConfig(out MemoryOptions? memoryOptions))
+    {
+        throw new ArgumentNullException(nameof(memoryOptions));
+    }
 
-    return qdrantMemoryBuilder.Build();
+    var memoryBuilder = new MemoryBuilder();
+    var textEmbedding = new AzureTextEmbeddingGeneration(aiOptions.EmbeddingDeployment, aiOptions.Endpoint, aiOptions.ApiKey);
+    memoryBuilder.WithTextEmbeddingGeneration(textEmbedding);
+    memoryBuilder.WithQdrantMemoryStore(memoryOptions.QdrantEndpoint, 1536);
+
+    return memoryBuilder.Build();
 });
 
 builder.Services.AddSingleton<IChatCompletion>(sp =>
@@ -65,7 +67,7 @@ app.MapPost("/search", async (SKChatService s, [FromBody] string q) => await s.S
 app.MapGet("/reset", (SKChatService s) => s.History.RemoveAll(m => m.Role != AuthorRole.System));
 
 // Use SKChatService to reset the system rule and conversation state
-app.MapPost("/resetrules", (SKChatService s, [FromBody] string q) => s.ResetSystemRule(q));
+app.MapPost("/hardreset", (SKChatService s, [FromBody] string q) => s.ResetSystemRule(q));
 
 // Use SKChatService to reset the conversation state
 app.MapGet("/rules", (SKChatService s) =>

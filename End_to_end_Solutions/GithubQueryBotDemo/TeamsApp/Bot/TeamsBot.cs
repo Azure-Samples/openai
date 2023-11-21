@@ -1,14 +1,13 @@
-﻿using AspireApp1.TeamsApp;
-using Microsoft.Bot.Builder;
+﻿using Microsoft.Bot.Builder;
 using Microsoft.Bot.Builder.Teams;
 using Microsoft.Bot.Schema;
 
-namespace AspireTeamsApp.Bot;
+namespace TeamsApp.Bot;
 
-public class TeamsEchoBot : TeamsActivityHandler
+public class TeamsBot : TeamsActivityHandler
 {
     private readonly ApiServiceClient _apiServiceClient;
-    public TeamsEchoBot(ApiServiceClient weatherApiClient)
+    public TeamsBot(ApiServiceClient weatherApiClient)
     {
         _apiServiceClient = weatherApiClient;
     }

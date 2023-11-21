@@ -1,4 +1,4 @@
-namespace AspireApp1.Web;
+namespace Web;
 
 public class RuleApiClient(HttpClient httpClient)
 {

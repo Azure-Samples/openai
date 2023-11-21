@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AspireApp1.TeamsApp\AspireApp1.TeamsApp.csproj" />
-    <ProjectReference Include="..\AspireApp1.ApiService\AspireApp1.ApiService.csproj" />
-    <ProjectReference Include="..\AspireApp1.Web\AspireApp1.Web.csproj" />
+    <ProjectReference Include="..\GithubRepoAssistant.ApiService\GithubRepoAssistant.ApiService.csproj" />
+    <ProjectReference Include="..\TeamsApp\TeamsApp.csproj" />
+    <ProjectReference Include="..\Web\Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

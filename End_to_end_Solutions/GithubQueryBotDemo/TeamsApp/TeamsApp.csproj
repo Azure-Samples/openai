@@ -47,7 +47,7 @@
 		</Content>
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\AspireApp1.ServiceDefaults\AspireApp1.ServiceDefaults.csproj" />
+		<ProjectReference Include="..\GithubRepoAssistant.ServiceDefaults\GithubRepoAssistant.ServiceDefaults.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -2,7 +2,7 @@
 using Microsoft.Bot.Builder.TraceExtensions;
 using Microsoft.Bot.Connector.Authentication;
 
-namespace AspireTeamsApp;
+namespace TeamsApp;
 
 public class AdapterWithErrorHandler : CloudAdapter
 {
