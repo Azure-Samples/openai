@@ -18,7 +18,7 @@ git clean -fdx
 ```
 
 - Open **Visual Studio int preview - Run as administrator**
-- **Include appsettings.development.json** for TeamsApp and AspireApp1.ApiService app if missing
+- **Include appsettings.development.json** for TeamsApp and GithubRepoAssistant.ApiService app if missing
 - **Rebuild** all projects - (doesn't matter in debug or release) -> **prefer Release**
 - Set the **Teams App as Startup** 
 
@@ -39,7 +39,7 @@ git clean -fdx
 			- (and maybe ignore that pop up for future)
 - then you will see the ports will populate in dev tunnels as the apps get started with aspire
 - check out webfrontend
-- check out AspireApp1.ApiService swagger
+- check out GithubRepoAssistant.ApiService swagger
 - checkout teams 
 	- just **ignore** the prefix http://localhost:5130/ from dashboard if you wanna directly click on endpoint below
 	- or go to webfrontend click on the teams page - sync it with url in launchSettings.json
