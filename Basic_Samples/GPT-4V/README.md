@@ -1,7 +1,19 @@
 
 # Introduction
 
-This repository contains samples demonstrating how to use GPT-4V for Chat Completions via REST API.
+This repository contains a collection of Jupyter notebooks demonstrating various use cases for interacting with the GPT-4V API, along with samples demonstrating how to use GPT-4V for Chat Completions via REST API. These examples provide practical guidance and accelerators for developers integrating GPT-4V functionalities in their applications.
+
+## Contents
+| Notebook | Description | Type |
+|----------|-------------|-------|
+| [Basic Image in GPT-4V](basic_chatcompletions_example_restapi.ipynb) | Processing a single image input with GPT-4V. | Image |
+| [Handling Multiple Images in GPT-4V](mutiple_images_chatcompletions_example_restapi.ipynb) | Managing multiple image inputs in GPT-4V. | Image |
+| [Enhancing GPT-4V with RAG and Custom Data](RAG_chatcompletions_example_restapi.ipynb) |  Enhancing capabilities by bringing custom data to augment image inputs in GPT-4V. | Image |
+| [Enhancing GPT-4V with Grounding Techniques](enhancement_grounding_chatcompletions_example_restapi.ipynb) | Applying grounding techniques to image inputs in GPT-4V. | Image |
+| [Enhancing GPT-4V with OCR Technique](enhancement_OCR_chatcompletions_example_restapi.ipynb) | Incorporating Optical Character Recognition (OCR) with image inputs in GPT-4V. | Image |
+| [Basic Video QnA in GPT-4V](video_chatcompletions_example_restapi.ipynb) | Conducting Q&A with video inputs in GPT-4V. | Video |
+| [Video Chunk Processing Sequentially in GPT-4V](video_chunk_chatcompletions_example_restapi.ipynb) | Sequential processing of video chunks in GPT-4V. | Video |
+
 
 ## Installation
 Install all Python modules and packages listed in the requirements.txt file using the below command.
@@ -11,7 +23,7 @@ pip install -r requirements.txt
 ```
 
 ### Microsoft Azure Endpoints
-In order to use REST API with Microsoft Azure endpoints, you need to set GPT-4V_MODEL, OPENAI_API_BASE, OPENAI_API_VERSION & VISION_API_ENDPOINT in _config.json_ file. 
+In order to use REST API with Microsoft Azure endpoints, you need to set a series of configurations such as GPT-4V_MODEL, OPENAI_API_BASE, OPENAI_API_VERSION & VISION_API_ENDPOINT in _config.json_ file. 
 
 ```js
 {
@@ -20,6 +32,13 @@ In order to use REST API with Microsoft Azure endpoints, you need to set GPT-4V_
     "OPENAI_API_VERSION":"<OpenAI API Version>",
 
     "VISION_API_ENDPOINT": "https://<Your Azure Vision Resource Name>.cognitiveservices.azure.com"
+
+    "AZURE_SEARCH_SERVICE_ENDPOINT": "https://<Your Azure Search Resource Name>.search.windows.net",
+    "AZURE_SEARCH_INDEX_NAME": "<Your Azure Search Index Name>",
+
+    "VIDEO_SAS_URL": "<Your Azure Blob Storage SAS URL>",
+    "VIDEO_INDEX_NAME": "<Your Azure Video Index Name>",
+    "VIDEO_INDEX_ID": "<Your Azure Video Index ID>"
 }
 ``` 
 
@@ -46,7 +65,15 @@ Learn more about Azure OpenAI Service REST API [here](https://learn.microsoft.co
 Python 3.8+ <br>
 Jupyter Notebook 6.5.2
 
-<br>
+
+## Usage
+
+Each notebook is self-contained and includes instructions specific to its scenario. Simply open a notebook in Jupyter and follow the steps outlined within it.
+
+## Shared Functions
+
+For convenience, commonly used functions across these notebooks are consolidated in [shared_functions.ipynb](shared_functions.ipynb). Import these functions in any notebook as needed.
+
 
 ## Trademarks
 
