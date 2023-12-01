@@ -17,7 +17,7 @@ These are small code samples and snippets which complete small sets of actions a
 | [Basic chat completions Python SDK](./Chat/basic_chatcompletions_example_sdk.ipynb) | Python |
 | [Chat with your own data .NET SDK](./Chat/dotnet/csharp/Chat_with_your_own_data.ipynb) | .NET |
 | [Chat with your own data](./Chat/chat_with_your_own_data.ipynb) | Python |
-| [ChatGPT managing conversatoins](./Chat/chatGPT_managing_conversation.ipynb) | Python |
+| [ChatGPT managing conversations](./Chat/chatGPT_managing_conversation.ipynb) | Python |
 | [Entity extraction for long documents](./Chat/dotnet/csharp/Entity_extraction_for_long_documents.ipynb) | .NET |
 
 ### Completions
