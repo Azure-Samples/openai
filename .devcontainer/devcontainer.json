@@ -3,8 +3,8 @@
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {},
         "ghcr.io/devcontainers/features/dotnet:2": {
-            "version": "7.0",
-            "additionalVersions": "8.0"
+            "version": "8.0",
+            "additionalVersions": "7.0"
         }
     },
     "customizations":{
