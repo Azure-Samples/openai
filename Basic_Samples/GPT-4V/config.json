@@ -1,5 +1,5 @@
 {
-    "GPT-4V_MODEL":"<GPT-4V Model Name>",
+    "GPT-4V_DEPLOYMENT_NAME":"<GPT-4V Deployment Name>",
     "OPENAI_API_BASE":"https://<Your Azure Resource Name>.openai.azure.com",
     "OPENAI_API_VERSION":"<OpenAI API Version>",
 

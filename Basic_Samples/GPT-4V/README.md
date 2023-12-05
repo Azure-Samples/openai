@@ -23,11 +23,11 @@ pip install -r requirements.txt
 ```
 
 ### Microsoft Azure Endpoints
-In order to use REST API with Microsoft Azure endpoints, you need to set a series of configurations such as GPT-4V_MODEL, OPENAI_API_BASE, OPENAI_API_VERSION & VISION_API_ENDPOINT in _config.json_ file. 
+In order to use REST API with Microsoft Azure endpoints, you need to set a series of configurations such as GPT-4V_DEPLOYMENT_NAME, OPENAI_API_BASE, OPENAI_API_VERSION in _config.json_ file. 
 
 ```js
 {
-    "GPT-4V_MODEL":"<GPT-4V Model Name>",
+    "GPT-4V_DEPLOYMENT_NAME":"<GPT-4V Deployment Name>",
     "OPENAI_API_BASE":"https://<Your Azure Resource Name>.openai.azure.com",
     "OPENAI_API_VERSION":"<OpenAI API Version>",
 
@@ -43,20 +43,22 @@ In order to use REST API with Microsoft Azure endpoints, you need to set a serie
 ``` 
 
 ### For getting started:
-- Add "OPENAI_API_KEY" and "VISION_API_KEY" (optional) as variable name and \<Your API Key Value\> and \<Your VISION Key Value\> (optional) as variable value in the environment variables.
+- Add "OPENAI_API_KEY", "VISION_API_KEY", and "AZURE_SEARCH_QUERY_KEY" (optional) as variable name and \<Your API Key Value\>, \<Your VISION Key Value\>, and \<Your SEARCH Query Key Value\> (optional) as variable value in the environment variables.
 <br>
-One can get the OPENAI_API_KEY and VISION_API_KEY values from the Azure Portal. Go to https://portal.azure.com, find your resource and then under "Resource Management" -> "Keys and Endpoints" look for one of the "Keys" values.
+One can get the OPENAI_API_KEY, VISION_API_KEY, and AZURE_SEARCH_QUERY_KEY values from the Azure Portal. Go to https://portal.azure.com, find your resource and then under "Resource Management" -> "Keys and Endpoints" look for one of the "Keys" values.
  <br>
       
       WINDOWS Users: 
          setx OPENAI_API_KEY "REPLACE_WITH_YOUR_KEY_VALUE_HERE"
 		 setx VISION_API_KEY "REPLACE_WITH_YOUR_KEY_VALUE_HERE"
+         setx AZURE_SEARCH_QUERY_KEY "REPLACE_WITH_YOUR_KEY_VALUE_HERE"
 
       MACOS/LINUX Users: 
          export OPENAI_API_KEY="REPLACE_WITH_YOUR_KEY_VALUE_HERE"
          export VISION_API_KEY="REPLACE_WITH_YOUR_KEY_VALUE_HERE"
+         export AZURE_SEARCH_QUERY_KEY="REPLACE_WITH_YOUR_KEY_VALUE_HERE"
 
-- To find your "OPENAI_API_BASE" and "VISION_API_ENDPOINT" go to https://portal.azure.com, find your resource and then under "Resource Management" -> "Keys and Endpoints" look for the "Endpoint" value.
+- To find your "OPENAI_API_BASE", "VISION_API_ENDPOINT", and "AZURE_SEARCH_SERVICE_ENDPOINT" go to https://portal.azure.com, find your resource and then under "Resource Management" -> "Keys and Endpoints" look for the "Endpoint" value.
 
 Learn more about Azure OpenAI Service REST API [here](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/reference).
 
