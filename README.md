@@ -34,7 +34,7 @@ If you prefer to run these samples locally, you'll need to install and configure
   - [Jupyter Notebook 6.5.2](https://jupyter.org/install)
   - [Python VS Code extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
 - .NET
-  - [.NET 7 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
+  - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
   - [Polyglot Notebooks VS Code extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)
 - [NodeJS](https://nodejs.org/)
   

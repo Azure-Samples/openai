@@ -40,6 +40,7 @@ These are small code samples and snippets which complete small sets of actions a
 | --- | --- |
 | [Search GitHub Issues using Vector Search (Qdrant)](./Datastores/dotnet/csharp/Ingest_Github_Issues_Qdrant.ipynb) | .NET |
 | [Question Answering Using Vector Search (Milvus)](./Datastores/dotnet/csharp/Question_answering_using_vector_store_search.ipynb) | .NET | 
+| [Question Answering Using Vector Search (Qadrant)](./Datastores/dotnet/csharp/Question_answering_using_vector_store_search_qdrant.ipynb) | .NET | 
 
 ### Embeddings
 
@@ -52,8 +53,9 @@ These are small code samples and snippets which complete small sets of actions a
 | [Get embeddings from a dataset](./Embeddings/dotnet/csharp/Get_embeddings.ipynb) | .NET |
 | [Labeling GitHub issues using Embeddings](./Embeddings/dotnet/csharp/Labelling_github_issues_with_embeddings.ipynb) | .NET |
 | [Question Answering using embeddings](./Embeddings/dotnet/csharp/Question_answering_using_embeddings.ipynb) | .NET |
-| [Semantic text search using embedings](./Embeddings/dotnet/csharp/Semantic_text_search_using_embeddings.ipynb) | .NET |
-| [Zero-shot classification with embeddings](./Embeddings/dotnet/csharp/Semantic_text_search_using_embeddings.ipynb) | .NET |
+| [Question Answering using embeddings](./Embeddings/dotnet/csharp/Question_answering_using_embeddings.ipynb) | .NET |
+| [Semantic text search using fusion retriever architecture](./Embeddings/dotnet/csharp/Question_answering_using_fusion_retriever_architecture.ipynb) | .NET |
+| [Zero-shot classification with embeddings](./Embeddings/dotnet/csharp/Zero-shot_classification_with_embeddings.ipynb) | .NET |
 | [Basic Embeddings REST API](./Embeddings/basic_embeddings_example_restapi.ipynb) | Python |
 | [Basic Embedding SDK](./Embeddings/basic_embeddings_example_sdk.ipynb) | Python |
 
