@@ -12,3 +12,10 @@ Basic_Samples/Embeddings/dotnet/csharp/fine_food_reviews_with_embeddings_1k.csv
 
 **/appsettings.[Dd]evelopment.json
 Basic_Samples/Embeddings/dotnet/csharp/query_rewriting_pack/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
