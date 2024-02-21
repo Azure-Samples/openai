@@ -5,6 +5,7 @@ openai==1.12.0
 jupyter
 
 # Other packages needed to run the notebook samples
+requests
 pytz
 pandas
 tenacity
