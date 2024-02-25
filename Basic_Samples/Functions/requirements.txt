@@ -1,10 +1,11 @@
 # Packages needed to call AOAI API with the OpenAI Python API
-openai
+openai==1.12.0
 
 # Packages needed to run the notebook samples
 jupyter
 
 # Other packages needed to run the notebook samples
+requests
 pytz
 pandas
 tenacity
