@@ -39,7 +39,8 @@ These are small code samples and snippets which complete small sets of actions a
 | Sample | Language |
 | --- | --- |
 | [Search GitHub Issues using Vector Search (Qdrant)](./Datastores/dotnet/csharp/Ingest_Github_Issues_Qdrant.ipynb) | .NET |
-| [Question Answering Using Vector Search (Milvus)](./Datastores/dotnet/csharp/Question_answering_using_vector_store_search.ipynb) | .NET | 
+| [Getting Started Milvus](./Datastores/dotnet/csharp/Getting-Started-Milvus.ipynb) | .NET |
+| [Question Answering Using Vector Search (Milvus)](./Datastores/dotnet/csharp/Question_answering_using_vector_store_search_milvus.ipynb) | .NET | 
 | [Question Answering Using Vector Search (Qadrant)](./Datastores/dotnet/csharp/Question_answering_using_vector_store_search_qdrant.ipynb) | .NET | 
 
 ### Embeddings
