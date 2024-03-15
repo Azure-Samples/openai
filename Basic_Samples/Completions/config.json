@@ -1,6 +1,0 @@
-{
-    "COMPLETIONS_MODEL":"text-davinci-003",
-    "OPENAI_API_ENDPOINT":"https://impactplusplus.openai.azure.com/",
-    "OPENAI_API_VERSION":"<API VERSION>",
-    "OPENAI_API_KEY":"ed4caf65c67b46dab2d82c41c254b5c1"
-}
