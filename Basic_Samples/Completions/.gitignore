@@ -1,0 +1,5 @@
+# Ignore .env files
+.env
+
+# Ignore config.json file
+config.json
