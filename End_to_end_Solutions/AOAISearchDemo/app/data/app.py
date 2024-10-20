@@ -358,7 +358,8 @@ def create_access_rule(rule_id: str):
         access_rule = permissions_manager.create_access_rule(rule_id, resources, members)
         return Response(response=json.dumps(access_rule.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
-        return Response(response=str(e), status=400)
+        logging.error(f"Validation error in create_access_rule: {e}", exc_info=True)
+        return Response(response="Invalid input provided.", status=400)
     except CosmosConflictError as e:
         return Response(response=str(e), status=409)
     except Exception as e:
