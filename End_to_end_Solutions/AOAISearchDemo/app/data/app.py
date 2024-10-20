@@ -62,13 +62,13 @@ def create_chat_session(user_id: str, conversation_id: str):
         return Response(response=json.dumps(session.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
         logger.exception(f"create-chat-session: error: {e} ", extra=properties)
-        return Response(response="Invalid input provided.", status=400)
+        return Response(response="A bad request error occurred.", status=400)
     except CosmosConflictError as e:
         logger.exception(f"create-chat-session: error: {e} ", extra=properties)
         return Response(response="Conflict occurred while creating chat session.", status=409)
     except Exception as e:
         logger.exception(f"create-chat-session: error: {e} ", extra=properties)
-        return Response(response="An internal error has occurred.", status=500)
+        return Response(response="An internal server error occurred.", status=500)
     
 @app.route('/chat-sessions/<user_id>/<conversation_id>', methods=['GET'])
 def get_chat_session(user_id: str, conversation_id: str):
@@ -92,7 +92,7 @@ def get_chat_session(user_id: str, conversation_id: str):
             return Response(response=json.dumps(session.to_item()), status=200)
     except Exception as e:
         logger.exception(f"get-chat-session: error: {e} ", extra=properties)
-        return Response(response="An internal error has occurred.", status=500)
+        return Response(response="An internal server error occurred.", status=500)
 
 @app.route('/check-chat-session/<user_id>/<conversation_id>', methods=['GET'])
 def check_chat_session(user_id: str, conversation_id: str):
