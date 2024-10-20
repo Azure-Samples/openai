@@ -162,9 +162,10 @@ def clear_chat_session(user_id: str, conversation_id: str):
         chat_manager.clear_chat_session(user_id, conversation_id)
         return Response(status=200)
     except SessionNotFoundError as e:
+        logger.exception(f"clear-chat-session: error: {e} ")
         return Response(response="Chat session not found.", status=404)
     except Exception as e:
-        logger.exception(f"clear-chat-session: error: {e}")
+        logger.exception(f"clear-chat-session: error: {e} ")
         return Response(response="An internal server error occurred.", status=500)
     
 @app.route('/user-profiles/<user_id>', methods=['POST'])
