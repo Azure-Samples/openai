@@ -85,8 +85,8 @@ def get_chat_session(user_id: str, conversation_id: str):
         properties = logger.get_updated_properties(addl_dim)
 
         if session is None:
-            logger.info(f"get-chat-session: session with conversation_id {conversation_id} not found", extra=properties)
-            return Response(response=f"Chat session with conversation_id {conversation_id} not found.", status=404)
+            logger.info(f"get-chat-session: session with conversation_id {html.escape(conversation_id)} not found", extra=properties)
+            return Response(response=f"Chat session with conversation_id {html.escape(conversation_id)} not found.", status=404)
         else:
             logger.info("get-chat-session: session found", extra=properties)
             return Response(response=json.dumps(session.to_item()), status=200)
