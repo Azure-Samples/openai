@@ -3,12 +3,17 @@ import json
 import os
 import pdb
 import tiktoken
+import urllib.parse
+
+def is_valid_url(url):
+    parsed_url = urllib.parse.urlparse(url)
+    return parsed_url.scheme in ["http", "https"] and parsed_url.netloc != ""
 
 def make_prompt_request(prompt, max_tokens = 2048, timeout = 4):
     # Whitelist of allowed URLs
     allowed_urls = ["https://api.openai.com/v1/embeddings", "https://another-trusted-url.com"]
     url = os.getenv("AOAI_ENDPOINT")
-    if url not in allowed_urls:
+    if not is_valid_url(url) or url not in allowed_urls:
         raise ValueError("The provided URL is not allowed.")
     key = os.getenv("AOAI_KEY")
                   
