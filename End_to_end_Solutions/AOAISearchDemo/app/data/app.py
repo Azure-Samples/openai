@@ -236,7 +236,8 @@ def create_user_group(group_id: str):
         user_group = entities_manager.create_user_group(group_id, group_name, users)
         return Response(response=json.dumps(user_group.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
-        return Response(response=str(e), status=400)
+        logging.error("A validation error occurred: %s", e, exc_info=True)
+        return Response(response="A validation error has occurred.", status=400)
     except CosmosConflictError as e:
         return Response(response=str(e), status=409)
     except Exception as e:
