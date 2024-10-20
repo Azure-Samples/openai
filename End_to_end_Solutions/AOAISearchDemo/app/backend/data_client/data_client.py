@@ -21,8 +21,20 @@ class DataClient:
         DELETE="DELETE"
 
     def __init__(self, base_uri: str, logger: CustomLogger):
-        self.base_uri = base_uri
+        self.base_uri = self._validate_base_uri(base_uri)
         self.logger = logger
+
+    def _validate_base_uri(self, base_uri: str) -> str:
+        # Ensure the base_uri is a trusted URL
+        if not base_uri.startswith("https://trusted-domain.com"):
+            raise ValueError("Invalid base URI")
+        return base_uri
+
+    def _sanitize_path(self, path: str) -> str:
+        # Sanitize the path to prevent malicious input
+        if ".." in path or path.startswith("/"):
+            raise ValueError("Invalid path")
+        return path
         
     def check_chat_session(self, user_id: str, conversation_id: str) -> bool:
         path = f"/check-chat-session/{user_id}/{conversation_id}"
@@ -113,6 +125,7 @@ class DataClient:
 
     @retry(reraise=True, stop = stop_after_attempt(3), wait = wait_exponential(multiplier = 1, max = 60))
     def _make_request(self, path: str, method: HttpMethod, payload: Optional[dict] = None) -> str:
+        path = self._sanitize_path(path)
 
         headers = self.logger.get_converation_and_dialog_ids()
         properties = self.logger.get_updated_properties(headers)
