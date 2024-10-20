@@ -246,7 +246,8 @@ def get_user_group(group_id: str):
         else:
             return Response(response=json.dumps(user_group.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while fetching user group: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/user/<user_id>', methods=['GET'])
 def get_user_member_groups(user_id: str):
@@ -257,7 +258,8 @@ def get_user_member_groups(user_id: str):
         else:
             return Response(response=json.dumps([user_group.to_item_no_users() for user_group in user_groups]), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while fetching user member groups: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['PUT'])
 def update_user_group(group_id: str):
@@ -279,7 +281,8 @@ def update_user_group(group_id: str):
     except SessionNotFoundError as e:
         return Response(response=str(e), status=404)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while updating user group: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/resources/<resource_id>', methods=['POST'])
 def create_resource(resource_id: str):
@@ -298,7 +301,8 @@ def create_resource(resource_id: str):
     except CosmosConflictError as e:
         return Response(response=str(e), status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while creating resource: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/resources/<resource_id>', methods=['GET'])
 def get_resource(resource_id: str):
