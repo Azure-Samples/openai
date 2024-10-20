@@ -309,7 +309,8 @@ def create_resource(resource_id: str):
         logging.error("An error occurred while creating resource: %s", e, exc_info=True)
         return Response(response="An internal error has occurred.", status=400)
     except CosmosConflictError as e:
-        return Response(response=str(e), status=409)
+        logging.error("A conflict occurred while creating resource: %s", e, exc_info=True)
+        return Response(response="A conflict occurred while creating the resource.", status=409)
     except Exception as e:
         logging.error("An error occurred while creating resource: %s", e, exc_info=True)
         return Response(response="An internal error has occurred.", status=500)
