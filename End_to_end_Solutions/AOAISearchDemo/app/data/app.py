@@ -254,7 +254,7 @@ def get_user_member_groups(user_id: str):
     try:
         user_groups = entities_manager.get_user_member_groups(user_id)
         if user_groups is None:
-            return Response(response=f"User with user_id {user_id} not found.", status=404)
+            return Response(response=f"User with user_id {html.escape(user_id)} not found.", status=404)
         else:
             return Response(response=json.dumps([user_group.to_item_no_users() for user_group in user_groups]), status=200)
     except Exception as e:
