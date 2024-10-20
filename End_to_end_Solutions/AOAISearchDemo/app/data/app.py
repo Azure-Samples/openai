@@ -279,7 +279,8 @@ def update_user_group(group_id: str):
     except (TypeError, NullValueError, MissingPropertyError, ValueError) as e:
         return Response(response=str(e), status=400)
     except SessionNotFoundError as e:
-        return Response(response=str(e), status=404)
+        logging.error("Session not found: %s", e, exc_info=True)
+        return Response(response="Session not found.", status=404)
     except Exception as e:
         logging.error("An error occurred while updating user group: %s", e, exc_info=True)
         return Response(response="An internal error has occurred.", status=500)
