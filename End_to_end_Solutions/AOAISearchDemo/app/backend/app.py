@@ -352,7 +352,7 @@ def get_all_user_profiles():
         return jsonify(user_profiles_dict)
     except Exception as e:
         logger.exception(f"Exception in /user-profiles: {e}")
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": "An internal error has occurred!"}), 500
 
 
 @app.route("/chat-sessions/<user_id>/<conversation_id>", methods=["DELETE"])
@@ -369,7 +369,7 @@ def clear_chat_session(user_id: str, conversation_id: str):
         logger.exception(
             f"Exception in /chat-sessions/<user_id>/<conversation_id>: {e}"
         )
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": "An internal error has occurred!"}), 500
 
 
 @app.route("/search-settings", methods=["GET"])
@@ -391,7 +391,7 @@ def get_search_settings():
         return jsonify(search_settings.to_item())
     except Exception as e:
         logger.exception(f"Exception in /search-settings: {e}")
-        return jsonify({"error": str(e)}), 500
+        return jsonify({"error": "An internal error has occurred!"}), 500
 
 
 if __name__ == "__main__":
