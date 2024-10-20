@@ -114,7 +114,7 @@ def check_chat_session(user_id: str, conversation_id: str):
             return Response(response="true", status=200)
     except Exception as e:
         logger.exception(f"check-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=500)
+        return Response(response="An internal error has occurred.", status=500)
 
 @app.route('/chat-sessions/<user_id>/<conversation_id>', methods=['PUT'])
 def update_chat_session(user_id: str, conversation_id: str):
