@@ -297,7 +297,8 @@ def create_resource(resource_id: str):
         resource = entities_manager.create_resource(resource_id, resource_type)
         return Response(response=json.dumps(resource.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
-        return Response(response=str(e), status=400)
+        logging.error("An error occurred while creating resource: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=400)
     except CosmosConflictError as e:
         return Response(response=str(e), status=409)
     except Exception as e:
