@@ -322,7 +322,7 @@ def get_user_resources(user_id: str):
     try:
         user_profile = entities_manager.get_user_profile(user_id)
         if user_profile is None:
-            return Response(response=f"User with user_id {user_id} not found.", status=404)
+            return Response(response=f"User with user_id {html.escape(user_id)} not found.", status=404)
         user_groups = entities_manager.get_user_member_groups(user_id)
         resources = permissions_manager.get_user_resources(user_profile, user_groups)
         
