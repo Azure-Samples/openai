@@ -12,7 +12,7 @@ from data.managers.entities.api.manager import EntitiesManager
 from datetime import datetime
 from flask import Flask, Response, request
 from typing import List, Set
-
+import logging
 # initialize config
 DefaultConfig.initialize()
 
@@ -307,7 +307,8 @@ def get_resource(resource_id: str):
         else:
             return Response(response=json.dumps(resource.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error(f"Error in get_resource: {e}", exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/resources/user/<user_id>', methods=['GET'])
 def get_user_resources(user_id: str):
@@ -327,7 +328,8 @@ def get_user_resources(user_id: str):
                 return Response(response="Could not find resource profile for resource ID {resource.resource_id}.", status=500)
         return Response(response=json.dumps([resource_profile.to_item() for resource_profile in resource_profiles]), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error(f"Error in get_user_resources: {e}", exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/access-rules/<rule_id>', methods=['POST'])
 def create_access_rule(rule_id: str):
@@ -354,7 +356,8 @@ def create_access_rule(rule_id: str):
     except CosmosConflictError as e:
         return Response(response=str(e), status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error(f"Error in create_access_rule: {e}", exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/access-rules/<rule_id>', methods=['GET'])
 def get_access_rule(rule_id: str):
@@ -365,7 +368,8 @@ def get_access_rule(rule_id: str):
         else:
             return Response(response=json.dumps(access_rule.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error(f"Error in get_access_rule: {e}", exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
 
 def get_log_properties(request, user_id: str) -> dict:
     conversation_id = request.headers.get('Conversation-Id')
