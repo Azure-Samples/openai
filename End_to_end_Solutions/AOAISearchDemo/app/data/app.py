@@ -242,7 +242,8 @@ def get_user_group(group_id: str):
     try:
         user_group = entities_manager.get_user_group(group_id)
         if user_group is None:
-            return Response(response=f"User group with group_id {group_id} not found.", status=404)
+            escaped_group_id = html.escape(group_id)
+            return Response(response=f"User group with group_id {escaped_group_id} not found.", status=404)
         else:
             return Response(response=json.dumps(user_group.to_item()), status=200)
     except Exception as e:
