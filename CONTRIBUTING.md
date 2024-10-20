@@ -35,7 +35,7 @@ a proposal for your work first, to be sure that we can use it.
 ## <a name="submit"></a> Submission Guidelines
 
 ### <a name="submit-issue"></a> Submitting an Issue
-Before you submit an issue, search the archive, maybe your question was already answered.
+Before you submit an issue, search the archive, maybe your question has already been answered.
 
 If your issue appears to be a bug, and hasn't been reported, open a new issue.
 Help us to maximize the effort we can spend fixing issues and adding new
