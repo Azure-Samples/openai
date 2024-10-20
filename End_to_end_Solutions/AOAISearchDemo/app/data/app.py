@@ -148,13 +148,13 @@ def update_chat_session(user_id: str, conversation_id: str):
         return Response(response=json.dumps(session.to_item()), status=200)
     except (TypeError, NullValueError, MissingPropertyError, ValueError) as e:
         logger.exception(f"update-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=400)
+        return Response(response="An error occurred while processing your request.", status=400)
     except SessionNotFoundError as e:
         logger.exception(f"update-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=404)
+        return Response(response="Session not found.", status=404)
     except Exception as e:
         logger.exception(f"update-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=500)
+        return Response(response="An internal server error occurred.", status=500)
     
 @app.route('/chat-sessions/<user_id>/<conversation_id>', methods=['DELETE'])
 def clear_chat_session(user_id: str, conversation_id: str):
@@ -162,9 +162,9 @@ def clear_chat_session(user_id: str, conversation_id: str):
         chat_manager.clear_chat_session(user_id, conversation_id)
         return Response(status=200)
     except SessionNotFoundError as e:
-        return Response(response=str(e), status=404)
+        return Response(response="Session not found.", status=404)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        return Response(response="An internal server error occurred.", status=500)
     
 @app.route('/user-profiles/<user_id>', methods=['POST'])
 def create_user_profile(user_id: str):
