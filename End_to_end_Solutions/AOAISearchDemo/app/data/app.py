@@ -373,7 +373,7 @@ def get_access_rule(rule_id: str):
     try:
         access_rule = permissions_manager.get_access_rule(rule_id)
         if access_rule is None:
-            return Response(response=f"Access rule with rule_id {rule_id} not found.", status=404)
+            return Response(response=f"Access rule with rule_id {html.escape(rule_id)} not found.", status=404)
         else:
             return Response(response=json.dumps(access_rule.to_item()), status=200)
     except Exception as e:
