@@ -5,8 +5,11 @@ import pdb
 import tiktoken
 
 def make_prompt_request(prompt, max_tokens = 2048, timeout = 4):
-    #url = "https://api.openai.com/v1/embeddings"
+    # Whitelist of allowed URLs
+    allowed_urls = ["https://api.openai.com/v1/embeddings", "https://another-trusted-url.com"]
     url = os.getenv("AOAI_ENDPOINT")
+    if url not in allowed_urls:
+        raise ValueError("The provided URL is not allowed.")
     key = os.getenv("AOAI_KEY")
                   
     payload_dict = {"prompt": prompt,
