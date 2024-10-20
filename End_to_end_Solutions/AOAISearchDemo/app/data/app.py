@@ -310,7 +310,7 @@ def get_resource(resource_id: str):
     try:
         resource = entities_manager.get_resource(resource_id)
         if resource is None:
-            return Response(response=f"Resource with resource_id {resource_id} not found.", status=404)
+            return Response(response=f"Resource with resource_id {html.escape(resource_id)} not found.", status=404)
         else:
             return Response(response=json.dumps(resource.to_item()), status=200)
     except Exception as e:
