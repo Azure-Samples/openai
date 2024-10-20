@@ -281,7 +281,8 @@ def update_user_group(group_id: str):
         user_group = entities_manager.add_users_to_user_group(group_id, new_users)
         return Response(response=json.dumps(user_group.to_item()), status=200)
     except (TypeError, NullValueError, MissingPropertyError, ValueError) as e:
-        return Response(response=str(e), status=400)
+        logging.error("An error occurred while updating user group: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=400)
     except SessionNotFoundError as e:
         logging.error("Session not found: %s", e, exc_info=True)
         return Response(response="Session not found.", status=404)
