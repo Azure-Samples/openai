@@ -205,7 +205,8 @@ def get_user_profile(user_id: str):
         else:
             return Response(response=json.dumps(user_profile.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while fetching user profile: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
 
 @app.route('/user-profiles', methods=['GET'])
 def get_all_user_profiles():
@@ -214,7 +215,8 @@ def get_all_user_profiles():
         json_user_profiles = [user_profile.to_item() for user_profile in user_profiles]
         return Response(response=json.dumps(json_user_profiles), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while fetching all user profiles: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['POST'])
 def create_user_group(group_id: str):
@@ -238,7 +240,8 @@ def create_user_group(group_id: str):
     except CosmosConflictError as e:
         return Response(response=str(e), status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while creating user group: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['GET'])
 def get_user_group(group_id: str):
