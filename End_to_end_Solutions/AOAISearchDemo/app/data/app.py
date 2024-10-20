@@ -361,7 +361,8 @@ def create_access_rule(rule_id: str):
         logging.error(f"Validation error in create_access_rule: {e}", exc_info=True)
         return Response(response="Invalid input provided.", status=400)
     except CosmosConflictError as e:
-        return Response(response=str(e), status=409)
+        logging.error(f"Cosmos conflict error in create_access_rule: {e}", exc_info=True)
+        return Response(response="A conflict occurred while processing your request.", status=409)
     except Exception as e:
         logging.error(f"Error in create_access_rule: {e}", exc_info=True)
         return Response(response="An internal error has occurred.", status=500)
