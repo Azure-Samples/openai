@@ -11,6 +11,7 @@ from data.managers.permissions.manager import PermissionsManager
 from data.managers.entities.api.manager import EntitiesManager
 from datetime import datetime
 from flask import Flask, Response, request
+import html
 from typing import List, Set
 import logging
 # initialize config
@@ -196,7 +197,8 @@ def get_user_profile(user_id: str):
     try:
         user_profile = entities_manager.get_user_profile(user_id)
         if user_profile is None:
-            return Response(response=f"User profile with user_id {user_id} not found.", status=404)
+            escaped_user_id = html.escape(user_id)
+            return Response(response=f"User profile with user_id {escaped_user_id} not found.", status=404)
         else:
             return Response(response=json.dumps(user_profile.to_item()), status=200)
     except Exception as e:
