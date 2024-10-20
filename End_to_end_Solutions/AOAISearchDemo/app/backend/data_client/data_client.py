@@ -12,6 +12,26 @@ from tenacity import retry, stop_after_attempt, wait_exponential
 from typing import List, Optional
 
 from common.logging.log_helper import CustomLogger
+from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
+
+def _validate_base_uri(self, base_uri: str):
+    parsed_uri = urlparse(base_uri)
+    if parsed_uri.scheme not in ["http", "https"]:
+        raise ValueError("Invalid URI scheme")
+    if not parsed_uri.netloc:
+        raise ValueError("Invalid URI netloc")
+
+def _validate_base_uri(self, base_uri: str):
+    parsed_uri = urlparse(base_uri)
+    if parsed_uri.scheme not in ["http", "https"]:
+        raise ValueError("Invalid URI scheme")
+    if not parsed_uri.netloc:
+        raise ValueError("Invalid URI netloc")
+
+def _validate_path(self, path: str):
+    if not path.startswith("/"):
+        raise ValueError("Invalid path")
 
 class DataClient:
     class HttpMethod(Enum):
@@ -21,6 +41,8 @@ class DataClient:
         DELETE="DELETE"
 
     def __init__(self, base_uri: str, logger: CustomLogger):
+        self._validate_base_uri(base_uri)
+        self.base_uri = base_uri
         self.base_uri = self._validate_base_uri(base_uri)
         self.logger = logger
 
@@ -126,6 +148,7 @@ class DataClient:
     @retry(reraise=True, stop = stop_after_attempt(3), wait = wait_exponential(multiplier = 1, max = 60))
     def _make_request(self, path: str, method: HttpMethod, payload: Optional[dict] = None) -> str:
         path = self._sanitize_path(path)
+        self._validate_path(path)
 
         headers = self.logger.get_converation_and_dialog_ids()
         properties = self.logger.get_updated_properties(headers)
