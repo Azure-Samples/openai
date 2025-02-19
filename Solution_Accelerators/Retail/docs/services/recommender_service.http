@@ -1,0 +1,12 @@
+###
+# post a recommendation request
+POST {{recommender_service_url}}/recommend
+Accept: application/json
+Content-Type: application/json
+
+{
+    "descriptions": [
+        "A sleek, dark navy blue suit with a subtle texture, paired with a crisp white dress shirt and a matching navy blue tie."
+    ],
+    "recommendation_query": "I am looking for pants that will complement this suit"
+}

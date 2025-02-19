@@ -1,0 +1,12 @@
+python-dotenv==1.0.0
+openai==1.56.0
+azure-identity==1.16.0
+Quart==0.19.9
+pydantic==2.4.2
+azure-storage-blob==12.14.1
+azure-keyvault==4.2.0
+azure-keyvault-secrets==4.7.0
+opencensus-ext-azure==1.1.9
+opencensus==0.11.2
+PyYAML
+tenacity==8.4.1

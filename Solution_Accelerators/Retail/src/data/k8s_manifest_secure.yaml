@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data
+  template:
+    metadata:
+      labels:
+        app: data
+    spec:
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: kv-secrets-provider 
+      containers:
+        - name: data-container
+          image: cr5xd4xcq23ihzu.azurecr.io/data:${tag}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5001
+          resources:
+            limits:
+              cpu: "0.25"
+              memory: "2Gi"
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+      nodeSelector:
+          agentpool: userpool
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: data
+spec:
+  ports:
+  - port: 5001
+    targetPort: 5001
+  selector:
+    app: data
+  type: ClusterIP

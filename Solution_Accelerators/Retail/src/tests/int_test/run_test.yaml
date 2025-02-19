@@ -1,0 +1,34 @@
+stages:
+- stage: IntTest
+  displayName: Run Integration Test
+  jobs:
+  - job: Test
+    displayName: Run Tests
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.10'
+    - bash: |
+        pip install wheel setuptools
+        cd $(System.DefaultWorkingDirectory)/MultiModalBot/src/common
+        python setup.py bdist_wheel
+      displayName: 'Build common module'
+    - bash: |
+        pip install $(System.DefaultWorkingDirectory)/MultiModalBot/src/common/dist/*.whl
+      displayName: 'Install common module'
+    - bash: | 
+        pip install -r $(System.DefaultWorkingDirectory)/MultiModalBot/src/tests/int_test/requirements.txt
+      displayName: 'Install dependencies from requirements'
+    - bash: |
+        export PYTHONPATH=$(System.DefaultWorkingDirectory)/MultiModalBot/src/common:$(System.DefaultWorkingDirectory)/MultiModalBot/src:$PYTHONPATH
+        pytest -sv $(System.DefaultWorkingDirectory)/MultiModalBot/src/tests/int_test/app.py --junitxml=$(Build.StagingDirectory)/MultiModalBot/src/tests/int_test/test_results.xml
+      displayName: 'Run integration tests using pytest'
+      env:
+        SESSION-MANAGER-URL: $(SESSION-MANAGER-URL)
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFiles: '$(Build.StagingDirectory)/MultiModalBot/src/tests/int_test/test_results.xml'
+        testRunTitle: 'Integration Test Results'

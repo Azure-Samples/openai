@@ -1,0 +1,49 @@
+catalog_indexer_detailed_description_prompt:
+  system_prompt:
+    template: |-
+                You are a retail expert that descriptively provides salient features of the clothing items. Add details on the features, functionality, form and best use for the clothing item.
+                Only describe the clothing item based on what is observed in the image. Do not make up any facts or use any other source of information.
+    history:
+      include: false
+      length: 3
+      filter: null
+  llm_model_parameter:
+    deployment_name: gpt-4o-2
+    temperature: 0.0
+    max_tokens: 4096
+    seed: 0
+    llm_response_format:
+      format: { "type": "text" }
+  llm_model_detail:
+    llm_model_name: cl100k_base
+    total_max_tokens: 122000
+  prompt_detail:
+    prompt_version: 1.0.0
+    prompt_nickname: indexer_prompt
+    llm_model_family: AzureOpenAI
+
+catalog_indexer_summarized_description_prompt:
+  system_prompt:
+    template: |-
+              Analyze the detailed description for the clothing item and provide a concise, one-line description summarizing its key features,
+              including the type of clothing (e.g., shirt, dress, pants), color, pattern, material (if visible), and any unique design details.
+
+              Be specific but brief, such as 'Red floral-print midi dress with short sleeves and a fitted waist.' Avoid subjective terms and keep the description under 15 words.
+    history:
+      include: false
+      length: 3
+      filter: null
+  llm_model_parameter:
+    deployment_name: gpt-4o-2
+    temperature: 0.0
+    max_tokens: 4096
+    seed: 0
+    llm_response_format:
+      format: { "type": "text" }
+  llm_model_detail:
+    llm_model_name: cl100k_base
+    total_max_tokens: 122000
+  prompt_detail:
+    prompt_version: 1.0.0
+    prompt_nickname: indexer_prompt
+    llm_model_family: AzureOpenAI

@@ -1,0 +1,83 @@
+test_cases:
+    - test_case: "search for polos and shoes to go along with khakis"
+      conversation:
+        conversation_id: "IntegrationTest_Conv_1"
+        dialogs:
+          - dialog_id: "1"
+            request:
+              user_prompt:
+                payload:
+                - type: "text"
+                  value: "I am looking for polos to go along with my khakis."
+                - type: "image"
+                  value: "data/khakiPants.jpg"
+              user_profile: {
+                "id": "anonymous",
+                "user_name": "anonymous"
+              }
+              overrides: {
+                is_content_safety_enabled: "false"
+              }
+            assertion:
+              response_assertion: "status_code == 200"
+              result_assertion:
+                result_count: "len(result_count) > 0"
+                product_description_includes_keywords: ["polo"]
+          - dialog_id: "2"
+            request:
+              user_prompt:
+                payload:
+                - type: "text"
+                  value: "How about green one instead."
+              user_profile: {
+                "id": "anonymous",
+                "user_name": "anonymous"
+              }
+              overrides: {
+                is_content_safety_enabled: "false"
+              }
+            assertion:
+              response_assertion: "status_code == 200"
+              result_assertion:
+                result_count: "len(result_count) > 0"
+                product_description_includes_keywords: ["green", "polo"]
+          - dialog_id: "3"
+            request:
+              user_prompt:
+                payload:
+                - type: "text"
+                  value: "Thanks and do you have shoes that will go along with my khakis and polos."
+              user_profile: {
+                "id": "anonymous",
+                "user_name": "anonymous"
+              }
+              overrides: {
+                is_content_safety_enabled: "false"
+              }
+            assertion:
+              response_assertion: "status_code == 200"
+              result_assertion:
+                result_count: "len(result_count) > 0"
+                product_description_includes_keywords: ["shoe"]
+    - test_case: "search for glasses"
+      conversation:
+        conversation_id: "IntegrationTest_Conv_2"
+        dialogs:
+          - dialog_id: "1"
+            request:
+              user_prompt:
+                payload:
+                - type: "text"
+                  value: "do you have sun glasses?"
+              user_profile: {
+                "id": "anonymous",
+                "user_name": "anonymous"
+              }
+              overrides: {
+                is_content_safety_enabled: "false"
+              }
+            assertion:
+              response_assertion: "status_code == 200"
+              result_assertion:
+                result_count: "len(result_count) > 0"
+                product_description_includes_keywords: ["glass"]

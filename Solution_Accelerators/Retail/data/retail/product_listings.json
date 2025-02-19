@@ -1,0 +1,1884 @@
+{
+  "items": [
+    {
+      "article_id": "business_jacket1",
+      "product_name": "business jacket1",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "tailored, dark blue jacket with a subtle texture, fine herringbone pattern. It features notch lapels, a two-button front closure, and a slim fit that contours closely to the body."
+    },
+    {
+      "article_id": "business_jacket2",
+      "product_name": "business jacket2",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": " black classic, tailored design, notched lapel, which is the folded flap of cloth on the front that extends from the collar. The jacket is single-breasted with a single row of buttons down the front, and it appears to have two buttons, although only one buttonhole is visible. The fabric has a smooth texture with a matte finish and is solid black in color, providing a professional and sleek appearance, two flap pockets on either side at the waist level and what seems to be a welt pocket at chest height on the left side"
+    },
+    {
+      "article_id": "business_jacket3",
+      "product_name": "business jacket3",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "charcoal grey, tailored jacket with a notched lapel design. It features a two-button front closure and a welt pocket on the left chest, which contains a white pocket square with a straight fold."
+    },
+    {
+      "article_id": "business_jacket4",
+      "product_name": "business jacket4",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": " classic single-breasted style with a notched lapel, fine, woolen fabric, texture that suggests quality and professionalism. The color of the jacket is a light grey, "
+    },
+    {
+      "article_id": "cowboy_boots1",
+      "product_name": "cowboy boots1",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "men",
+      "detail_description": "alligator leather, intricate, embossed pattern, square toe cowboy boot with stacked heel, dark brown"
+    },
+    {
+      "article_id": "cowboy_boots2",
+      "product_name": "cowboy boots2",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "men",
+      "detail_description": "gloss black leather embossed pattern square toe cowboy boot with stacked heel"
+    },
+    {
+      "article_id": "cowboy_boots3",
+      "product_name": "cowboy boots3",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "men",
+      "detail_description": "ostrich leather dirt brown square toe cowboy boot with stacked heel and stiching pattern"
+    },
+    {
+      "article_id": "cowboy_boots4",
+      "product_name": "cowboy boots4",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "men",
+      "detail_description": "boa snake skin leather cowboy boot. Embossed pattern and stacked heel, red "
+    },
+    {
+      "article_id": "cowboy_boots5",
+      "product_name": "cowboy boots5",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "men",
+      "detail_description": "rattlesnake skin leather cowboy boot with brown leather shaft"
+    },
+    {
+      "article_id": "cowboy_boots6",
+      "product_name": "cowboy boots6",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "men",
+      "detail_description": "light brown suede cowboy boots with round toe. Embossed patter and stacked heel"
+    },
+    {
+      "article_id": "cowboy_boots7",
+      "product_name": "cowboy boots7",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "men",
+      "detail_description": "matte black square toe cowboy boots with leather embossing and stacked heel."
+    },
+    {
+      "article_id": "Men_button_shirt1",
+      "product_name": "Men button shirt1",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, green polyester linen blend"
+    },
+    {
+      "article_id": "Men_button_shirt2",
+      "product_name": "Men button shirt2",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, grey silver polyester rayon blend,"
+    },
+    {
+      "article_id": "Men_button_shirt3",
+      "product_name": "Men button shirt3",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, lavender, cotton blend fabric, left breast pocket"
+    },
+    {
+      "article_id": "Men_button_shirt4",
+      "product_name": "Men button shirt4",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with white collar and white cuffs, light blue, polyester rayon texture, left breast pocket"
+    },
+    {
+      "article_id": "Men_button_shirt5",
+      "product_name": "Men button shirt5",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, pink, light red, cotton blend fabric, "
+    },
+    {
+      "article_id": "Men_button_shirt6",
+      "product_name": "Men button shirt6",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, solid navy blue with fine texture weave synthetic fiber."
+    },
+    {
+      "article_id": "Men_button_shirt7",
+      "product_name": "Men button shirt7",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, solid white cotton blend fabric."
+    },
+    {
+      "article_id": "men_dress_shoe1",
+      "product_name": "men dress shoe1",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's  laced dress shoes with brogue design. Black with glossy finish"
+    },
+    {
+      "article_id": "men_dress_shoe2",
+      "product_name": "men dress shoe2",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's glossy brown laced dress shoes with brogue design pattern"
+    },
+    {
+      "article_id": "men_dress_shoe3",
+      "product_name": "men dress shoe3",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's burgundy red, leather sole, brogue details dress shoe."
+    },
+    {
+      "article_id": "men_dress_shoe4",
+      "product_name": "men dress shoe4",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "classic men's loafers, sleek, slip on, running toe box and pattern strap across the vamp. Brown color with glossy finish"
+    },
+    {
+      "article_id": "men_dress_shoe5",
+      "product_name": "men dress shoe5",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "classic men's loafers, sleek, slip on, running toe box and strap across the vamp. Burgundy color with glossy finish"
+    },
+    {
+      "article_id": "men_dress_shoe6",
+      "product_name": "men dress shoe6",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "classic men's loafers, sleek, slip on, running toe box and strap across the vamp. Black color with semi glossy finish"
+    },
+    {
+      "article_id": "men_dress_shorts1",
+      "product_name": "men dress shorts1",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Wool blend, charcoal grey. With slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts2",
+      "product_name": "men dress shorts2",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Cotton wool blend, subdued dark blue. With slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts3",
+      "product_name": "men dress shorts3",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Cotton wool blend, light blue. With slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts4",
+      "product_name": "men dress shorts4",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, twill weave pattern, pleated front. Cotton wool blend, warm brown. With slanted pockets, belt loops, straight leg."
+    },
+    {
+      "article_id": "men_dress_shorts5",
+      "product_name": "men dress shorts5",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, twill weave pattern. Cotton wool blend, tan. With slanted pockets, belt loops, turned-up cuffs. Pleated cream color. Includes matching belt."
+    },
+    {
+      "article_id": "Men_flipflop1",
+      "product_name": "Men flipflop1",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "foam blue, black trim flipflops, patterned straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop2",
+      "product_name": "Men flipflop2",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "dark blue leather flipflops, brown trim stiched onto the straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop3",
+      "product_name": "Men flipflop3",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "classic black foam flipflops for men"
+    },
+    {
+      "article_id": "Men_flipflop4",
+      "product_name": "Men flipflop4",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "men's blue flipflops with black trim, wide ribbed straps"
+    },
+    {
+      "article_id": "men_jersey1",
+      "product_name": "men jersey1",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "men's heavy synthetic fabric, green long sleeves, grey body, elastic wrist and waist band"
+    },
+    {
+      "article_id": "men_jersey2",
+      "product_name": "men jersey2",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "maroon long sleeve men's jersey, elastic wrist crew neck, synthetic cotton blend"
+    },
+    {
+      "article_id": "men_jersey3",
+      "product_name": "men jersey3",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "blue long sleeve jersey, men's, medium weight cotton blend"
+    },
+    {
+      "article_id": "men_jersey4",
+      "product_name": "men jersey4",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "blue long sleeve , grey body jersey, men's. button spandex-cotton blend."
+    },
+    {
+      "article_id": "men_jersey5",
+      "product_name": "men jersey5",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "grey long sleeve , white body jersey, men's. button cotton synthetic fiber blend."
+    },
+    {
+      "article_id": "men_leather_jacket1",
+      "product_name": "men leather jacket1",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Fringe tassels breast, shoulders and sleeves. Brown leather jacket for men. Zipper front closure, stiched lapel, standard collar. Zipper pockets"
+    },
+    {
+      "article_id": "men_leather_jacket2",
+      "product_name": "men leather jacket2",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Fringe detail tassels chest and shoulders, black leather jacket. Men.  6 front zipper pockets, silver front zipper closure. Zippered wrist and belt strap wrist cuffs."
+    },
+    {
+      "article_id": "men_leather_jacket3",
+      "product_name": "men leather jacket3",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Fringe detail tassels chest, shoulder, and sleeve. natural leather jacket. Tan to light brown. Men.  Two front zipper pockets, front zipper closure. Zippered and snap on wrist. Standard collar."
+    },
+    {
+      "article_id": "men_leather_jacket4",
+      "product_name": "men leather jacket4",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Fringe detail tassels chest and shoulder, natural leather jacket. Tan to light brown. Men.  Two ffront change pockets with snap on flaps, front zipper closure. Zippered wrist and snap on wrist cuffs. Waist adjustable belt and buckle.  Notched snap on lapels and shoulder grab straps"
+    },
+    {
+      "article_id": "men_leather_jacket6",
+      "product_name": "men leather jacket6",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Collared leather jacket. Light brown suede. Fringed tassels. Front zipper closure for men."
+    },
+    {
+      "article_id": "men_leather_jacket7",
+      "product_name": "men leather jacket7",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Suede leather jacket for men. Featuring fringe details and double buttoned front closure. With native american pattern. Flat braided waist and cuffs."
+    },
+    {
+      "article_id": "Men_sandal1",
+      "product_name": "Men sandal1",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Canvas adjustable velcro strap. Men's sandal. Tan with stitch trim. White sole."
+    },
+    {
+      "article_id": "Men_sandal2",
+      "product_name": "Men sandal2",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Men's Leather sandals with adjustable belt and buckle strap. Strap embossed with braided pattern. Leather brown sole."
+    },
+    {
+      "article_id": "Men_sandal3",
+      "product_name": "Men sandal3",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Brown leather sandal, non-adjustable stramp. Brown rubber sole with comfortable foot pad. Men's sandal."
+    },
+    {
+      "article_id": "Men_sandal4",
+      "product_name": "Men sandal4",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Brown leather sandal, adjustable velcro leather strap. Brown rubber sole. Men's sandal. Fabric foot pad."
+    },
+    {
+      "article_id": "Men_sandal5",
+      "product_name": "Men sandal5",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Brown leather sandal, adjustable velcro leather strap. And adjustable velcro back strap. Brown rubber sole. Men's sandal. Comfortable forming foot pad."
+    },
+    {
+      "article_id": "men_slacks1",
+      "product_name": "men slacks1",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Charcoal grey single pleated men's trousers. Great for formal and buisness events. Complimentary faux belt. Tightly woven wool fabric"
+    },
+    {
+      "article_id": "men_slacks2",
+      "product_name": "men slacks2",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Formal Grey straight leg slacks. Men's pants with five belt loops.  Smooth synthetic fabric. 800 threads per inch."
+    },
+    {
+      "article_id": "men_slacks3",
+      "product_name": "men slacks3",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Deep Blue men's slacks. Straight leg. Men's pants. Synthetic blend tightly woven fabric. 7 belt loops.  Formal wear"
+    },
+    {
+      "article_id": "men_slacks4",
+      "product_name": "men slacks4",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Men's formal wear slacks. Black tight wool blend heavy weave. Tapered legs, 800 threads per inch"
+    },
+    {
+      "article_id": "men_watch1",
+      "product_name": "men watch1",
+      "product_type": "accessory",
+      "index_group_name": "watch",
+      "gender": "men",
+      "detail_description": "22kt Gold on black men's watch. Black Bluing Metal segmented wrist band, with section of annodized gold. Mechanical face with asymmetric hour markers and black minute indicators. Wind-up battery support operation."
+    },
+    {
+      "article_id": "men_watch2",
+      "product_name": "men watch2",
+      "product_type": "accessory",
+      "index_group_name": "watch",
+      "gender": "men",
+      "detail_description": "22kt Gold on black men's watch. Metal and obsidian segmented adjustable wrist band. White clock face. Can tell time in 3 time zones, with two additional wind-ups for adjusting the three time zones. Wind-up battery support operation."
+    },
+    {
+      "article_id": "men_watch3",
+      "product_name": "men watch3",
+      "product_type": "accessory",
+      "index_group_name": "watch",
+      "gender": "men",
+      "detail_description": "22kt Gold watch for men. Wind-up operation, with gold plated segmented wrist band. Cream colored watch face without minute tick marks. Gold numberless hour indicators"
+    },
+    {
+      "article_id": "men_watch4",
+      "product_name": "men watch4",
+      "product_type": "accessory",
+      "index_group_name": "watch",
+      "gender": "men",
+      "detail_description": "Men's gold watch with minute free black face and gold hour indicators. Stretch adjustable gold plated segmented wristband.  Wind-up operation."
+    },
+    {
+      "article_id": "men_watch5",
+      "product_name": "men watch5",
+      "product_type": "accessory",
+      "index_group_name": "watch",
+      "gender": "men",
+      "detail_description": "Wind up men's watch. Brown leather band with adjustable buckle. Numberless hour markers and silver plated clock face."
+    },
+    {
+      "article_id": "men_watch6",
+      "product_name": "men watch6",
+      "product_type": "accessory",
+      "index_group_name": "watch",
+      "gender": "men",
+      "detail_description": "Men's wind up watch with silver plated case and metal segmented wrist band. Can indicate temperature and has tenth second counter."
+    },
+    {
+      "article_id": "men_watch7",
+      "product_name": "men watch7",
+      "product_type": "accessory",
+      "index_group_name": "watch",
+      "gender": "men",
+      "detail_description": "Battery and wind up operated silver case watch for men. Semi glossy leather wrist band. Can set the month and day. The lower center timer is tenth of second counter."
+    },
+    {
+      "article_id": "sleeveless_elasticwaist_dress1",
+      "product_name": "sleeveless elasticwaist dress1",
+      "product_type": "dress",
+      "index_group_name": "sleeveless",
+      "gender": "women",
+      "detail_description": "Women's three band elastic waist, sleeveless long dress. Light blue with semi heavy weight cotton linen fabric. With slanted pockets. U-neck cut with medium straps. Great for fall, summer or spring. "
+    },
+    {
+      "article_id": "sleeveless_elasticwaist_dress2",
+      "product_name": "sleeveless elasticwaist dress2",
+      "product_type": "dress",
+      "index_group_name": "sleeveless",
+      "gender": "women",
+      "detail_description": "Women's sleeveless full length garment with elastic waist, modest neckline. Vertical rib knit. Fine polyester cotton blend. Uniform grey."
+    },
+    {
+      "article_id": "sleeveless_elasticwaist_dress3",
+      "product_name": "sleeveless elasticwaist dress3",
+      "product_type": "dress",
+      "index_group_name": "sleeveless",
+      "gender": "women",
+      "detail_description": "Woman deep v neckline. Sleeveless with rich green long dress. Fitted bodice, cinched with elastic waist. Satin and cotton blend fabric "
+    },
+    {
+      "article_id": "sleeveless_elasticwaist_dress4",
+      "product_name": "sleeveless elasticwaist dress4",
+      "product_type": "dress",
+      "index_group_name": "sleeveless",
+      "gender": "women",
+      "detail_description": "Elastic waist mid-length dress. Light blue, round neckline and sleeveless with fitted bodice. Waist is gatherd. Synthetic polyester blend to produce flowing effect."
+    },
+    {
+      "article_id": "sleeveless_elasticwaist_dress5",
+      "product_name": "sleeveless elasticwaist dress5",
+      "product_type": "dress",
+      "index_group_name": "sleeveless",
+      "gender": "women",
+      "detail_description": "Elastic waist knee-length dress. Light Blue grey High neckline. For women Sleeveless fitted bodice, Texture flared.  "
+    },
+    {
+      "article_id": "sleeveless_elasticwaist_dress6",
+      "product_name": "sleeveless elasticwaist dress6",
+      "product_type": "dress",
+      "index_group_name": "sleeveless",
+      "gender": "women",
+      "detail_description": "Woman Light green mid length dress. Elastic waist band and sleeveless baring shoulders. Round neckline Bodice."
+    },
+    {
+      "article_id": "sleeveless_elasticwaist_dress7",
+      "product_name": "sleeveless elasticwaist dress7",
+      "product_type": "dress",
+      "index_group_name": "sleeveless",
+      "gender": "women",
+      "detail_description": "Light tan long dress with sleeveless tank top.  High round neckline. Fabric lightweighted knit viscose for volume and movement. "
+    },
+    {
+      "article_id": "woman_button_blouse1",
+      "product_name": "woman button blouse1",
+      "product_type": "shirt",
+      "index_group_name": "blouse",
+      "gender": "women",
+      "detail_description": "Green front button blouse. Elastic wrist. Cotton and synthetic blend fabric for loose feel. Collarless bodice. For women"
+    },
+    {
+      "article_id": "woman_button_blouse2",
+      "product_name": "woman button blouse2",
+      "product_type": "shirt",
+      "index_group_name": "blouse",
+      "gender": "women",
+      "detail_description": "Loose fit, button up, long sleeve blouse. Lightweight blue denim with classic pointed collar. For women"
+    },
+    {
+      "article_id": "woman_button_blouse3",
+      "product_name": "woman button blouse3",
+      "product_type": "shirt",
+      "index_group_name": "blouse",
+      "gender": "women",
+      "detail_description": "Long sleeve, elastic wrist, blouse silk synthetic red blend fabric. Buttoned up front for women"
+    },
+    {
+      "article_id": "woman_button_blouse4",
+      "product_name": "woman button blouse4",
+      "product_type": "shirt",
+      "index_group_name": "blouse",
+      "gender": "women",
+      "detail_description": "Blouse button up front loose fit. Tan natural textured cotton linen fiber. Long sleeve collarless. For women"
+    },
+    {
+      "article_id": "woman_button_blouse5",
+      "product_name": "woman button blouse5",
+      "product_type": "shirt",
+      "index_group_name": "blouse",
+      "gender": "women",
+      "detail_description": "Blouse button up front loose fit. White natural textured cotton linen fiber. Long sleeve collarless. For women"
+    },
+    {
+      "article_id": "woman_collaredshirt1",
+      "product_name": "woman collaredshirt1",
+      "product_type": "shirt",
+      "index_group_name": "collared ",
+      "gender": "women",
+      "detail_description": "Buttoned fit collared shirt for women. Loose 3/4 length sleeves. Tan polyester cotton blend."
+    },
+    {
+      "article_id": "woman_collaredshirt2",
+      "product_name": "woman collaredshirt2",
+      "product_type": "shirt",
+      "index_group_name": "collared ",
+      "gender": "women",
+      "detail_description": "Green classic collar buttoned shirt. Full length sleeves. Textured cotton and linen blend weave, casual wear for women"
+    },
+    {
+      "article_id": "woman_collaredshirt3",
+      "product_name": "woman collaredshirt3",
+      "product_type": "shirt",
+      "index_group_name": "collared ",
+      "gender": "women",
+      "detail_description": "Blue classic collar buttoned tailored fit shirt. long sleeves. Casual or formal wear. Blue textured cotton and linen blend weave for women. Can be worn tucked or untucked."
+    },
+    {
+      "article_id": "woman_collaredshirt4",
+      "product_name": "woman collaredshirt4",
+      "product_type": "shirt",
+      "index_group_name": "collared ",
+      "gender": "women",
+      "detail_description": "White classic collar buttoned tailored fit shirt. long sleeves. cotton and linen blend weave for women's formal wear."
+    },
+    {
+      "article_id": "woman_cowgirl_boots1",
+      "product_name": "woman cowgirl boots1",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "women",
+      "detail_description": "Double Fringed leather tassel heeled cowgirl boots. Brown rustic look with embossing. Leather sole."
+    },
+    {
+      "article_id": "woman_cowgirl_boots2",
+      "product_name": "woman cowgirl boots2",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "women",
+      "detail_description": "Black suede heeled cowgirl boots with backstrap fringe leather and tassels on pull straps. Adorned with white flower and leafy patterns"
+    },
+    {
+      "article_id": "woman_cowgirl_boots3",
+      "product_name": "woman cowgirl boots3",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "women",
+      "detail_description": "Brown suede heeled cowgirl boots. Embossing on the boot shaft"
+    },
+    {
+      "article_id": "woman_cowgirl_boots4",
+      "product_name": "woman cowgirl boots4",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "women",
+      "detail_description": "Natural leather embossed cowgirl boots. 2 inch heels.  Round toe"
+    },
+    {
+      "article_id": "woman_cowgirl_boots5",
+      "product_name": "woman cowgirl boots5",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "women",
+      "detail_description": "Fringed tassel details cowgirl boots. Subdued brown with 1-1/4 heels. Made from genuine cowhide."
+    },
+    {
+      "article_id": "woman_cowgirl_boots6",
+      "product_name": "woman cowgirl boots6",
+      "product_type": "shoe",
+      "index_group_name": "boots",
+      "gender": "women",
+      "detail_description": "Real cowhide cowgirl boots with side tassels. Matte finished with embossing on the shaft. Heeled and leather sole."
+    },
+    {
+      "article_id": "woman_flipflop1",
+      "product_name": "woman flipflop1",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "women",
+      "detail_description": "Pink woman flipflop textured insole with decorative flowers adorned on the strap. Braided sole edge. Synthetic rubber material for slip prevention. "
+    },
+    {
+      "article_id": "woman_flipflop2",
+      "product_name": "woman flipflop2",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "women",
+      "detail_description": "Lavender woman flipflop textured insole with decorative flowers adorned on the strap. Sole edge with woven texture detail. Synthetic rubber material for slip prevention. "
+    },
+    {
+      "article_id": "woman_flipflop3",
+      "product_name": "woman flipflop3",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "women",
+      "detail_description": "Light green woman flipflop textured insole with standard strap. Braided sole edge. Synthetic rubber material for slip prevention. "
+    },
+    {
+      "article_id": "woman_flipflop4",
+      "product_name": "woman flipflop4",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "women",
+      "detail_description": "Light red woman flipflop textured insole with light red and white trim on the strap. Braided sole edge. Synthetic rubber material for slip prevention. "
+    },
+    {
+      "article_id": "woman_jean1",
+      "product_name": "woman jean1",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "women",
+      "detail_description": "women's denim blue jean regular fit."
+    },
+    {
+      "article_id": "woman_jean2",
+      "product_name": "woman jean2",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "women",
+      "detail_description": "women's green denim jean regular fit, straight cut legs. Hemmed neatly for ankle booties."
+    },
+    {
+      "article_id": "woman_jean3",
+      "product_name": "woman jean3",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "women",
+      "detail_description": "deep purple stretchy denim jeans for slim fit women. Will contours to the individuals figure for skin tight fit and comfort.  Extends to ankles"
+    },
+    {
+      "article_id": "woman_jean4",
+      "product_name": "woman jean4",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "women",
+      "detail_description": "Five pocket red denim and satin fiber jeans. Button front fasten closure. Red stitching thread for seamless look. Hemmed for above the ankles. For women"
+    },
+    {
+      "article_id": "woman_jean5",
+      "product_name": "woman jean5",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "women",
+      "detail_description": "women's tan denim jean regular fit, straight cut legs. Extend to the ankles and hemmed neatly."
+    },
+    {
+      "article_id": "woman_jean6",
+      "product_name": "woman jean6",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "women",
+      "detail_description": "women's blue denim jean regular fit, tapered cut. Hemmed neatly for ankle length"
+    },
+    {
+      "article_id": "woman_opentoe_shoe1",
+      "product_name": "woman opentoe shoe1",
+      "product_type": "shoe",
+      "index_group_name": "heeled sandals",
+      "gender": "women",
+      "detail_description": "Womens black heeled open toe sandals. Block style to provide stability and modern look. Double strap crossing over mid foot.  Front ankle strap with buckle for close fit. perfect for evening wear."
+    },
+    {
+      "article_id": "woman_opentoe_shoe2",
+      "product_name": "woman opentoe shoe2",
+      "product_type": "shoe",
+      "index_group_name": "heeled sandals",
+      "gender": "women",
+      "detail_description": "Womens open toe sandals with stability block heel. Wide over the mid foot strap and inline strap for the ankle buckle to strap. Tan leather with stitched sole and leather heel support. Sleek minimalist design."
+    },
+    {
+      "article_id": "woman_opentoe_shoe3",
+      "product_name": "woman opentoe shoe3",
+      "product_type": "shoe",
+      "index_group_name": "heeled sandals",
+      "gender": "women",
+      "detail_description": "Warm brown leather. Open toe shoes with block high heels. Synthetic fabric detailed stitched to leather sole. Ankle buckle strap for adjustable fit."
+    },
+    {
+      "article_id": "woman_opentoe_shoe4",
+      "product_name": "woman opentoe shoe4",
+      "product_type": "shoe",
+      "index_group_name": "heeled sandals",
+      "gender": "women",
+      "detail_description": "White high heel sandals. 3 in thin heel. Two straps, over the toes and ankle with small buckle for adjustable wear. Made with US leather. Women"
+    },
+    {
+      "article_id": "woman_opentoe_shoe5",
+      "product_name": "woman opentoe shoe5",
+      "product_type": "shoe",
+      "index_group_name": "heeled sandals",
+      "gender": "women",
+      "detail_description": "Yellow high heel sandals. 3 in wide heel. Two straps, over the toes and ankle with small buckle for adjustable wear. Padded center for arch support. Made with US leather. Women"
+    },
+    {
+      "article_id": "woman_pump_shoe1",
+      "product_name": "woman pump shoe1",
+      "product_type": "shoe",
+      "index_group_name": "high heeled",
+      "gender": "women",
+      "detail_description": "Neutral shade white thinned high heeled shoes. Classic pointed toes design. Extra semi gloss leather toe stitched. Arch supported. Women. Made from genuine leather."
+    },
+    {
+      "article_id": "woman_pump_shoe2",
+      "product_name": "woman pump shoe2",
+      "product_type": "shoe",
+      "index_group_name": "high heeled",
+      "gender": "women",
+      "detail_description": "Beige thin high heels shoes for women. Slip-on classic design for elegance. Made from leather and semi glossy polish"
+    },
+    {
+      "article_id": "woman_pump_shoe3",
+      "product_name": "woman pump shoe3",
+      "product_type": "shoe",
+      "index_group_name": "high heeled",
+      "gender": "women",
+      "detail_description": "Yellow wide block high heels shoes for women. Slip-on classic design for elegance. Made from leather and semi glossy polish"
+    },
+    {
+      "article_id": "woman_purse1",
+      "product_name": "woman purse1",
+      "product_type": "accessory",
+      "index_group_name": "purse",
+      "gender": "women",
+      "detail_description": "Woman shoulder slung vibrant red purse. Classice flap-over style with streamlined retangular shape. Smooth glossy leather finish. Has neat visible stitching. Silver tone metal clasp to secure the flap-over."
+    },
+    {
+      "article_id": "woman_purse2",
+      "product_name": "woman purse2",
+      "product_type": "accessory",
+      "index_group_name": "purse",
+      "gender": "women",
+      "detail_description": "Woman shoulder slung black purse. Classice flap-over style with streamlined retangular shape. Smooth glossy leather finish. Has neat visible stitching. Flap-over is secured with neodymium magnet. Straps come with quick releases for strapless occasions."
+    },
+    {
+      "article_id": "woman_purse3",
+      "product_name": "woman purse3",
+      "product_type": "accessory",
+      "index_group_name": "purse",
+      "gender": "women",
+      "detail_description": "Woman silver glittering studded exterior purse. With classic flap-over. Formal occasions or as an eye catching accessory. Adjustable metallic color strap."
+    },
+    {
+      "article_id": "woman_purse4",
+      "product_name": "woman purse4",
+      "product_type": "accessory",
+      "index_group_name": "purse",
+      "gender": "women",
+      "detail_description": "Woman tan leather round corner flap-over purse. Light brown. Attached with shoulder strap. Embossed with floral pattern of various flowers and stems. Twist knob to secure flap-over."
+    },
+    {
+      "article_id": "woman_purse5",
+      "product_name": "woman purse5",
+      "product_type": "accessory",
+      "index_group_name": "purse",
+      "gender": "women",
+      "detail_description": "Woman gold glittering studded exterior purse with anchored hand strap. With classic flap-over. Formal occasions or as an eye catching accessory. Removeable shoulder strap. Silk lining interior"
+    },
+    {
+      "article_id": "woman_skirt1",
+      "product_name": "woman skirt1",
+      "product_type": "skirt",
+      "index_group_name": "pencil",
+      "gender": "women",
+      "detail_description": "Woman straight cut, above the knee skirt. With waistband to secure slim or straight silhouette. Grey Pencil Skirt with wool and twill blend fabric"
+    },
+    {
+      "article_id": "woman_skirt2",
+      "product_name": "woman skirt2",
+      "product_type": "skirt",
+      "index_group_name": "a-line",
+      "gender": "women",
+      "detail_description": "Woman A-line below the knee skirt. Brown pleated midi skirt with belted waist. Made from linen blend to give it crisp appearance. "
+    },
+    {
+      "article_id": "woman_skirt3",
+      "product_name": "woman skirt3",
+      "product_type": "skirt",
+      "index_group_name": "pencil",
+      "gender": "women",
+      "detail_description": "Wash faded denim above the knee pencil skirt.  Sturdy cotton twill fabric. Two front pockets and zipper fly. Waistband with belt loops, Straight to narrow cut."
+    },
+    {
+      "article_id": "woman_skirt4",
+      "product_name": "woman skirt4",
+      "product_type": "skirt",
+      "index_group_name": "a-line",
+      "gender": "women",
+      "detail_description": "Mid length A-Line woman skirt. Smooth, structured fabric made from synthetic blend such as polyester and statin mix. Wide waistband to produce a flared silhouette. Solid brown."
+    },
+    {
+      "article_id": "woman_skirt5",
+      "product_name": "woman skirt5",
+      "product_type": "skirt",
+      "index_group_name": "pencil",
+      "gender": "women",
+      "detail_description": "Belt loop below the knee length Pencil woman skirt. High waist design. Front button closure made from sturdy navy blue cotton"
+    },
+    {
+      "article_id": "woman_skirt6",
+      "product_name": "woman skirt6",
+      "product_type": "skirt",
+      "index_group_name": "pencil",
+      "gender": "women",
+      "detail_description": "Below the knee length Pencil woman skirt. High waist with straight cut. Fine tight weave of wool and twill. Solid black."
+    },
+    {
+      "article_id": "woman_skirt7",
+      "product_name": "woman skirt7",
+      "product_type": "skirt",
+      "index_group_name": "a-line",
+      "gender": "women",
+      "detail_description": "Below the knee length A-Line woman skirt. High waist with dual pleats. Fine tight weave of wool and twill. Solid beige."
+    },
+    {
+      "article_id": "woman_sweater1",
+      "product_name": "woman sweater1",
+      "product_type": "sweater",
+      "index_group_name": "pullover",
+      "gender": "women",
+      "detail_description": "Blue and white pattern pullover sweater for women. Loose fit with round neckline and ribbed wrist. Made with Wool and synthetic fabric"
+    },
+    {
+      "article_id": "woman_sweater2",
+      "product_name": "woman sweater2",
+      "product_type": "sweater",
+      "index_group_name": "crew neck",
+      "gender": "women",
+      "detail_description": "Solid green crew neck sweater for women. Long sleeve semi loose fit with knitted wool blend and ribbed at the wrist."
+    },
+    {
+      "article_id": "woman_sweater3",
+      "product_name": "woman sweater3",
+      "product_type": "sweater",
+      "index_group_name": "crop knit",
+      "gender": "women",
+      "detail_description": "Red, long sleeved, cropped knitwear sweater for women. Collar bone neckline. Ribbed at the wrist and the waist. Made from knited wool"
+    },
+    {
+      "article_id": "woman_sweater4",
+      "product_name": "woman sweater4",
+      "product_type": "sweater",
+      "index_group_name": "pullover",
+      "gender": "women",
+      "detail_description": "Fitted long sleeve sweater detailed with fair isle knit pattern using shades of blue and white, traditional nordic motifs of snowflake and geometric shapes. Knitted wool. Ribbed cuff. For women"
+    },
+    {
+      "article_id": "woman_sweater5",
+      "product_name": "woman sweater5",
+      "product_type": "sweater",
+      "index_group_name": "pullover",
+      "gender": "women",
+      "detail_description": "Fitted long sleeve sweater detailed with fair isle knit pattern using shades of brown and white, traditional celtic motifs of braids and geometric shapes. Knitted wool. Ribbed cuff and ribbed turtle neck. For women"
+    },
+    {
+      "article_id": "woman_sweater6",
+      "product_name": "woman sweater6",
+      "product_type": "sweater",
+      "index_group_name": "pullover",
+      "gender": "women",
+      "detail_description": "High neckline long sleeve sweater for women. Thick woven wool cold weather garment. Wrist and turtleneck ribbed. Patterned with shades of green, white and hint of red arranged in a snowflake like motifs."
+    },
+    {
+      "article_id": "woman_tweed_jacket1",
+      "product_name": "woman tweed jacket1",
+      "product_type": "jacket",
+      "index_group_name": "tweed",
+      "gender": "women",
+      "detail_description": "Light Blue three button collarless tweed jacket. Fabric is 100% wool  with 3/4 length sleeves. Silk lining and stiched rope about the waist. Without pockets"
+    },
+    {
+      "article_id": "woman_tweed_jacket2",
+      "product_name": "woman tweed jacket2",
+      "product_type": "jacket",
+      "index_group_name": "tweed",
+      "gender": "women",
+      "detail_description": "Brown on white threaded tweed jacket. Lapel collar. Durable with front four button closure with hip pockets. Modern minimalist. Collarless fitted, waist length with round neckline. Side pockets. 100% wool with polyester lining."
+    },
+    {
+      "article_id": "business_jacket11",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "tailored, dark forest green jacket with a subtle pins stripes, fine herringbone pattern. It features notch lapels, a two-button front closure, and a slim fit that contours closely to the body."
+    },
+    {
+      "article_id": "business_jacket12",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "dark green classic, tailored design, notched lapel, which is the folded flap of cloth on the front that extends from the collar. The jacket is single-breasted with two button front. The fabric has a smooth texture with a matte finish and two side pockets."
+    },
+    {
+      "article_id": "business_jacket13",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "dark coal gray, tailored jacket with a notched lapel design has two-button front closure and a welt pocket on the left chest, which contains a white pocket square with a straight fold."
+    },
+    {
+      "article_id": "business_jacket14",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "classic single-breasted style with silky notched lapel, polyester blend fabric, perfect for formal and evening wear. The color of the jacket is a deep rich black."
+    },
+    {
+      "article_id": "business_jacket15",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "tailored, black jacket with flashy pin stripes throughout, fine herringbone pattern. It features notch lapels, a two-button front closure, and a slim fit that contours closely to the body."
+    },
+    {
+      "article_id": "business_jacket16",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "black classic, tailored design, notched lapel, which is the folded flap of cloth on the front that extends from the collar. Pocketless chest with coarse salt and peper tecture."
+    },
+    {
+      "article_id": "business_jacket17",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "charcoal grey, tailored jacket with a notched lapel design. It features a two-button front closure and a welt pocket on the left chest, has border stitching pattern and folded side pockets. Fabric is cotton synthetic blend"
+    },
+    {
+      "article_id": "business_jacket18",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "classic single-breasted style with a notched lapel with black borders, fine, woolen fabric, texture that suggests smooth quality. The color of the jacket is a red ruby."
+    },
+    {
+      "article_id": "business_jacket19",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "tailored, red jacket with a subtle pin stripe texture, fine herringbone pattern. It features notch lapels, a two-button front closure, and a slim fit that contours closely to the body."
+    },
+    {
+      "article_id": "business_jacket20",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "rich red classic, tailored design, notched lapel, which is the folded flap of cloth on the front that extends from the collar. Two flap pockets on either side at the waist level and what seems to be a welt pocket at chest height on the left side"
+    },
+    {
+      "article_id": "business_jacket21",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "sky blue, tailored jacket with a notched lapel design. Fabric smooth silk polyester blend. It features a two-button(black) front closure and a welt pocket on the left chest, which contains a chest pocket square with a straight fold."
+    },
+    {
+      "article_id": "business_jacket22",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "classic single-breasted style with a notched lapel, fine, smooth silky fabric, texture that suggests quality and professionalism. The color of the jacket is a metallic blue with pronounced pin stripes."
+    },
+    {
+      "article_id": "business_jacket23",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "dark blue classic, tailored design, notched lapel, which is the folded flap of cloth on the front that extends from the collar. The jacket is single-breasted with a single row of buttons down the front, two buttons front. Sleek appearance, two flap pockets on either side at the waist level and what seems to be a welt pocket at chest height on the left side."
+    },
+    {
+      "article_id": "business_jacket24",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "dark blue, tailored jacket with a notched lapel design featuring pin stripes. It features a two-button front closure and a welt pocket on the left chest pocket slot and side pockets with folded flaps"
+    },
+    {
+      "article_id": "business_jacket25",
+      "product_name": "Business Jacket",
+      "product_type": "jacket",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "classic single-breasted style with a notched lapel, fine, woolen fabric, shiny texture that suggests quality and professionalism. The color of the jacket is a sky blue with white pin stripes."
+    },
+    {
+      "article_id": "Men_button_shirt11",
+      "product_name": "Men Button Shirt",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, turquoise button-up shirt with a collar, polyester linen blend with left chest pocket"
+    },
+    {
+      "article_id": "Men_button_shirt12",
+      "product_name": "Men Button Shirt",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar with left chest pocket and dark turquoise polyester rayon blend,"
+    },
+    {
+      "article_id": "Men_button_shirt13",
+      "product_name": "Men Button Shirt",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, medium dark turquoise with grey cuffs, cotton blend fabric, left breast pocket"
+    },
+    {
+      "article_id": "Men_button_shirt14",
+      "product_name": "Men Button Shirt",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt, bluish dark metal in color, polyester rayon texture, left breast pocket"
+    },
+    {
+      "article_id": "Men_button_shirt15",
+      "product_name": "Men Button Shirt",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, metal dark green polyester blend fabric."
+    },
+    {
+      "article_id": "Men_button_shirt16",
+      "product_name": "Men Button Shirt",
+      "product_type": "shirt",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, solid emerald green with fine synthetic fiber."
+    },
+    {
+      "article_id": "Men_button_shirt17",
+      "product_name": "Men button Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, double button double pocket with rigid synthetic fiber. Blue box pattern with winter adornments."
+    },
+    {
+      "article_id": "men_dress_shorts11",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Wool blend, coyote orange. With slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts12",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Cotton wool blend, subdued grey. With slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts13",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Cotton wool blend, dark moss green. With slanted pockets, belt loops, and straight thigh."
+    },
+    {
+      "article_id": "men_dress_shorts14",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, twill weave pattern, pleated front. Cotton wool blend, moss green. With slanted pockets, belt loops and turned up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts15",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, twill weave pattern. Cotton wool blend, dark green. With slanted pockets, belt loops, and third left front pouch pocket."
+    },
+    {
+      "article_id": "men_dress_shorts16",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Wool blend, coyote brown. With slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts17",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Cotton wool blend, charcoal black. With slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts18",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Cotton wool blend, black. With slanted pockets, belt loops, and turned-up cuffs. Includes internal liner."
+    },
+    {
+      "article_id": "men_dress_shorts19",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, twill weave pattern, pleated front. Cotton wool blend, black. With slanted pockets and belt loops. Full length pleats and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts20",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, twill weave pattern. Cotton wool blend, charcoal grey. With slanted pockets, belt loops, ridgeline pleats and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts21",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Wool blend, grey. Hard edge crease with slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "men_dress_shorts22",
+      "product_name": "Men Dress Shorts",
+      "product_type": "trouser",
+      "index_group_name": "shorts",
+      "gender": "men",
+      "detail_description": "men's dress shorts, woven with herringbone pattern. Cotton wool blend, red. With slanted pockets, belt loops, and turned-up cuffs."
+    },
+    {
+      "article_id": "Men_flannel11",
+      "product_name": "Men Flannel Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, polyester linen blend with left chest button pocket. Wool flannel blue and grey."
+    },
+    {
+      "article_id": "Men_flannel12",
+      "product_name": "Men Flannel Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt, pockeless and with a collar. Wool flannel blue."
+    },
+    {
+      "article_id": "Men_flannel13",
+      "product_name": "Men Flannel Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's flannel long-sleeved, button-up shirt with a collar, red black, wool blend fabric, double chest pocket."
+    },
+    {
+      "article_id": "Men_flannel14",
+      "product_name": "Men Flannel Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's flannel long-sleeved, button-up shirt, wide bar red black in color, polyester wool texture, left breast pocket with flap."
+    },
+    {
+      "article_id": "Men_flannel15",
+      "product_name": "Men Flannel Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's long-sleeved, button-up shirt with a collar, dark green wool blend flannel fabric."
+    },
+    {
+      "article_id": "Men_flannel16",
+      "product_name": "Men Flannel Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's flannel long-sleeved, button-up shirt with a collar, with tri green with wool synthetic fiber. Double chet pockets with button flap."
+    },
+    {
+      "article_id": "Men_flannel17",
+      "product_name": "Men Flannel Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's flannel long-sleeved, button-up shirt, orange black in color, wool texture, left breast pocket with flap."
+    },
+    {
+      "article_id": "Men_flannel18",
+      "product_name": "Men Flannel Shirt",
+      "product_type": "shirt",
+      "index_group_name": "casual",
+      "gender": "men",
+      "detail_description": "men's flannel long-sleeved, double breat pocket with button flaps, button-up shirt with a collar, deep blue black wool blend fabric."
+    },
+    {
+      "article_id": "Men_flipflop11",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "foam black, yellow trim flipflops, plane straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop12",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "foam yellow flipflops, black trim straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop13",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "classic black and yellow foam flipflops for men with patterned straps"
+    },
+    {
+      "article_id": "Men_flipflop14",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "men's black flipflops with fabric black yellow trim straps"
+    },
+    {
+      "article_id": "Men_flipflop15",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "foam black, red trim flipflops, strip pattern straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop16",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "dark red flipflops, red and black rubber ribbed straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop17",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "classic black foam flipflops with red trim for men"
+    },
+    {
+      "article_id": "Men_flipflop18",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "foam black, red sole flipflops, textured red and black straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop19",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "men's black flipflops with green sole and trim, faux leather straps attachment"
+    },
+    {
+      "article_id": "Men_flipflop20",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "dark green flipflops, fabric black grey trim straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop21",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "classic black rubber flipflops green sole and fabric straps for men"
+    },
+    {
+      "article_id": "Men_flipflop22",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "men's brown flipflops with foam sole."
+    },
+    {
+      "article_id": "Men_flipflop23",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "brown foam sole flipflops, brown trim texture onto the straps, men's"
+    },
+    {
+      "article_id": "Men_flipflop24",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "classic brown rubber flipflops for men"
+    },
+    {
+      "article_id": "Men_flipflop25",
+      "product_name": "Men Flipflop",
+      "product_type": "shoe",
+      "index_group_name": "flipflop",
+      "gender": "men",
+      "detail_description": "men's brown rubber flipflops with characteristic straps"
+    },
+    {
+      "article_id": "men_jersey11",
+      "product_name": "Men Jersey",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "men's heavy synthetic fabric, green long sleeves, dark grey body, elastic wrist and waist band"
+    },
+    {
+      "article_id": "men_jersey12",
+      "product_name": "Men Jersey",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "lime geen long sleeve jersey, men's, medium weight cotton blend"
+    },
+    {
+      "article_id": "men_jersey13",
+      "product_name": "Men Jersey",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "pink long sleeve , white body jersey, men's, synthetic-cotton blend."
+    },
+    {
+      "article_id": "men_jersey14",
+      "product_name": "Men Jersey",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "hotter pink long sleeve , light grey body jersey, men's, cotton synthetic fiber blend."
+    },
+    {
+      "article_id": "men_jersey15",
+      "product_name": "Men Jersey",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "two tone tan long sleeve , cream body jersey, men's. button cotton synthetic fiber blend."
+    },
+    {
+      "article_id": "men_jersey16",
+      "product_name": "Men Jersey",
+      "product_type": "shirt",
+      "index_group_name": "jersey",
+      "gender": "men",
+      "detail_description": "two tone white sky blue long sleeve men's jersey, elastic wrist crew neck, synthetic cotton blend"
+    },
+    {
+      "article_id": "men_leather_jacket11",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Four front pocket with snap button flap brown leather jacket. Men. Front zipper closure. Elastic waist and cuffs. Standard collar."
+    },
+    {
+      "article_id": "men_leather_jacket12",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Brown leather jacket with two chest pockets, two side pockets, two clavical zipper pockets and a front zipper"
+    },
+    {
+      "article_id": "men_leather_jacket13",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Two zipper chest pocket and two zipper side pockets. Front zipper closure brown leather jacket featuring shoulder padding and standard snap collar. Elastic waist band. Great cafe racer biker jacket."
+    },
+    {
+      "article_id": "men_leather_jacket14",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Black, natural leather jacket. Two front change pockets each with zipper closure. Notched snap on lapels and micro shoulder grab straps. Front zipper closure and two side pockets."
+    },
+    {
+      "article_id": "men_leather_jacket15",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Snap collared black leather jacket. Adjustable waist strap. Six front pockets and two tricep pockets. Great cafe racer biker jacket with shoulder padding."
+    },
+    {
+      "article_id": "men_leather_jacket16",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Brown leather jacket with button up front closure plus pull up zipper. Four front pocket with snap button flaps."
+    },
+    {
+      "article_id": "men_leather_jacket17",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Brown leather cafe jacket for men. Featuring four panel shoulder pads. Adjustable waist strap and zipper cuffs."
+    },
+    {
+      "article_id": "men_leather_jacket18",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Snap collared black leather jacket. Adjustable waist strap. Two front pockets and two side pockets. Great cafe racer biker jacket with shoulder padding."
+    },
+    {
+      "article_id": "men_leather_jacket19",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Snap collared black leather jacket. Four front pockets and two tricep pockets. Great cafe racer biker jacket with shoulder and deltoid padding. Zippered wrist and belt strap wrist cuffs."
+    },
+    {
+      "article_id": "men_leather_jacket20",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Double snap collared black leather jacket. Adjustable waist strap. Two front pockets with the left front pocket featuring right angle access and two side pockets. Also snap buttons for wrist adjustment. This jacket provide shoulder and deltoid padding."
+    },
+    {
+      "article_id": "men_leather_jacket21",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Taupe brown leather jacket with a single chest zipper pocket. Front zipper closure and two side pockets. Snap collar. Made for men"
+    },
+    {
+      "article_id": "men_leather_jacket22",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Rustic taupe brown leather jacket. Front zipper closure for men. Six total front pockets; two side pockets, two chest pockets, and two clavical pockets. Snap collar."
+    },
+    {
+      "article_id": "men_leather_jacket23",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Taup brown leather jacket. Front zipper closure for men."
+    },
+    {
+      "article_id": "men_leather_jacket24",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Rustic brown leather cafe jacket for the motorcycle enthusiast. Front zipper closure. Additional features two chest pockets and shoulder padding."
+    },
+    {
+      "article_id": "men_leather_jacket25",
+      "product_name": "Men Leather Jacket",
+      "product_type": "jacket",
+      "index_group_name": "leather",
+      "gender": "men",
+      "detail_description": "Rustic brown leather cafe jacket for the motorcycle enthusiast. Front zipper closure. Additional features two chest pockets and shoulder padding."
+    },
+    {
+      "article_id": "Men_sandal11",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Canvas adjustable velcro strap. Men's sandal. Black sandal with rubber sole. Three point strap design."
+    },
+    {
+      "article_id": "Men_sandal12",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Men's Leather sandals with adjustable belt and buckle strap. Leather black sole with brown stitch trimmning."
+    },
+    {
+      "article_id": "Men_sandal13",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Black leather sandal, non-adjustable textued strap. Brown rubber sole with comfortable foot pad. Men's sandal."
+    },
+    {
+      "article_id": "Men_sandal14",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Blue textile sandal, adjustable velcro fabric strap. Blue rubber sole. Men's sandal. Foam foot pad."
+    },
+    {
+      "article_id": "Men_sandal15",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Blue textured sandal, double adjustable velcro canvas strap. Brown rubber sole with blue side trimming. Men's sandal. Comfortable forming foot pad."
+    },
+    {
+      "article_id": "Men_sandal16",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Blue textured sandal, double adjustable velcro canvas strap. Brown rubber sole with blue side trimming. Men's sandal. Comfortable forming foot pad."
+    },
+    {
+      "article_id": "Men_sandal17",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Blue ridged textured sandal for comofort, double adjustable velcro canvas strap with flexible backstrap. Blue rubber sole with blue side trimming. Men's sandal."
+    },
+    {
+      "article_id": "Men_sandal18",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Green rubber sole sandal, non-adjustable textued strap that includes a backstrap. "
+    },
+    {
+      "article_id": "Men_sandal19",
+      "product_name": "Men Sandal",
+      "product_type": "shoe",
+      "index_group_name": "sandal",
+      "gender": "men",
+      "detail_description": "Green textile sandal, adjustable velcro fabric strap. Green rubber gripping sole. Men's sandal. Foam foot pad."
+    },
+    {
+      "article_id": "men_slacks11",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Charcoal grey ribbed men's trousers. Great for formal and buisness events. Complimentary faux leather belt. Tightly woven wool fabric"
+    },
+    {
+      "article_id": "men_slacks12",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Formal black straight leg slacks. Men's pants with five belt loops.  Smooth synthetic fabric. 800 threads per inch."
+    },
+    {
+      "article_id": "men_slacks13",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Economical black men's slacks. Straight leg. Men's pants. Synthetic blend tightly woven fabric. Priced right for formal wear"
+    },
+    {
+      "article_id": "men_slacks14",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Men's formal wear slacks. Full length vertical crease Black tight polyester cotton blend heavy weave. Tapered legs, 800 threads per inch"
+    },
+    {
+      "article_id": "men_slacks15",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Charcoal grey single pleated men's trousers. Great for formal and buisness events. Complimentary faux belt. Tightly woven wool fabric"
+    },
+    {
+      "article_id": "men_slacks16",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Formal dark heather grey straight leg slacks. Men's pants with five belt loops. Smooth synthetic wool fabric. 800 threads per inch."
+    },
+    {
+      "article_id": "men_slacks17",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Storm cloud grey slacks with 1/2 inch ribs. Straight leg. Men's pants. Synthetic polyester blend tightly woven fabric. 7 belt loops with pin stripes. Formal wear for the office"
+    },
+    {
+      "article_id": "men_slacks18",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Men's formal wear slacks. Sky blue shiny polyester blend with pin stripes. Hidden front zipper closure. 800 threads per inch"
+    },
+    {
+      "article_id": "men_slacks19",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Men's formal wear slacks. Sky blue matte polyester blend with pin stripes. Front zipper closure. 800 threads per inch"
+    },
+    {
+      "article_id": "men_slacks20",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Formal solid sky blue straight leg slacks. Men's pants with five belt loop for optional fastening. Include buckle fastner. Smooth synthetic fabric. 800 threads per inch."
+    },
+    {
+      "article_id": "men_slacks21",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Formal solid sky blue straight leg slacks. Men's pants with five belt loops. Smooth synthetic fabric. 800 threads per inch."
+    },
+    {
+      "article_id": "men_slacks22",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Men's formal wear slacks. Dark grey tight vertical wool blend heavy weave. Tapered legs, 800 threads per inch"
+    },
+    {
+      "article_id": "men_slacks23",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Red raider men's trousers. Great for formal and buisness events. Tightly woven 805 polyester 20% cotton fabric"
+    },
+    {
+      "article_id": "men_slacks24",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Formal dark green straight leg slacks with pin stripes. Men's pants with five belt loops. Smooth synthetic fabric. 800 threads per inch."
+    },
+    {
+      "article_id": "men_slacks25",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Moss green slacks. Straight leg. Men's pants. Synthetic blend tightly woven fabric. Five belt loops. Formal wear"
+    },
+    {
+      "article_id": "men_slacks26",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Moss green slacks. Straight leg. Men's pants. Anti allergen fabric for sensitive skin. Five belt loops. Formal wear"
+    },
+    {
+      "article_id": "men_slacks27",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Men's formal wear slacks. Off green tight wool blend heavy weave. Tapered legs. Brown leather belts complements the off green color."
+    },
+    {
+      "article_id": "men_slacks28",
+      "product_name": "Men Slacks",
+      "product_type": "trouser",
+      "index_group_name": "pants",
+      "gender": "men",
+      "detail_description": "Dark forest green single creasedd men's trousers. Buisness events. Tightly woven wool fabric"
+    },
+    {
+      "article_id": "men_dress_shoe11",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's laced dress white shoes with plain formal design pattern"
+    },
+    {
+      "article_id": "men_dress_shoe12",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's rustic brown laced dress shoes with for the casual design pattern"
+    },
+    {
+      "article_id": "men_dress_shoe13",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's rustic taupe brown laced dress shoes with high ankle design."
+    },
+    {
+      "article_id": "men_dress_shoe14",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's matte finished rustic brown laced dress shoes"
+    },
+    {
+      "article_id": "men_dress_shoe15",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's brown laced dress shoes with rugged look design pattern"
+    },
+    {
+      "article_id": "men_dress_shoe16",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's glossy white loafers dress shoes with desinguished stitched leather cross strap."
+    },
+    {
+      "article_id": "men_dress_shoe17",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's glossy white loafer dress shoes with ornamental bar on foot tongue."
+    },
+    {
+      "article_id": "men_dress_shoe18",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's red rage loafer dress shoes for the noticeable appeal."
+    },
+    {
+      "article_id": "men_dress_shoe19",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's glossy red laced dress shoes with gradient brogue design pattern"
+    },
+    {
+      "article_id": "men_dress_shoe20",
+      "product_name": "Men Dress Shoe",
+      "product_type": "shoe",
+      "index_group_name": "formal",
+      "gender": "men",
+      "detail_description": "men's glossy red laced dress shoes with standard brogue design pattern"
+    }
+  ]
+}

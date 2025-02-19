@@ -1,0 +1,9 @@
+###
+# Post an image analyze request 
+POST {{image_describer_url}}/analyze
+Accept: application/json
+Content-Type: application/json
+
+{
+    "images": ["<image-url>"]
+}

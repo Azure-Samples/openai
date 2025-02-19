@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommender-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recommender
+  template:
+    metadata:
+      labels:
+        app: recommender
+    spec:
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: kv-secrets-provider 
+      containers:
+        - name: recommender-container
+          image: cr5xd4xcq23ihzu.azurecr.io/recommender:${tag}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6003
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "2Gi"
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          env:
+          - name: ENVIRONMENT
+            value: "PROD"
+      nodeSelector:
+        agentpool: userpool
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: recommender
+spec:
+  ports:
+  - port: 6003
+    targetPort: 6003
+  selector:
+    app: recommender
+  type: ClusterIP

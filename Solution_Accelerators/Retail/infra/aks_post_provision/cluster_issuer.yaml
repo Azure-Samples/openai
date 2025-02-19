@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypthttp
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory # Replace with https://acme-staging-v02.api.letsencrypt.org/directory for staging
+    email: <EMAIL-ADDRESS>
+    privateKeySecretRef:
+      name: letsencrypthttp-secret
+    solvers:
+    - http01:
+        ingress:
+          class: azure/application-gateway

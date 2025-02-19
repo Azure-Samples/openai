@@ -1,0 +1,50 @@
+###
+
+# post a search request with overrides and NO filters
+POST {{search_service_url}}/search?scenario=retail
+Accept: application/json
+Content-Type: application/json
+
+{
+    "search_queries": [
+    {
+        "search_query": "suits for a gala", 
+        "min_results_count": 1, 
+        "max_results_count": 10, 
+        "search_id": "retail_search_via_http_call_test_02"
+    }],
+    "search_overrides":{
+        "top":5
+    }
+}
+###
+
+#post a Retail search request
+POST {{search_service_url}}/search?scenario=retail
+Accept: application/json
+Content-Type: application/json
+
+{
+    "search_queries": [
+        {
+            "search_query": "A silver leather clutch purse with a detachable chain strap, featuring a sleek metallic finish and a minimalist design", 
+            "filter": null, 
+            "min_results_count": 1, 
+            "max_results_count": 3, 
+            "search_id": "250b44b6-10fd-452b-be25-ff740216f95d"
+        }, 
+        {
+            "search_query": "A gold-tone watch with a mother-of-pearl dial, adorned with crystal accents and a slim bracelet band", 
+            "filter": null, 
+            "min_results_count": 1, 
+            "max_results_count": 3, 
+            "search_id": "297dd946-47ae-48ec-b471-f5adedea91b4"
+            }
+    ], 
+    "search_overrides": {
+        "semantic_ranker": true, 
+        "vector_search": true, 
+        "top": null, 
+        "config_version": null
+    }
+}

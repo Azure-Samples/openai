@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: multimodal-bot-demo
+metadata:
+  template: azure-search-openai-demo@0.0.2-beta
+hooks:
+  preprovision:
+    shell: pwsh
+    run: Install-Module AzureAD -Force;Connect-AzAccount;$principalId = (Get-AzADUser -UserPrincipalName (Get-AzContext).Account).Id;azd env set AZURE_PRINCIPAL_ID $principalId
+    continueOnError: false
+    interactive: true

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-describer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image-describer
+  template:
+    metadata:
+      labels:
+        app: image-describer
+    spec:
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: kv-secrets-provider 
+      containers:
+        - name: image-describer-container
+          image: craumj6cpfeztbo.azurecr.io/image-describer:${tag}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 6004
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "2Gi"
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          env:
+          - name: ENVIRONMENT
+            value: "PROD"
+      nodeSelector:
+        agentpool: userpool
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: image-describer
+spec:
+  ports:
+  - port: 6004
+    targetPort: 6004
+  selector:
+    app: image-describer
+  type: ClusterIP

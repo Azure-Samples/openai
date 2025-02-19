@@ -1,0 +1,302 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Configuration service: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./config_hub",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Data service: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./data",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Orchestrator_Retail: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./orchestrator_retail",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Session Manager: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./session_manager",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Integration Tests: Create python virtual environment",
+            "type": "shell",
+            "command": "../../scripts/createEnv.ps1 -Path ./int_test",
+            "options": {
+                "cwd": "${workspaceFolder}/src/tests"
+            }
+        },
+        {
+            "label": "Start redis container",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "if (!(docker ps -q -f name=my-redis)) { if (docker ps -aq -f status=exited -f name=my-redis) { docker start my-redis } else { docker run -d --name my-redis -p 6379:6379 -e REDIS_PASSWORD=redis_password redis --requirepass redis_password } }"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Configuration service: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./config_hub/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./config_hub/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./config_hub/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./config_hub/.venv/Scripts/python.exe -m pip install -r config_hub/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Configuration service: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Data service: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./data/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./data/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./data/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./data/.venv/Scripts/python.exe -m pip install -r data/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Data service: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Orchestrator_Retail: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./orchestrator_retail/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./orchestrator_retail/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./orchestrator_retail/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./orchestrator_retail/.venv/Scripts/python.exe -m pip install -r orchestrator_retail/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Orchestrator_Retail: Create python virtual environment",
+                "Start redis container"
+            ]
+        },
+        {
+            "label": "Session Manager: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./session_manager/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./session_manager/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./session_manager/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./session_manager/.venv/Scripts/python.exe -m pip install -r session_manager/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Session Manager: Create python virtual environment",
+                "Start redis container"
+            ]
+        },
+        {
+            "label": "Integration Tests: Setup Environment",
+            "type": "shell",
+            "command": "./int_test/.venv/Scripts/python.exe -m pip install wheel && ./int_test/.venv/Scripts/python.exe ../common/setup.py bdist_wheel && ./int_test/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl && ./int_test/.venv/Scripts/python.exe -m pip install -r int_test/requirements.txt",
+            "options": {
+                "cwd": "${workspaceFolder}/src/tests"
+            },
+            "dependsOn": [
+                "Integration Tests: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Session Manager: pip install dependencies",
+            "type": "shell",
+            "command": "./session_manager/.venv/Scripts/python.exe -m pip install -r session_manager/requirements.txt",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Session Manager: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Search Skill: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./skills/search",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Search Skill: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./skills/search/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./skills/search/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./skills/search/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./skills/search/.venv/Scripts/python.exe -m pip install -r skills/search/src/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Search Skill: Create python virtual environment",
+                "Start redis container"
+            ]
+        },
+        {
+            "label": "Ingestion Service: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./skills/ingestion",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Ingestion Service: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./skills/ingestion/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./skills/ingestion/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./skills/ingestion/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./skills/ingestion/.venv/Scripts/python.exe -m pip install -r skills/ingestion/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Ingestion Service: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Frontend Retail: npm install",
+            "type": "shell",
+            "command": "npm install",
+            "options": {
+                "cwd": "${workspaceFolder}/src/frontend_retail"
+            },
+            "problemMatcher": ["$node-sass"]
+        },
+        {
+            "label": "Frontend Retail: Start",
+            "type": "shell",
+            "command": "npm run start",
+            "options": {
+                "cwd": "${workspaceFolder}/src/frontend_retail"
+            },
+            "dependsOn": "Frontend Retail: npm install",
+            "problemMatcher": ["$node-sass"]
+        },
+        {
+            "label": "Recommender Skill: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./skills/recommender",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Recommender Skill: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./skills/recommender/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./skills/recommender/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./skills/recommender/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./skills/recommender/.venv/Scripts/python.exe -m pip install -r skills/recommender/src/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Recommender Skill: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Image Describer Skill: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./skills/image_describer",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Image Describer Skill: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./skills/image_describer/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./skills/image_describer/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./skills/image_describer/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./skills/image_describer/.venv/Scripts/python.exe -m pip install -r skills/image_describer/src/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Image Describer Skill: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Retail Bot Backend - Setup Environment (All services)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Data service: Setup Environment",
+                "Configuration service: Setup Environment",
+                "Session Manager: Setup Environment",
+                "Orchestrator_Retail: Setup Environment",
+                "Search Skill: Setup Environment",
+                "Recommender Skill: Setup Environment",
+                "Image Describer Skill: Setup Environment"
+            ]
+        },
+        {
+            "label": "Sim Tests: Create python virtual environment",
+            "type": "shell",
+            "command": "../../scripts/createEnv.ps1 -Path ./sim_test",
+            "options": {
+                "cwd": "${workspaceFolder}/src/tests"
+            }
+        },
+        {
+            "label": "Sim Tests: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./sim_test/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./sim_test/.venv/Scripts/python.exe .././common/setup.py bdist_wheel",
+                "&& ./sim_test/.venv/Scripts/python.exe -m pip install --force-reinstall .././dist/common-0.1.0-py3-none-any.whl",
+                "&& ./sim_test/.venv/Scripts/python.exe -m pip install -r sim_test/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src/tests"
+            },
+            "dependsOn": [
+                "Sim Tests: Create python virtual environment"
+            ]
+        },
+    ]
+}

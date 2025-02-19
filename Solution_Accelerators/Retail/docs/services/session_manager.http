@@ -1,0 +1,63 @@
+###
+# post a user conversation for retail
+POST {{session_manager_url}}/chat?scenario=retail
+Accept: application/json
+Content-Type: application/json
+
+{
+    "user_id": "anonymous",
+    "conversation_id": "retail_test_conversation_1",
+    "dialog_id": "retaildialog1",
+    "message": {
+        "payload": [
+            {
+                "type": "text",
+                "value": "I am looking for a suit to go to a gala"
+            }
+        ]
+    },
+    "overrides": {},
+    "user_profile": {
+        "id": "anonymous",
+        "user_name": "Anonymous",
+        "description": "A sample user",
+        "gender": "Male"
+    },
+    "response_mode": "json"
+}
+
+###
+# post a user conversation for retail
+POST {{session_manager_url}}/chat?scenario=retail
+Accept: application/json
+Content-Type: application/json
+
+{
+    "user_id": "anonymous",
+    "conversation_id": "retail_test_conversation_2",
+    "dialog_id": "retaildialog1",
+    "message": {
+        "payload": [
+            {
+                "type": "text",
+                "value": "Can you recommend me some good sandals to go with this t shirt"
+            },
+            {
+                "type": "image",
+                "value": "data:image/png;base64, <BASE64-ENCODING>"
+            }
+        ]
+    },
+    "overrides": {},
+    "user_profile": {
+        "id": "anonymous",
+        "user_name": "Anonymous",
+        "description": "A sample user",
+        "gender": "Male"
+    },
+    "response_mode": "json"
+}
+
+###
+# get all user-profiles
+GET {{session_manager_url}}/user-profiles
