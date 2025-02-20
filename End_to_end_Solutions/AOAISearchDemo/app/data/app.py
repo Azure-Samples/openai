@@ -200,7 +200,8 @@ def get_user_profile(user_id: str):
         else:
             return Response(response=json.dumps(user_profile.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        app.logger.error(f"Error in get_user_profile: {e}")
+        return Response(response="An internal error has occurred.", status=500)
 
 @app.route('/user-profiles', methods=['GET'])
 def get_all_user_profiles():
@@ -209,7 +210,8 @@ def get_all_user_profiles():
         json_user_profiles = [user_profile.to_item() for user_profile in user_profiles]
         return Response(response=json.dumps(json_user_profiles), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        app.logger.error(f"Error in get_all_user_profiles: {e}")
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['POST'])
 def create_user_group(group_id: str):
@@ -233,7 +235,8 @@ def create_user_group(group_id: str):
     except CosmosConflictError as e:
         return Response(response=str(e), status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        app.logger.error(f"Error in create_user_group: {e}")
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['GET'])
 def get_user_group(group_id: str):
@@ -244,7 +247,8 @@ def get_user_group(group_id: str):
         else:
             return Response(response=json.dumps(user_group.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        app.logger.error(f"Error in get_user_group: {e}")
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/user/<user_id>', methods=['GET'])
 def get_user_member_groups(user_id: str):
@@ -255,7 +259,8 @@ def get_user_member_groups(user_id: str):
         else:
             return Response(response=json.dumps([user_group.to_item_no_users() for user_group in user_groups]), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        app.logger.error(f"Error in get_user_member_groups: {e}")
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['PUT'])
 def update_user_group(group_id: str):
@@ -277,7 +282,8 @@ def update_user_group(group_id: str):
     except SessionNotFoundError as e:
         return Response(response=str(e), status=404)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        app.logger.error(f"Error in update_user_group: {e}")
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/resources/<resource_id>', methods=['POST'])
 def create_resource(resource_id: str):
@@ -296,7 +302,8 @@ def create_resource(resource_id: str):
     except CosmosConflictError as e:
         return Response(response=str(e), status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        app.logger.error(f"Error in create_resource: {e}")
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/resources/<resource_id>', methods=['GET'])
 def get_resource(resource_id: str):
