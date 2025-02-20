@@ -29,12 +29,12 @@ if (-Not (Test-Path -Path "$Path/.venv/pip.ini")) {
     # Install required packages
     pip install keyring artifacts-keyring
     pip install wheel setuptools
-    
+
     # now create the pip.ini file
     Write-Host "Creating pip.ini file in directory $Path/.venv and set up the index-url"
     $pipIniContent = @"
 [global]
-index-url=https://pkgs.dev.azure.com/AIP-CXE-Eng/Engineering/_packaging/CustomerEng/pypi/simple/
+index-url=https://pypi.python.org/simple
 "@
 
   $pipIniPath = Join-Path -Path "$Path/.venv" -ChildPath "pip.ini"

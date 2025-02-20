@@ -10,7 +10,7 @@
   - [Orchestrator](#orchestrator)
   - [Configuration Service](#configuration-service)
   - [Data Service](#data-service)
-- [Sharing Intermediate Results](#sharing-intermediate-skill)
+- [Sharing Intermediate Results](#sharing-intermediate-results)
 - [Architecture Features](#Architecture-features)
 - [Secure Runtime and Deployment of Copilot](#secure-runtime-and-deployment-of-copilot)
   - [Security](#security)
@@ -57,7 +57,7 @@ Enhances search queries by breaking them into multiple subqueries. For example, 
 
 #### Configuration Service
 
-The runtime configuration service enhances the architecture's dynamicity and flexibility. It enables core services and AI skills to decouple and parameterize various components, such as prompts, search data settings, and operational parameters. These services can easily override default configurations with new versions at runtime, allowing for dynamic behavior adjustments during operation. The biggest benefit of the configuration service is its ability to expose different configurations for various microservices during runtime, making processes like evaluations much easier - no need for any more deployments. This could also be used to demo against different search indexes as well. Example: default index is the one that is with this repo. However you can bring your own product catalog and create a new Index and use that via runtime configuration. More details on how to configure the entire demo for your data is [here](./SETUP_RAG.md/#build-your-own-copilot)
+The runtime configuration service enhances the architecture's dynamicity and flexibility. It enables core services and AI skills to decouple and parameterize various components, such as prompts, search data settings, and operational parameters. These services can easily override default configurations with new versions at runtime, allowing for dynamic behavior adjustments during operation. The biggest benefit of the configuration service is its ability to expose different configurations for various microservices during runtime, making processes like evaluations much easier - no need for any more deployments. This could also be used to demo against different search indexes as well. Example: default index is the one that is with this repo. However you can bring your own product catalog and create a new Index and use that via runtime configuration. More details on how to configure the entire demo for your data is [here](./SETUP.md/#build-your-own-copilot)
 
 For more details refer config service documentation [Configuration Service](./src/config_hub/README.md).
 

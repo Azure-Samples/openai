@@ -14,5 +14,10 @@ Content-Type: application/json
     "filename": "2023_Annual_Report.pdf",
     "reported_year": "2023",
     "subsidiary": "Microsoft"
-  }
+  },
+  "enrichment": "NONE" // can be NONE | TABLE_AS_LIST | IMAGE_DESCRIPTION
 }
+
+###
+# get status of task by task id
+GET {{ingestion_service_url}}/indexer/index/3c8b1753-56fa-4ed9-b7da-79b4753704b9

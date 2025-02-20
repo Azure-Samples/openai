@@ -35,8 +35,8 @@ class DefaultConfig:
 
                 cls.AZURE_OPENAI_GPT_SERVICE_FINAL_ANSWER_GENERATOR = config_reader.read_config_value(Config.AZURE_OPENAI_ENDPOINT)
 
-                cls.SEARCH_SKILL_URL = config_reader.read_config_value(Config.SEARCH_SKILL_URL)
-                cls.CONFIGURATION_SERVICE_URL = config_reader.read_config_value(Config.CONFIGURATION_SERVICE_URL)
+                cls.SEARCH_SKILL_URL = config_reader.read_config_value(Config.SEARCH_SKILL_URI)
+                cls.CONFIGURATION_SERVICE_URL = config_reader.read_config_value(Config.CONFIGURATION_SERVICE_URI)
 
                 cls.REDIS_HOST = config_reader.read_config_value(Config.REDIS_HOST)
                 cls.REDIS_PORT = config_reader.read_config_value(Config.REDIS_PORT)

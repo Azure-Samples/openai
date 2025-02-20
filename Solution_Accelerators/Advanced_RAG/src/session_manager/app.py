@@ -88,7 +88,7 @@ adaptive_card_converter = AdaptiveCardConverter(
 )
 
 # Initialize configuration hub client
-config_service_client = ConfigServiceClient(DefaultConfig.CONFIGURATION_SERVICE_URL, logger=logger)
+config_service_client = ConfigServiceClient(DefaultConfig.CONFIGURATION_SERVICE_URI, logger=logger)
 
 caching_client = RedisCachingClient(
     host=DefaultConfig.REDIS_HOST,
@@ -123,8 +123,8 @@ async def content_file(request: web.Request):
     base_properties = {"ApplicationName": "SESSION_MANAGER_SERVICE"}
     logger.set_base_properties(base_properties)
 
-    path = request.match_info.get('path', None)
-    override_version = request.query.get('override_version', None)
+    path = request.match_info.get("path", None)
+    override_version = request.query.get("override_version", None)
     logger.log_request_received(f"Received request for content: {path} with override version: {override_version}")
 
     # Retrieve content from Blob store
@@ -194,15 +194,13 @@ async def content_file(request: web.Request):
         )
     except Exception as ex:
         logger.exception(f"Failed to return requested content: {ex}", event=LogEvent.REQUEST_FAILED)
-        return  web.json_response({"error": str(ex)}, status=HTTPStatusCode.INTERNAL_SERVER_ERROR.value)
+        return web.json_response({"error": str(ex)}, status=HTTPStatusCode.INTERNAL_SERVER_ERROR.value)
+
 
 @routes.get("/user-profiles")
 async def get_all_user_profiles(request: web.Request):
     logger = AppLogger(custom_logger)
-    base_properties = {
-        "ApplicationName": "SESSION_MANAGER_SERVICE",
-        "path": "/user-profiles"
-    }
+    base_properties = {"ApplicationName": "SESSION_MANAGER_SERVICE", "path": "/user-profiles"}
     logger.set_base_properties(base_properties)
     logger.log_request_received(f"fetching all user profiles")
     data_service_uri = DefaultConfig.DATA_SERVICE_URI
@@ -210,13 +208,12 @@ async def get_all_user_profiles(request: web.Request):
 
     try:
         user_profiles = data_client.get_all_user_profiles()
-        user_profiles_dict = [user_profile.model_dump()
-                              for user_profile in user_profiles]
+        user_profiles_dict = [user_profile.model_dump() for user_profile in user_profiles]
         logger.log_request_success(f"done fetching user profiles")
         return web.json_response(user_profiles_dict)
     except Exception as e:
         logger.exception(f"Exception in /user-profiles: {e}", event=LogEvent.REQUEST_FAILED)
-        return  web.json_response({"error": str(e)}), HTTPStatusCode.INTERNAL_SERVER_ERROR.value
+        return web.json_response({"error": str(e)}), HTTPStatusCode.INTERNAL_SERVER_ERROR.value
 
 
 @routes.delete("/chat-sessions/{user_id}/{conversation_id}")
@@ -230,7 +227,7 @@ async def clear_chat_session(request: web.Request):
         "ApplicationName": "SESSION_MANAGER_SERVICE",
         "user_id": user_id,
         "conversation_id": conversation_id,
-        "path": "/chat-sessions"
+        "path": "/chat-sessions",
     }
     logger.set_base_properties(base_properties)
 
@@ -242,13 +239,20 @@ async def clear_chat_session(request: web.Request):
         logger.log_request_success(f"cleared chat session.")
         return web.json_response({"message": "cleared chat session"}, status=200)
     except Exception as e:
-        logger.log_request_failed(
-            f"Exception in /chat-sessions/<user_id>/<conversation_id>: {e}")
+        logger.log_request_failed(f"Exception in /chat-sessions/<user_id>/<conversation_id>: {e}")
         return web.json_response({"error": str(e)}, status=500)
 
 
 @routes.get("/get-speech-token")
 def get_speech_token(request: web.Request):
+    if not DefaultConfig.SPEECH_REGION or not DefaultConfig.SPEECH_KEY:
+        return web.json_response(
+            {
+                "error": "Speech services are not available. If your app requires speech services, please configure session manager"
+            },
+            status=500,
+        )
+
     url = f"https://{DefaultConfig.SPEECH_REGION}.api.cognitive.microsoft.com/sts/v1.0/issueToken"
     headers = {"Ocp-Apim-Subscription-Key": DefaultConfig.SPEECH_KEY}
     response = requests.post(url, headers=headers)
@@ -259,10 +263,7 @@ def get_speech_token(request: web.Request):
 @routes.post("/chat")
 async def chat(request: web.Request):
     logger = AppLogger(custom_logger)
-    base_properties = {
-        "ApplicationName": "SESSION_MANAGER_SERVICE",
-        "path": "/chat"
-    }
+    base_properties = {"ApplicationName": "SESSION_MANAGER_SERVICE", "path": "/chat"}
     logger.set_base_properties(base_properties)
 
     try:
@@ -302,7 +303,9 @@ async def chat(request: web.Request):
         return web.json_response(response.model_dump(), status=status_code)
     except json.decoder.JSONDecodeError:
         logger.log_request_failed("Request body must be JSON")
-        return web.json_response({"error": "Request body must be JSON"}, status=HTTPStatusCode.UNSUPPORTED_MEDIA_TYPE.value)
+        return web.json_response(
+            {"error": "Request body must be JSON"}, status=HTTPStatusCode.UNSUPPORTED_MEDIA_TYPE.value
+        )
     except (ValidationError, ValueError) as e:
         logger.log_request_failed(f"Failed to handle chat message: {e}")
         return web.json_response(
@@ -314,10 +317,7 @@ async def chat(request: web.Request):
 @routes.get("/ws/chat")
 async def ws_chat(request: web.Request):
     logger = AppLogger(custom_logger)
-    base_properties = {
-        "ApplicationName": "SESSION_MANAGER_SERVICE",
-        "path": "/ws/chat"
-    }
+    base_properties = {"ApplicationName": "SESSION_MANAGER_SERVICE", "path": "/ws/chat"}
     logger.set_base_properties(base_properties)
     logger.log_request_received("WebSocket connection request received.")
 

@@ -7,7 +7,7 @@
     - [Document Indexer and Search](#document-indexer-and-search)
 - [Enhancements to the Pipeline for Financial Content](#enhancements-to-the-pipeline-for-financial-content)
 - [Running Ingestion Service Locally](#running-ingestion-service-locally)
-- [Bring your onw data](#bring-your-own-data)
+- [Bring your own data](#bring-your-own-data)
 <!-- /TOC -->
 
 A guide for ingesting financial documents for your copilot. Ingestion service performs document processing and indexing using Azure Document Intelligence, Langchain, Azure Open AI, and Azure AI Search.
@@ -107,15 +107,17 @@ To run ingestion service locally, ensure the following:
 3. Update the value of `KEYVAULT-URI` field. If you want to override what is the keyvault, you can provide them in this file.
 4. Ensure you have docker desktop service running locally. If not, start Docker Desktop
 5. From the `RUN AND DEBUG` dropdown of VSCode, select `Ingestion Service: Launch & Attach Server`. This will run ingestion service as a web app locally
-6. Once service has started successfully, you can use the examples in the [ingestion_service_rag.http](../../../docs/services/ingestion_service_rag.http) to perform ingestion / indexing of your documents
+6. Once service has started successfully, you should store [microsoft financial files](../../../data/rag/data) in storage container and submit a payload for indexing. You can do this step two ways:
+- a.  Upload financial files to your storage container. Then use the examples in the [ingestion_service_rag.http](../../../docs/services/ingestion_service_rag.http) to post a request and perform ingestion / indexing of your documents.
+- b. Refer to [Ingestion Notebook](../../../data/rag/microsoft_data_ingestion.ipynb). Go over instructions and run cells. Make sure to update place holders with name of index and storage account information.
 
 ### Ingesting a sample finacial report
-To ingest and populate search index, upload the report to the blob store and provide the name of the report in the payload. In the payload, ensure that container name already exisits. 
+To ingest and populate search index, upload the report to the blob store and provide the name of the report in the payload. In the payload, ensure that container name already exisits.
 For examples of how to invoke ingestion service, look at sample payloads in the [ingestion_service_rag.http](../../../docs/services/ingestion_service_rag.http) file
 
 ## Bring your own data
-To bring your data and use this CoPilot on it, the easiest scenario would be when your indexing needs can be met with the existing fields. However if you determine more fields needs to added then following things needs to be considered:
-1. Search Index: Does all the fields in the current design match to your needs. If not, you will need to create new search index with required fileds to index. Here are fields and their configuration for the [current index](../../../infra/search_index/microsoft_financial_index.json)
+To bring your data and use this CoPilot on it, the easiest scenario would be when your indexing needs can be met with the existing fields. However if you determine more fields are required then following things needs to be considered:
+1. Search Index: Does all the fields in the current design match to your needs. If not, you will need to create new search index with required fileds to index. Here are fields and their configuration for the [microsoft_financial_index.json](../../../infra/search_index/microsoft_financial_index.json)
 2. Ingestion Service: Currently ingestion service expects these additional fields to be present in the index and then uses these fields to store additional information/metadata. Here is current mapping
 
 |Field Name|Content Stored|
@@ -129,7 +131,7 @@ To bring your data and use this CoPilot on it, the easiest scenario would be whe
 |subsidiary|company and or its subsidiary name to which this report belongs to. used for filtering|
 
 If additional metadata is available and could be considered useful then that needs to be added to the index, and populated during indexing which would require changing the indexing service code -  `__generate_index_documents()` method in the [markdown_text_splitter.py](../ingestion/splitters/markdown_text_splitter.py)
-Once you have your updated index and are able to run ingestion service successfully, test it out using the [Search Notebook](../../../samples/rag/microsoft_data_ingestion.ipynb)
+Once you have your updated index and are able to run ingestion service successfully, test it out using the [Search Notebook](../../../data/rag/microsoft_data_ingestion.ipynb)
 
 Here is an example of how to invoke [ingestion service](../../../docs/services/ingestion_service_rag.http)
 
@@ -151,7 +153,7 @@ If you are thinking that the new fields will be used for additional filtering, t
                           }
                       ]
 ```
-4. Update the [search index template](../cognitiveSearch/src/components/templates/rag.config.json) that the search skil is using to match the updated search index
+4. Update the [search index template](../search/src/components/templates/rag.config.json) that the search skil is using to match the updated search index
 
 5. Update the data models used by the Search Skill. They can be found [here](../../common/contracts/skills/search/api_models.py):
 

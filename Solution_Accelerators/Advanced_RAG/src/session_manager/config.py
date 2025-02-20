@@ -54,14 +54,21 @@ class DefaultConfig:
                 )
                 cls.RAG_ORCHESTRATOR_SERVICE_URI = config_reader.read_config_value(Config.RAG_ORCHESTRATOR_SERVICE_URI)
 
-                cls.CONFIGURATION_SERVICE_URL = config_reader.read_config_value(Config.CONFIGURATION_SERVICE_URL)
+                cls.CONFIGURATION_SERVICE_URI = config_reader.read_config_value(Config.CONFIGURATION_SERVICE_URI)
 
                 cls.PRUNE_SEARCH_RESULTS_FROM_HISTORY_ON_PRODUCT_SELECTION = config_reader.read_config_value(
                     Config.PRUNE_SEARCH_RESULTS_FROM_HISTORY_ON_PRODUCT_SELECTION
                 )
 
-                cls.SPEECH_REGION = config_reader.read_config_value(Config.SPEECH_REGION)
-                cls.SPEECH_KEY = config_reader.read_config_value(Config.SPEECH_KEY)
+                cls.SPEECH_REGION = None
+                cls.SPEECH_KEY = None
+
+                try:
+                    cls.SPEECH_REGION = config_reader.read_config_value(Config.SPEECH_REGION)
+                    cls.SPEECH_KEY = config_reader.read_config_value(Config.SPEECH_KEY)
+                except Exception as e:
+                    logger.error(f"Error while loading speech region and key: {e}")
+                    logger.info("Speech region and key are not set. Speech features will be disabled.")
 
                 cls.REDIS_HOST = config_reader.read_config_value(Config.REDIS_HOST)
                 cls.REDIS_PORT = int(config_reader.read_config_value(Config.REDIS_PORT))

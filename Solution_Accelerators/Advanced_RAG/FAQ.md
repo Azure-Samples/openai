@@ -96,4 +96,27 @@ This error occurs when your user or service principal does not have the necessar
 This error occurs because your account or service principal does not have the "Search Index Data Reader" role assigned for the selected index. Ask your service administrator to grant you this role in the Azure Portal → Access Control (IAM) section of your Azure AI Search resource.
 
 ### How to keep my data updated?
-It is best that you have a schedule for re-running ingestion with every new set of data to make sure your index is updated. To do so follow instructions [here.](./src/skills/ingestion/README_FINANCIAL.md/#keep-your-index-updated-by-re-running-ingestion)
+It is best that you have a schedule for re-running ingestion with every new set of data to make sure your index is updated. To do so follow instructions [here.](./src/skills/ingestion/README_RETAIL.md/#keep-your-index-updated-by-re-running-ingestion)
+
+### Why is my frontend deployment script taking long?
+Frontend Deployment needs to compress Node build files, this can take a while using using built in Windows Zip. To speed up the process install 7Zip (https://www.7-zip.org/).
+Navigate to src/frontend_rag (or src/frontend_retail), run:
+> npm install
+
+> npm run build
+
+Zip up the contents of src/frontend_rag (or src/frontend_retails) (including the build and source files) using 7zip and run these two commands:
+> az webapp config set --resource-group $resourceGroup --name $webAppName --startup-file "npm start"
+
+> az webapp deployment source config-zip --resource-group $resourceGroup --name $webAppName --src $zipFilePath
+
+($zipFilePath is path where you created the zip file, find the $resourceGroup and $webAppName in Azure from your deployment process)
+
+## What access do I need to run the solution locally?
+
+To run the solution locally, ensure you have the following role assignments:
+
+- **Azure Storage**: `Storage Blob Data Contributor`
+- **Azure OpenAI**: `Cognitive Services OpenAI User` or `Cognitive Services OpenAI Contributor`
+- **Azure Search Service**: `Search Index Data Contributor`, `Search Index Data Reader`
+- **Azure Cosmos DB**: `Cosmos DB Built-in Data Contributor`
