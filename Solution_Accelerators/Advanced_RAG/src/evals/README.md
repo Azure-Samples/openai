@@ -16,13 +16,13 @@ Below are the instructions to install and run the `rag_eval` tool along with bas
 
 ## Installation
 
-Navigate to `<repo root>/Multimodalbot/.vscode/launch.json` and add appropriate arguments under `RAG Evals: Launch` setting. Refer `<repo root>/Multimodalbot/src/evals/rag_eval/evaluation_params.py` below for a detailed description of all the available arguments.
+Navigate to `<repo root>/Advanced_RAG/.vscode/launch.json` and add appropriate arguments under `RAG Evals: Launch` setting. Refer `<repo root>/Advanced_RAG/src/evals/rag_eval/evaluation_params.py` below for a detailed description of all the available arguments.
 
 
 ## Basic Usage
 At a high level, `rag_eval` pulls an existing datset from AML, passes it to individual flow, and evaluates against a particular task, ultimately producing aggregate results. The results are then printed to the console and saved to disk. Logs, settings used and final results from an example run are included in the `results` directory.
 
-The below instruction uses the default evaluation settings. This should be sufficient for most use cases. You can inspect the default settings by navigating to `<repo root>/Multimodalbot/src/evals/rag_eval/evaluation_params.py`.
+The below instruction uses the default evaluation settings. This should be sufficient for most use cases. You can inspect the default settings by navigating to `<repo root>/Advanced_RAG/src/evals/rag_eval/evaluation_params.py`.
 
 
 To start `evaluate_tone`

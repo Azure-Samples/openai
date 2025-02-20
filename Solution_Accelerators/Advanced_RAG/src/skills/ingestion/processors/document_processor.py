@@ -15,6 +15,7 @@ from splitters.plaintext_splitter import PlainTextSplitter
 
 from common.clients.openai.openai_client import AzureOpenAIClient
 from common.telemetry.app_logger import AppLogger
+from managers.task_status_manager import TaskStatusManager, TaskStatus
 
 
 class DocumentProcessor:
@@ -33,11 +34,13 @@ class DocumentProcessor:
                  markdown_content_include_image_captions: bool,
                  azure_openai_endpoint: str,
                  azure_openai_embeddings_engine_name: str,
+                 document_indexer_status_manager: TaskStatusManager
     ) -> None:
         self.logger = logger
         self.search_endpoint = search_endpoint
         self.storage_client = storage_client
         self.upload_dir = upload_dir
+        self.document_indexer_status_manager = document_indexer_status_manager
 
         self._chunking_lock = asyncio.Lock()
 
@@ -85,6 +88,7 @@ class DocumentProcessor:
     async def process_async(self, message: bytes):
         payload = DocumentIndexerRequestPayload(**json.loads(message))
         self.logger.info(f"Task {payload.task_id}: Document Indexer: File received {payload.document_name}")
+        await self.document_indexer_status_manager.set_task_status(payload.task_id, "Task is processing by document processor.", TaskStatus.PROCESSING)
 
         try:
             # Step 1: Analyze document using document loader service
@@ -124,8 +128,10 @@ class DocumentProcessor:
                                                                                 task_id=payload.task_id)
             if not upload_status:
                 self.logger.error(f"Task {payload.task_id}: Document upload by page failed for {payload.document_name}. Exiting.")
+            await self.document_indexer_status_manager.set_task_status(payload.task_id, "Task processed by document processor.", TaskStatus.PROCESSED)
         except Exception as ex:
             self.logger.exception(f"Task {payload.task_id}: Document Indexer failed. {ex}")
+            await self.document_indexer_status_manager.set_task_status(payload.task_id, f"An error occured while processing task: {ex}", TaskStatus.FAILED)
         finally:
             # Step 6: Clean up uploaded file for data privacy reasons.
             os.remove(payload.document_path)

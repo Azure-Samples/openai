@@ -20,6 +20,9 @@ from common.clients.openai.openai_settings import ChatCompletionsSettings
 from common.contracts.data.prompt import Prompt
 from common.telemetry.app_logger import AppLogger
 
+from common.clients.openai.openai_chat_completions_configuration import OpenAIChatCompletionsConfiguration
+from common.clients.openai.openai_embeddings_configuration import OpenAIEmbeddingsConfiguration
+from managers.task_status_manager import TaskStatusManager, TaskStatus
 
 class CatalogProcessor:
     def __init__(self,
@@ -29,7 +32,8 @@ class CatalogProcessor:
                  storage_client: AzureStorageClient,
                  search_endpoint: str,
                  azure_openai_endpoint: str,
-                 azure_openai_embeddings_engine_name: str
+                 azure_openai_embeddings_engine_name: str,
+                 catalog_indexer_status_manager: TaskStatusManager
     ) -> None:
         self.logger = logger
         self.detailed_description_prompt = detailed_description_prompt
@@ -40,11 +44,14 @@ class CatalogProcessor:
 
         self.embeddings_deployment_name = azure_openai_embeddings_engine_name
 
+        self.catalog_indexer_status_manager = catalog_indexer_status_manager
+
         self._chunking_lock = asyncio.Lock()
 
     async def process_async(self, message: bytes):
         payload = CatalogIndexerRequestPayload(**json.loads(message))
         self.logger.info(f"Task {payload.task_id}: Catalog Indexer: Task payload received. Total items: {len(payload.items)}")
+        await self.catalog_indexer_status_manager.set_task_status(payload.task_id, "Task is processing by catalog processor.", TaskStatus.PROCESSING)
 
         chunks: List[Dict] = []
         try:
@@ -77,7 +84,9 @@ class CatalogProcessor:
                 return
 
             self.logger.info(f"Task {payload.task_id}: Catalog Indexed successfully. Total items: {len(payload.items)}")
+            await self.catalog_indexer_status_manager.set_task_status(payload.task_id, "Task processed by catalog processor.", TaskStatus.PROCESSED)
         except Exception as ex:
+            await self.catalog_indexer_status_manager.set_task_status(payload.task_id, f"An error occured while processing task: {ex}", TaskStatus.FAILED)
             self.logger.exception(f"Task {payload.task_id}: Catalog Indexer failed. {ex}")
             raise
 

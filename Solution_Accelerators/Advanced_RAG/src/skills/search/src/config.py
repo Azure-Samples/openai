@@ -49,7 +49,7 @@ class DefaultConfig:
                 )
 
                 # Configuration Service Settings
-                cls.CONFIGURATION_SERVICE_URI = config_reader.read_config_value(Config.CONFIGURATION_SERVICE_URL)
+                cls.CONFIGURATION_SERVICE_URI = config_reader.read_config_value(Config.CONFIGURATION_SERVICE_URI)
                 cls.REDIS_HOST = config_reader.read_config_value(Config.REDIS_HOST)
                 cls.REDIS_PORT = config_reader.read_config_value(Config.REDIS_PORT)
                 cls.REDIS_PASSWORD = config_reader.read_config_value(Config.REDIS_PASSWORD)

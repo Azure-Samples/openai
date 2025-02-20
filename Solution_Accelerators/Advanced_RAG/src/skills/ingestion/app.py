@@ -16,12 +16,14 @@ from common.contracts.data.prompt import Prompt
 from common.telemetry.app_logger import AppLogger, LogEvent
 from common.utilities.files import load_file
 from common.utilities.task_manager import TaskManager
+from managers.task_status_manager import TaskStatusManager, TaskStatus
 
 routes = web.RouteTableDef()
 
 ALLOWED_FILE_EXTENSIONS = [".pdf", ".csv"]
 UPLOAD_DIRECTORY = "data"
 MAX_CONTENT_LENGTH = 50 * 1024 * 1024 # 50MB
+TASK_STATUS_MAP_NAME = "task_status_map"
 
 # get the logger that is already initialized
 DefaultConfig.initialize()
@@ -52,6 +54,13 @@ catalog_processing_task_manager = TaskManager(AppLogger(custom_logger),
                                                redis_password=DefaultConfig.REDIS_PASSWORD,
                                                redis_ssl=False,
                                                max_worker_threads=DefaultConfig.CATALOG_PROCESSING_MAX_WORKER_THREADS)
+
+task_status_manager = TaskStatusManager(logger=AppLogger(custom_logger),
+                                        task_status_map_name=TASK_STATUS_MAP_NAME,
+                                        redis_host=DefaultConfig.REDIS_HOST,
+                                        redis_port=DefaultConfig.REDIS_PORT,
+                                        redis_password=DefaultConfig.REDIS_PASSWORD,
+                                        redis_ssl=False)
 
 prompt_config = load_file(os.path.join(os.path.dirname(__file__), 'static', 'prompt.yaml'), "yaml")
 catalog_indexer_detailed_description_prompt = Prompt(**prompt_config["catalog_indexer_detailed_description_prompt"])
@@ -116,6 +125,7 @@ async def index_document_async(request: web.Request):
                 reported_year=ingestion_request.payload.reported_year,
                 subsidiary=ingestion_request.payload.subsidiary
             )
+            await task_status_manager.set_task_status(task_id, "Document processing task enqueued in task queue.", TaskStatus.ENQUEUED)
             await document_processing_task_manager.submit_task(request_payload.model_dump_json())
         elif isinstance(ingestion_request.payload, CatalogPayload):
             logger.info(f"Catalog payload received in ingestion request.")
@@ -128,6 +138,7 @@ async def index_document_async(request: web.Request):
                 items=ingestion_request.payload.items,
                 enrichment=ingestion_request.enrichment is not None
             )
+            await task_status_manager.set_task_status(task_id, "Catalog processing task enqueued in task queue.", TaskStatus.ENQUEUED)
             await catalog_processing_task_manager.submit_task(request_payload.model_dump_json())
 
         logger.log_request_success("Document Indexer: Request Processed.")
@@ -141,6 +152,39 @@ async def index_document_async(request: web.Request):
     except Exception as ex:
         logger.error(f"Invalid payload received. {ex}", event=LogEvent.REQUEST_FAILED)
         return web.json_response({"error": "Invalid payload"}, status=400)
+
+@routes.get("/indexer/index/{task_id}")
+async def check_ingestion_status(request: web.Request):
+
+    logger = AppLogger(custom_logger)
+    logger.set_base_properties({
+        "ApplicationName": "DOCUMENT_INDEXER",
+        "path":"/indexer/index"
+    })
+
+    task_id = request.match_info.get("task_id")
+
+    if not task_id:
+        return web.json_response({"error": "Task ID is required to check on status of task."}, status=400)
+    
+    task_status = await task_status_manager.get_task_status(task_id)
+
+    if task_status == TaskStatus.NOT_FOUND:
+        return web.json_response(
+            {
+                "Task ID": task_id,
+                "Task Status": "Task not found."
+            },
+            status=404
+        )
+    
+    return web.json_response(
+            {
+                "Task ID": task_id,
+                "Task Status": task_status,
+            },
+            status=200
+        )
 
 def generate_document_name(payload: DocumentPayload) -> str:
     filename, ext = os.path.splitext(payload.filename)
@@ -174,6 +218,7 @@ def start_server(host: str, port: int):
         cors.add(route)
 
     app.on_startup.append(on_startup)
+    app.on_shutdown.append(on_shutdown)
 
     # Start server
     web.run_app(app, host=host, port=port)
@@ -199,7 +244,8 @@ async def on_startup(app):
         document_max_chunk_size=DefaultConfig.DOCUMENT_MAX_CHUNK_SIZE,
         markdown_content_include_image_captions=DefaultConfig.MARKDOWN_CONTENT_INCLUDE_IMAGE_CAPTIONS,
         markdown_header_split_config=DefaultConfig.MARKDOWN_HEADER_SPLIT_CONFIG,
-        upload_dir=UPLOAD_DIRECTORY
+        upload_dir=UPLOAD_DIRECTORY,
+        document_indexer_status_manager=task_status_manager
     )
     asyncio.create_task(document_processing_task_manager.start_async(document_processor.process_async))
 
@@ -210,9 +256,17 @@ async def on_startup(app):
         storage_client=storage_client,
         search_endpoint=DefaultConfig.AZURE_SEARCH_ENDPOINT,
         azure_openai_endpoint=DefaultConfig.AZURE_OPENAI_ENDPOINT,
-        azure_openai_embeddings_engine_name=DefaultConfig.AZURE_OPENAI_EMBEDDINGS_ENGINE_NAME
+        azure_openai_embeddings_engine_name=DefaultConfig.AZURE_OPENAI_EMBEDDINGS_ENGINE_NAME,
+        catalog_indexer_status_manager=task_status_manager
     )
     asyncio.create_task(catalog_processing_task_manager.start_async(catalog_processor.process_async))
+
+async def on_shutdown(app):
+    logger = AppLogger(custom_logger)
+
+    await task_status_manager.remove_in_progress_tasks()
+
+    logger.info("Shutting down the server.")
 
 if __name__ == '__main__':
     asyncio.run(start_server(

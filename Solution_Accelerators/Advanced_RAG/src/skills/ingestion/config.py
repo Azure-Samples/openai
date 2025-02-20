@@ -55,7 +55,6 @@ class DefaultConfig:
 
                 # Azure Storage Settings
                 cls.AZURE_STORAGE_ACCOUNT_NAME = config_reader.read_config_value(Config.AZURE_STORAGE_ACCOUNT)
-                cls.AZURE_DOCUMENT_PAGES_STORAGE_CONTAINER = config_reader.read_config_value(Config.AZURE_DOCUMENT_PAGES_STORAGE_CONTAINER)
 
                 # Redis settings
                 cls.REDIS_HOST = config_reader.read_config_value(Config.REDIS_HOST)

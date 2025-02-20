@@ -81,13 +81,7 @@ def get_arguments():
         help="Name of the Prompt flow in AML",
         default="RAG_E2E_Eval_Flow",
     )
-    arg_parser.add_argument(
-        "--subscription_id",
-        type=str,
-        required=False,
-        help="Azure subscription ID",
-        default="a71e73e0-6235-4a56-ba1b-f21ef82062dd",
-    )
+    arg_parser.add_argument("--subscription_id", type=str, required=True, help="Azure subscription ID")
     arg_parser.add_argument(
         "--resource_group",
         type=str,

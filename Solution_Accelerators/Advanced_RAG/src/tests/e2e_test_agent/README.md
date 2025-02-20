@@ -35,7 +35,7 @@ A multi-turn test would be sequence of dialogs with increasing sequence numbers,
 - **Create a YAML Test File**: Define the conversation queries in a YAML file, such as data/queries.yaml.
 - **Set Environment Variables**: Ensure all necessary environment variables, including the conversation depth, are configured.
 
-Once the service is set up, it can be triggered either manually or automatically based on a predefined schedule. For instructions on manual triggering and scheduling jobs, refer to `<repo root>\MultiModalBot\docs\e2e_nightly_test_agent.http`.
+Once the service is set up, it can be triggered either manually or automatically based on a predefined schedule. For instructions on manual triggering and scheduling jobs, refer to `<repo root>\Advanced_RAG\docs\e2e_nightly_test_agent.http`.
 
 During execution, the queries specified in the YAML file are processed and tested against the chatbot. If any conversations do not reach the predefined conversation depth, the test agent intelligently generates relevant follow-up queries based on the prior conversation context. Upon completing the execution, a detailed report is generated and stored in the Azure Blob container specified by the configuration variable `AZURE-BLOB-CONTAINER-NAME-E2E-TEST`. This report can be reviewed later for manual evaluation.
 
