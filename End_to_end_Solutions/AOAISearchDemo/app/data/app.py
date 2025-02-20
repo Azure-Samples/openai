@@ -11,8 +11,9 @@ from data.managers.permissions.manager import PermissionsManager
 from data.managers.entities.api.manager import EntitiesManager
 from datetime import datetime
 from flask import Flask, Response, request
+import html
 from typing import List, Set
-
+import logging
 # initialize config
 DefaultConfig.initialize()
 
@@ -61,13 +62,13 @@ def create_chat_session(user_id: str, conversation_id: str):
         return Response(response=json.dumps(session.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
         logger.exception(f"create-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=400)
+        return Response(response="A bad request error occurred.", status=400)
     except CosmosConflictError as e:
         logger.exception(f"create-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=409)
+        return Response(response="Conflict occurred while creating chat session.", status=409)
     except Exception as e:
         logger.exception(f"create-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=500)
+        return Response(response="An internal server error occurred.", status=500)
     
 @app.route('/chat-sessions/<user_id>/<conversation_id>', methods=['GET'])
 def get_chat_session(user_id: str, conversation_id: str):
@@ -84,14 +85,14 @@ def get_chat_session(user_id: str, conversation_id: str):
         properties = logger.get_updated_properties(addl_dim)
 
         if session is None:
-            logger.info(f"get-chat-session: session with conversation_id {conversation_id} not found", extra=properties)
-            return Response(response=f"Chat session with conversation_id {conversation_id} not found.", status=404)
+            logger.info(f"get-chat-session: session with conversation_id {html.escape(conversation_id)} not found", extra=properties)
+            return Response(response=f"Chat session with conversation_id {html.escape(conversation_id)} not found.", status=404)
         else:
             logger.info("get-chat-session: session found", extra=properties)
             return Response(response=json.dumps(session.to_item()), status=200)
     except Exception as e:
         logger.exception(f"get-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=500)
+        return Response(response="An internal server error occurred.", status=500)
 
 @app.route('/check-chat-session/<user_id>/<conversation_id>', methods=['GET'])
 def check_chat_session(user_id: str, conversation_id: str):
@@ -113,7 +114,7 @@ def check_chat_session(user_id: str, conversation_id: str):
             return Response(response="true", status=200)
     except Exception as e:
         logger.exception(f"check-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=500)
+        return Response(response="An internal error has occurred.", status=500)
 
 @app.route('/chat-sessions/<user_id>/<conversation_id>', methods=['PUT'])
 def update_chat_session(user_id: str, conversation_id: str):
@@ -147,13 +148,13 @@ def update_chat_session(user_id: str, conversation_id: str):
         return Response(response=json.dumps(session.to_item()), status=200)
     except (TypeError, NullValueError, MissingPropertyError, ValueError) as e:
         logger.exception(f"update-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=400)
+        return Response(response="An error occurred while processing your request.", status=400)
     except SessionNotFoundError as e:
         logger.exception(f"update-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=404)
+        return Response(response="Chat session not found.", status=404)
     except Exception as e:
         logger.exception(f"update-chat-session: error: {e} ", extra=properties)
-        return Response(response=str(e), status=500)
+        return Response(response="An internal server error occurred.", status=500)
     
 @app.route('/chat-sessions/<user_id>/<conversation_id>', methods=['DELETE'])
 def clear_chat_session(user_id: str, conversation_id: str):
@@ -161,9 +162,11 @@ def clear_chat_session(user_id: str, conversation_id: str):
         chat_manager.clear_chat_session(user_id, conversation_id)
         return Response(status=200)
     except SessionNotFoundError as e:
-        return Response(response=str(e), status=404)
+        logger.exception(f"clear-chat-session: error: {e} ")
+        return Response(response="Chat session not found.", status=404)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logger.exception(f"clear-chat-session: error: {e} ")
+        return Response(response="An internal server error occurred.", status=500)
     
 @app.route('/user-profiles/<user_id>', methods=['POST'])
 def create_user_profile(user_id: str):
@@ -184,11 +187,12 @@ def create_user_profile(user_id: str):
         user_profile = entities_manager.create_user_profile(user_id, user_name, description, sample_questions)
         return Response(response=json.dumps(user_profile.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
-        return Response(response=str(e), status=400)
+        return Response(response="Invalid request data.", status=400)
     except CosmosConflictError as e:
-        return Response(response=str(e), status=409)
+        return Response(response="Conflict occurred while creating user profile.", status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logger.exception(f"create-user-profile: error: {e}")
+        return Response(response="An internal server error occurred.", status=500)
     
 @app.route('/user-profiles/<user_id>', methods=['GET'])
 def get_user_profile(user_id: str):
@@ -196,11 +200,13 @@ def get_user_profile(user_id: str):
     try:
         user_profile = entities_manager.get_user_profile(user_id)
         if user_profile is None:
-            return Response(response=f"User profile with user_id {user_id} not found.", status=404)
+            escaped_user_id = html.escape(user_id)
+            return Response(response=f"User profile with user_id {escaped_user_id} not found.", status=404)
         else:
             return Response(response=json.dumps(user_profile.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while fetching user profile: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
 
 @app.route('/user-profiles', methods=['GET'])
 def get_all_user_profiles():
@@ -209,7 +215,8 @@ def get_all_user_profiles():
         json_user_profiles = [user_profile.to_item() for user_profile in user_profiles]
         return Response(response=json.dumps(json_user_profiles), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while fetching all user profiles: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['POST'])
 def create_user_group(group_id: str):
@@ -229,33 +236,39 @@ def create_user_group(group_id: str):
         user_group = entities_manager.create_user_group(group_id, group_name, users)
         return Response(response=json.dumps(user_group.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
-        return Response(response=str(e), status=400)
+        logging.error("A validation error occurred: %s", e, exc_info=True)
+        return Response(response="A validation error has occurred.", status=400)
     except CosmosConflictError as e:
-        return Response(response=str(e), status=409)
+        logging.error("A conflict error occurred while creating user group: %s", e, exc_info=True)
+        return Response(response="A conflict error has occurred.", status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while creating user group: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['GET'])
 def get_user_group(group_id: str):
     try:
         user_group = entities_manager.get_user_group(group_id)
         if user_group is None:
-            return Response(response=f"User group with group_id {group_id} not found.", status=404)
+            escaped_group_id = html.escape(group_id)
+            return Response(response=f"User group with group_id {escaped_group_id} not found.", status=404)
         else:
             return Response(response=json.dumps(user_group.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while fetching user group: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/user/<user_id>', methods=['GET'])
 def get_user_member_groups(user_id: str):
     try:
         user_groups = entities_manager.get_user_member_groups(user_id)
         if user_groups is None:
-            return Response(response=f"User with user_id {user_id} not found.", status=404)
+            return Response(response=f"User with user_id {html.escape(user_id)} not found.", status=404)
         else:
             return Response(response=json.dumps([user_group.to_item_no_users() for user_group in user_groups]), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while fetching user member groups: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/user-groups/<group_id>', methods=['PUT'])
 def update_user_group(group_id: str):
@@ -273,11 +286,14 @@ def update_user_group(group_id: str):
         user_group = entities_manager.add_users_to_user_group(group_id, new_users)
         return Response(response=json.dumps(user_group.to_item()), status=200)
     except (TypeError, NullValueError, MissingPropertyError, ValueError) as e:
-        return Response(response=str(e), status=400)
+        logging.error("An error occurred while updating user group: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=400)
     except SessionNotFoundError as e:
-        return Response(response=str(e), status=404)
+        logging.error("Session not found: %s", e, exc_info=True)
+        return Response(response="Session not found.", status=404)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while updating user group: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/resources/<resource_id>', methods=['POST'])
 def create_resource(resource_id: str):
@@ -292,29 +308,33 @@ def create_resource(resource_id: str):
         resource = entities_manager.create_resource(resource_id, resource_type)
         return Response(response=json.dumps(resource.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
-        return Response(response=str(e), status=400)
+        logging.error("An error occurred while creating resource: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=400)
     except CosmosConflictError as e:
-        return Response(response=str(e), status=409)
+        logging.error("A conflict occurred while creating resource: %s", e, exc_info=True)
+        return Response(response="A conflict occurred while creating the resource.", status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error("An error occurred while creating resource: %s", e, exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/resources/<resource_id>', methods=['GET'])
 def get_resource(resource_id: str):
     try:
         resource = entities_manager.get_resource(resource_id)
         if resource is None:
-            return Response(response=f"Resource with resource_id {resource_id} not found.", status=404)
+            return Response(response=f"Resource with resource_id {html.escape(resource_id)} not found.", status=404)
         else:
             return Response(response=json.dumps(resource.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error(f"Error in get_resource: {e}", exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/resources/user/<user_id>', methods=['GET'])
 def get_user_resources(user_id: str):
     try:
         user_profile = entities_manager.get_user_profile(user_id)
         if user_profile is None:
-            return Response(response=f"User with user_id {user_id} not found.", status=404)
+            return Response(response=f"User with user_id {html.escape(user_id)} not found.", status=404)
         user_groups = entities_manager.get_user_member_groups(user_id)
         resources = permissions_manager.get_user_resources(user_profile, user_groups)
         
@@ -327,7 +347,8 @@ def get_user_resources(user_id: str):
                 return Response(response="Could not find resource profile for resource ID {resource.resource_id}.", status=500)
         return Response(response=json.dumps([resource_profile.to_item() for resource_profile in resource_profiles]), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error(f"Error in get_user_resources: {e}", exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/access-rules/<rule_id>', methods=['POST'])
 def create_access_rule(rule_id: str):
@@ -350,22 +371,26 @@ def create_access_rule(rule_id: str):
         access_rule = permissions_manager.create_access_rule(rule_id, resources, members)
         return Response(response=json.dumps(access_rule.to_item()), status=201)
     except (TypeError, NullValueError, MissingPropertyError) as e:
-        return Response(response=str(e), status=400)
+        logging.error(f"Validation error in create_access_rule: {e}", exc_info=True)
+        return Response(response="Invalid input provided.", status=400)
     except CosmosConflictError as e:
-        return Response(response=str(e), status=409)
+        logging.error(f"Cosmos conflict error in create_access_rule: {e}", exc_info=True)
+        return Response(response="A conflict occurred while processing your request.", status=409)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error(f"Error in create_access_rule: {e}", exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
     
 @app.route('/access-rules/<rule_id>', methods=['GET'])
 def get_access_rule(rule_id: str):
     try:
         access_rule = permissions_manager.get_access_rule(rule_id)
         if access_rule is None:
-            return Response(response=f"Access rule with rule_id {rule_id} not found.", status=404)
+            return Response(response=f"Access rule with rule_id {html.escape(rule_id)} not found.", status=404)
         else:
             return Response(response=json.dumps(access_rule.to_item()), status=200)
     except Exception as e:
-        return Response(response=str(e), status=500)
+        logging.error(f"Error in get_access_rule: {e}", exc_info=True)
+        return Response(response="An internal error has occurred.", status=500)
 
 def get_log_properties(request, user_id: str) -> dict:
     conversation_id = request.headers.get('Conversation-Id')

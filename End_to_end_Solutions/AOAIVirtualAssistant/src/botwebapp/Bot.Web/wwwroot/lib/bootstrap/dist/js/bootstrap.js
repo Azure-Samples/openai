@@ -146,6 +146,11 @@
         selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : '';
       }
 
+      // Sanitize the selector to prevent XSS
+      var tempDiv = document.createElement('div');
+      tempDiv.appendChild(document.createTextNode(selector));
+      selector = tempDiv.innerHTML;
+
       try {
         return document.querySelector(selector) ? selector : null;
       } catch (err) {
