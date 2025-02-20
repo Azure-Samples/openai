@@ -1,6 +1,6 @@
-# Copilot for eCommerce
+# Copilot for E-commerce
 
-This sample highlights an approach to building a copilot for eCommerce, bringing in a multimodal experience to enable a personal concierge-like experience for shoppers. It combines the power of [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service/) and [Azure AI Search](https://azure.microsoft.com/en-us/products/ai-services/ai-search/) for indexing and retrieving multimodal content. The solution not only helps users find and recommend products based on their shopping needs but also leverages the power of multimodality. Whether they are preparing for an event, looking for matching styles, or even using an image to find the perfect match, the copilot has them covered.
+This sample highlights an approach to building a copilot for E-commerce, bringing in a multimodal experience to enable a personal concierge-like experience for shoppers. It combines the power of [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service/) and [Azure AI Search](https://azure.microsoft.com/en-us/products/ai-services/ai-search/) for indexing and retrieving multimodal content. The solution not only helps users find and recommend products based on their shopping needs but also leverages the power of multimodality. Whether they are preparing for an event, looking for matching styles, or even using an image to find the perfect match, the copilot has them covered.
 
 ## Table of Contents
 
