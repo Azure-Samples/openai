@@ -30,7 +30,10 @@ A custom RAG application can be highly beneficial when dealing with large financ
 
 - Enhanced Query Capabilities: Financial professionals may need to ask complex queries that involve conditional logic, comparisons over time, or aggregations across different data dimensions. A custom solution can support advanced querying capabilities, natural language understanding tailored to financial contexts, and more accurate interpretation of user intent.
 
-To showcase the solution’s capabilities, a pre-recorded voiceover demonstrates its functionality, ranging from simple queries to complex multimodal interactions. Watch the [Demo Video](docs/media/Advanced_RAG_Techniques_Demo.mp4) and follow along with the [Demo Script](docs/demo_script/Analyzing%20Microsoft%20Financial%20Performance%20Demo%20Script.docx).
+To showcase the solution’s capabilities, a pre-recorded voiceover demonstrates its functionality, ranging from simple queries to complex multimodal interactions. Watch the Demo Video below and follow along with the [Demo Script](docs/demo_script/Analyzing%20Microsoft%20Financial%20Performance%20Demo%20Script.docx).
+
+https://github.com/user-attachments/assets/dbf2e27c-ca98-4eca-886a-9c5ce60b7950
+
 
 ## Features
 The repository includes a complete end-to-end solution, comprising:

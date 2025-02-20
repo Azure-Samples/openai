@@ -137,7 +137,7 @@ Here is an example of how to invoke [ingestion service](../../../docs/services/i
 3. Update the solution code:
 If your product catalog is in a different domain, you also want to consider updating the prompts used by the [recommender](../recommender/src/prompts_config.yaml) and [image describer](../image_describer/src/static/prompts_config.yaml) skills to match your domain.
 
-4. If there are changes in the fields, then update the [search index template](../Search/src/components/templates/retail.config.json) that the search skil is using to match the updated search index
+4. If there are changes in the fields, then update the [search index template](../search/src/components/templates/retail.config.json) that the search skil is using to match the updated search index
 
 5. Update the data models used by the Search Skill. They can be found [here](../../common/contracts/skills/search/api_models.py).
 
