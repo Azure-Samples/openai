@@ -96,7 +96,7 @@ This error occurs when your user or service principal does not have the necessar
 This error occurs because your account or service principal does not have the "Search Index Data Reader" role assigned for the selected index. Ask your service administrator to grant you this role in the Azure Portal → Access Control (IAM) section of your Azure AI Search resource.
 
 ### How to keep my data updated?
-It is best that you have a schedule for re-running ingestion with every new set of data to make sure your index is updated. To do so follow instructions [here.](./src/skills/ingestion/README_RETAIL.md/#keep-your-index-updated-by-re-running-ingestion)
+It is best that you have a schedule for re-running ingestion with every new set of data to make sure your index is updated. To do so follow instructions [here.](./src/skills/ingestion/README_FINANCIAL.md/#running-ingestion-service-locally)
 
 ### Why is my frontend deployment script taking long?
 Frontend Deployment needs to compress Node build files, this can take a while using using built in Windows Zip. To speed up the process install 7Zip (https://www.7-zip.org/).

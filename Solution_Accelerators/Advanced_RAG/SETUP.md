@@ -225,7 +225,7 @@ When you begin to setup the AI Assistant deployment, you must must have `Microso
 
 ![ConstosoSub](./docs/media/contososubscription.png)
 
-If you have successfully completed the [Azure Resources setup](#azure-resources-setup), the required resources for end-to-end local setup should already be provisioned. You can proceed by verifying the existence of the following resources in your Azure Resource Group:
+If you have successfully completed the [Azure Resources setup](#setting-up-azure-resources), the required resources for end-to-end local setup should already be provisioned. You can proceed by verifying the existence of the following resources in your Azure Resource Group:
 
 - Azure Key Vault
 - Azure OpenAI
@@ -421,7 +421,7 @@ More details on how to use the tool can be found in the [evaluation tools readme
 
 ### Azure Kubernetes Setup
 **Note:**
-Setting up the Azure Kubernetes Service (AKS) and application gateway is only needed if you want the services to be deployed to cloud. Users can proceed with setting up the keyvault and then follow the instructions to [run the solution locally in VSCode](#local-setup). Once that succeeds, they can then come and setup the AKS.
+Setting up the Azure Kubernetes Service (AKS) and application gateway is only needed if you want the services to be deployed to cloud. Users can proceed with setting up the keyvault and then follow the instructions to [run the solution locally in VSCode](#running-services-locally). Once that succeeds, they can then come and setup the AKS.
 
 1. To work with the AKS cluster, developers will need `Azure Kubernetes Service RBAC Admin` role assigned.
 
@@ -520,7 +520,7 @@ Additionally, developers would need `Cosmos DB Built-in Data Contributor` role w
     ```
 
 ### Keyvault
-1. To work with keyvault, developers will need GET, LIST and SET permissions to keyvault secrets. Refer [AKS](#aks) to grant these permissions via access policies tab.
+1. To work with keyvault, developers will need GET, LIST and SET permissions to keyvault secrets. Refer [AKS](#azure-kubernetes-setup) to grant these permissions via access policies tab.
 2. Navigate through `config.py` files across micro-services in the `<repo root>\Advanced_RAG\src` folder: config_hub, skills\search, orchestrator_rag, data, session_manager and add any un-populated secrets with appropriate values in the keyvault. Examples:
     ```
     az keyvault secret set --vault-name <key vault name> --name "KEYVAULT-URI" --value "https://<keyvault name>.vault.azure.net/"
