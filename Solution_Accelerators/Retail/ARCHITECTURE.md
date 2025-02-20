@@ -13,7 +13,7 @@
   - [AI skills](#ai-skills)
     - [Image Describer Skill](#image-describer-skill)
     - [Recommender Skill](#recommender-skill)
-- [Sharing Intermediate Results](#sharing-intermediate-skill)
+- [Sharing Intermediate Results](#sharing-intermediate-results)
 - [Architecture Features](#Architecture-features)
 - [Secure Runtime and Deployment of Copilot](#secure-runtime-and-deployment-of-copilot)
   - [Security](#security)
@@ -29,8 +29,6 @@
 #### Ingestion Service
 Ingestion service is a generic service that use different Azure AI services to enrich the content (chunks) as it indexes them to improve search quality.
 For example, when indexing product catalog, it uses AzureOpenAI services to extract salient features of the product images and adds them to the index. This improves searching across product even better.
-
-Have you experiences poor search results on retailer site specially for 3rd party market place products? We think this capability would drastically help improve search results across the board.
 
 The ingestion process primarily consists of three steps: Image Encoding, Catalog Enrichment, and Catalog Indexing.
 
@@ -61,7 +59,7 @@ The orchestrator service acts as the central controller, coordinating between va
 
 #### Configuration Service
 
-The runtime configuration service enhances the architecture's dynamicity and flexibility. It enables core services and AI skills to decouple and parameterize various components, such as prompts, search data settings, and operational parameters. These services can easily override default configurations with new versions at runtime, allowing for dynamic behavior adjustments during operation. The biggest benefit of the configuration service is its ability to expose different configurations for various microservices during runtime, making processes like evaluations much easier - no need for any more deployments. This could also be used to demo against different search indexes as well. Example: default index is the one that is with this repo. However you can bring your own product catalog and create a new Index and use that via runtime configuration. More details on how to configure the entire demo for your data is [here](./Setup.md/#build-your-own-copilot)
+The runtime configuration service enhances the architecture's dynamicity and flexibility. It enables core services and AI skills to decouple and parameterize various components, such as prompts, search data settings, and operational parameters. These services can easily override default configurations with new versions at runtime, allowing for dynamic behavior adjustments during operation. The biggest benefit of the configuration service is its ability to expose different configurations for various microservices during runtime, making processes like evaluations much easier - no need for any more deployments. This could also be used to demo against different search indexes as well. Example: default index is the one that is with this repo. However you can bring your own product catalog and create a new Index and use that via runtime configuration. More details on how to configure the entire demo for your data is [here](./SETUP_RETAIL.md/#build-your-own-copilot)
 
 For more details refer config service documentation [Configuration Service](./src/config_hub/README.md).
 

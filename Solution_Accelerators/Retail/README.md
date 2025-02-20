@@ -18,7 +18,7 @@ This solution enables users to explore retail products such as clothing and acce
 
 Imagine getting ready for a party and finding a complete outfit—simply by conversing with the bot. Whether you're searching for a suit, shoes, or complementary accessories, the bot provides relevant and tailored suggestions.
 
-To showcase the solution’s capabilities, a pre-recorded voiceover demonstrates its functionality, ranging from simple queries to complex multimodal interactions. Watch the [Demo Video](docs/media/Retail_Accelerator_Demo%20(GitHub).mp4) and follow along with the [Demo Script](docs/demo_script/Retail%20Demo_Script.docx).
+To showcase the solution’s capabilities, a pre-recorded voiceover demonstrates its functionality, ranging from simple queries to complex multimodal interactions. Watch the [Demo Video](docs/media/Retail_Accelerator_Demo%20(GitHub).mp4) and follow along with the [Demo Script](docs/demo_script/Retail%20Demo_Script.pdf).
 
 ## Features
 The repository includes a complete end-to-end solution, comprising:
@@ -39,7 +39,7 @@ The solution includes the following key components:
 
 4. **Testing and Evaluation**: This includes the ability to simulate conversations with the copilot, run certain end-to-end tests on demand, and an evaluation tool to help perform end-to-end evaluation of the copilot.
 
-Detailed architecture for the eCommerce Copilot can be found [here](Architecture.md)
+Detailed architecture for the eCommerce Copilot can be found [here](ARCHITECTURE.md)
 
 ![Copilot Solution Architecture](./docs/media/copilot_solution_architecture.png)
 

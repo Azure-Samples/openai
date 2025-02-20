@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Azure Resources Setup](#azure-resources-setup)
-  - [Prerequisites](#prerequisite)
+  - [Prerequisites](#prerequisites)
   - [Deployment Steps](#deployment-steps)
   - [Manual Configuration](#manual-configuration)
     - [Azure OpenAI](#azure-openai)
@@ -10,16 +10,16 @@
     - [Creating App registration for user Authentication with EntraID](#creating-app-registration-for-user-authentication-with-entraid)
 - [Deploying Services](#deploying-services)
   - [Running Services Locally](#running-services-locally)
-    - [Prerequisites](#prerequisites)
+    - [Local Setup Prerequisites](#local-setup-prerequisites)
     - [Verify Azure Resources](#verify-azure-resources)
     - [Setup CosmosDB Emulator](#setup-cosmosdb-emulator)
     - [Project Initialization](#project-initialization)
       - [Frontend](#frontend)
       - [Core Microservices](#core-microservices)
-    - [Ingesting Retail data for testing](#ingesting-retail-data-for-testing)
+    - [Ingesting Retail Data for Testing](#ingesting-retail-data-for-testing)
     - [Testing](#testing)
     - [Instrumentation and application logs](#instrumentation-and-application-logs)
-  - [Deploying Services to Azure Kubernetes](#deploying-services-to-azure-kubernetes)
+  - [Deploying Services to Azure](#deploying-services-to-azure)
 - [Build Your Own Copilot](#build-your-own-copilot)
 - [Guidance](#guidance)
 - [Additional Resources](#additional-resources)
@@ -40,17 +40,17 @@ You will also need docker running locally if you want to build and deploy the so
 Installation Instructions: https://docs.docker.com/desktop/setup/install/windows-install/
 
 ### Deployment Steps
-1. Login to [portal.azure.com](portal.azure.com). If you do not have an Azure account, you should create one. Visit [here](https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account/)
+1. Login to [portal.azure.com](https://portal.azure.com). If you do not have an Azure account, you should create one. Visit [here](https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account/)
 
 2. Create a new Resource Group (similar to a folder in windows explorer) where all the azure resources for this PoC would be created. Select the region where these resources needs to be created.
 
 3. Note the Resource Group name, Region and your Azure subscription ID. These will be needed for the later steps
 
-4. Open Windows PowerShell window and change directory to root of this repo: `<repo root>\multimodalbot`
+4. Open Windows PowerShell window and change directory to root of this repo: `<repo root>\Retail`
 
 5. Type `azd init` and hit enter. This will ask for an environment name. Provide a name - say `retail_demo`. You should see a success message that the environment was initialized.
 
-6. Open windows explorer and go to folder `<repo root>\multimodalbot\.azure`. The `.azure` will have `retail_demo` folder with a .env file.
+6. Open windows explorer and go to folder `<repo root>\Retail\.azure`. The `.azure` will have `retail_demo` folder with a .env file.
 
 7. Open text editor and open .env file and, then add your resource group, location, and subscription to the .env file.
 
@@ -63,7 +63,7 @@ Installation Instructions: https://docs.docker.com/desktop/setup/install/windows
       AZURE_SUBSCRIPTION_ID="SubscriptionID_GUID"
       ```
 
-8. Open the `<repo root>\multimodalbot\infra\main.parameters.json` in a file editor. This file has parameters that can be passed to the various azure resources when creating them. 
+8. Open the `<repo root>\Retail\infra\main.parameters.json` in a file editor. This file has parameters that can be passed to the various azure resources when creating them. 
     * Create a web app for the frontend, name of which is as below. Change Line 72 to title your web app, in this case "value": "retail-demo-fe":
 
           ```
@@ -72,7 +72,7 @@ Installation Instructions: https://docs.docker.com/desktop/setup/install/windows
             },
           ```
 
-      Your deployed front end web app will reside in this link- https://retail-demo-fe.azurewebsites.net will be created. Save this link.
+      Your deployed front end web app will reside in this link- https://retail-demo-fe.azurewebsites.net will be created. Save this link. Note: This link will not work until front end is deployed to Azure Web App Service resource.
 
       >Note: These web app names should be unique across azurewebsites.net domain.
 
@@ -118,7 +118,7 @@ Installation Instructions: https://docs.docker.com/desktop/setup/install/windows
         ```
       >Note: If you have access to multiple azure subscriptions you could set the context to the right subscription by running `az account set --subscription <subscription ID>` command first on the PowerShell prompt.
 
-    * Save `<repo root>\multimodalbot\infra\main.parameters.json` file
+    * Save `<repo root>\Retail\infra\main.parameters.json` file
 
     * OPTIONAL:
       To specify your existing Azure resource, see: FAQ.md, "How can I use my own Azure Resources"
@@ -126,7 +126,7 @@ Installation Instructions: https://docs.docker.com/desktop/setup/install/windows
 9. Deploy your Azure resources, open PowerShell window and type `azd provision`, hit enter.
 
     ```
-          (venv) PS C:\Repo\MultiModalBot> azd provision
+          (venv) PS C:\Repo\Retail> azd provision
     ```
     `azd provision` will install all the resources in the selected resource group. It will open your browser to authenticate you to the azure portal and then continue with the deployment. If all goes well, you should see a message on the command prompt that the application was provisioned, otherwise try to fix the resource deployment issues before proceeding to the next steps of doing some manual updates and configurations.
 
@@ -189,7 +189,7 @@ Installation Instructions: https://docs.docker.com/desktop/setup/install/windows
 
 ## Running Services Locally
 <!-- From README -->
-### Prerequisites
+### Local Setup Prerequisites
 
 Before you begin, ensure you have the following prerequisites installed:
 
@@ -301,7 +301,7 @@ The project is divided into three main components:
 
 #### Frontend
 Frontend is a reactjs/typescript project. 
-Path: `<repo root>/Multimodalbot/src/frontend_retail`
+Path: `<repo root>/Retail/src/frontend_retail`
 
 To run the front end locally follow the steps below:
 
@@ -322,7 +322,7 @@ To run the front end locally follow the steps below:
     ```
     - ![frontendretail](./docs/media/retail_env.png) 
 
-4. On the command prompt, in the `<repo root>/multimodalbot/src/frontend_retail` folder, run `npm install`.
+4. On the command prompt, in the `<repo root>/Retail/src/frontend_retail` folder, run `npm install`.
 5. Run `npm run dev`. This should start the frontend at port 3000. You can browse the frontend (web app) by going to `http://localhost:3000`.
 
 ![signinpage](./docs/media/login_browser.png)
@@ -370,7 +370,7 @@ To run the front end locally follow the steps below:
    > **NOTE**: Core Microservice with a `.debug.env` will be fetched from the KeyVault. So `KEYVAULT-URI` configuration is required and update as needed.
 
 3. **Run and debug services locally inside VS Code**:
-    - Open the folder `<repo root>\multimodalbot` in VSCode:
+    - Open the folder `<repo root>\Retail` in VSCode:
     - Click on `Run and Debug` or Ctrl+Shift+D
     - Click on the `Drop Down Menu` at the top of VSCode
     - Select a Microservice from below then click `Play Button` to start the instance 
@@ -397,7 +397,7 @@ To run the front end locally follow the steps below:
 
 
 ### Ingesting Retail Data for Testing
-- Details on how to use ingestion service to ingest retail data can be found in the [ingestion service readme](../MultiModalBot/src/skills/ingestion/README_RETAIL.md) file.
+- Details on how to use ingestion service to ingest retail data can be found in the [ingestion service readme](../Retail/src/skills/ingestion/README_RETAIL.md) file.
 
 
 ### Testing
@@ -412,7 +412,7 @@ To run the front end locally follow the steps below:
 
 ### Azure Kubernetes Setup
 **Note:**
-Setting up the Azure Kubernetes Service (AKS) and application gateway is only needed if you want the services to be deployed to cloud. Users can proceed with setting up the keyvault and then follow the instructions to [run the solution locally in VSCode](#local-setup). Once that succeeds, they can then come and setup the AKS.
+Setting up the Azure Kubernetes Service (AKS) and application gateway is only needed if you want the services to be deployed to cloud. Users can proceed with setting up the keyvault and then follow the instructions to [run the solution locally in VSCode](#running-services-locally). Once that succeeds, they can then come and setup the AKS.
 
 1. To work with the AKS cluster, developers will need `Azure Kubernetes Service RBAC Admin` role assigned.
 
@@ -422,16 +422,16 @@ Setting up the Azure Kubernetes Service (AKS) and application gateway is only ne
     kubelogin convert-kubeconfig -l azurecli
     ```
 
-3. Update the secrets_provider.yaml file in the `<repo root>\multimodalbot\infra\aks_post_provision` folder  to update `KEYVAULTNAME` name and `TENANTID`, which can be found from your recent deployment of the azure resources. Save the file.
+3. Update the secrets_provider.yaml file in the `<repo root>\Retail\infra\aks_post_provision` folder  to update `KEYVAULTNAME` name and `TENANTID`, which can be found from your recent deployment of the azure resources. Save the file.
 
-4. Run kubectl apply command to apply these changes to AKS cluster. Change directory to `<repo root>\multimodalbot\infra` and run:
+4. Run kubectl apply command to apply these changes to AKS cluster. Change directory to `<repo root>\Retail\infra` and run:
     ```
     kubectl apply -f .\aks_post_provision\secrets_provide.yaml
     ```
 
 5. Deploy redis pods to AKS.
-    1. Review the `<repo root>\multimodalbot\infra\aks_post_provision\redis_deployment.yaml` file for redis password used
-    2. Change directory to `<repo root>\multimodalbot\infra` and run:\
+    1. Review the `<repo root>\Retail\infra\aks_post_provision\redis_deployment.yaml` file for redis password used
+    2. Change directory to `<repo root>\Retail\infra` and run:\
       `
       kubectl apply -f .\aks_post_provision\redis_deployment.yaml
       `
@@ -511,8 +511,8 @@ Additionally, developers would need `Cosmos DB Built-in Data Contributor` role w
     ```
 
 ### Keyvault
-1. To work with keyvault, developers will need GET, LIST and SET permissions to keyvault secrets. Refer [AKS](#aks) to grant these permissions via access policies tab.
-2. Navigate through `config.py` files across micro-services in the `<repo root>\multimodalbot\src` folder: config_hub, skills\search, orchestrator_rag, data, session_manager and add any un-populated secrets with appropriate values in the keyvault. Examples:
+1. To work with keyvault, developers will need GET, LIST and SET permissions to keyvault secrets. Refer [AKS](#azure-kubernetes-setup) to grant these permissions via access policies tab.
+2. Navigate through `config.py` files across micro-services in the `<repo root>\Retail\src` folder: config_hub, skills\search, orchestrator_rag, data, session_manager and add any un-populated secrets with appropriate values in the keyvault. Examples:
     ```
     az keyvault secret set --vault-name <key vault name> --name "KEYVAULT-URI" --value "https://<keyvault name>.vault.azure.net/"
 
