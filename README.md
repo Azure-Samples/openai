@@ -4,9 +4,9 @@
 
 # Azure OpenAI Service Samples
 
-This repo is a compilation of useful [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/cognitive-services/openai-service) resources and code samples to help you get started and accelerate your technology adoption journey.
+This repo is a compilation of useful [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service/) resources and code samples to help you get started and accelerate your technology adoption journey.
 
-The Azure OpenAI service provides REST API access to OpenAI's powerful language models on the Azure cloud. These models can be easily adapted to your specific task including but not limited to content generation, summarization, semantic search, and natural language to code translation. Users can access the service through REST APIs, Python SDK, .NET SDK, or our web-based interface in the Azure OpenAI Studio.
+The Azure OpenAI service provides REST API access to OpenAI's powerful language models on the Azure cloud. These models can be easily adapted to your specific task including but not limited to content generation, summarization, semantic search, and natural language to code translation. Users can access the service through REST APIs, Python SDK, .NET SDK, or our web-based interface in the Azure AI Foundry.
 
 ## Get started
 
@@ -17,30 +17,12 @@ The Azure OpenAI service provides REST API access to OpenAI's powerful language 
 - **Azure OpenAI resource** - For these samples, you'll need to deploy models like GPT-3.5 Turbo, GPT 4, DALL-E, and Whisper. See the Azure OpenAI Service documentation for more details on [deploying models](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) and [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models).
 
 ### Project setup
+The repo includes many end to end solutions and solution accelerators with sample data and detailed installation instructions. Follow the instructions provided with these solutions to get going.
 
-#### Codespaces
-
-The easiest way to get started is with GitHub Codespaces
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Azure-Samples/openai)
-
-#### Local
-
-If you prefer to run these samples locally, you'll need to install and configure the following:
-
-- [Visual Studio Code](https://code.visualstudio.com/Download)
-- Python
-  - [Python 3.8+](https://www.python.org/downloads/)
-  - [Jupyter Notebook 6.5.2](https://jupyter.org/install)
-  - [Python VS Code extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-- .NET
-  - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-  - [Polyglot Notebooks VS Code extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.dotnet-interactive-vscode)
-- [NodeJS](https://nodejs.org/)
-  
 
 ### Navigating the repo
-
+- [**eCommerce Solution Accelerator**](./Solution_Accelerators/Retail/README.md): This solution demonstrates building an eCommerce copilot with a multimodal, concierge-like shopping experience. It leverages Azure OpenAI Service and Azure AI Search to index and retrieve multimodal content, enabling product discovery through text, images, and personalized recommendations.
+- [**Advanced RAG for Financial Domain**](./Solution_Accelerators/Advanced_RAG/README.md): This is a solution accelerator that supports advanced techniques for ingesting, formatting and intent extraction from structured and non-structured data and querying the data through simple web interface to achieve improved accuracy and performance rates than baseline RAG.
 - [**Basic samples**](./Basic_Samples/README.md): These are small code samples and snippets which complete small sets of actions and can be integrated into the user code.
 - [**End to end solutions**](./End_to_end_Solutions/README.md): These are complete solutions for some use cases and industry scenarios. These include appropriate workflows and reference architectures, which can be easily customized and built into full scale production systems.
 
