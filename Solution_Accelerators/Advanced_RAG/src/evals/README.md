@@ -58,7 +58,7 @@ The tool defaults to calling RAG Bot's Dev endpoint. You can point `rag_eval` to
 ]
 ```
 
-RAG Bot is non-deterministic. You can repeat the same query multiple times to get a more accurate evaluation. 
+RAG Bot is non-deterministic. You can repeat the same query multiple times to get a more accurate evaluation.
 ```json
 "args": [
     "--eval_flow=evaluate_end_to_end",
@@ -91,7 +91,7 @@ The Configuration Service is a separate application for uploading and managing R
 
 The `--orchestrator_config` can be set to a specific version ID for an existing configuration in the Configuration Service. The tool will then use this configuration for the evaluation. You can also provide an absolute path to a local config json file which will be automatically uploaded to the Configuration Service. The version ID of the uploaded configuration will be the same experiment ID as the evaluation.
 
-**Leverage an existing configuration:** 
+**Leverage an existing configuration:**
 ```json
 "args": [
     "--eval_flow=evaluate_end_to_end",
@@ -110,11 +110,11 @@ The `--orchestrator_config` can be set to a specific version ID for an existing 
 ]
 ```
 
-Similarly, configuring the search index can be done with the `--search_config` argument. 
+Similarly, configuring the search index can be done with the `--search_config` argument.
 
 
 
-## [Important] Upload Evaluation Flow to Prompt Flow for `evaluate_end_to_end` 
+## [Important] Upload Evaluation Flow to Prompt Flow for `evaluate_end_to_end`
 1) Go to prompt_flow_resources/RAG_E2E_Eval_Flow/flow.dag.yaml and replace \<AZURE-OPENAI-CONNECTION> with your Azure OpenAI connection name
 2) Compress all the files under prompt_flow_resources/RAG_E2E_Eval_Flow into a ZIP File (Note: flow.dag.yaml must be in the root of your ZIP File)
 3) Navigate to ml.azure.com and go to your workspace
@@ -176,7 +176,7 @@ Example with formatted Markdown table:
 | Why did the investment in associates and joint ventures change significantly?  | Investment in associates and joint ventures increased due to the acquisition of a new subsidiary. | 0                  | 2.0                    |
 | What is the largest net currency exposure for the Group?                        | The Group has a net exposure of AED 7.24b to Indian Rupee.                                        | 1                  | 7.0                    |
 | Why did share of profit from investment in associates change?                   | The company recognized Gain on acquisition of additional stake in XYZ Ltd.                         | 2                  | 2.0                    |
-| What was the Net Profit and Net Profit growth for the year?                     | Net Profit, before non-controlling interests, increased by 15% to AED 5.6b.                        | 3                  | 1.0                    |ntrolling interests, ...  ...                  3                     1.0  
+| What was the Net Profit and Net Profit growth for the year?                     | Net Profit, before non-controlling interests, increased by 15% to AED 5.6b.                        | 3                  | 1.0                    |ntrolling interests, ...  ...                  3                     1.0
 
 Runs can also be viewed in the Azure Machine Learning workspace under the `RAG_E2E_Eval_Flow` flow.
 
@@ -197,24 +197,3 @@ RAG Bot's answers are saved to new version of the `RAG-Eval-Results` AML data as
 By default, the tool uses the `RAG_E2E_Eval_Flow`. This flow can be extended to support additional evaluation scenarios, such as RAG evaluations (groundedness, relevance, etc.). A new run shhoul be created for each successful evaluation.
 
 ![alt text](documentation/flow_ui.png)
-
-## Roadmap
-
-### V1 Feature TODO
-- [X] Configuration service support.
-- [X] Make the evaluation dataset version configurable. 
-- [X] Dataset configuration: Duplicates per sample.
-- [X] Unify evaluation flows.
-
-### V2 Feature TODO
-- [ ] Migrate E2E Evaluation to Prompty.
-- [ ] Support context evaluations such as relevance and groundedness. 
-- [ ] Support running from VS Code.
-- [ ] Support running from Azure DevOps Build Pipeline
-- [ ] Expose tool at pip package with changelog. Must include a script to run, ideally as an ADO pipeline.
-- [ ] Python API which returns experiment results in-memory.
-- [ ] Dataset configuration: Paraphrases per sample in E2E Dataset.
-
-### Testing TODO
-- [X] Write README that others can follow without guidance.
-- [ ] Confirm that others can run the tool.

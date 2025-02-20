@@ -12,9 +12,10 @@ To read more about the underlying design principles, architecture, and solution 
 * For more information on best practices on evaluation, architecture or validation of the solution design and outputs, please see the 'Additional Resources' section in solution documentation: [Advanced RAG Solution Accelerator Documentation](./docs/Advanced%20RAG%20Solution%20Accelerator%20Documentation.pdf).
 
 ## Table of Contents
+
 - [Use Case: Copilot for Financial Reports](#use-case-copilot-for-financial-reports)
-- [Features](#Features)
-- [Architecture](#Architecture)
+- [Features](#features)
+- [Architecture](#architecture)
 - [Getting Started](#getting-started)
 - [Code of Conduct](#code-of-conduct)
 - [Responsible AI Guidelines](#responsible-ai-guidelines)
