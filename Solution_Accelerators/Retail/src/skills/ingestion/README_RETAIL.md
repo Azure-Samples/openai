@@ -108,7 +108,7 @@ If you cannot separate new data, you can create a new index. In your search serv
 
 ## Bring your own data
 To bring your data and use this CoPilot on it, the easiest scenario would be when your indexing needs can be met with the existing fields. However if you determine more fields are reqiured then following things needs to be considered:
-1. Search Index: Does all the fields in the current design match to your product catalog. If not, you will need to create new search index with required fileds to index. Here are fields and their configuration for the [current index](../../../infra/search_index/retail_index.json)
+1. Search Index: Does all the fields in the current design match to your product catalog. If not, you will need to create new search index with required fileds to index. Here are fields and their configuration for the [retail_index.json](../../../infra/search_index/retail_index.json)
 2. Ingestion Service: Currently ingestion service expects these additional fields to be present in the index and then uses these fields and images to generate this additional data.
 > a. Uses article_id field to find the product catalog image (one only). 
 ```
@@ -137,7 +137,7 @@ Here is an example of how to invoke [ingestion service](../../../docs/services/i
 3. Update the solution code:
 If your product catalog is in a different domain, you also want to consider updating the prompts used by the [recommender](../recommender/src/prompts_config.yaml) and [image describer](../image_describer/src/static/prompts_config.yaml) skills to match your domain.
 
-4. If there are changes in the fields, then update the [search index template](../cognitiveSearch/src/components/templates/retail.config.json) that the search skil is using to match the updated search index
+4. If there are changes in the fields, then update the [search index template](../Search/src/components/templates/retail.config.json) that the search skil is using to match the updated search index
 
 5. Update the data models used by the Search Skill. They can be found [here](../../common/contracts/skills/search/api_models.py).
 
