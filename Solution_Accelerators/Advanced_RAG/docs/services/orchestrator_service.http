@@ -1,0 +1,24 @@
+
+###
+# post a search configuration
+POST {{rag_orchestrator_service_url}}/start
+Accept: application/json
+Content-Type: application/json
+
+{
+  "user_id": "user1",
+  "conversation_id": "conversation1",
+  "dialog_id": "dialog1",
+  "messages": [
+    {"role": "user", "content": "What was the revenue for year 2023 for IHC"}
+  ],
+  "overrides":{
+    "orchestrator_runtime": {
+        "config_version": "1.0.1"
+    },
+    "search_overrides": {
+        "top": 5,
+        "config_version": "1.0.1"
+    }
+  }
+}

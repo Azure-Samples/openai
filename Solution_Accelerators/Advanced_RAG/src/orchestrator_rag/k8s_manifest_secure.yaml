@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orchestrator-rag-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orchestrator-rag
+  template:
+    metadata:
+      labels:
+        app: orchestrator-rag
+    spec:
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: kv-secrets-provider 
+      containers:
+        - name: orchestrator-rag-container
+          image: cr5xd4xcq23ihzu.azurecr.io/orchestrator-rag:${tag}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5002
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "2Gi"
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          env:
+          - name: ENVIRONMENT
+            value: "PROD"
+      nodeSelector:
+        agentpool: userpool
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchestrator-rag
+spec:
+  ports:
+  - port: 5002
+    targetPort: 5002
+  selector:
+    app: orchestrator-rag
+  type: ClusterIP

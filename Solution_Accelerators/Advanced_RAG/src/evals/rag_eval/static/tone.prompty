@@ -1,0 +1,34 @@
+---
+name: Tone Evaluator
+description: Tone Evaluator to check if the tone matches of someone who is a financial expert.
+model:
+    api: chat
+    parameters:
+        temperature: 0.1
+        response_format: { "type": "json_object" }
+inputs:
+    text_1:
+        type: string
+    text_2:
+        type: string
+outputs:
+    Judgement:
+        type: string
+    Reason:
+        type: string
+---
+
+system:
+You are given 2 texts. You are to judge which of them comes from a financial expert based on the tone. 
+You are also to give the reason why you think it is so.
+TEXT_1: {{text_1}}
+
+TEXT_2: {{text_2}}
+
+#OUTPUT 
+You are to give your answer in JSON format which is either
+{"Judgement": "TEXT_1",
+"Reason"   : "..."}
+or
+{"Judgement": "TEXT_2",
+"Reason"   : "..."}

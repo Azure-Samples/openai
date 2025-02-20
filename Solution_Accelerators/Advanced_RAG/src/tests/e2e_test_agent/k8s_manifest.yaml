@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e2etestagent-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: e2etestagent
+  template:
+    metadata:
+      labels:
+        app: e2etestagent
+    spec:
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: kv-secrets-provider 
+      containers:
+        - name: e2etestagent-container
+          image: craumj6cpfeztbo.azurecr.io/e2etestagent:${tag}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5051
+          resources:
+            limits:
+              cpu: ".5"
+              memory: "2Gi"
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          env:
+          - name: ENVIRONMENT
+            value: "PROD"
+      nodeSelector:
+        agentpool: userpool
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: e2etestagent
+spec:
+  ports:
+  - port: 5051
+  selector:
+    app: e2etestagent
+  type: ClusterIP

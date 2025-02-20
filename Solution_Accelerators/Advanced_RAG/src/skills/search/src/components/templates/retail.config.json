@@ -1,0 +1,28 @@
+{
+  "$schema": "./searchSkill.schema.json",
+  "config": [
+    {
+      "index_name": "retail-catalog-index-3",
+      "index_application": "image_description_search",
+      "select_fields": [
+        { "name": "id", "is_item_id": true, "is_product_id": true },
+        { "name": "articleId" },
+        { "name": "productName" },
+        { "name": "productType" },
+        { "name": "indexGroupName" },
+        { "name": "gender" },
+        { "name": "detailDescription", "contains_image_description": true },
+        { "name": "generatedDescription", "contains_image_description": true },
+        { "name": "summarizedDescription", "contains_image_description": true },
+        { "name": "imageUrl" }
+      ],
+      "search_type": "hybrid_semantic",
+      "vector_configs": [
+        "detailDescriptionVector",
+        "generatedDescriptionVector",
+        "summarizedDescriptionVector"
+      ],
+      "semantic_config": "catalog-semantic-config"
+    }
+  ]
+}

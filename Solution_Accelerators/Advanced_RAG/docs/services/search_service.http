@@ -1,0 +1,78 @@
+
+###
+# post a RAG search request with overrides and filters
+POST {{search_service_url}}/search
+Accept: application/json
+Content-Type: application/json
+
+{
+    "search_queries": [
+    {
+        "search_query": "What was the revenue and revenue growth for IHC in the financial year 2023?",
+        "filter":
+        {
+            "search_filters": [
+                {
+                    "field_name": "reportedYear",
+                    "field_value": "2023",
+                    "filter_type": "GREATER_OR_EQUALS"
+                },
+                {
+                    "field_name": "subsidiary",
+                    "field_value": "IHC",
+                    "filter_type": "EQUALS"
+                }
+            ],
+            "logical_operator": "AND"
+        },
+        "min_results_count": 1,
+        "max_results_count": 10,
+        "search_id": "search_via_http_call_test_01"
+    }],
+    "search_overrides":{
+        "top":3
+    }
+}
+
+
+###
+# post a search request with overrides and NO filters
+POST {{search_service_url}}/search
+Accept: application/json
+Content-Type: application/json
+
+{
+    "search_queries": [
+    {
+        "search_query": "What was the revenue and revenue growth for IHC in the financial year 2023?",
+        "min_results_count": 1,
+        "max_results_count": 10,
+        "search_id": "search_via_http_call_test_02"
+    }],
+    "search_overrides":{
+        "top":3
+    }
+}
+
+###
+
+# post a search request with config overrides
+POST {{search_service_url}}/search
+Accept: application/json
+Content-Type: application/json
+
+{
+    "search_queries": [
+    {
+        "search_query": "Who were the top 5 countries that imported the most in 2022 considering all goods categories and who are the top countries that imported the most 'Electrical machinery and electronic equipment' in the last 5 years?",
+        "min_results_count": 1,
+        "max_results_count": 10,
+        "search_id": "search_via_http_call_test_02"
+    }],
+    "search_overrides":{
+        "config_version": "demo-wto-tariff-profile-index_v2",
+        "top":3
+    }
+}
+
+###

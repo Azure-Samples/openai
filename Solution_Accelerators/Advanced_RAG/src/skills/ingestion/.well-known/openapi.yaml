@@ -1,0 +1,26 @@
+openapi: 3.0.3
+info:
+  title: document_indexer
+  description: Indexes documents in Azure AI Search to support chat with your data scenarios.
+  version: 1.0
+
+servers:
+  - url: https://0.0.0.0:8080
+    description: App server running as a Docker container.
+
+paths:
+  /index:
+    post:
+      description: Indexes documents in Azure AI Search index.
+      operationId: analyze
+      requestBody:
+        required: true
+        content:
+          application/pdf:
+            schema:
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:

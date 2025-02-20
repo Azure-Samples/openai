@@ -1,0 +1,23 @@
+- conversation_id: TRADE_DEMO_TEST_0
+  dialog_sequence: 0
+  dialog: Who were the top 5 countries that imported the most in 2022 considering all goods categories and who are the top countries that imported the most "Electrical machinery and electronic equipment" in the last 5 years?
+
+- conversation_id: TRADE_DEMO_TEST_1
+  dialog_sequence: 0
+  dialog: I want to explore exporting Electrical Machinery for the United States of America. Who are their top 3 partners for that in 2023 and what was their export growth in value in the last 5 years and what was the average tariff percentage that the USA applied for them?
+
+- conversation_id: TRADE_DEMO_TEST_2
+  dialog_sequence: 0
+  dialog: What was the average trade to GDP ratio of the USA in the last 5 years considering all goods?
+
+- conversation_id: TRADE_DEMO_TEST_3
+  dialog_sequence: 0
+  dialog: ما هي الميزة النسبية التي كشفت عنها دولة الإمارات العربية المتحدة للآلات الكهربائية بناء على بيانات عام 2023؟
+
+- conversation_id: TRADE_DEMO_TEST_4
+  dialog_sequence: 0
+  dialog: For which category of non-oil goods do I have a comparative advantage based on 2023 data?
+
+- conversation_id: TRADE_DEMO_TEST_5
+  dialog_sequence: 0
+  dialog: Considering final bound duties, what is the average tariff the USA has for Electrical machinery and electronic equipment? What other categories have lower tariffs?

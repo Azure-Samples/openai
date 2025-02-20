@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: enterprise-bot-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/upstream-keepalive-timeout: "600"
+    nginx.ingress.kubernetes.io/keep-alive: "600"
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - enterprisebot.eastus.cloudapp.azure.com
+      secretName: tls-secret
+  rules:
+  - host: enterprisebot.eastus.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: session-manager
+            port:
+              number: 5000

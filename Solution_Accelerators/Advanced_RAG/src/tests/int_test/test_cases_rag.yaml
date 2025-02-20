@@ -1,0 +1,63 @@
+test_cases:
+  - test_case: "Test for Microsoft's financial performance"
+    communication_protocol: "all"
+    scenario: "rag"
+    conversation:
+      conversation_id: "IntegrationTest_Conv_1"
+      user_id: Int_Test_User
+      dialogs:
+        - dialog_id: "1"
+          message:
+            payload:
+              - type: "text"
+                value: "What was Microsoft's revenue in fiscal year 2022?"
+          overrides:
+            search_overrides:
+              top: 25
+          assertion:
+            response_assertion: "status_code == 200"
+            check_presence_citation: True
+        - dialog_id: "2"
+          message:
+            payload:
+              - type: "text"
+                value: "How about in a year later?"
+          overrides:
+            search_overrides:
+              top: 25
+          assertion:
+            response_assertion: "status_code == 200"
+            check_presence_citation: True
+        - dialog_id: "3"
+          message:
+            payload:
+              - type: "text"
+                value: "How did Microsoft's operating income trend from 2022 to 2024?"
+          overrides:
+            search_overrides:
+              top: 1
+          assertion:
+            response_assertion: "status_code == 200"
+            check_presence_citation: True
+        - dialog_id: "4"
+          message:
+            payload:
+              - type: "text"
+                value: "Can you analyze the compound quarterly growth rate (CQGR) for Microsoft's Intelligent Cloud segment from Q3 2022 to Q3 2024?"
+          overrides:
+            search_overrides:
+              top: 7
+          assertion:
+            response_assertion: "status_code == 200"
+            check_presence_citation: True
+        - dialog_id: "5"
+          message:
+            payload:
+              - type: "text"
+                value: "What were the most significant changes in Microsoft's financial performance in fiscal year 2024 compared to previous years?"
+          overrides:
+            search_overrides:
+              top: 25
+          assertion:
+            response_assertion: "status_code == 200"
+            check_presence_citation: True

@@ -1,0 +1,80 @@
+trigger:
+ branches:
+  include:
+    - main
+ paths:
+   include:
+     - MultiModalBot/src/frontend_rag
+
+variables:
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+  # Project root folder.
+  frontendRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src/frontend_rag
+
+#
+# TODO: Move to container based along with other microservies.
+#
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: BuildJob
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Install Node.js'
+    
+    - script: |
+        npm install
+      displayName: 'npm install'
+      workingDirectory: $(frontendRoot)
+
+    - script: |
+        npm run build
+      displayName: 'npm build'
+      workingDirectory: $(frontendRoot)
+      
+    - task: ArchiveFiles@2
+      displayName: 'Archive files'
+      inputs:
+        rootFolderOrFile: '$(frontendRoot)' 
+        includeRootFolder: false
+        archiveType: zip
+        archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+        replaceExistingArchive: true
+
+    - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+      displayName: 'Upload package'
+      artifact: drop
+
+- stage: Deploy
+  displayName: 'Deploy Web App'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: DeploymentJob
+    pool:
+      vmImage: $(vmImageName)
+    environment: $(ENVIRONMENT_NAME)
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              buildType: 'current'
+              artifactName: 'drop'
+              itemPattern: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+              downloadPath: '$(Pipeline.Workspace)'
+
+          - task: AzureWebApp@1
+            inputs:
+              azureSubscription: $(AZURE_SERVICE_CONNECTION_ID)
+              appName: $(WEB_APP_NAME)
+              package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              startUpCommand: 'npm start'

@@ -1,0 +1,46 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: session-manager-ingress-https
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/request-timeout: "300"
+    cert-manager.io/cluster-issuer: letsencrypthttp
+    cert-manager.io/acme-challenge-type: http01
+spec:
+  tls:
+   - hosts:
+      - {{HOST}}
+     secretName: session-manager-tls-https
+  rules:
+  - host: {{HOST}}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: session-manager
+            port:
+              number: 5000
+      - path: /configuration-service
+        pathType: Prefix
+        backend:
+          service:
+            name: confighub
+            port:
+              number: 5003
+      - path: /indexer
+        pathType: Prefix
+        backend:
+          service:
+            name: ingestion
+            port:
+              number: 6001
+      - path: /e2etest
+        pathType: Prefix
+        backend:
+          service:
+            name: e2etestagent
+            port:
+              number: 5051

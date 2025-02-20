@@ -1,0 +1,76 @@
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - MultiModalBot/src/common
+    - MultiModalBot/src/skills/search
+
+resources:
+- repo: self
+
+variables:
+  sourceRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src
+  searchServiceRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src/skills/search
+  namespace: 'default'
+  prodImageRepository: 'search'
+
+  # Tag
+  tag: '$(Build.BuildNumber)'
+
+  # Dataset specific tags
+  dataSetTag: $(tag)-$(DATA_SET_TAG)
+
+stages:
+- stage: BuildAndPush
+  displayName: Build and Push Images
+  jobs:  
+  - job: Build
+    displayName: Build Images
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build - Search Service Container Image
+      inputs:
+        command: build
+        repository: $(prodImageRepository)
+        dockerfile: $(searchServiceRoot)/Dockerfile
+        containerRegistry: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
+        buildContext: $(sourceRoot)
+        tags: $(dataSetTag)
+
+    - task: Docker@2
+      displayName: Push - Search Service Container Image
+      inputs:
+        command: push
+        repository: $(prodImageRepository)
+        containerRegistry: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
+        tags: $(dataSetTag)
+
+- stage: DevDeploy
+  displayName: Dev - Deploy Search Service to Kubernetes
+  dependsOn: BuildAndPush
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Kubernetes
+    environment: $(ENVIRONMENT_NAME)
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: KubernetesManifest@0
+            displayName: Deploy Search Service
+            inputs:
+              action: 'deploy'
+              kubernetesServiceConnection: $(K8S_SERVICE_CONNECTION)
+              namespace: $(namespace)
+              manifests: |
+                $(searchServiceRoot)/k8s_manifest.yaml
+              containers: |
+                $(DOCKER_REGISTRY)/$(prodImageRepository):$(dataSetTag)

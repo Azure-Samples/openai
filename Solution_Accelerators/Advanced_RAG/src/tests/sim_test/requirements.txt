@@ -1,0 +1,16 @@
+azure-ai-evaluation
+azure-keyvault==4.2.0
+azure-cosmos==4.7.0
+python-dotenv==1.0.0
+azure-identity
+Quart==0.19.9
+quart-cors==0.7.0
+PyYAML==6.0.1
+uvicorn==0.20.0
+opencensus-ext-azure==1.1.9
+opencensus==0.11.2
+pydantic==2.7.1
+aiohttp==3.9.1
+aiohttp_cors==0.7.0
+requests==2.31.0
+tenacity==8.2.2

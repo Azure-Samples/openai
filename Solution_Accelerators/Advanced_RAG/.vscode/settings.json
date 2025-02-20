@@ -1,0 +1,66 @@
+{
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "static": true
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        },
+    },
+    "black-formatter.args": [
+        "--line-length",
+        "119"
+    ],
+    "isort.args":["--profile", "black"],
+    "python.analysis.extraPaths": [
+        "./src/orchestrator_new",
+        "./src/session_manager"
+    ],
+    "rest-client.environmentVariables": {
+        "$shared": {},
+        "local": {
+            "session_manager_url": "http://localhost:5000",
+            "data_service_url": "http://localhost:5001",
+            "rag_orchestrator_service_url": "http://localhost:5002",
+            "configuration_service_url": "http://localhost:5003",
+            "end-2-end-test-agent-url":"http://127.0.0.1:5051",
+            "ingestion_service_url": "http://localhost:6001",
+            "search_service_url": "http://localhost:6002"
+        },
+        "secure_dev_cluster": {
+            "session_manager_url": "",
+            "configuration_service_url": "",
+        },
+        "dev_cluster": {
+            "session_manager_url": "",
+            "configuration_service_url": "",
+            "end-2-end-test-agent-url":"",
+            "ingestion_service_url": ""
+        }
+    }
+}

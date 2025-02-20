@@ -1,0 +1,238 @@
+PS C:\Users\kyobrien\repos\CustomerEng\MultiModalBot\evals> c:\Users\kyobrien\AppData\Local\miniconda3\envs\rag_bot_eval\python.exe -m rag_eval
+Authenticating to AML...
+Getting benchmark questions...
+Resolving access token for scope "https://storage.azure.com/.default" using identity of type "USER".
+   n_no                                           question                                       ground_truth page_number
+0   1.0  What was the revenue and revenue growth in fin...  Revenue grew from AED 50.95b in 2022 to AED 60...          11
+1   2.0  Which segment was the largest revenue contribu...  Real Estate and Construction segment was the l...         200
+2   3.0  Mention and describe the two largest business ...  Services and other segments, which mainly comp...         200
+3   3.0  Mention and describe the two largest business ...  Services and other segments, which mainly comp...         200
+4   4.0  What was the gross margin in 2023 compared to ...  The company reported a gross margin of 21.70% ...          11
+Getting RAG Bot answers...
+Getting answers...: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 30/30 [05:02<00:00, 10.07s/it] 
+   n_no  ...                                             answer
+0   1.0  ...  The revenue in the financial year 2023 was AED...
+1   2.0  ...  The Real Estate segment was the largest revenu...
+2   3.0  ...  The two largest business segments by assets fo...
+3   3.0  ...  The two largest business segments by assets fo...
+4   4.0  ...  The provided documentation does not include in...
+
+[5 rows x 8 columns]
+Saving RAG Bot answers to disk...
+Answers saved to C:\Users\kyobrien\repos\CustomerEng\MultiModalBot\evals\rag_eval/results/RAG Bot-Eval_Dataset=Golden_20_IHC_TF_10rp_Start=2024-07-16_063415/benchmark_answers.csv
+Uploading RAG Bot answers to AML...
+Data asset with version 1 already exists. Trying next version...
+Data asset with version 2 already exists. Trying next version...
+Data asset with version 3 already exists. Trying next version...
+Data asset with version 4 already exists. Trying next version...
+Data asset with version 5 already exists. Trying next version...
+Data asset with version 6 already exists. Trying next version...
+Data asset with version 7 already exists. Trying next version...
+Data asset with version 8 already exists. Trying next version...
+Data asset with version 9 already exists. Trying next version...
+Data asset with version 10 already exists. Trying next version...
+Data asset with version 11 already exists. Trying next version...
+Data asset with version 12 already exists. Trying next version...
+Data asset with version 13 already exists. Trying next version...
+Data asset with version 14 already exists. Trying next version...
+Data asset with version 15 already exists. Trying next version...
+Data asset with version 16 already exists. Trying next version...
+Data asset with version 17 already exists. Trying next version...
+Data asset with version 18 already exists. Trying next version...
+Data asset with version 19 already exists. Trying next version...
+Data asset with version 20 already exists. Trying next version...
+Data asset with version 21 already exists. Trying next version...
+Data asset with version 22 does not exist. Uploading...
+Uploading benchmark_answers.csv (< 1 MB): 100%|######################################################################| 334k/334k [00:00<00:00, 2.22MB/s]
+
+
+Data asset created. Name: RAG Bot-Eval-Results, version: 22
+Calculating metrics...
+[2024-07-16 06:39:52 -0700][promptflow][WARNING] - You're using compute session, if it's first time you're using it, it may take a while to build session and you may see 'NotStarted' status for a while.
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'NotStarted', continue streaming...)
+(Run status is 'Preparing', continue streaming...)
+2024-07-16 13:45:44 +0000      28 promptflow-runtime INFO     [RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415] Receiving v2 bulk run request 08581e4d-607c-431b-89de-a0b2d0a4506a: {"flow_id": "5521e52a-4400-4de7-9324-58d8ee38e168", "flow_run_id": "RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415", "flow_source": {"flow_source_type": 1, "flow_source_info": {"snapshot_id": "8ef0a5d3-1ac5-4ba2-8bab-45747cb13d9a"}, "flow_dag_file": "flow.dag.yaml"}, "connections": "**data_scrubbed**", "log_path": "https://ragbotscenariodemoamlwsstg.blob.core.windows.net/azureml/ExperimentRun/dcid.RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415/logs/azureml/executionlogs.txt?sv=2019-07-07&sr=b&sig=**data_scrubbed**&skoid=8e63ea1e-1a2f-4a6b-87d9-73da7588aca0&sktid=72f988bf-86f1-41af-91ab-2d7cd011db47&skt=2024-07-16T13%3A35%3A43Z&ske=2024-07-16T21%3A45%3A43Z&sks=b&skv=2019-07-07&st=2024-07-16T13%3A35%3A43Z&se=2024-07-16T21%3A45%3A43Z&sp=rcw", "app_insights_instrumentation_key": "InstrumentationKey=**data_scrubbed**;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/", "flow_name": "RAG Bot_E2E_Eval_Flow", "batch_timeout_sec": 36000, "data_inputs": {"data": "azureml://subscriptions/a71e73e0-6235-4a56-ba1b-f21ef82062dd/resourcegroups/RAGBotScenarioDemo/workspaces/RAGBotScenrarioDemo_AML_WS/datastores/workspaceblobstore/paths/LocalUpload/c027b0b826c5adbbd826b99609ef6d5d/benchmark_answers.csv"}, "inputs_mapping": {"question": "${data.question}", "ground_truth": "${data.ground_truth}", "answer": "${data.answer}"}, "azure_storage_setting": {"azure_storage_mode": 1, "storage_account_name": "ragbotscenariodemoamlwsstg", "blob_container_name": "azureml-blobstore-1d8da691-ec6b-432d-a0d1-ae4f57247c78", "flow_artifacts_root_path": "promptflow/PromptFlowArtifacts/5521e52a-4400-4de7-9324-58d8ee38e168/RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415", "blob_container_sas_token": "?sv=2019-07-07&sr=c&sig=**data_scrubbed**&skoid=8e63ea1e-1a2f-4a6b-87d9-73da7588aca0&sktid=72f988bf-86f1-41af-91ab-2d7cd011db47&skt=2024-07-16T13%3A45%3A44Z&ske=2024-07-23T13%3A45%3A44Z&sks=b&skv=2019-07-07&se=2024-07-23T13%3A45%3A44Z&sp=racwl", "output_datastore_name": "workspaceblobstore"}}
+2024-07-16 13:45:45 +0000      28 promptflow-runtime INFO     Runtime version: 20240709.v1. PromptFlow version: 1.14.0rc1
+2024-07-16 13:45:45 +0000      28 promptflow-runtime INFO     Updating RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415 to Status.Preparing...
+2024-07-16 13:45:45 +0000      28 promptflow-runtime INFO     Downloading snapshot to /mnt/host/service/app/34751/requests/RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415
+2024-07-16 13:45:45 +0000      28 promptflow-runtime INFO     Get snapshot sas url for 8ef0a5d3-1ac5-4ba2-8bab-45747cb13d9a.
+2024-07-16 13:45:45 +0000      28 promptflow-runtime INFO     Snapshot 8ef0a5d3-1ac5-4ba2-8bab-45747cb13d9a contains 12 files.
+2024-07-16 13:45:45 +0000      28 promptflow-runtime INFO     Download snapshot 8ef0a5d3-1ac5-4ba2-8bab-45747cb13d9a completed.
+2024-07-16 13:45:45 +0000      28 promptflow-runtime INFO     Successfully download snapshot to /mnt/host/service/app/34751/requests/RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415
+2024-07-16 13:45:45 +0000      28 promptflow-runtime INFO     About to execute a python flow.
+2024-07-16 13:45:47 +0000      28 promptflow-runtime INFO     Use spawn method to start child process.
+2024-07-16 13:45:47 +0000      28 promptflow-runtime INFO     Starting to check process 130 status for run RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415
+2024-07-16 13:45:47 +0000      28 promptflow-runtime INFO     Start checking run status for run RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415
+2024-07-16 13:45:53 +0000     130 promptflow-runtime INFO     [28--130] Start processing flowV2......
+2024-07-16 13:45:53 +0000     130 promptflow-runtime INFO     Runtime version: 20240709.v1. PromptFlow version: 1.14.0rc1
+2024-07-16 13:45:53 +0000     130 promptflow-runtime INFO     Setting mlflow tracking uri...
+2024-07-16 13:45:53 +0000     130 promptflow-runtime INFO     Validating 'AzureML Data Scientist' user authentication...
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Successfully validated 'AzureML Data Scientist' user authentication.
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Using AzureMLRunStorageV2
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Setting mlflow tracking uri to 'azureml://westus.api.azureml.ms/mlflow/v1.0/subscriptions/a71e73e0-6235-4a56-ba1b-f21ef82062dd/resourceGroups/RAGBotScenarioDemo/providers/Microsoft.MachineLearningServices/workspaces/RAGBotScenrarioDemo_AML_WS'       
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Setting mlflow tracking uri to 'azureml://westus.api.azureml.ms/mlflow/v1.0/subscriptions/a71e73e0-6235-4a56-ba1b-f21ef82062dd/resourceGroups/RAGBotScenarioDemo/providers/Microsoft.MachineLearningServices/workspaces/RAGBotScenrarioDemo_AML_WS'       
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Creating unregistered output Asset for Run RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415...
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Created debug_info Asset: azureml://locations/westus/workspaces/1d8da691-ec6b-432d-a0d1-ae4f57247c78/data/azureml_RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415_output_data_debug_info/versions/1
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Creating unregistered output Asset for Run RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415...
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Created flow_outputs output Asset: azureml://locations/westus/workspaces/1d8da691-ec6b-432d-a0d1-ae4f57247c78/data/azureml_RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415_output_data_flow_outputs/versions/1
+2024-07-16 13:45:54 +0000     130 promptflow-runtime INFO     Patching RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415...
+2024-07-16 13:45:58 +0000     130 promptflow-runtime INFO     Resolve data from url finished in 1.6483650629999715 seconds
+2024-07-16 13:45:58 +0000     130 promptflow-runtime INFO     Starting the aml run 'RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415'...
+2024-07-16 13:45:59 +0000     130 execution.bulk     INFO     The timeout for the batch run is 36000 seconds.
+2024-07-16 13:45:59 +0000     130 execution.bulk     INFO     Set process count to 4 by taking the minimum value among the factors of {'default_worker_count': 4, 'row_count': 30}.
+2024-07-16 13:46:05 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(0) start execution.
+2024-07-16 13:46:05 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(1) start execution.
+2024-07-16 13:46:05 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(2) start execution.
+2024-07-16 13:46:05 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(3) start execution.
+2024-07-16 13:46:11 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(0) completed.
+2024-07-16 13:46:11 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(4) start execution.
+2024-07-16 13:46:11 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(1) completed.
+2024-07-16 13:46:11 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(5) start execution.
+2024-07-16 13:46:11 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(3) completed.
+2024-07-16 13:46:11 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(6) start execution.
+2024-07-16 13:46:12 +0000     130 execution.bulk     INFO     Finished 3 / 30 lines.
+2024-07-16 13:46:12 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 4.34 seconds. Estimated time for incomplete lines: 117.18 seconds.
+2024-07-16 13:46:14 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(2) completed.
+2024-07-16 13:46:14 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(7) start execution.
+2024-07-16 13:46:16 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(7) completed.
+2024-07-16 13:46:16 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(8) start execution.
+(Run status is 'Running', continue streaming...)
+2024-07-16 13:46:21 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(4) completed.
+2024-07-16 13:46:21 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(9) start execution.
+2024-07-16 13:46:21 +0000     130 execution.bulk     INFO     Finished 6 / 30 lines.
+2024-07-16 13:46:21 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 3.68 seconds. Estimated time for incomplete lines: 88.32 seconds.
+2024-07-16 13:46:22 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(6) completed.
+2024-07-16 13:46:22 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(10) start execution.
+2024-07-16 13:46:22 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(5) completed.
+2024-07-16 13:46:22 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(11) start execution.
+2024-07-16 13:46:23 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(8) completed.
+2024-07-16 13:46:23 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(12) start execution.
+2024-07-16 13:46:23 +0000     130 execution.bulk     INFO     Finished 9 / 30 lines.
+2024-07-16 13:46:23 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 2.68 seconds. Estimated time for incomplete lines: 56.28 seconds.
+2024-07-16 13:46:23 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(12) completed.
+2024-07-16 13:46:23 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(13) start execution.
+2024-07-16 13:46:25 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(10) completed.
+2024-07-16 13:46:25 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(14) start execution.
+2024-07-16 13:46:26 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(14) completed.
+2024-07-16 13:46:26 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(15) start execution.
+2024-07-16 13:46:26 +0000     130 execution.bulk     INFO     Finished 12 / 30 lines.
+2024-07-16 13:46:26 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 2.27 seconds. Estimated time for incomplete lines: 40.86 seconds.
+2024-07-16 13:46:28 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(15) completed.
+2024-07-16 13:46:28 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(16) start execution.
+2024-07-16 13:46:29 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(13) completed.
+2024-07-16 13:46:29 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(17) start execution.
+2024-07-16 13:46:29 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(11) completed.
+2024-07-16 13:46:29 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(18) start execution.
+2024-07-16 13:46:30 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(16) completed.
+2024-07-16 13:46:30 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(19) start execution.
+2024-07-16 13:46:30 +0000     130 execution.bulk     INFO     Finished 16 / 30 lines.
+2024-07-16 13:46:30 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 1.95 seconds. Estimated time for incomplete lines: 27.3 seconds.
+2024-07-16 13:46:32 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(19) completed.
+2024-07-16 13:46:32 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(20) start execution.
+2024-07-16 13:46:33 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(17) completed.
+2024-07-16 13:46:33 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(21) start execution.
+2024-07-16 13:46:33 +0000     130 execution.bulk     INFO     Finished 18 / 30 lines.
+2024-07-16 13:46:33 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 1.91 seconds. Estimated time for incomplete lines: 22.92 seconds.
+2024-07-16 13:46:34 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(20) completed.
+2024-07-16 13:46:34 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(22) start execution.
+2024-07-16 13:46:35 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(9) completed.
+2024-07-16 13:46:35 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(23) start execution.
+2024-07-16 13:46:36 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(23) completed.
+2024-07-16 13:46:36 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(24) start execution.
+2024-07-16 13:46:36 +0000     130 execution.bulk     INFO     Finished 21 / 30 lines.
+2024-07-16 13:46:36 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 1.78 seconds. Estimated time for incomplete lines: 16.02 seconds.
+2024-07-16 13:46:37 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(21) completed.
+2024-07-16 13:46:37 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(25) start execution.
+2024-07-16 13:46:37 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(18) completed.
+2024-07-16 13:46:37 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(26) start execution.
+2024-07-16 13:46:42 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(22) completed.
+2024-07-16 13:46:42 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(27) start execution.
+2024-07-16 13:46:42 +0000     130 execution.bulk     INFO     Finished 24 / 30 lines.
+2024-07-16 13:46:42 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 1.81 seconds. Estimated time for incomplete lines: 10.86 seconds.
+2024-07-16 13:46:43 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(24) completed.
+2024-07-16 13:46:43 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(28) start execution.
+2024-07-16 13:46:44 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(27) completed.
+2024-07-16 13:46:44 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(29) start execution.
+2024-07-16 13:46:44 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:1)-Process id(314)-Line number(25) completed.
+2024-07-16 13:46:44 +0000     130 execution.bulk     INFO     Finished 27 / 30 lines.
+2024-07-16 13:46:44 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 1.68 seconds. Estimated time for incomplete lines: 5.04 seconds.
+2024-07-16 13:46:45 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:4)-Process id(342)-Line number(26) completed.
+2024-07-16 13:46:47 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:2)-Process id(320)-Line number(28) completed.
+2024-07-16 13:46:49 +0000     130 execution.bulk     INFO     Process name(ForkProcess-2:2:3)-Process id(332)-Line number(29) completed.
+2024-07-16 13:46:49 +0000     130 execution.bulk     INFO     Finished 30 / 30 lines.
+2024-07-16 13:46:49 +0000     130 execution.bulk     INFO     Average execution time for completed lines: 1.68 seconds. Estimated time for incomplete lines: 0.0 seconds.
+2024-07-16 13:46:49 +0000     130 execution.bulk     INFO     The thread monitoring the process [314-ForkProcess-2:2:1] will be terminated.
+2024-07-16 13:46:49 +0000     130 execution.bulk     INFO     The thread monitoring the process [332-ForkProcess-2:2:3] will be terminated.
+2024-07-16 13:46:49 +0000     130 execution.bulk     INFO     The thread monitoring the process [320-ForkProcess-2:2:2] will be terminated.
+2024-07-16 13:46:49 +0000     130 execution.bulk     INFO     The thread monitoring the process [342-ForkProcess-2:2:4] will be terminated.
+2024-07-16 13:46:49 +0000     314 execution.bulk     INFO     The process [314] has received a terminate signal.
+2024-07-16 13:46:49 +0000     332 execution.bulk     INFO     The process [332] has received a terminate signal.
+2024-07-16 13:46:49 +0000     320 execution.bulk     INFO     The process [320] has received a terminate signal.
+2024-07-16 13:46:49 +0000     342 execution.bulk     INFO     The process [342] has received a terminate signal.
+2024-07-16 13:46:50 +0000     130 execution.bulk     INFO     Executing aggregation node...
+2024-07-16 13:46:51 +0000     130 execution.bulk     INFO     Finish executing aggregation node.
+2024-07-16 13:46:51 +0000     130 promptflow-runtime INFO     Post processing batch result...
+2024-07-16 13:46:53 +0000     130 execution.bulk     INFO     Upload status summary metrics for run RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415 finished in 2.701465459000019 seconds
+2024-07-16 13:46:57 +0000     130 execution.bulk     INFO     Upload metrics for run RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415 finished in 3.423568099000022 seconds
+2024-07-16 13:46:59 +0000     130 promptflow-runtime INFO     Successfully write run properties {"_azureml.evaluate_artifacts": "[{\"path\": \"instance_results.jsonl\", \"type\": \"table\"}]", "azureml.promptflow.total_tokens": 34112, "azureml.promptflow.completion_tokens": 4223, "azureml.promptflow.prompt_tokens": 29889} with run id 'RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415'
+2024-07-16 13:46:59 +0000     130 execution.bulk     INFO     Upload RH properties for run RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415 finished in 2.568500115000006 seconds
+2024-07-16 13:46:59 +0000     130 promptflow-runtime INFO     Creating Artifact for Run RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415...
+2024-07-16 13:46:59 +0000     130 promptflow-runtime INFO     Created instance_results.jsonl Artifact.
+2024-07-16 13:46:59 +0000     130 promptflow-runtime INFO     Ending the aml run 'RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415' with status 'Completed'...
+======= Run Summary =======
+Run name: "RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415"
+Run status: "Completed"
+Start time: "2024-07-16 13:45:58.965715+00:00"
+Duration: "0:01:01.099228"
+Run url: "https://ml.azure.com/prompts/trace/run/RAG Bot-Eval_Dataset_eq_Golden_20_IHC_TF_10rp_Start_eq_2024-07-16_063415/details?wsid=/subscriptions/a71e73e0-6235-4a56-ba1b-f21ef82062dd/resourcegroups/RAGBotScenarioDemo/providers/Microsoft.MachineLearningServices/workspaces/RAGBotScenrarioDemo_AML_WS"================================================================================
+Run details saved to C:\Users\kyobrien\repos\CustomerEng\MultiModalBot\evals\rag_eval/results/RAG Bot-Eval_Dataset=Golden_20_IHC_TF_10rp_Start=2024-07-16_063415/run_details.csv
+
+                                                       inputs.question  ... outputs.gpt_similarity
+outputs.line_number                                                     ...
+0                    What was the revenue and revenue growth in fin...  ...                    2.0
+1                    Which segment was the largest revenue contribu...  ...                    2.0
+2                    Mention and describe the two largest business ...  ...                    2.0
+3                    Mention and describe the two largest business ...  ...                    2.0
+4                    What was the gross margin in 2023 compared to ...  ...                    1.0
+5                    What was the gross margin in 2023 compared to ...  ...                    2.0
+6                    What was the Net Profit and Net Profit growth ...  ...                    2.0
+7                    What was the Net Profit and Net Profit growth ...  ...                    2.0
+8                    What was the Net Profit and Net Profit growth ...  ...                    2.0
+9                    What was the Net Profit and Net Profit growth ...  ...                    2.0
+10                   What was the net profit margin in 2023 compare...  ...                    1.0
+11                   What was the Net Profit and Net Profit growth ...  ...                    2.0
+12                   What was the Net Profit and Net Profit growth ...  ...                    5.0
+13                   Why did share of profit from investment in ass...  ...                    2.0
+14                   Why did Investment and other income drop signi...  ...                    5.0
+15                   Provide more details on Gain on derecognition ...  ...                    NaN
+16                   Why did the investment in associates and joint...  ...                    3.0
+17                   What was the return on average equity in 2023 ...  ...                    1.0
+18                   What is the debt position for the group as of ...  ...                    2.0
+19                   What is the cash position for the group as of ...  ...                    1.0
+20                   What is the cash position for the group as of ...  ...                    1.0
+21                   What is the cash position for the group as of ...  ...                    1.0
+22                   What is the Gearing ratio as of Dec 2023, how ...  ...                    2.0
+23                   What is the Earnings per share (EPS) in 2023 c...  ...                    5.0
+24                   What is the Earnings per share (EPS) in 2023 c...  ...                    2.0
+25                   What is the largest net currency exposure for ...  ...                    7.0
+26                   What is the largest net currency exposure for ...  ...                    7.0
+27                   What is the proportion of UAE (domestic) and N...  ...                    1.0
+28                   What is the geographical distribution of inves...  ...                    2.0
+29                   What proportion of the Financial Assets are qu...  ...                    3.0
+
+[30 rows x 5 columns]
+================================================================================
+Metrics saved to C:\Users\kyobrien\repos\CustomerEng\MultiModalBot\evals\rag_eval/results/RAG Bot-Eval_Dataset=Golden_20_IHC_TF_10rp_Start=2024-07-16_063415/run_metrics.json
+
+{'gpt_similarity': 2.48, 'gpt_similarity_pass_rate(%)': 16.67}
+================================================================================
+Done!
+PS C:\Users\kyobrien\repos\CustomerEng\MultiModalBot\evals>

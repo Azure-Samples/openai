@@ -1,0 +1,65 @@
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - MultiModalBot/src/common
+    - MultiModalBot/src/orchestrator_rag
+
+resources:
+- repo: self
+
+variables:
+  sourceRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src
+  orchestratorRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src/orchestrator_rag
+  namespace: 'default'
+  
+  # Tag
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: BuildAndPush
+  displayName: Build and Push Images
+  jobs:  
+  - job: Build
+    displayName: Build Images
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build and Push Orchestrator Rag Image
+      inputs:
+        command: buildAndPush
+        repository: orchestrator-rag
+        dockerfile: $(orchestratorRoot)/Dockerfile
+        containerRegistry: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
+        buildContext: $(sourceRoot)
+        tags: |
+          $(tag)
+
+- stage: DevDeploy
+  displayName: Dev - Deploy to Kubernetes
+  dependsOn: BuildAndPush
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Kubernetes
+    environment: $(ENVIRONMENT_NAME)
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: KubernetesManifest@0
+            displayName: Deploy Orchestrator Rag
+            inputs:
+              action: 'deploy'
+              kubernetesServiceConnection: $(K8S_SERVICE_CONNECTION)
+              namespace: $(namespace)
+              manifests: |
+                $(orchestratorRoot)/k8s_manifest.yaml
+              containers: |
+                $(DOCKER_REGISTRY)/orchestrator-rag:$(tag)
