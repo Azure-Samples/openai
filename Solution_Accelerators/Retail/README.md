@@ -18,7 +18,9 @@ This solution enables users to explore retail products such as clothing and acce
 
 Imagine getting ready for a party and finding a complete outfit—simply by conversing with the bot. Whether you're searching for a suit, shoes, or complementary accessories, the bot provides relevant and tailored suggestions.
 
-To showcase the solution’s capabilities, a pre-recorded voiceover demonstrates its functionality, ranging from simple queries to complex multimodal interactions. Watch the [Demo Video](docs/media/Retail_Accelerator_Demo%20(GitHub).mp4) and follow along with the [Demo Script](docs/demo_script/Retail%20Demo_Script.pdf).
+To showcase the solution’s capabilities, a pre-recorded voiceover demonstrates its functionality, ranging from simple queries to complex multimodal interactions. Watch the demo video below and follow along with the [Demo Script](docs/demo_script/Retail%20Demo_Script.pdf).
+
+https://github.com/user-attachments/assets/6b1039be-b55b-4841-90dc-4715b8b2b62f
 
 ## Features
 The repository includes a complete end-to-end solution, comprising:
