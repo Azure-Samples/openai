@@ -1,0 +1,96 @@
+$defs:
+  IndexApplicationType:
+    enum:
+    - image_description_search
+    - stock_search
+    - price_search
+    title: IndexApplicationType
+    type: string
+  IndexConfig:
+    properties:
+      index_application:
+        allOf:
+        - $ref: '#/$defs/IndexApplicationType'
+        description: Application of the Search Index field data
+      index_name:
+        description: Must match with the Index Name used in the Azure AI Search
+          resource
+        title: Index Name
+        type: string
+      search_type:
+        allOf:
+        - $ref: '#/$defs/SearchType'
+        description: search type to be performed on the Search Index
+      select_fields:
+        description: Index Search Fields to be retrieved on search results
+        items:
+          $ref: '#/$defs/SearchFieldConfig'
+        title: Select Fields
+        type: array
+      vector_configs:
+        default: []
+        description: vector config names to be used for vector or hybrid search
+        items:
+          type: string
+        title: Vector Configs
+        type: array
+    required:
+    - index_name
+    - index_application
+    - select_fields
+    - search_type
+    title: IndexConfig
+    type: object
+  SearchFieldConfig:
+    properties:
+      contains_image_description:
+        default: false
+        description: Field contains image description of an item
+        title: Contains Image Description
+        type: boolean
+      contains_price_data:
+        default: false
+        description: Field contains price related data
+        title: Contains Price Data
+        type: boolean
+      contains_stock_data:
+        default: false
+        description: Field contains stock related data
+        title: Contains Stock Data
+        type: boolean
+      is_item_id:
+        default: false
+        description: Field contains item id
+        title: Is Item Id
+        type: boolean
+      is_product_category:
+        default: false
+        description: Field is filterable and facetable that contains item categories
+        title: Is Product Category
+        type: boolean
+      name:
+        description: Cognitive Search Index Field Name
+        title: Name
+        type: string
+    required:
+    - name
+    title: SearchFieldConfig
+    type: object
+  SearchType:
+    enum:
+    - keywords
+    - vector
+    - hybrid_keywords
+    title: SearchType
+    type: string
+$id: ./searchSkill.schema.json
+properties:
+  config:
+    items:
+      $ref: '#/$defs/IndexConfig'
+    title: Config
+    type: array
+required:
+- config
+title: Azure AI Search Skill Configuration
+type: object

@@ -1,0 +1,25 @@
+---
+name: Check Table Evaluator
+description: Check Table Evaluator to check if the reply has a table.
+model:
+    api: chat
+    parameters:
+        temperature: 0.1
+        response_format: { "type": "json_object" }
+inputs:
+    text:
+        type: string
+outputs:
+    Table:
+        type: bool
+---
+
+system:
+You are to check if there is any table in the text given.
+Lists and equations are not tables so do not include them.
+
+TEXT: {{text}}
+
+#OUTPUT
+You are to give your answer in JSON format which is either
+{"Table": "True"} or {"Table": "False"}

@@ -1,0 +1,77 @@
+# trigger:
+#   branches:
+#     include:
+#     - main
+#     exclude:
+#     - '*'
+#   paths:
+#     include:
+#     - MultiModalBot/src/tests/e2e_test_agent
+
+resources:
+- repo: self
+
+variables:
+  namespace: 'default'
+
+  # Image respository name
+  imageRepository: 'e2etestagent'
+
+  # Project root folder.
+  sourceRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src
+
+  # Image describe root folder.
+  e2eTestAgentRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src/tests/e2e_test_agent
+
+  # Tag
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: BuildAndPush
+  displayName: Build and Push Images
+  jobs:  
+  - job: Build
+    displayName: Build Images
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build and Push
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(e2eTestAgentRoot)/Dockerfile
+        containerRegistry: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
+        buildContext: $(sourceRoot)
+        tags: |
+          $(tag)
+
+- stage: Deploy
+  displayName: Deploy to Kubernetes
+  dependsOn: BuildAndPush
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Kubernetes
+    environment: $(ENVIRONMENT_NAME)
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - script: echo $(tag)
+            displayName: 'Print Build Tag'
+          # Inline PowerShell script to replace token
+          - powershell: |
+              (Get-Content "$(e2eTestAgentRoot)/k8s_manifest.yaml").replace('${tag}', '$(tag)') | Set-Content "$(e2eTestAgentRoot)/k8s_manifest.yaml"
+            displayName: 'Replace tokens in manifest'
+          - task: KubernetesManifest@0
+            displayName: Deploy E2E Test Agent
+            inputs:
+              action: 'deploy'
+              kubernetesServiceConnection: $(K8S_SERVICE_CONNECTION)
+              namespace: $(namespace)
+              manifests: |
+                $(e2eTestAgentRoot)/k8s_manifest.yaml

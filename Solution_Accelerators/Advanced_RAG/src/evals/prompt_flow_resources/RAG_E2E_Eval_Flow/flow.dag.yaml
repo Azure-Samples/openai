@@ -1,0 +1,145 @@
+id: QnA_gpt_similarity_eval
+name: QnA GPT Similarity Evaluation
+inputs:
+  question:
+    type: string
+    default: What feeds all the fixtures in low voltage tracks instead of each light
+      having a line-to-low voltage transformer?
+    is_chat_input: false
+  ground_truth:
+    type: string
+    default: The main transformer is the object that feeds all the fixtures in low
+      voltage tracks.
+    is_chat_input: false
+  answer:
+    type: string
+    default: Master transformer.
+    is_chat_input: false
+  difficulty:
+    type: string
+    default: Hard
+    is_chat_input: false
+outputs:
+  gpt_similarity:
+    type: object
+    reference: ${concat_scores.output.gpt_similarity}
+  score_reasoning:
+    type: string
+    reference: ${concat_scores.output.comment}
+  o1_debug:
+    type: string
+    reference: ${debug.output}
+  o1_suggestion:
+    type: string
+    reference: ${hint.output}
+  o1_hint_question:
+    type: string
+    reference: ${new_question.output}
+  o1_failure_mode:
+    type: string
+    reference: ${failure_mode.output}
+nodes:
+- name: similarity_score
+  type: llm
+  source:
+    type: code
+    path: similarity_score.jinja2
+  inputs:
+    deployment_name: gpt-4o
+    temperature: 0
+    top_p: 1
+    max_tokens: 256
+    response_format:
+      type: json_object
+    seed: 42
+    answer: ${inputs.answer}
+    ground_truth: ${inputs.ground_truth}
+    question: ${inputs.question}
+  provider: AzureOpenAI
+  connection: <AZURE-OPENAI-CONNECTION>
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+- name: concat_scores
+  type: python
+  source:
+    type: code
+    path: concat_scores.py
+  inputs:
+    difficulty: ${inputs.difficulty}
+    similarity_score: ${similarity_score.output}
+  use_variants: false
+- name: aggregate_variants_results
+  type: python
+  source:
+    type: code
+    path: aggregate_variants_results.py
+  inputs:
+    results: ${concat_scores.output}
+  aggregation: true
+  use_variants: false
+- name: debug
+  type: llm
+  source:
+    type: code
+    path: debug.jinja2
+  inputs:
+    deployment_name: o1-preview
+    answer: ${inputs.answer}
+    ground_truth: ${inputs.ground_truth}
+    question: ${inputs.question}
+  provider: AzureOpenAI
+  connection: <AZURE-OPENAI-CONNECTION>
+  api: chat
+  module: promptflow.tools.aoai
+  activate:
+    when: ${concat_scores.output.gpt_similarity_pass_rate}
+    is: 0
+  use_variants: false
+- name: hint
+  type: llm
+  source:
+    type: code
+    path: hint.jinja2
+  inputs:
+    deployment_name: o1-preview
+    top_p: 1
+    feedback: ${debug.output}
+  provider: AzureOpenAI
+  connection: <AZURE-OPENAI-CONNECTION>
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+- name: new_question
+  type: llm
+  source:
+    type: code
+    path: new_question.jinja2
+  inputs:
+    deployment_name: gpt-4o
+    temperature: 0
+    seed: 42
+    feedback: ${hint.output}
+    question: ${inputs.question}
+  provider: AzureOpenAI
+  connection: <AZURE-OPENAI-CONNECTION>
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+- name: failure_mode
+  type: llm
+  source:
+    type: code
+    path: failure_mode.jinja2
+  inputs:
+    deployment_name: o1-preview
+    top_p: 1
+    feedback: ${debug.output}
+  provider: AzureOpenAI
+  connection: <AZURE-OPENAI-CONNECTION>
+  api: chat
+  module: promptflow.tools.aoai
+  use_variants: false
+node_variants: {}
+environment:
+  python_requirements_txt: requirements.txt

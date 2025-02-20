@@ -1,0 +1,14 @@
+/*
+ *   Copyright (c) 2024 
+ *   All rights reserved.
+ */
+.loaderContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+}
+
+.loader {
+    height: 100%;
+}

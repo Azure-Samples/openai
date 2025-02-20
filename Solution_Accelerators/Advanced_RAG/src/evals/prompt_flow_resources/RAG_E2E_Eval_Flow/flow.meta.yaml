@@ -1,0 +1,11 @@
+$schema: https://azuremlschemas.azureedge.net/latest/flow.schema.json
+name: qna_gpt_similarity_eval
+display_name: QnA GPT Similarity Evaluation
+type: evaluate
+path: ./flow.dag.yaml
+description: Compute the similarity of the answer base on the question and ground truth using llm.
+properties:
+  promptflow.stage: prod
+  promptflow.details.type: markdown
+  promptflow.details.source: README.md
+  promptflow.batch_inputs: samples.json

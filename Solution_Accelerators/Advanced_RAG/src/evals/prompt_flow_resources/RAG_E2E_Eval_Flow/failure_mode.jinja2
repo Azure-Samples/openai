@@ -1,0 +1,15 @@
+User:
+Task: Classify the failure mode of the AI system based on the provided feedback.
+
+Instructions:
+
+Read the Feedback: Carefully read the feedback given in the Feedback variable.
+Classify the Failure Mode: Determine the category that best describes the failure mode of the AI system based on the feedback. Use the following categories:
+- Calculation Errors: If the model made an arithmetic error.
+- Data Errors: If the inputs to any calculations were incorrect.
+- Analysis Errors: If the calculations were correct, but the final takeaway/analysis was incorrect.
+- Other: If the failure does not fit into the above categories.
+
+Return the Category Name: Only return the name of the category that you have determined. Do not return any additional text.
+
+Feedback: {{feedback}}

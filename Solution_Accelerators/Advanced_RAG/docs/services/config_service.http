@@ -1,0 +1,125 @@
+###
+# check service is running
+GET {{configuration_service_url}}/configuration-service
+
+
+###
+# List search configurations available
+GET {{configuration_service_url}}/configuration-service/configs/search_runtime
+
+###
+# List orchestrator configurations available
+GET {{configuration_service_url}}/configuration-service/configs/orchestrator_runtime
+
+###
+# List session manager configurations available
+GET {{configuration_service_url}}/configuration-service/configs/session_manager_runtime
+
+# Get config_id and config_version from the response
+
+###
+# Get the search configuration
+GET {{configuration_service_url}}/configuration-service/configs/search_runtime/<config-name>
+
+###
+# Post a configuration for Orchestrator
+POST {{configuration_service_url}}/configuration-service/configs/orchestrator_runtime
+Accept: application/json
+Content-Type: application/json
+
+{
+  "config_id": "orchestrator_runtime",
+  "config_version": "prompt_version_2_test",
+  "final_answer_generation_prompt": {
+    "system_prompt": {
+      "template": "<add system prompt here>",
+      "arguments": [
+        "context"
+      ],
+      "history": {
+        "include": true,
+        "length": 3,
+        "filter": null
+      }
+    },
+    "llm_model_parameter": {
+      "deployment_name": "gpt-4o-2",
+      "temperature": 0.0,
+      "max_tokens": 4096,
+      "seed": 0,
+      "llm_response_format": {
+        "format": {
+          "type": "text"
+        }
+      }
+    },
+    "llm_model_detail": {
+      "llm_model_name": "cl100k_base",
+      "total_max_tokens": 122000
+    },
+    "prompt_detail": {
+      "prompt_version": "2.0.0",
+      "prompt_nickname": "final_answer_prompt",
+      "llm_model_family": "AzureOpenAI"
+    }
+  },
+  "static_user_query_rephraser_prompt": {
+    "system_prompt": {
+      "template": "<add system prompt here>",
+      "arguments": [
+        "current_date"
+      ],
+      "history": {
+        "include": false,
+        "length": 0,
+        "filter": null
+      }
+    },
+    "user_prompt": {
+      "template": "{user_request_and_response_str}\nLast user message: {last_user_message}\nRephrased message:\\n",
+      "arguments": [
+        "user_request_and_response_str",
+        "last_user_message"
+      ],
+      "history": {
+        "include": true,
+        "length": 3
+      }
+    },
+    "llm_model_parameter": {
+      "deployment_name": "gpt-4o-2",
+      "temperature": 0.0,
+      "max_tokens": 4096,
+      "seed": 0,
+      "llm_response_format": {
+        "format": {
+          "type": "json_object"
+        }
+      }
+    },
+    "prompt_detail": {
+      "prompt_version": "1.1.0",
+      "prompt_nickname": "user_query_rephraser",
+      "llm_model_family": "AzureOpenAI"
+    }
+  }
+}
+
+
+
+###
+# Get the orchestrator configuration
+GET {{configuration_service_url}}/configuration-service/configs/orchestrator_runtime/pm_test_02
+
+###
+# Create a session manager configuration overriding Azure storage container to go with search override
+POST {{configuration_service_url}}/configuration-service/configs/session_manager_runtime
+Accept: application/json
+Content-Type: application/json
+
+{  "config_id": "session_manager_runtime",
+    "config_version": "demo_v1",
+    "config_body": {
+        "azure_storage_container": "demo-content"
+    }
+}

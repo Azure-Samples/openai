@@ -1,0 +1,14 @@
+/*
+ *   Copyright (c) 2024 
+ *   All rights reserved.
+ */
+.container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.disabled {
+    opacity: 0.4;
+}

@@ -1,0 +1,234 @@
+{
+    "@odata.etag": "\"0x8DD0221B2ACEC71\"",
+    "name": "<index-name>",
+    "fields": [
+      {
+        "name": "id",
+        "type": "Edm.String",
+        "searchable": false,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": true,
+        "synonymMaps": []
+      },
+      {
+        "name": "articleId",
+        "type": "Edm.String",
+        "searchable": false,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": true,
+        "key": false,
+        "synonymMaps": []
+      },
+      {
+        "name": "productName",
+        "type": "Edm.String",
+        "searchable": false,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": true,
+        "key": false,
+        "synonymMaps": []
+      },
+      {
+        "name": "productType",
+        "type": "Edm.String",
+        "searchable": false,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": true,
+        "key": false,
+        "synonymMaps": []
+      },
+      {
+        "name": "indexGroupName",
+        "type": "Edm.String",
+        "searchable": false,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": true,
+        "key": false,
+        "synonymMaps": []
+      },
+      {
+        "name": "gender",
+        "type": "Edm.String",
+        "searchable": false,
+        "filterable": true,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": true,
+        "key": false,
+        "synonymMaps": []
+      },
+      {
+        "name": "detailDescription",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "analyzer": "en.microsoft",
+        "synonymMaps": []
+      },
+      {
+        "name": "detailDescriptionVector",
+        "type": "Collection(Edm.Single)",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": false,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "dimensions": 1536,
+        "vectorSearchProfile": "myHnswProfile",
+        "synonymMaps": []
+      },
+      {
+        "name": "summarizedDescription",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "analyzer": "en.microsoft",
+        "synonymMaps": []
+      },
+      {
+        "name": "summarizedDescriptionVector",
+        "type": "Collection(Edm.Single)",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": false,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "dimensions": 1536,
+        "vectorSearchProfile": "myHnswProfile",
+        "synonymMaps": []
+      },
+      {
+        "name": "generatedDescription",
+        "type": "Edm.String",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "analyzer": "en.microsoft",
+        "synonymMaps": []
+      },
+      {
+        "name": "generatedDescriptionVector",
+        "type": "Collection(Edm.Single)",
+        "searchable": true,
+        "filterable": false,
+        "retrievable": false,
+        "stored": true,
+        "sortable": false,
+        "facetable": false,
+        "key": false,
+        "dimensions": 1536,
+        "vectorSearchProfile": "myHnswProfile",
+        "synonymMaps": []
+      },
+      {
+        "name": "imageUrl",
+        "type": "Edm.String",
+        "searchable": false,
+        "filterable": false,
+        "retrievable": true,
+        "stored": true,
+        "sortable": false,
+        "facetable": true,
+        "key": false,
+        "synonymMaps": []
+      }
+    ],
+    "scoringProfiles": [],
+    "suggesters": [],
+    "analyzers": [],
+    "normalizers": [],
+    "tokenizers": [],
+    "tokenFilters": [],
+    "charFilters": [],
+    "similarity": {
+      "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+    },
+    "semantic": {
+      "configurations": [
+        {
+          "name": "catalog-semantic-config",
+          "prioritizedFields": {
+            "prioritizedContentFields": [
+              {
+                "fieldName": "detailDescription"
+              },
+              {
+                "fieldName": "generatedDescription"
+              },
+              {
+                "fieldName": "summarizedDescription"
+              }
+            ],
+            "prioritizedKeywordsFields": [
+              {
+                "fieldName": "indexGroupName"
+              },
+              {
+                "fieldName": "gender"
+              },
+              {
+                "fieldName": "productType"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "vectorSearch": {
+      "algorithms": [
+        {
+          "name": "myHnsw",
+          "kind": "hnsw",
+          "hnswParameters": {
+            "metric": "cosine",
+            "m": 4,
+            "efConstruction": 400,
+            "efSearch": 500
+          }
+        }
+      ],
+      "profiles": [
+        {
+          "name": "myHnswProfile",
+          "algorithm": "myHnsw"
+        }
+      ],
+      "vectorizers": [],
+      "compressions": []
+    }
+  }

@@ -1,0 +1,30 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Document Indexer",
+  "name_for_model": "documentindexer",
+  "description_for_human": "Indexes documents in Azure AI Search to support chat with your data scenarios.",
+  "description_for_model": "Indexes documents in Azure AI Search to support chat with your data scenarios.",
+  "auth": {
+    "type": "none"
+  },
+  "api": [
+    {
+      "type": "GET",
+      "url": "<SKILL_HOSTNAME>/manifest"
+    },
+    {
+      "type": "POST",
+      "url": "<SKILL_HOSTNAME>/index",
+      "content": {
+        "user_id": "The user id associated with the current session.",
+        "conversation_id": "The conversation id associated with the current session.",
+        "dialog_id": "The dialog id associated with the current session.",
+        "file": "The file to be indexed in the Azure AI Search service as raw bytes content."
+      },
+      "response": {
+        "message": "The document <document_name> is indexed successfully.",
+        "status": "201"
+      }
+    }
+  ]
+}

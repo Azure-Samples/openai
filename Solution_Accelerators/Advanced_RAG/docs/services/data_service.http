@@ -1,0 +1,8 @@
+###
+# get all user-profiles
+GET {{data_service_url}}/user-profiles
+
+###
+# get single user-profiles
+
+GET {{data_service_url}}/user-profiles/anonymous

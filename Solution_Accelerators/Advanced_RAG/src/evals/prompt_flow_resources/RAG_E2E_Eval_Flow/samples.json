@@ -1,0 +1,7 @@
+[
+  {
+    "question": "What feeds all the fixtures in low voltage tracks instead of each light having a line-to-low voltage transformer?",
+    "answer": "The main transformer is the object that feeds all the fixtures in low voltage tracks.",
+    "ground_truth": "Master transformer."
+  }
+]

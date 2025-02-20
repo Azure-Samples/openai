@@ -1,0 +1,21 @@
+{
+  "$schema": "./searchSkill.schema.json",
+  "config": [
+    {
+      "index_name": "microsoft-secure-markdown-index-3k",
+      "index_application": "image_description_search",
+      "select_fields": [
+        { "name": "id", "is_item_id": true, "is_product_id": true },
+        { "name": "content", "contains_image_description": true },
+        { "name": "headings" },
+        { "name": "sourcePage" },
+        { "name": "sourceFile" },
+        { "name": "reportedYear" },
+        { "name": "subsidiary" }
+      ],
+      "search_type": "hybrid_semantic",
+      "vector_configs": ["contentVector"],
+      "semantic_config": "microsoft-semantic-config"
+    }
+  ]
+}

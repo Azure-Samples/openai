@@ -1,0 +1,18 @@
+###
+
+# ingestion health check
+GET {{ingestion_service_url}}/indexer
+
+###
+# post an ingestion request
+POST {{ingestion_service_url}}/indexer/index
+Content-Type: application/json
+{
+  "storage_container_name": "content",
+  "index_name": "microsoft-financial-index",
+  "payload": {
+    "filename": "2023_Annual_Report.pdf",
+    "reported_year": "2023",
+    "subsidiary": "Microsoft"
+  }
+}

@@ -1,0 +1,15 @@
+.thoughtProcess {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.thoughtProcessHeader {
+    word-wrap: break-word;
+    font-weight: bolder;
+}
+
+.thoughtProcessParagraph {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    word-wrap: break-word;
+    font-weight: normal;
+}
