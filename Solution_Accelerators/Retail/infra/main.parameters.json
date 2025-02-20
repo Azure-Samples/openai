@@ -1,0 +1,108 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "value": "${AZURE_ENV_NAME}"
+    },
+    "location": {
+      "value": "${AZURE_LOCATION}"
+    },
+    "principalId": {
+      "value": "${AZURE_PRINCIPAL_ID}"
+    },
+    "resourceGroupName": {
+      "value": "${AZURE_RESOURCE_GROUP}"
+    },
+    "gpt4ServiceName": {
+      "value": "{AZURE_OPENAI_SERVICE_NAME}"
+    },
+    "gpt4ResourceGroupName": {
+      "value": "${AZURE_RESOURCE_GROUP}"
+    },
+    "openAiSkuName": {
+      "value": "S0"
+    },
+    "deployOpenAIModels": {
+      "value": true
+    },
+    "openAIResourceGroupName": {
+      "value": "${AZURE_RESOURCE_GROUP}"
+    },
+    "openAIResourceGroupLocation": {
+      "value": "${AZURE_LOCATION}"
+    },
+    "openAIResourceName": {
+      "value": "${AZURE_OPENAI_RESOURCE_NAME}"
+    },
+    "gpt35TurboDeploymentName": {
+      "value": "gpt-35-turbo-1106"
+    },
+    "gpt35ModelVersion": {
+      "value": "1106"
+    },
+    "embeddingsGptDeploymentName": {
+      "value": "text-embedding-ada-002"
+    },
+    "embeddingsGptModelName": {
+      "value": "text-embedding-ada-002"
+    },
+    "embeddingsGptModelVersion": {
+      "value": "2"
+    },
+    "multiAccountCogServiceName": {
+      "value": "${MULTIACCOUNT_COG_SERVICE_NAME}"
+    },
+    "multiAccountCogServiceSkuName": {
+      "value": "S0"
+    },
+    "searchServiceName": {
+      "value": "${AZURE_SEARCH_SERVICE}"
+    },
+    "searchServiceResourceGroupName": {
+      "value": "${AZURE_SEARCH_SERVICE_RESOURCE_GROUP}"
+    },
+    "searchServiceSkuName": {
+      "value": "standard"
+    },
+    "searchSkipVectorization": {
+      "value": false
+    },
+    "frontendWebAppName": {
+      "value": "scenariodemo-fe-test"
+    },
+    "aksClusterName": {
+      "value": "${AKS_CLUSTER_NAME}"
+    },
+    "aksResourceGroupName": {
+      "value": "${AZURE_RESOURCE_GROUP}"
+    },
+    "aksClusterLocation": {
+      "value": "westus2"
+    },
+    "aksVersion": {
+      "value": "1.29.7"
+    },
+    "aksAgentPoolVMSize": {
+      "value": "standard_a2m_v2"
+    },
+    "aksUserPoolVMSize": {
+      "value": "standard_a2m_v2"
+    },
+    "virtualNetworkAddressPrefix": {
+      "value": "10.255.0.0/16"
+    },
+    "subnetPrefixes": {
+      "value": {
+        "aksSubnetPrefix": "10.255.1.0/24",
+        "endpointsSubnetPrefix": "10.255.101.0/24",
+        "appGatewaySubnetPrefix": "10.255.201.0/24"
+      }
+    },
+    "tag": {
+      "value": {
+        "Purpose": "For developing multimodal bot PoC"
+      }
+    }
+  }
+}

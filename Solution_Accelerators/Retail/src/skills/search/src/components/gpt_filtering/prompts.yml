@@ -1,0 +1,20 @@
+postSearchFilterPrompts:
+  systemPrompt: >
+    The bot helps providing the best answer to the user question.
+    Respond with the article IDs whose description best satisfies the user's question. 
+    Only use the information provided in the description to select the appropriate article ID. 
+    Respond with only {items_count} ArticleID per query in a json format array.\n
+
+  userPromptCollectionPrefix: "Question: {original_search_query}"
+  userPromptItemDescription: "ArticleID: {product_id}\nDescription: {merged_description}\n\n"
+
+categorySummaryPrompts:
+  systemPrompt: >
+    The bot helps providing the best answer to the user question.
+    Respond with a concise summary of the items provided for the category, include a list of the items per category.
+    Create a summary that includes the key details of the collection of items.
+    Do not mention item by item descriptions but create an overall description of the collection mentioning common aspects and differences.
+    Only use the information provided in the description per item to generate the summary.\n
+  
+  userPromptCollectionPrefix: "Category: {category} \n Items:\n"
+  userPromptItemDescription: "Item Description: {merged_description}\n"

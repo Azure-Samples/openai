@@ -1,0 +1,42 @@
+test_cases:
+  - test_case: "Sample 8"
+    communication_protocol: "http"
+    scenario: "retail"
+    conversation:
+      user_id: 7b17fb37-c3d6-4df0-8a51-dc1d6aa0e267
+      conversation_id: "IntegrationTest_Conv_8"
+      scenario: "retail"
+      dialogs:
+        - dialog_id: "1"
+          message:
+            payload:
+              - type: "text"
+                value: "I am going to a gala and need a solid suit jacket."
+          overrides:
+            search_overrides:
+              top: 7
+          assertion:
+            response_assertion: "status_code == 200"
+            result_assertion:
+              product_description_includes_keywords:
+                - "business jacket"
+  - test_case: "Sample 9"
+    communication_protocol: "http"
+    scenario: "retail"
+    conversation:
+      user_id: 7b17fb37-c3d6-4df0-8a51-dc1d6aa0e267
+      conversation_id: "IntegrationTest_Conv_9"
+      dialogs:
+        - dialog_id: "1"
+          message:
+            payload:
+              - type: "text"
+                value: "I am looking for accessories to pair with a dinner gown."
+          overrides:
+            is_content_safety_enabled: "false"
+          assertion:
+            response_assertion: "status_code == 200"
+            result_assertion:
+              product_description_includes_keywords:
+                - "purse"
+

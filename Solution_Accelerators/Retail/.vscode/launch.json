@@ -1,0 +1,303 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Configuration service: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/config_hub",
+            "python": "${workspaceFolder}/src/config_hub/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Configuration service: Setup Environment"
+        },
+        {
+            "name": "Configuration service: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/config_hub",
+            "python": "${workspaceFolder}/src/config_hub/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"
+        },
+        {
+            "name": "Data service: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/data",
+            "python": "${workspaceFolder}/src/data/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Data service: Setup Environment"
+        },
+        {
+            "name": "Data service: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/data",
+            "python": "${workspaceFolder}/src/data/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"
+        },
+        {
+            "name": "Orchestrator_Retail: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/orchestrator_retail",
+            "python": "${workspaceFolder}/src/orchestrator_retail/.venv/Scripts/python.exe",
+            "program": "run.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Orchestrator_Retail: Setup Environment"
+        },
+        {
+            "name": "Orchestrator_Retail: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/orchestrator_retail",
+            "python": "${workspaceFolder}/src/orchestrator_retail/.venv/Scripts/python.exe",
+            "program": "run.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"
+        },
+        {
+            "name": "Session Manager: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/session_manager",
+            "python": "${workspaceFolder}/src/session_manager/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Session Manager: Setup Environment"
+        },
+        {
+            "name": "Session Manager: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/session_manager",
+            "python": "${workspaceFolder}/src/session_manager/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"
+        },
+        {
+            "name": "Search Skill: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/skills/search/src",
+            "python": "${workspaceFolder}/src/skills/search/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Search Skill: Setup Environment"
+        },
+        {
+            "name": "Search Skill: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/skills/search/src",
+            "python": "${workspaceFolder}/src/skills/search/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"
+        },
+        {
+            "name": "Ingestion Service: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/skills/ingestion",
+            "python": "${workspaceFolder}/src/skills/ingestion/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Ingestion Service: Setup Environment"
+        },
+        {
+            "name": "Ingestion Service: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/skills/ingestion",
+            "python": "${workspaceFolder}/src/skills/ingestion/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"
+        },
+        {
+            "name": "Frontend Retail: build",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/frontend_retail",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "build"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Frontend Retail: Launch UI From Edge - build",
+            "request": "launch",
+            "type": "msedge",
+            "url": "http://localhost:5000",
+            "sourceMaps": true,
+            "webRoot": "${workspaceFolder}/src/frontend_retail/src",
+            "skipFiles": [
+                "node_modules"
+            ],
+            "preLaunchTask": "Frontend Retail: Start"
+        },
+        {
+            "name": "Frontend Retail: Launch UI From Edge - live",
+            "request": "launch",
+            "type": "msedge",
+            "url": "http://localhost:3000",
+            "sourceMaps": true,
+            "webRoot": "${workspaceFolder}/src/frontend_retail/src",
+            "skipFiles": [
+                "node_modules"
+            ]
+        },
+        {
+            "name": "Integration Test: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "app.py"
+            ],
+            "cwd": "${workspaceFolder}/src/tests/int_test",
+            "python": "${workspaceFolder}/src/tests/int_test/.venv/Scripts/python.exe",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Integration Tests: Setup Environment",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "name": "Integration Test: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "pytest",
+            "args": [
+                "app.py"
+            ],
+            "cwd": "${workspaceFolder}/src/tests/int_test",
+            "python": "${workspaceFolder}/src/tests/int_test/.venv/Scripts/python.exe",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "name": "Recommender Skill: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/skills/recommender/src",
+            "python": "${workspaceFolder}/src/skills/recommender/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Recommender Skill: Setup Environment"
+        },
+        {
+            "name": "Recommender Skill: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/skills/recommender/src",
+            "python": "${workspaceFolder}/src/skills/recommender/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"            
+        },
+        {
+            "name": "Image Describer Skill: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/skills/image_describer/src",
+            "python": "${workspaceFolder}/src/skills/image_describer/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Image Describer Skill: Setup Environment"
+        },
+        {
+            "name": "Image Describer Skill: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/skills/image_describer/src",
+            "python": "${workspaceFolder}/src/skills/image_describer/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"
+        },
+        {
+            "name": "Sim Tests: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/tests/sim_test",
+            "python": "${workspaceFolder}/src/tests/sim_test/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Sim Tests: Setup Environment"
+        },
+    ],
+    "compounds": [
+        {
+            "name": "Run Retail Bot Backend",
+            "configurations": [
+                "Configuration service: Launch & Attach server [NO INSTALL]",
+                "Data service: Launch & Attach server [NO INSTALL]",
+                "Session Manager: Launch & Attach server [NO INSTALL]",
+                "Orchestrator_Retail: Launch & Attach server [NO INSTALL]",
+                "Search Skill: Launch & Attach server [NO INSTALL]",
+                "Recommender Skill: Launch & Attach server [NO INSTALL]",
+                "Image Describer Skill: Launch & Attach server [NO INSTALL]"
+            ],
+            "preLaunchTask": "Retail Bot Backend - Setup Environment (All services)",
+            "stopAll": true
+        },
+        {
+            "name": "Run Retail Bot Backend [NO INSTALL]",
+            "configurations": [
+                "Configuration service: Launch & Attach server [NO INSTALL]",
+                "Data service: Launch & Attach server [NO INSTALL]",
+                "Session Manager: Launch & Attach server [NO INSTALL]",
+                "Orchestrator_Retail: Launch & Attach server [NO INSTALL]",
+                "Search Skill: Launch & Attach server [NO INSTALL]",
+                "Recommender Skill: Launch & Attach server [NO INSTALL]",
+                "Image Describer Skill: Launch & Attach server [NO INSTALL]"
+            ],
+            "stopAll": true
+        }
+    ]
+}

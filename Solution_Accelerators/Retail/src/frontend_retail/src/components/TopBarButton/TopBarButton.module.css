@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.enabled {
+    cursor: pointer;
+}
+
+.disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}

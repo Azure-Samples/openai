@@ -1,0 +1,13 @@
+{
+  "type": "AdaptiveCard",
+  "version": "1.2",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "This is some text",
+      "wrap": true
+    }
+  ],
+  "actions": [],
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+}

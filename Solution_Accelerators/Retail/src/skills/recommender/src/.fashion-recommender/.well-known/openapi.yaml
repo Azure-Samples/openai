@@ -1,0 +1,68 @@
+openapi: 3.0.3
+
+info:
+  title: recommender
+  description: Recommender skill analyzes product descriptions provided by the caller and recommends pieces of clothing.
+  version: 1.0
+
+servers:
+  - url: https://0.0.0.0:8080
+    description: App server running as a Docker container.
+
+paths:
+  /recommend:
+    post:
+      description: Analyzes the images shared as an URL using AI models and generates detailed descriptions.
+      operationId: analyze
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommenderRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecommenderResponse'
+
+components:
+  schemas:
+    RecommenderRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        recommendation_queries:
+          type: array
+          description: The list of recommendation queries
+          items:
+            type: string
+            description: Recommendation query. e.g. "What shoes go well with black jeans?", "What pants go well with a white shirt?"
+      required:
+        - recommendation_queries
+    RecommenderResponse:
+      type: object
+      additionalProperties: false
+      properties:
+        user_id:
+          type: string
+          description: The user id provided in the request payload.
+          pattern: ^[\x00-\x7F]*$
+        conversation_id:
+          type: string
+          description: The conversation id provided in the request payload.
+          pattern: ^[\x00-\x7F]*$
+        dialog_id:
+          type: string
+          description: The dialog id provided in the request payload.
+          pattern: ^[\x00-\x7F]*$
+        recommendations:
+          type: array
+          description: The list of recommendations based on product descriptions.
+          items:
+            type: string
+      required:
+        - recommendations
+        

@@ -1,0 +1,14 @@
+/*/.debug.env
+/*/.debug.env.template
+/**/*/.debug.env
+/**/*/.debug.env.template
+/backend/static
+/backend/frontend/node_modules
+/*/.venv
+/**/*/.venv
+/*.egg-info
+/*/*.egg-info
+/*/__pycache__
+/**/*/__pycache__
+/build
+*.md

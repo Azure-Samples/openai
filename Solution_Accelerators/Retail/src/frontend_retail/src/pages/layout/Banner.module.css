@@ -1,0 +1,24 @@
+.header {
+    background-color: #0a569d;
+}
+
+.headerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.headerTitleContainer {
+    display: flex;
+    align-items: center;
+    margin-right: 40px;
+    color: #f2f2f2;
+    text-decoration: none;
+}
+
+.headerTitle {
+    margin-left: 12px;
+    font-weight: 600;
+}

@@ -1,0 +1,68 @@
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - MultiModalBot/src/common
+    - MultiModalBot/src/data
+
+resources:
+- repo: self
+
+variables:
+  sourceRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src
+  dataRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src/data
+  namespace: 'default'
+
+  # Tag
+  tag: '$(Build.BuildId)'
+
+stages:
+
+# - template: ../tests/int_test/run_test.yaml
+
+- stage: BuildAndPush
+  displayName: Build and Push Images
+  jobs:
+  - job: Build
+    displayName: Build Images
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build and Push Data Image
+      inputs:
+        command: buildAndPush
+        repository: data
+        dockerfile: $(dataRoot)/Dockerfile
+        containerRegistry: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
+        buildContext: $(sourceRoot)
+        tags: |
+          $(tag)
+
+- stage: DevDeploy
+  displayName: Dev - Deploy to Kubernetes
+  dependsOn: BuildAndPush
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Kubernetes
+    environment: $(ENVIRONMENT_NAME)
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: KubernetesManifest@1
+            displayName: Deploy Data service
+            inputs:
+              action: 'deploy'
+              kubernetesServiceConnection: $(K8S_SERVICE_CONNECTION)
+              namespace: $(namespace)
+              manifests: |
+                $(dataRoot)/k8s_manifest_secure.yaml
+              containers: |
+                $(DOCKER_REGISTRY)/data:$(tag)

@@ -1,0 +1,42 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Recommender Skill",
+    "name_for_model": "recommender",
+    "description_for_human": "Recommends additional clothing based on the product descriptions.",
+    "description_for_model": "Skill for recommending clothing based on input text descriptions.",
+    "auth": {
+      "type": "none"
+    },
+    "api": [
+      {
+        "type": "GET",
+        "url": "<SKILL_HOSTNAME>/manifest"
+      },
+      {
+        "type": "POST",
+        "url": "<SKILL_HOSTNAME>/recommend",
+        "content": {
+          "user_id": "The user id associated with the current session.",
+          "conversation_id": "The conversation id associated with the current session.",
+          "dialog_id": "The dialog id associated with the current session.",
+          "system_prompt": "The system prompt containing the directive for the model to output domain-specific completion.",
+          "user_prompt": "The user prompt containing the query in context to the image.",
+          "descriptions": "A list of product descriptions for the pieces of clothing."
+        },
+        "response": {
+          "result":
+          {
+            "user_id":null,
+            "conversation_id":null,
+            "dialog_id":null,
+            "recommendations": [
+              "1. A pair of white leather low-top sneakers with navy blue accents, featuring a comfortable insole and a contrasting rubber sole.",
+              "2. A pair of burgundy suede loafers with a classic slip-on design, a low heel, and a sleek finish.",
+              "3. A pair of navy blue running shoes with a breathable mesh upper, a cushioned insole, and a flexible rubber outsole.",
+              "4. A pair of black leather boots with a lace-up front, a padded ankle collar, and a durable rubber sole."
+            ]
+          }
+        }
+      }
+    ]
+  }

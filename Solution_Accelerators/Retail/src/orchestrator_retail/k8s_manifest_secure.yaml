@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orchestrator-retail-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orchestrator-retail
+  template:
+    metadata:
+      labels:
+        app: orchestrator-retail
+    spec:
+      volumes:
+        - name: secrets-store-inline
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: kv-secrets-provider 
+      containers:
+        - name: orchestrator-retail-container
+          image: cr5xd4xcq23ihzu.azurecr.io/orchestrator-retail:${tag}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5102
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "2Gi"
+          volumeMounts:
+            - name: secrets-store-inline
+              mountPath: "/mnt/secrets-store"
+              readOnly: true
+          env:
+          - name: ENVIRONMENT
+            value: "PROD"
+      nodeSelector:
+        agentpool: userpool
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchestrator-retail
+spec:
+  ports:
+  - port: 5102
+    targetPort: 5102
+  selector:
+    app: orchestrator-retail
+  type: ClusterIP

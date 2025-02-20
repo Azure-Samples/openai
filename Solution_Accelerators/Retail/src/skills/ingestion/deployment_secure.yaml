@@ -1,0 +1,80 @@
+trigger:
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - MultiModalBot/src/common
+    - MultiModalBot/src/skills/ingestion
+
+resources:
+- repo: self
+
+variables:
+  sourceRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src
+  ingestionRoot: $(System.DefaultWorkingDirectory)/MultiModalBot/src/skills/ingestion
+  namespace: 'default'
+
+  prodImageRepository: 'ingestion'
+
+  # Tag
+  tag: '$(Build.BuildNumber)'
+
+  # Dataset specific tags
+  dataSetTag: $(tag)-$(DATA_SET_TAG)
+
+stages:
+# - template: ../../tests/int_test/run_test.yaml
+
+- stage: BuildAndPush
+  displayName: Build and Push Images
+  # dependsOn: IntTest
+  jobs:
+  - job: Build
+    displayName: Build Images
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: Docker@2
+      displayName: Build -  Ingestion Service Container Image
+      inputs:
+        command: build
+        repository: $(prodImageRepository)
+        dockerfile: $(ingestionRoot)/Dockerfile
+        containerRegistry: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
+        buildContext: $(sourceRoot)
+        tags: $(dataSetTag)
+
+    - task: Docker@2
+      displayName: Push -  Ingestion Service Container Image
+      inputs:
+        command: push
+        repository: $(prodImageRepository)
+        containerRegistry: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
+        tags: $(dataSetTag)
+
+- stage: DevDeploy
+  displayName: Dev - Deploy Ingestion Service to Kubernetes
+  dependsOn: BuildAndPush
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: Deploy to Kubernetes
+    environment: $(ENVIRONMENT_NAME)
+    pool:
+      vmImage: 'ubuntu-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+          - task: KubernetesManifest@0
+            displayName: Deploy Ingestion Service
+            inputs:
+              action: 'deploy'
+              kubernetesServiceConnection: $(K8S_SERVICE_CONNECTION)
+              namespace: $(namespace)
+              manifests: |
+                $(ingestionRoot)/k8s_manifest_secure.yaml
+              containers: |
+                $(DOCKER_REGISTRY)/$(prodImageRepository):$(dataSetTag)

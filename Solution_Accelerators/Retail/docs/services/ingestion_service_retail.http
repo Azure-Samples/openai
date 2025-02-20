@@ -1,0 +1,32 @@
+###
+# ingestion health check
+
+GET {{ingestion_service_url}}/indexer
+
+### 
+# post an ingestion request
+POST {{ingestion_service_url}}/indexer/index
+Content-Type: application/json
+
+{
+  "storage_container_name": "images",
+  "index_name": "retail-catalog-index-3",
+  "enrichment": "IMAGE_DESCRIPTION",
+  "payload": {
+    "items": [
+      {
+        "article_id": "business_jacket1",
+        "product_name": "business jacket1",
+        "product_type": "jacket",
+        "index_group_name": "formal",
+        "gender": "men",
+        "detail_description": "tailored, dark blue jacket with a subtle texture, fine herringbone pattern. It features notch lapels, a two-button front closure, and a slim fit that contours closely to the body."
+      }
+      // Include more items here from productlisting.json
+    ]
+  }
+}
+
+###
+# get status of task by task id
+GET {{ingestion_service_url}}/indexer/index/3c8b1753-56fa-4ed9-b7da-79b4753704b9
