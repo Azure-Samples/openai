@@ -186,10 +186,13 @@ def get_arguments():
     experiment_id = f"RAG-Eval_Dataset_eq_{dataset_name}_Start_eq_{current_time}"
     parsed_config.experiment_id = experiment_id
 
-    save_path = os.path.join(os.path.dirname(__file__), f"results/{experiment_id}")
+    base_path = os.path.join(os.path.dirname(__file__), "results")
+    save_path = os.path.normpath(os.path.join(base_path, experiment_id))
+    if not save_path.startswith(base_path):
+        raise Exception("Invalid experiment ID resulting in unsafe path")
     parsed_config.save_path = save_path
     os.makedirs(save_path, exist_ok=True)
-    with open(f"{save_path}/config.json", "w") as f:
+    with open(os.path.join(save_path, "config.json"), "w") as f:
         json.dump(vars(parsed_config), f, indent=4)
 
     return parsed_config
