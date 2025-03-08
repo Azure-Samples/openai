@@ -9,6 +9,7 @@ import os
 import sys
 import time
 import uuid
+from werkzeug.utils import secure_filename
 
 import pandas as pd
 import requests
@@ -174,7 +175,7 @@ def get_arguments():
     current_time = pd.Timestamp.now().strftime("%Y-%m-%d_%H%M%S")
     aml_dataset = parsed_config.aml_dataset
     experiment_id = f"RAG-Bot-Eval_Dataset_eq_{aml_dataset}_Start_eq_{current_time}"
-    parsed_config.experiment_id = experiment_id
+    parsed_config.experiment_id = secure_filename(experiment_id)
 
     base_path = os.path.join(os.path.dirname(__file__), "results")
     save_path = os.path.normpath(os.path.join(base_path, experiment_id))
@@ -719,8 +720,8 @@ def evaluate(config: argparse.Namespace):
 
     combined_results = {
         "config": config.__dict__,
-        "metrics": json.load(open(os.path.normpath(os.path.join(current_dir, "results", config.experiment_id, "run_metrics.json")))),
-        "answers": pd.read_csv(os.path.normpath(os.path.join(current_dir, "results", config.experiment_id, "run_details.csv"))).to_dict(),
+        "metrics": json.load(open(os.path.join(current_dir, "results", config.experiment_id, "run_metrics.json"))),
+        "answers": pd.read_csv(os.path.join(current_dir, "results", config.experiment_id, "run_details.csv")).to_dict(),
     }
     metrics_path = os.path.normpath(os.path.join(current_dir, "results", config.experiment_id, "combined_results.json"))
     if not metrics_path.startswith(os.path.join(current_dir, "results")):
