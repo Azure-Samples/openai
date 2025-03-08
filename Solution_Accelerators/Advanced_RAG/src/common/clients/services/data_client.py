@@ -41,6 +41,8 @@ class DataClient():
         return Conversation(**data)
     
     def clear_chat_session(self, user_id: str, conversation_id: str):
+        if not user_id.isalnum() or not conversation_id.isalnum():
+            raise ValueError("Invalid user_id or conversation_id")
         path = f"/chat-sessions/{user_id}/{conversation_id}"
         make_request(self.base_uri, path, HttpMethod.DELETE, self.logger)
 

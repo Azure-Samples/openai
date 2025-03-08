@@ -17,6 +17,9 @@ class HttpMethod(Enum):
 def make_request(base_uri: str, path: str, method: HttpMethod, logger: AppLogger, 
                  payload: Optional[dict] = None, raise_for_status_code: bool = True) -> Tuple[str, int]:
     
+    if not path.isalnum():
+        raise ValueError("Invalid path parameter")
+    
     logger.info(f"Making {method.value} request to {path} endpoint")
 
     url = base_uri + path
