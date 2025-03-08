@@ -9,9 +9,16 @@ from data.managers.entities.api.manager import EntitiesManager
 from data.managers.permissions.manager import PermissionsManager
 from typing import List, Set
 
+import os
+
+SAFE_ROOT = os.path.abspath("./entries")
+
 def read_yaml(file_path, verbose) -> dict:
     if verbose: print(f"Reading YAML file: {file_path}")
-    with open(file_path, "r") as f:
+    normalized_path = os.path.normpath(os.path.join(SAFE_ROOT, file_path))
+    if not normalized_path.startswith(SAFE_ROOT):
+        raise Exception(f"Invalid file path: {file_path}")
+    with open(normalized_path, "r") as f:
         try:
             return yaml.safe_load(f)
         except yaml.YAMLError as exc:
