@@ -176,9 +176,12 @@ def get_arguments():
     experiment_id = f"RAG-Bot-Eval_Dataset_eq_{aml_dataset}_Start_eq_{current_time}"
     parsed_config.experiment_id = experiment_id
 
-    save_path = os.path.join(os.path.dirname(__file__), f"results/{experiment_id}")
+    base_path = os.path.join(os.path.dirname(__file__), "results")
+    save_path = os.path.normpath(os.path.join(base_path, experiment_id))
+    if not save_path.startswith(base_path):
+        raise Exception("Invalid experiment ID resulting in unsafe path.")
     os.makedirs(save_path, exist_ok=True)
-    with open(f"{save_path}/config.json", "w") as f:
+    with open(os.path.join(save_path, "config.json"), "w") as f:
         json.dump(vars(parsed_config), f, indent=4)
 
     return parsed_config
@@ -200,7 +203,10 @@ def load_previous_run_config():
         default=None,
     )
     parsed_config = arg_parser.parse_args()
-    config_path = f"{os.path.dirname(__file__)}/results/{parsed_config.resume_run_id}/config.json"
+    base_path = os.path.join(os.path.dirname(__file__), "results")
+    config_path = os.path.normpath(os.path.join(base_path, parsed_config.resume_run_id, "config.json"))
+    if not config_path.startswith(base_path):
+        raise Exception("Invalid resume run ID resulting in unsafe path.")
     parsed_config = json.load(open(config_path, "r"))
 
     print(f"Resuming run with ID: {parsed_config['experiment_id']}")
@@ -713,11 +719,14 @@ def evaluate(config: argparse.Namespace):
 
     combined_results = {
         "config": config.__dict__,
-        "metrics": json.load(open(f"{current_dir}/results/{config.experiment_id}/run_metrics.json")),
-        "answers": pd.read_csv(f"{current_dir}/results/{config.experiment_id}/run_details.csv").to_dict(),
+        "metrics": json.load(open(os.path.normpath(os.path.join(current_dir, "results", config.experiment_id, "run_metrics.json")))),
+        "answers": pd.read_csv(os.path.normpath(os.path.join(current_dir, "results", config.experiment_id, "run_details.csv"))).to_dict(),
     }
+    metrics_path = os.path.normpath(os.path.join(current_dir, "results", config.experiment_id, "combined_results.json"))
+    if not metrics_path.startswith(os.path.join(current_dir, "results")):
+        raise Exception("Invalid experiment ID resulting in unsafe path.")
     json.dump(
-        combined_results, open(f"{current_dir}/results/{config.experiment_id}/combined_results.json", "w"), indent=4
+        combined_results, open(metrics_path, "w"), indent=4
     )
     return combined_results
 
