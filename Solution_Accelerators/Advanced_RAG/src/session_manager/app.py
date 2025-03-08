@@ -108,7 +108,11 @@ async def health_check(request: web.Request):
 @routes.get("/assets/{rest_of_path}")
 async def assets(request: web.Request):
     rest_of_path = request.match_info.get("rest_of_path", None)
-    return web.FileResponse(f"assets/{rest_of_path}")
+    base_path = os.path.join("assets")
+    full_path = os.path.normpath(os.path.join(base_path, rest_of_path))
+    if not full_path.startswith(base_path):
+        raise web.HTTPForbidden(reason="Invalid path")
+    return web.FileResponse(full_path)
 
 
 # Serve content files from blob storage from within the app to keep the example self-contained.
