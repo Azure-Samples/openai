@@ -1,0 +1,14 @@
+user_profiles:
+  - user_id: 1
+    first_name: First
+    last_name: Last
+    address: Address Line 1 City State Zip
+    credit_score: 750
+    loan_type: PERSONAL
+    email: email_address
+    utility_bill: utility_bill.png <add to verification_documents_folder>
+    id_proof: drivers_license.png <add to verification_documents_folder>
+    customer_sentiment: Neutral
+
+
+

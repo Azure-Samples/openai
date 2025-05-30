@@ -1,0 +1,119 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  height: 90vh;
+}
+
+.chatRoot {
+  flex: 1;
+  display: flex;
+  height: auto;
+  max-height: 100%;
+}
+
+.chatContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.chatEmptyState {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 50%;
+  padding-top: 60px;
+}
+
+.chatEmptyStateIcon {
+  font-size: 120px;
+  color: #1e7bd2;
+}
+
+.chatEmptyStateTitle {
+  font-size: 4rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 30px;
+  max-width: 80%;
+  text-align: center;
+}
+
+.chatEmptyStateSubtitle {
+  font-weight: 600;
+  margin-bottom: 10px;
+  max-width: 100%;
+  text-align: center;
+}
+
+@media only screen and (max-height: 780px) {
+  .chatEmptyState {
+    padding-top: 0;
+  }
+
+  .chatEmptyStateTitle {
+    font-size: 3rem;
+    margin-bottom: 0px;
+  }
+}
+
+.chatScrollable {
+  height: 80%;
+  width: 70%;
+  padding-left: 24px;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chatMessageStream {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.chatInput {
+  max-height: 35%;
+  padding: 24px;
+  width: 70%;
+}
+
+.chatSettingsTitle {
+  font-weight: bold;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.chatSettingsText {
+  font-size: 15px;
+}
+
+.chatSettingsDiv {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.chatSetting {
+  margin-top: 20px;
+}
+
+.loadingLogo {
+  font-size: 28px;
+}
+
+.commandsContainer {
+  display: flex;
+  align-self: flex-end;
+}
+
+.commandButton {
+  margin-right: 20px;
+  margin-bottom: 20px;
+}

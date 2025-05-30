@@ -1,0 +1,27 @@
+evaluation_jobs:
+  evaluation_1:
+    config_body:
+      type: AgentEvaluation
+      agent_config_id: POST_CALL_ANALYSIS_AGENT
+      local_dataset: ""
+      config_file_path: ""
+      metric_config:
+        relevance:
+          name: "relevance"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+        coherence:
+          name: "coherence"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+        intent_resolution:
+          name: "intent_resolution"
+          type: "AgentEvaluatorConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+

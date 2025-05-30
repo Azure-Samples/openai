@@ -1,0 +1,33 @@
+{
+  "scenario": "document",
+  "fieldSchema": {
+    "fields": {
+      "first_name": {
+        "type": "string",
+        "method": "extract",
+        "description": "First Name of the license holder"
+      },
+      "last_name": {
+        "type": "string",
+        "method": "extract",
+        "description": "Last Name of the license holder"
+      },
+      "address": {
+        "type": "string",
+        "method": "extract",
+        "description": "Address of the license holder"
+      },
+      "drivers_license_number": {
+        "type": "string",
+        "method": "extract",
+        "description": "DL number on the license"
+      },
+      "expiry_date": {
+        "type": "string",
+        "method": "extract",
+        "description": "Expiration date of the license"
+      }
+    },
+    "definitions": {}
+  }
+}
