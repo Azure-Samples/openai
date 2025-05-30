@@ -1,0 +1,81 @@
+evaluation_jobs:
+  evaluation_1:
+    config_body:
+      type: AgentEvaluation
+      agent_config_id: JIRA_AGENT
+      local_dataset: ""
+      config_file_path: ""
+      metric_config:
+        similarity:
+          name: "similarity"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service: "AzureOpenAI"
+            deployment_name: ""
+        relevance:
+          name: "relevance"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+        intent_resolution:
+          name: "intent_resolution"
+          type: "AgentEvaluatorConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+        task_adherence:
+          name: "task_adherence"
+          type: "AgentEvaluatorConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+  evaluation_2:
+    config_body:
+      type: AgentEvaluation
+      agent_config_id: DEVOPS_AGENT
+      local_dataset: ""
+      config_file_path: ""
+      metric_config:
+        similarity:
+          name: "similarity"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service: "AzureOpenAI"
+            deployment_name: ""
+        relevance:
+          name: "relevance"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+        intent_resolution:
+          name: "intent_resolution"
+          type: "AgentEvaluatorConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+        task_adherence:
+          name: "task_adherence"
+          type: "AgentEvaluatorConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+  evaluation_3:
+    config_body:
+      type: "EndToEndEvaluation"
+      local_dataset: ""
+      metric_config:
+        similarity:
+          name: "similarity"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service: "AzureOpenAI"
+            deployment_name: ""
+        relevance:
+          name: "relevance"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+

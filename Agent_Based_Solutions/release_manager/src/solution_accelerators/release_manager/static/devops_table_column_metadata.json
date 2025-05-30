@@ -1,0 +1,30 @@
+[
+  {
+    "name": "WORK_ITEM_ID",
+    "description": "The identifier of the work item linked to the issue."
+  },
+  {
+    "name": "ISSUE_ID",
+    "description": "The unique identifier of the issue."
+  },
+  {
+    "name": "STREAM_NAME",
+    "description": "The name of the stream or code branch associated with the issue."
+  },
+  {
+    "name": "RELEASE",
+    "description": "The release version or name that the issue is part of."
+  },
+  {
+    "name": "WORK_ITEM_STATUS",
+    "description": "The current status of the work item (New, In review, Checked in, Completed)."
+  },
+  {
+    "name": "COMMIT_ID",
+    "description": "The identifier of the code commit associated with the issue or work item."
+  },
+  {
+    "name": "CHECK_IN_DATE",
+    "description": "The date when the commit was checked into the version control system."
+  }
+]

@@ -1,0 +1,207 @@
+<!-- Copyright (c) Microsoft Corporation. -->
+<!-- Licensed under the MIT license. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Release Manager Assistant</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col">
+
+  <header class="bg-gray-800 text-white text-xl font-semibold py-4 text-center shadow-md">
+    Release Manager Assistant
+  </header>
+
+  <main class="flex-1 flex flex-col items-center justify-center px-4 pt-2 pb-20 overflow-hidden">
+    <div class="w-full max-w-3xl h-full bg-white shadow-xl rounded-xl flex flex-col overflow-hidden">
+
+      <!-- Chat messages -->
+      <div id="messages" class="flex-1 p-4 space-y-4 overflow-y-auto scrollbar-hide">
+        <!-- Messages will be dynamically inserted here -->
+      </div>
+
+      <!-- Input -->
+      <div class="p-4 bg-gray-50 border-t flex items-center gap-2">
+        <input id="userInput" type="text" placeholder="Ask your release manager assistant..."
+               class="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        <button onclick="sendMessage()"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full px-6 py-2 transition">
+          Send
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let socket = null;
+    let interimMessageId = null;
+
+    function sendMessage() {
+      const inputField = document.getElementById('userInput');
+      const query = inputField.value.trim();
+      if (!query) return;
+
+      addMessage(query, 'user');
+      inputField.value = '';
+
+      const message = {
+        dialog_id: "dialog1",
+        message: {
+          payload: [
+            {
+              type: "text",
+              value: query
+            }
+          ]
+        }
+      };
+
+      if (!socket || socket.readyState !== WebSocket.OPEN) {
+        const sessionId = crypto.randomUUID();
+        socket = new WebSocket(`ws://127.0.0.1:5000/api/query?session_id=${sessionId}`);
+
+        socket.onopen = () => socket.send(JSON.stringify(message));
+        socket.onmessage = event => {
+          const data = JSON.parse(event.data);
+
+          if (data.error?.error_str) {
+            addMessage('Error: ' + data.error.error_str, 'bot');
+            return;
+          }
+
+          if (data.answer?.answer_string) {
+            if (data.answer.is_final) {
+              if (interimMessageId) {
+                const interimEl = document.getElementById(interimMessageId);
+                if (interimEl) interimEl.remove();
+                interimMessageId = null;
+              }
+              addMessage(data.answer.answer_string, 'bot', true);
+            } else {
+              if (!interimMessageId) {
+                interimMessageId = 'interim-' + Date.now();
+                addMessage(data.answer.answer_string, 'bot', false, interimMessageId);
+              } else {
+                const interimEl = document.getElementById(interimMessageId);
+                if (interimEl) interimEl.innerHTML = isHTML(data.answer.answer_string)
+                  ? styleHTMLTables(data.answer.answer_string)
+                  : markdownToHTML(data.answer.answer_string);
+              }
+            }
+          }
+
+          if (data.answer?.data_points?.length > 0) {
+            displayImages(data.answer.data_points);
+          }
+        };
+        socket.onerror = () => addMessage('WebSocket error occurred.', 'bot');
+        socket.onclose = () => addMessage('WebSocket connection closed.', 'bot');
+      } else {
+        socket.send(JSON.stringify(message));
+      }
+    }
+
+    function addMessage(text, sender, isFinal = true, messageId = null) {
+      const container = document.getElementById('messages');
+      const msgWrapper = document.createElement('div');
+      msgWrapper.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+
+      const msgBubble = document.createElement('div');
+
+      const isRawHTML = isHTML(text);
+      msgBubble.className =
+        (isRawHTML ? 'w-full' : 'max-w-[75%] whitespace-pre-wrap ') +
+        (sender === 'user'
+            ? ' bg-blue-100 text-blue-900'
+            : isFinal
+            ? ' bg-gray-200 text-gray-900'
+            : ' bg-yellow-50 text-yellow-800 text-sm italic') +
+        ' px-4 py-2 rounded-lg overflow-x-auto ' +
+        (isRawHTML && sender === 'bot' && isFinal ? 'max-h-[500px] min-h-[200px] overflow-y-auto ' : '');
+
+
+      msgBubble.innerHTML = isRawHTML ? styleHTMLTables(text) : markdownToHTML(text);
+      if (messageId) msgBubble.id = messageId;
+
+      msgWrapper.appendChild(msgBubble);
+      container.appendChild(msgWrapper);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function displayImages(images) {
+      const container = document.getElementById('messages');
+      const imgWrapper = document.createElement('div');
+      imgWrapper.className = 'w-full flex flex-wrap justify-start gap-4';
+
+      images.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'w-full max-w-full h-auto rounded-lg shadow';
+        imgWrapper.appendChild(img);
+      });
+
+      container.appendChild(imgWrapper);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function markdownToHTML(text) {
+      return text
+        .replace(/^##### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^#### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+        .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+        .replace(/\*(.*)\*/gim, '<i>$1</i>')
+        .replace(/!\[(.*?)\]\((.*?)\)/gim, '<img src="$2" alt="$1" class="inline-block max-w-full" />')
+        .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" class="text-blue-600 hover:underline">$1</a>')
+        .replace(/\n/gim, '<br />');
+    }
+
+    function isHTML(str) {
+      const div = document.createElement('div');
+      div.innerHTML = str.trim();
+      return div.childNodes.length > 0 && [...div.childNodes].some(node => node.nodeType === 1);
+    }
+
+    function styleHTMLTables(html) {
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = html;
+
+      const tables = wrapper.querySelectorAll('table');
+      tables.forEach(table => {
+        table.classList.add(
+          'table-auto', 'border', 'border-gray-400',
+          'border-collapse', 'w-full', 'text-sm'
+        );
+
+        table.querySelectorAll('th, td').forEach(cell => {
+          cell.classList.add('border', 'border-gray-400', 'p-2', 'text-left', 'align-top');
+        });
+      });
+
+      return wrapper.innerHTML;
+    }
+
+    document.getElementById('userInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
