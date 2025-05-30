@@ -1,0 +1,58 @@
+[
+  {
+    "name": "issue_id",
+    "description": "The unique identifier of the issue."
+  },
+  {
+    "name": "creator_id",
+    "description": "The identifier of the person who created the issue."
+  },
+  {
+    "name": "created_at",
+    "description": "The timestamp indicating when the issue was created."
+  },
+  {
+    "name": "issue_type",
+    "description": "The category of the issue, such as Bug or Story."
+  },
+  {
+    "name": "issue_description",
+    "description": "A detailed explanation of the issue."
+  },
+  {
+    "name": "issue_status",
+    "description": "The current status of the issue (e.g., Active, Resolved)."
+  },
+  {
+    "name": "severity",
+    "description": "The level of impact the issue has: 1-Critical, 2-High, 3-Medium, 4-Low."
+  },
+  {
+    "name": "discussion",
+    "description": "Comments or discussions related to the issue."
+  },
+  {
+    "name": "resolution",
+    "description": "The action taken to resolve the issue."
+  },
+  {
+    "name": "linked_issues",
+    "description": "Other issues that are linked or related to this issue."
+  },
+  {
+    "name": "owning_team",
+    "description": "The team responsible for resolving the issue."
+  },
+  {
+    "name": "affected_version",
+    "description": "The software version affected by the issue."
+  },
+  {
+    "name": "affected_service",
+    "description": "The system or service impacted by the issue."
+  },
+  {
+    "name": "escalation_manager",
+    "description": "The person responsible for managing the issue escalation process."
+  }
+]
