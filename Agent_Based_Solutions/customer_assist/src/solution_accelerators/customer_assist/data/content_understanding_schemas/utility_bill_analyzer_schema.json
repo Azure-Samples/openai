@@ -1,0 +1,23 @@
+{
+  "scenario": "document",
+  "fieldSchema": {
+    "fields": {
+      "first_name": {
+        "type": "string",
+        "method": "extract",
+        "description": "First name of the customer"
+      },
+      "last_name": {
+        "type": "string",
+        "method": "extract",
+        "description": "Last name of the customer"
+      },
+      "address": {
+        "type": "string",
+        "method": "extract",
+        "description": "Address of the customer"
+      }
+    },
+    "definitions": {}
+  }
+}
