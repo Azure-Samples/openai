@@ -17,12 +17,12 @@ The **Release Manager Assistant (RMA)** is a solution accelerator designed to au
 
 ## 🧩 Key Challenges
 
-- ❌ Fragmented release data across platforms
-- ❌ Lack of real-time release health visibility
-- ❌ High manual effort in compiling readiness reports
-- ❌ Difficulty managing cross-team/service dependencies
-- ❌ Visualizing complex data across multiple systems
-- ❌ Notifying stakeholders on change in the system
+- Fragmented release data across platforms
+- Lack of real-time release health visibility
+- High manual effort in compiling readiness reports
+- Difficulty managing cross-team/service dependencies
+- Visualizing complex data across multiple systems
+- Notifying stakeholders on change in the system
 
 ---
 
