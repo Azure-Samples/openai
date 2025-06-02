@@ -1,0 +1,204 @@
+ISSUE_ID,STREAM_NAME,RELEASE,WORK_ITEM_ID,WORK_ITEM_STATUS,COMMIT_ID,CHECK_IN_DATE
+1000,APP-Analytics,4.0.0.4000,250239,In Review,,NULL
+1001,APP-Analytics,4.0.0.4000,250238,New,,NULL
+1002,Platform-ServiceFramework,1.0.0.1000,279045,Completed,q9e0r4d7,2025-05-12 00:00:00
+1003,Platform-IntegrationService,2.0.0.2000,233656,Active,,NULL
+1004,Platform-ServiceFramework,1.0.0.1000,299788,Checked in,q8t3d5u0,2025-01-31 00:00:00
+1005,APP-UI-UX,3.0.0.3000,208500,Completed,x2w5v2l1,2025-01-18 23:06:00
+1006,APP-UI-UX,3.0.0.3000,208593,Completed,i7o2y9t7,2025-05-01 00:47:00
+1007,APP-Analytics,4.0.0.4000,289954,In Review,,NULL
+1008,APP-Analytics,4.0.0.4000,202006,In Review,,NULL
+1009,APP-UI-UX,3.0.0.3000,213196,In Review,,NULL
+1010,APP-UI-UX,3.0.0.3000,234196,In Review,,NULL
+1011,Platform-IntegrationService,2.0.0.2000,298281,New,,NULL
+1012,Platform-IntegrationService,2.0.0.2000,223934,Completed,t6q3e6k7,2025-02-24 00:54:00
+1013,Platform-IntegrationService,2.0.0.2000,273145,Active,,NULL
+1014,Platform-IntegrationService,2.0.0.2000,253246,Active,,NULL
+1015,Platform-IntegrationService,2.0.0.2000,288391,New,,NULL
+1016,Platform-ServiceFramework,1.0.0.1000,278842,Checked in,a5n3d6z0,2025-02-20 19:08:00
+1017,Platform-ServiceFramework,1.0.0.1000,257823,In Review,,NULL
+1018,APP-Analytics,4.0.0.4000,236200,Checked in,g0k6j8i1,2025-02-09 20:42:00
+1019,Platform-IntegrationService,2.0.0.2000,273720,In Review,,NULL
+1020,Platform-IntegrationService,2.0.0.2000,297993,In Review,,NULL
+1021,APP-Analytics,4.0.0.4000,245392,Active,,NULL
+1022,Platform-IntegrationService,2.0.0.2000,208921,New,,NULL
+1023,APP-Analytics,4.0.0.4000,258654,In Review,,NULL
+1024,APP-UI-UX,3.0.0.3000,200479,In Review,,NULL
+1025,APP-Analytics,4.0.0.4000,237864,In Review,,NULL
+1026,Platform-ServiceFramework,1.0.0.1000,236479,Completed,r5a8h1h7,2025-01-28 08:44:00
+1027,Platform-ServiceFramework,1.0.0.1000,262299,New,,NULL
+1028,Platform-IntegrationService,2.0.0.2000,218174,Completed,d8m1r1f4,2025-02-06 13:52:00
+1029,Platform-IntegrationService,2.0.0.2000,278186,Completed,r4j4j7y9,2025-01-04 11:28:00
+1030,Platform-ServiceFramework,1.0.0.1000,247620,Completed,k0u0v8s8,2025-04-29 05:12:00
+1031,Platform-IntegrationService,2.0.0.2000,247685,Completed,y2i2u9j0,2025-03-09 00:00:00
+1032,Platform-ServiceFramework,1.0.0.1000,252079,Completed,j3z6i7a0,2025-01-26 12:44:00
+1033,APP-UI-UX,3.0.0.3000,257283,Completed,o3x2l6h4,2025-03-31 20:26:00
+1034,APP-Analytics,4.0.0.4000,268524,New,,NULL
+1035,Platform-IntegrationService,2.0.0.2000,267668,New,,NULL
+1036,APP-UI-UX,3.0.0.3000,225047,Active,,NULL
+1037,Platform-ServiceFramework,1.0.0.1000,293395,Checked in,s0g8r2c0,2025-04-27 11:00:00
+1038,Platform-ServiceFramework,1.0.0.1000,252704,Active,,NULL
+1039,Platform-ServiceFramework,1.0.0.1000,297399,In Review,,NULL
+1040,Platform-IntegrationService,2.0.0.2000,205218,In Review,,NULL
+1041,Platform-ServiceFramework,1.0.0.1000,228197,New,,NULL
+1042,Platform-IntegrationService,2.0.0.2000,278279,Completed,f3t1v0m9,2025-02-22 03:54:00
+1043,APP-UI-UX,3.0.0.3000,226358,In Review,,NULL
+1044,Platform-ServiceFramework,1.0.0.1000,211460,New,,NULL
+1045,APP-Analytics,4.0.0.4000,203157,Completed,r1n4a4p,NULL
+1046,APP-Analytics,4.0.0.4000,203757,New,,NULL
+1047,Platform-IntegrationService,2.0.0.2000,205324,New,,NULL
+1048,Platform-ServiceFramework,1.0.0.1000,284919,In Review,,NULL
+1049,APP-UI-UX,3.0.0.3000,273690,Checked in,m1o3n8r3,2025-01-10 02:42:00
+1050,Platform-ServiceFramework,1.0.0.1000,287296,New,,NULL
+1051,Platform-ServiceFramework,1.0.0.1000,277108,New,,NULL
+1052,APP-Analytics,4.0.0.4000,246513,Checked in,t6z8x0p6,2025-01-23 02:26:00
+1053,APP-Analytics,4.0.0.4000,272580,Checked in,r8j9c5z6,2025-05-21 18:17:00
+1054,APP-UI-UX,3.0.0.3000,283163,Active,,NULL
+1055,APP-Analytics,4.0.0.4000,240607,Checked in,b7a1r9t9,2025-04-29 15:00:00
+1056,Platform-ServiceFramework,1.0.0.1000,281393,Active,,NULL
+1057,Platform-ServiceFramework,1.0.0.1000,223337,In Review,,NULL
+1058,APP-UI-UX,3.0.0.3000,233767,Active,,NULL
+1059,Platform-ServiceFramework,1.0.0.1000,293388,New,,NULL
+1060,APP-Analytics,4.0.0.4000,254452,Completed,t6y6l2o8,2025-02-05 00:21:00
+1061,Platform-IntegrationService,2.0.0.2000,272211,Checked in,u6r8g3y6,2025-05-12 11:53:00
+1062,Platform-ServiceFramework,1.0.0.1000,224055,Active,,NULL
+1063,Platform-IntegrationService,2.0.0.2000,261800,Completed,q0b0a1r4,2025-03-12 00:57:00
+1064,Platform-IntegrationService,2.0.0.2000,277694,In Review,,NULL
+1065,Platform-ServiceFramework,1.0.0.1000,256288,Active,,NULL
+1066,Platform-ServiceFramework,1.0.0.1000,278276,Checked in,m4i3j9z4,2025-03-18 02:13:00
+1067,APP-Analytics,4.0.0.4000,281938,Completed,t6f0h8e4,2025-03-13 11:09:00
+1068,APP-UI-UX,3.0.0.3000,290089,Active,,NULL
+1069,APP-UI-UX,3.0.0.3000,267781,Completed,r1g9f9d2,2025-01-24 03:31:00
+1070,APP-Analytics,4.0.0.4000,294645,New,,NULL
+1071,Platform-ServiceFramework,1.0.0.1000,290120,In Review,,NULL
+1072,Platform-IntegrationService,2.0.0.2000,215533,New,,NULL
+1073,APP-UI-UX,3.0.0.3000,241936,In Review,,NULL
+1074,APP-Analytics,4.0.0.4000,232494,Active,,NULL
+1075,APP-UI-UX,3.0.0.3000,292289,New,,NULL
+1076,Platform-IntegrationService,2.0.0.2000,280823,In Review,,NULL
+1077,Platform-IntegrationService,2.0.0.2000,213586,Active,,NULL
+1078,APP-UI-UX,3.0.0.3000,284936,In Review,,NULL
+1079,APP-UI-UX,3.0.0.3000,237970,In Review,,NULL
+1080,Platform-ServiceFramework,1.0.0.1000,283611,New,,NULL
+1081,Platform-IntegrationService,2.0.0.2000,277117,Completed,v8c6m7l4,2025-03-01 18:56:00
+1082,APP-UI-UX,3.0.0.3000,280174,In Review,,NULL
+1083,Platform-ServiceFramework,1.0.0.1000,239785,Checked in,b3c3s5o0,2025-02-05 10:00:00
+1084,APP-Analytics,4.0.0.4000,294792,Checked in,j5a8h6u6,2025-02-06 23:16:00
+1085,APP-Analytics,4.0.0.4000,292908,Active,,NULL
+1086,Platform-IntegrationService,2.0.0.2000,210807,New,,NULL
+1087,Platform-ServiceFramework,1.0.0.1000,238767,Active,,NULL
+1088,Platform-IntegrationService,2.0.0.2000,205046,New,,NULL
+1089,Platform-IntegrationService,2.0.0.2000,293797,New,,NULL
+1090,APP-UI-UX,3.0.0.3000,249350,Checked in,c6g8q2v7,2025-05-20 10:31:00
+1091,Platform-IntegrationService,2.0.0.2000,278865,Checked in,i8k1o2o0,2025-03-02 23:06:00
+1092,Platform-IntegrationService,2.0.0.2000,285418,Completed,k3y6i8l3,2025-03-26 11:31:00
+1093,Platform-ServiceFramework,1.0.0.1000,265137,In Review,,NULL
+1094,APP-UI-UX,3.0.0.3000,229906,New,,NULL
+1095,APP-Analytics,4.0.0.4000,241887,Active,,NULL
+1096,Platform-ServiceFramework,1.0.0.1000,289947,Active,,NULL
+1097,APP-UI-UX,3.0.0.3000,202333,Checked in,b1y1i3q7,2025-04-08 21:43:00
+1098,Platform-IntegrationService,2.0.0.2000,232307,In Review,,NULL
+1099,APP-UI-UX,3.0.0.3000,288990,Checked in,o6w2w3u5,2025-05-02 17:41:00
+1100,Platform-ServiceFramework,1.0.0.1000,239597,Active,,NULL
+1101,APP-Analytics,4.0.0.4000,255736,Completed,r2b7o2t4,2025-05-08 16:03:00
+1102,APP-Analytics,4.0.0.4000,285582,New,,NULL
+1103,Platform-IntegrationService,2.0.0.2000,243576,Completed,z8n9h5o5,2025-05-30 08:17:00
+1104,APP-Analytics,4.0.0.4000,224652,New,,NULL
+1105,Platform-ServiceFramework,1.0.0.1000,240972,Checked in,j8x3u0e8,2025-04-06 05:13:00
+1106,APP-Analytics,4.0.0.4000,295163,Active,,NULL
+1107,Platform-IntegrationService,2.0.0.2000,226569,Active,,NULL
+1108,Platform-IntegrationService,2.0.0.2000,232860,Completed,c4l3p7h5,2025-03-23 16:47:00
+1109,Platform-IntegrationService,2.0.0.2000,292691,Checked in,t0t5e3c9,2025-03-15 22:48:00
+1110,Platform-ServiceFramework,1.0.0.1000,231580,New,,NULL
+1111,Platform-ServiceFramework,1.0.0.1000,241856,New,,NULL
+1112,Platform-IntegrationService,2.0.0.2000,220640,Completed,e7t4q2a8,2025-03-10 07:38:00
+1113,APP-Analytics,4.0.0.4000,290265,In Review,,NULL
+1114,Platform-ServiceFramework,1.0.0.1000,222888,Active,,NULL
+1115,Platform-IntegrationService,2.0.0.2000,264625,In Review,,NULL
+1116,APP-Analytics,4.0.0.4000,214405,New,,NULL
+1117,Platform-IntegrationService,2.0.0.2000,258079,Active,,NULL
+1118,Platform-IntegrationService,2.0.0.2000,221168,Completed,x2b6a5x3,2025-03-08 11:42:00
+1119,APP-UI-UX,3.0.0.3000,273388,Completed,e4w2s0w3,2025-01-28 13:37:00
+1120,Platform-ServiceFramework,1.0.0.1000,247610,In Review,,NULL
+1121,Platform-IntegrationService,2.0.0.2000,238404,Completed,d4n2v8t3,2025-01-04 14:27:00
+1122,APP-UI-UX,3.0.0.3000,273474,Active,,NULL
+1123,Platform-IntegrationService,2.0.0.2000,245993,Checked in,s7y3i5i0,2025-04-10 05:35:00
+1124,Platform-IntegrationService,2.0.0.2000,275208,Checked in,s5o2t2c0,2025-04-13 19:36:00
+1125,Platform-IntegrationService,2.0.0.2000,224020,Checked in,g5x7k4z2,2025-04-05 05:57:00
+1126,APP-UI-UX,3.0.0.3000,278860,Completed,j9y5h5s3,2025-05-28 17:33:00
+1127,Platform-IntegrationService,2.0.0.2000,246972,New,,NULL
+1128,APP-UI-UX,3.0.0.3000,277468,Completed,k4e9b7k1,2025-01-02 11:19:00
+1129,Platform-IntegrationService,2.0.0.2000,293789,Checked in,n3u6p8s8,2025-04-07 22:23:00
+1130,Platform-ServiceFramework,1.0.0.1000,202817,Completed,e3p7m6s7,2025-04-22 05:13:00
+1131,Platform-IntegrationService,2.0.0.2000,275972,In Review,,NULL
+1132,APP-UI-UX,3.0.0.3000,202963,Checked in,l5t1t8v2,2025-05-25 21:00:00
+1133,Platform-IntegrationService,2.0.0.2000,250251,Active,,NULL
+1134,Platform-IntegrationService,2.0.0.2000,284165,Checked in,h1i0x9z8,2025-03-03 23:30:00
+1135,Platform-ServiceFramework,1.0.0.1000,286580,In Review,,NULL
+1136,Platform-IntegrationService,2.0.0.2000,281895,Completed,o3z2l6x3,2025-03-27 08:13:00
+1137,APP-Analytics,4.0.0.4000,249295,Completed,s1j9o6f4,2025-01-10 20:41:00
+1138,Platform-ServiceFramework,1.0.0.1000,206188,Active,,NULL
+1139,Platform-IntegrationService,2.0.0.2000,266947,Checked in,e1y2n8c7,2025-02-24 19:42:00
+1140,Platform-IntegrationService,2.0.0.2000,279830,Completed,o8d1z3u3,2025-05-02 22:55:00
+1141,Platform-IntegrationService,2.0.0.2000,233444,Completed,d0k5d5j6,2025-02-08 15:50:00
+1142,Platform-IntegrationService,2.0.0.2000,253913,Completed,r9e1u6m4,2025-04-06 03:50:00
+1143,APP-UI-UX,3.0.0.3000,283033,Completed,m3a2k7r2,2025-05-29 20:44:00
+1144,APP-Analytics,4.0.0.4000,285277,Active,,NULL
+1145,Platform-ServiceFramework,1.0.0.1000,232172,Active,,NULL
+1146,Platform-ServiceFramework,1.0.0.1000,281094,Checked in,a8u9k9n4,2025-04-18 20:42:00
+1147,APP-Analytics,4.0.0.4000,293423,New,,NULL
+1148,Platform-IntegrationService,2.0.0.2000,269451,New,,NULL
+1149,Platform-ServiceFramework,1.0.0.1000,264919,Checked in,t5p4z9q7,2025-01-08 20:12:00
+1150,Platform-ServiceFramework,1.0.0.1000,218273,Completed,i0z9y0k7,2025-05-09 06:28:00
+1151,APP-UI-UX,3.0.0.3000,201426,New,,NULL
+1152,Platform-ServiceFramework,1.0.0.1000,265111,Checked in,t0m1u9w3,2025-03-25 21:15:00
+1153,Platform-IntegrationService,2.0.0.2000,286580,Active,,NULL
+1154,APP-Analytics,4.0.0.4000,223651,Completed,t8d9v9e0,2025-03-03 20:50:00
+1155,APP-Analytics,4.0.0.4000,225037,Completed,w4k9u8w7,2025-04-25 14:09:00
+1156,Platform-IntegrationService,2.0.0.2000,298869,Completed,z7o5h3z8,2025-03-09 03:09:00
+1157,Platform-ServiceFramework,1.0.0.1000,260058,Completed,u0g2i4g0,2025-01-07 17:39:00
+1158,Platform-IntegrationService,2.0.0.2000,274026,Completed,m8i4t4f0,2025-03-04 17:28:00
+1159,APP-Analytics,4.0.0.4000,289133,Completed,j6o6k3s1,2025-02-16 23:47:00
+1160,Platform-ServiceFramework,1.0.0.1000,210696,New,,NULL
+1161,Platform-IntegrationService,2.0.0.2000,259947,Completed,h2i1l8j0,2025-03-12 19:10:00
+1162,APP-Analytics,4.0.0.4000,293748,In Review,,NULL
+1163,Platform-IntegrationService,2.0.0.2000,243909,New,,NULL
+1164,APP-Analytics,4.0.0.4000,239625,New,,NULL
+1165,APP-Analytics,4.0.0.4000,289246,Checked in,e3i9z2j1,2025-04-21 20:47:00
+1166,APP-UI-UX,3.0.0.3000,207335,Checked in,l9b5e5g4,2025-03-24 15:15:00
+1167,APP-UI-UX,3.0.0.3000,282791,Checked in,a7t6e4t5,2025-05-16 23:46:00
+1168,Platform-IntegrationService,2.0.0.2000,287485,Active,,NULL
+1169,APP-Analytics,4.0.0.4000,219352,Completed,i6f3q2i0,2025-01-16 22:46:00
+1170,Platform-ServiceFramework,1.0.0.1000,261275,In Review,,NULL
+1171,Platform-IntegrationService,2.0.0.2000,293064,New,,NULL
+1172,Platform-IntegrationService,2.0.0.2000,200783,In Review,,NULL
+1173,Platform-ServiceFramework,1.0.0.1000,239375,Checked in,x2e9y2n1,2025-01-15 13:48:00
+1174,Platform-ServiceFramework,1.0.0.1000,266723,Active,,NULL
+1175,APP-Analytics,4.0.0.4000,237354,In Review,,NULL
+1176,Platform-IntegrationService,2.0.0.2000,234829,Active,,NULL
+1177,Platform-IntegrationService,2.0.0.2000,269002,Checked in,c7j6v1l7,2025-04-13 07:46:00
+1178,Platform-IntegrationService,2.0.0.2000,283744,In Review,,NULL
+1179,APP-Analytics,4.0.0.4000,257123,Completed,j1x8n5g7,2025-01-12 16:06:00
+1180,Platform-IntegrationService,2.0.0.2000,267324,In Review,,NULL
+1181,Platform-IntegrationService,2.0.0.2000,208747,New,,NULL
+1182,Platform-IntegrationService,2.0.0.2000,286848,Checked in,o3i0p1v7,2025-01-24 01:02:00
+1183,Platform-IntegrationService,2.0.0.2000,219285,Completed,g6t8i2u8,2025-05-13 13:24:00
+1184,APP-Analytics,4.0.0.4000,219310,In Review,,NULL
+1185,Platform-ServiceFramework,1.0.0.1000,269960,Completed,z2t3f5v4,2025-01-08 01:20:00
+1186,APP-UI-UX,3.0.0.3000,224590,Checked in,k0g7g8s0,2025-03-21 02:09:00
+1187,Platform-ServiceFramework,1.0.0.1000,276218,In Review,,NULL
+1188,Platform-IntegrationService,2.0.0.2000,291770,New,,NULL
+1189,Platform-ServiceFramework,1.0.0.1000,219642,Completed,q1f9p0j8,2025-02-19 12:16:00
+1190,Platform-ServiceFramework,1.0.0.1000,200912,New,,NULL
+1191,APP-Analytics,4.0.0.4000,219468,Completed,a2u2p0z3,2025-03-19 09:29:00
+1192,Platform-ServiceFramework,1.0.0.1000,236832,Completed,y3k0p3q4,2025-01-01 23:27:00
+1193,APP-Analytics,4.0.0.4000,298689,Checked in,n5t8p1b0,2025-04-04 05:22:00
+1194,APP-Analytics,4.0.0.4000,237875,New,,NULL
+1195,Platform-ServiceFramework,1.0.0.1000,294850,In Review,,NULL
+1196,APP-UI-UX,3.0.0.3000,260601,In Review,,NULL
+1197,Platform-ServiceFramework,1.0.0.1000,279693,Completed,m2v3h8p3,2025-04-18 18:57:00
+1198,APP-Analytics,4.0.0.4000,283804,In Review,,NULL
+1199,APP-Analytics,4.0.0.4000,225562,In Review,,NULL
+1200,Platform-IntegrationService,2.0.0.2000,294149,Checked in,i2g4h8d1,2025-03-11 10:03:00
+1201,Platform-IntegrationService,2.0.0.2000,245867,Checked in,y1p0m5t6,2025-04-24 19:31:00
+1202,Platform-ServiceFramework,1.0.0.1000,274078,Checked in,z6j4k6x3,2025-01-14 20:50:00
