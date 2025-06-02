@@ -2,13 +2,11 @@
 
 ## Overview
 
-The Customer Assist solution is designed to facilitate customer service interactions through an intelligent advisor system that integrates multiple agents and services:
+The Customer Assist solution is designed to facilitate customer service interactions through an intelligent advisor system that integrates multiple agents and services. By the end of this setup, you should be able to replicate the functionality demonstrated in the following demo video.
 
-- **Conversation Processor Agent**: Processes customer conversations and identifies key insights. Also, finds relevant information to assist customer service representatives.
-- **Sentiment Analysis Agent**: Evaluates customer sentiment during conversations.
-- **Post-call Analysis Agent**: Provides analysis after customer interactions are complete.
+https://github.com/user-attachments/assets/3d2d387c-6345-42a5-96ea-b5cd97ce14df
 
-By combining these agents within an orchestrated framework, Customer Assist enables enhanced customer service experiences through intelligent assistance.
+
 
 ## Architecture Diagram
 

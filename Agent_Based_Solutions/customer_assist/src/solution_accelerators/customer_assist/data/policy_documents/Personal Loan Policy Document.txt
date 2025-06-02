@@ -1,0 +1,63 @@
+Personal Loan Policy Document
+1. Purpose
+This policy outlines the eligibility, documentation, credit requirements, and loan terms for Personal Loans offered by [Bank Name]. Our aim is to provide our customers with a transparent and hassle-free loan process while adhering to US financial regulations.
+2. Loan Product Overview
+
+- Loan Type: Personal Loan
+- Purpose: Marriage, education, travel, medical emergency, debt consolidation, etc.
+- Collateral Required: No
+
+3. Loan Range & Terms
+Parameter	Details
+Loan Amount (₹)	Minimum: $1,000
+Maximum: $ 50,000
+Tenure	Minimum: 12 months
+Maximum: 60 months
+Interest Rate	If credit score is > 650 and duration >36 months : 10% 
+If credit score is > 650 and duration < 36 months : 15% 
+If credit score is 600 – 650 and duration < 36 months: 20%
+If credit score is 600 – 650 and duration > 36 months : 15%
+Processing Fee	 2% of the loan amount, depending on the applicant's creditworthiness and loan terms. This fee will be deducted from the disbursed loan amount.
+Pre-closure Charges	2% (after lock-in of 6–12 months)
+4. Eligibility Criteria
+Criteria	Requirement
+Age	18-58 years
+Employment Type	Salaried (Private/Public), or Self-employed (minimum 2 years of IT returns)
+Monthly Income	Minimum $5,000
+Credit Score	Minimum 600 
+Work Experience	Salaried: 1 year
+Self-employed: 2 years
+Residential Stability	Minimum 6 months at current address
+5. Required Documentation
+Document Type	Description
+Identity Proof	Driving License, Passport
+Address Proof	Utility Bill, Lease Agreement
+Income Proof	Last 2 months pay stubs, bank statements 
+Self-employed: Last 2 years ITR + 6 months bank statement
+6. Disqualification Criteria
+
+Applicants will be rejected if any of the following are true:
+- Credit Score < 600
+- Existing EMI obligations exceed 50% of income
+- History of loan default or write-off in the last 24 months
+- Mismatch in KYC details
+- Income not verifiable
+- Applicant listed on internal or regulatory blacklist
+- Fraud risk flag from bureau or underwriting engine
+
+7. Customer FAQs
+
+Q1: How long does it take to process a personal loan?
+A: Loan applications are typically processed within 3-5 business days, provided all required documents are submitted.
+
+Q2: Can I apply for a loan if I am self-employed?
+A: Yes, self-employed individuals can apply by providing tax returns for the past two years and recent bank statements.
+
+Q3: What happens if I miss a payment?
+A: Missing a payment may result in late fees, impact your credit score, and could lead to loan default. Please contact us if you're unable to make a payment on time.
+
+Q4: Is there a prepayment penalty?
+A: No, there is no prepayment penalty. You can pay off your loan early without any additional fees.
+Q5: Are there any other fees associated with the loan?
+A: In addition to the processing fee, late payment fees and insufficient funds fees may apply. All fees will be disclosed in your loan agreement.
+

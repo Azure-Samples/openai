@@ -1,0 +1,62 @@
+Home Loan Policy Document
+1. Purpose
+This policy outlines the eligibility, documentation, credit requirements, and loan terms for Home Loans offered by [Bank Name]. Our aim is to provide our customers with a transparent and hassle-free loan process while adhering to US financial regulations.
+2. Loan Product Overview
+•	Loan Type: Home Loan
+•	Purpose: Home Loan
+•	Collateral Required: Property purchase agreement or sale contract for the property to be financed
+
+3. Loan Range & Terms
+Parameter	Details
+Loan Amount (₹)	Minimum: $200,000
+Maximum: $ 750,000
+Tenure	15,20 or 30 years
+Interest Rate	If credit score is > 650 and duration >=20 years: 4.5% 
+If credit score is > 650 and duration < 20 years: 6% 
+If credit score is 600 – 650 and duration < 20 years: 7.5%
+If credit score is 600 – 650 and duration > 20 years: 6%
+
+Based on credit score & profile: 4.5% – 7.5% p.a.
+Processing Fee	 1% to 2% of the loan amount, depending on the applicant's creditworthiness and loan terms. This fee will be deducted from the disbursed loan amount.
+Pre-closure Charges	2% – 4% (after lock-in of 6–12 months)
+4. Eligibility Criteria
+Criteria	Requirement
+Age	18-58 years
+Employment Type	Salaried (Private/Public), or Self-employed (minimum 2 years of IT returns)
+Monthly Income	Minimum $5,000
+Credit Score	Minimum 600 
+Work Experience	Salaried: 2 year
+Self-employed: 3 years
+Residential Stability	Minimum 6 months at current address
+5. Required Documentation
+Document Type	Description
+Identity Proof	Driving License, Passport
+Address Proof	Utility Bill, Lease Agreement, Passport
+Income Proof	Last 3 months pay stubs, bank statements, Last 1 year ITR
+Self-employed: Last 2 years ITR + 6 months bank statement
+Property Documentation	Purchase agreement or sales contract for the property being financed
+6. Disqualification Criteria
+•	Applicants will be rejected if any of the following are true:
+•	Credit Score < 650
+•	Existing EMI obligations exceed 43% of income
+•	History of loan default or write-off in the last 7 years
+•	Mismatch in KYC details
+•	Income not verifiable
+•	Property document not authentic
+•	Applicant listed on internal or regulatory blacklist
+•	Fraud risk flag from bureau or underwriting engine
+7. Customer FAQs
+
+Q1: How long does it take to process a home loan?
+A: The loan application process typically takes 15-30 business days, depending on the complexity of the application and property verification
+Q2: Can I apply for a loan if I am self-employed?
+A: Yes, self-employed individuals can apply by providing tax returns for the past two years and recent bank statements.
+Q3: What happens if I miss a payment?
+A: Missing a payment may result in late fees, impact your credit score, and could lead to loan default. Please contact us if you're unable to make a payment on time.
+Q4: Is there a prepayment penalty?
+A: No, there is no prepayment penalty. You can pay off your loan early without any additional fees.
+Q5: Are there any other fees associated with the loan?
+A: In addition to the processing fee, late payment fees and insufficient funds fees may apply. All fees will be disclosed in your loan agreement.
+Q6: How do I repay the loan?
+Loan repayments are made in fixed monthly installments. You can set up automatic payments from your bank account or pay manually via our online portal
+
