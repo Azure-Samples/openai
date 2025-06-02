@@ -1,0 +1,56 @@
+Business Loan Policy Document
+1. Purpose
+This policy outlines the eligibility, documentation, credit requirements, and loan terms for Business Loan offered by [Bank Name]. Our aim is to provide our customers with a transparent and hassle-free loan process while adhering to US financial regulations.
+2. Loan Product Overview
+
+- Loan Type: Business Loan
+- Purpose: Setting up a new business or loan on existing business
+- Collateral Required: No
+3. Loan Range & Terms
+Parameter	Details
+Loan Amount (₹)	Minimum: $10,000
+Maximum: $ 250,000
+Tenure	Minimum: 6 months
+Maximum: 25 years
+Interest Rate	Based on credit score & profile: 6% – 25% p.a.
+Processing Fee	 1% to 3% of the loan amount, depending on the applicant's creditworthiness and loan terms. This fee will be deducted from the disbursed loan amount.
+Pre-closure Charges	2% – 4% (after lock-in of 6–12 months)
+4. Eligibility Criteria
+Criteria	Requirement
+Age	25-40 years
+Monthly Income	Minimum gross monthly income: $5,000
+Business owners must demonstrate consistent monthly revenue of at least $5,000 to qualify for the loan.
+Credit Score	Minimum 600 
+Residential Stability	Minimum 6 months at current address
+5. Required Documentation
+Document Type	Description
+Identity Proof	Driving License, Passport
+Address Proof	Utility Bill, Lease Agreement
+Income Proof	Bank statements (last 6 months) and business financial statements (profit and loss statement, balance sheet)
+Business Registration	Valid business registration certificate or business license
+6. Disqualification Criteria
+
+Applicants will be rejected if any of the following are true:
+•	Credit Score < 600
+•	Existing EMI obligations exceed 50% of income
+•	History of loan default or write-off in the last 7 years
+•	Mismatch in KYC details
+•	Income not verifiable
+•	Applicant listed on internal or regulatory blacklist
+•	Fraud risk flag from bureau or underwriting engine
+•	Business plan lacks clarity or feasibility
+•	Pending legal disputes or regulatory violations involving business
+•	Unstable business operations for less than 6 months
+
+7. Customer FAQs
+
+Q1: How long does it take to process a business loan?
+A: Loan processing typically takes 5-15 business days, depending on the complexity of the application and verification of documents.
+Q2: Can I apply for a loan if I am self-employed?
+A: Yes, self-employed individuals can apply by providing tax returns for the past two years and recent bank statements.
+Q3: What happens if I miss a payment?
+A: Missing a payment may result in late fees, impact your credit score, and could lead to loan default. Please contact us if you're unable to make a payment on time.
+Q4: Is there a prepayment penalty?
+A: No, there is no prepayment penalty. You can pay off your loan early without any additional fees.
+Q5: Are there any other fees associated with the loan?
+A: In addition to the processing fee, late payment fees and insufficient funds fees may apply. All fees will be disclosed in your loan agreement.
