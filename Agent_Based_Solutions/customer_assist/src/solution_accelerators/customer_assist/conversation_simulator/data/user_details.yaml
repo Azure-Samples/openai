@@ -1,14 +1,21 @@
 user_profiles:
   - user_id: 1
-    first_name: First
-    last_name: Last
-    address: Address Line 1 City State Zip
-    credit_score: 750
-    loan_type: PERSONAL
-    email: email_address
-    utility_bill: utility_bill.png <add to verification_documents_folder>
-    id_proof: drivers_license.png <add to verification_documents_folder>
-    customer_sentiment: Neutral
-
-
-
+    first_name: Shannon
+    last_name: Walker
+    address: 9816 JONATHAN STATION SUITE 088 WEST RYAN, TN 43780
+    credit_score: 650
+    loan_type: Personal
+    customer_sentiment: Happy
+    id_proof: shannon_walker_dl.png
+    utility_bill: shannon_walker_utility_bill.png
+    email: shannon.walker@contoso.com
+  - user_id: 2 # Test user with blurred ID proof
+    first_name: Shannon
+    last_name: Walker
+    address: 9816 JONATHAN STATION SUITE 088 WEST RYAN, TN 43780
+    credit_score: 650
+    loan_type: Personal
+    customer_sentiment: Happy
+    id_proof: shannon_walker_dl_blurred.png
+    utility_bill: shannon_walker_utility_bill.png
+    email: shannon.walker@contoso.com
