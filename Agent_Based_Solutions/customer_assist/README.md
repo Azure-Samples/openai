@@ -34,6 +34,10 @@ Guide agents through technical troubleshooting, plan recommendations, and outage
 5. Travel & Hospitality:
 Support booking changes, handle complaints sensitively, and personalize loyalty program engagement.
 
+## ✨ Architecture
+
+https://github.com/user-attachments/assets/4b77a57a-5694-48e2-8cc4-b9afb1900b4b
+
 ## ✨ Solution Features
 
 
