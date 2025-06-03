@@ -4,7 +4,7 @@
   </h1>
   <p><strong>Transforming software delivery process with intelligent agent orchestration</strong></p>
   <br>
-  <p><a href="https://placeholder-for-rma-demo-video.com">▶️ Watch Demo Video</a></p>
+  <p><a href="https://github.com/user-attachments/assets/6c8202bf-9d7b-4aaf-9907-81124adaaa9d">▶️ Watch Intro Video</a></p>
 </div>
 
 ## 🚀 Overview
@@ -13,6 +13,9 @@ In modern software development, **Release Managers** play a pivotal role bridgin
 
 The **Release Manager Assistant (RMA)** is a solution accelerator designed to augment release managers with AI-driven intelligence, multi-system integration, and real-time decision support. It simplifies the release lifecycle from planning to post-deployment analysis, all through a unified and contextual interface.
 
+Watch a quick demo below!
+
+<p><a href="https://github.com/user-attachments/assets/fad365a9-f777-4aae-80e4-a437c5ad50e7">▶️ Demo Video</a></p>
 ---
 
 ## 🧩 Key Challenges
@@ -59,9 +62,14 @@ The architecture is built on a modular and secure AI-native design leveraging:
 
 *For setting up email notifications, additional setup is required. For instructions, please refer to this guide: [Microsoft Email Notifications Setup](src/solution_accelerators/release_manager/plugins/NOTIFICATIONS.md)*
 
+### 🎯 Architecture Walkthrough
+
+https://github.com/user-attachments/assets/619f5a11-45ed-4a8b-a2e4-7d3900eee60e
+
+
 ---
 
-## ARCHITECTURE DIAGRAM
+### 📐 Architecture Diagram
 
 This diagram provides a visual representation of how the **JIRA Agent**, **DevOps Agent**, **Visualization Agent** and **Notification Agent** collaborate to streamline release planning and execution for a release manager.
 
