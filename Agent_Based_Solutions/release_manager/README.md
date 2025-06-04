@@ -102,6 +102,8 @@ For detailed setup instructions, please follow the guide here: [SETUP INSTRUCTIO
 - [Microsoft Graph API](https://learn.microsoft.com/en-us/graph/overview)
 - [MySQL](https://dev.mysql.com/)
 
+*Synthetic dataset is included in the solution under `/data` directory for reference purposes.*
+
 ---
 
 ## 📈 Roadmap (subject to change)

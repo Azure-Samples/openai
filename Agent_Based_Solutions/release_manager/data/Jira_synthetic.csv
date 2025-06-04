@@ -1,0 +1,950 @@
+﻿Creator ID,Created At,Issue ID,Issue Type,Issue Description,Issue Status,Severity,Discussion,Resolution,Linked Issues,Owning Team,Affected Version,Affected Service,Escalation Manager
+aarai@contoso.com,2025-04-02 22:33:12,1000,Bug,Submit button not working on the check out page,Active,3,"[""Customer IT Team: Hi, some of our users have problems using the application. I am able to reproduce the issue on our stage environment as well. The ""Submit"" button on the checkout page isn't working. I keep clicking it, but nothing happens."", ""Developer: I'm sorry to hear that you're experiencing issues with the ""Submit"" button. Could you please provide a bit more information so I can assist you better?
+Are you using a desktop, tablet, or mobile device?
+Which browser are you using (e.g., Chrome, Safari, Firefox)?
+Are you seeing any error messages or unusual behavior?"",""Customer IT Team : I'm using a desktop with Chrome browser. There's no error message. The button just doesn't do anything when I click it. "", ""Developer: Thanks for the information. I'll check the logs and review the relevant code. Can you confirm if you are using the latest version of Chrome? Sometimes older versions can cause unexpected behavior."", ""Customer: I can confirm that I am using the latest version of chrome"", "" Developer: OK, let me start the technical investigation from my side and check our error logs. I will keep you posted on this."", ""Customer IT Team: Thanks, please update here once you have some findings"", ""Developer: Okay, I've identified the problem.
+It looks like the ""Submit"" button is missing its onclick event handler due to a JavaScript error during page load. This issue only occurs when a specific optional field (Promo Code) is left blank. I've created a patch to fix this and deployed it to our staging environment. Can you test it before we push it to production?"", ""Customer IT Team: Sure, I can test it and share an update by tomorrow"", ""Developer: That would be great!"", ""Customer IT Team: I tested this and I can confirm that it is now working fine. Please push this to production soon"", ""Developer: Good to hear that the fix is working in stage. We will be releasing this fix by this Friday.""]",,1029,UI/UX Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+amjosh@contoso.com,2025-04-25 23:59:31,1001,Bug,Application performance degradation during peak hours,Active,2,"[
+  ""Customer: We've noticed the application becomes significantly slower between 10 AM and 12 PM IST. Pages take more than 10 seconds to load, especially the dashboard and reports section."",
+  ""Developer: Thanks for reporting. We'll check our logs and telemetry for that window. Was this observed across all users or a specific region?"",
+  ""Customer: It appears to affect users across multiple locations. We also received complaints from our support center in Mumbai."",
+  ""SRE: Reviewing our metrics — CPU and memory usage spiked during that period. Initial suspicion is that the scheduled batch jobs might be consuming too many resources."",
+  ""Developer: Found some database queries triggered by the dashboard API that are missing indexes. That could explain the slowness under load. We're working on query optimization."",
+  ""Product Manager: Let's prioritize a fix for this in the next patch. Can we also look at adding caching for the reports that are run frequently?"",
+  ""Developer: Yes, we can cache report summaries for 15 mins to reduce load. Also planning to paginate the dashboard cards to reduce initial payload size."",
+  ""QA: We'll run performance regression tests once the fix is deployed. Targeting staging by tomorrow."",
+  ""Customer: Appreciate the quick turnaround. Please notify us once this is live so we can confirm on our end.""
+]",,"1164, 1157",SRE Team,v2.1.1,Mobile UI,ramesh.iyer@contoso.com
+sanjay.singh@contoso.com,2025-04-14 03:47:09,1002,Bug,Analytics dashboard not updating with latest user activity data,Resolved,3,"[
+  ""Customer: The analytics dashboard hasn't shown any new data since yesterday evening. We rely on real-time updates for our daily reporting."",
+  ""Developer: Thanks for flagging. We're checking the data pipeline logs now. Was this observed for all reports or just specific widgets?"",
+  ""Customer: Mainly the user engagement and traffic source charts are showing outdated numbers."",
+  ""Data Engineer: We found failures in the ETL job that pushes engagement data to the dashboard. A schema mismatch in the incoming data stream caused the sync to fail."",
+  ""Developer: We'll apply a patch to handle the updated schema and reprocess the missed data."",
+  ""Product Manager: Let's add monitoring alerts for failed ETL jobs going forward, so we can catch this earlier."",
+  ""QA: We'll verify the fix and ensure historical data is backfilled before we close this out."",
+  ""Customer: Appreciate the quick response. Let us know once the dashboard reflects the updated numbers."",
+  ""Developer: Fix is deployed, and data is catching up. You should see the dashboard fully updated within the next hour.""
+]",This was fixed as part of release 1.0.0.1000,,Analytics Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+ravi.nair@contoso.com,2025-04-17 17:51:26,1003,Story,MFA step not triggered for some enterprise accounts.,Active,2,"[
+  ""Customer: We're seeing that some enterprise users are able to log in without being prompted for MFA. This poses a serious security concern."",
+  ""Developer: Thanks for raising this. We're checking the identity logs and MFA policy enforcement settings. Are these accounts part of a specific group or region?"",
+  ""Customer: Most of the reports are coming from users in the APAC region under the 'Enterprise-Tier-2' role group."",
+  ""Security Engineer: Confirmed — users in 'Enterprise-Tier-2' were excluded due to a misconfigured conditional access policy update pushed last week."",
+  ""Developer: We're rolling back that policy change and will revalidate MFA triggers across all enterprise groups."",
+  ""SRE: Recommending that we add automated tests for all identity policies during future deployment cycles to prevent this."",
+  ""Product Manager: Can we also implement monitoring to flag any authentication session that skips MFA for high-privilege accounts?"",
+  ""QA: Testing the fix now with sample enterprise accounts. Will update once confirmed across all groups."",
+  ""Customer: Please ensure there's a post-mortem for this. Security team wants a summary of affected users and steps taken."",
+  ""Developer: Fix is deployed and verified. We'll prepare the RCA and send a report by EOD.""
+]",,1093,Mobile Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+priya.menon@contoso.com,2025-04-18 22:14:38,1004,Bug,Unusual login attempts from multiple geographies within short time spans,Active,1,"[
+  ""Customer: We are extremely concerned — the same user account is showing login attempts from India, Germany, and the US within minutes. This points to a serious security breach."",
+  ""Security Analyst: Agreed. We've escalated this internally and activated an emergency audit trail on the affected user. Still investigating whether credentials were compromised or spoofed."",
+  ""Developer: We're checking our session handling logic and token issuance paths. So far, the access tokens appear valid, but their origin is unclear."",
+  ""SRE: Reviewing traffic patterns. No signs of proxy tunneling yet, but unusual IP rotations are being flagged in the WAF logs."",
+  ""Customer: This is not acceptable. MFA was not triggered on some of these sessions — why wasn't conditional access enforced?"",
+  ""Security Analyst: That's under review. A misconfigured access policy might be the reason, but we haven't isolated the exact condition yet. We're expanding the investigation to cover adjacent services."",
+  ""Product Manager: This needs immediate visibility from leadership. If token leakage or session hijacking is even a possibility, we need containment now."",
+  ""Security Lead: We've suspended the impacted account and are rotating all admin tokens as a precaution. Engaging our incident response team."",
+  ""Developer: We're patching additional logging and starting a forced MFA re-auth flow for all high-privilege roles while we continue root cause analysis."",
+  ""Customer: Expecting a formal incident report with mitigation steps today. We will be involving our legal and compliance teams if this isn't resolved within the next 24 hours.""
+]",,,SRE Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+arpat@contoso.com,2025-04-12 11:25:36,1005,Bug,Application crashes intermittently during peak usage hours,Active,2,"[
+  ""Customer: Our users are reporting frequent crashes on the application during peak business hours. This is now affecting multiple teams across regions."",
+  ""Support Lead: Confirmed. Incident has been escalated to P1. Users are unable to complete transactions, and error rates are spiking."",
+  ""Developer: We're seeing unhandled exceptions in the service logs tied to the recommendation engine API. Memory usage is abnormally high."",
+  ""SRE: Autoscaling didn't trigger as expected. The node pool hit its CPU ceiling, and some requests are getting dropped. Investigating why the scale-up failed."",
+  ""Customer: This is unacceptable. We've had three outages in the last two weeks. What's being done to prevent this from happening again?"",
+  ""Product Manager: We need a full war-room now. Engineering, SRE, and architecture teams must stay on until root cause is identified and fixed."",
+  ""Developer: Temporary mitigation applied — we've disabled the recommendation service and restarted the app instances. CPU usage is stabilizing."",
+  ""Security Analyst: Confirmed no external threats or DDoS patterns. Issue appears internal, related to resource exhaustion."",
+  ""Customer: When can we expect full functionality restored? We need an ETA for a permanent fix and a post-incident report today."",
+  ""Engineering Manager: We're deploying a hotfix to decouple the failing module. RCA will be shared in the next 6 hours. Leadership has been looped in.""
+]",,,Platform Team,v2.3.5,Reporting Engine,deepa.sinha@contoso.com
+neha.reddy@contoso.com,2025-04-28 03:49:12,1006,Story,Funnel visualization doesn't update after filters,Resolved,3,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Mobile Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+karan.verma@contoso.com,2025-04-06 11:44:37,1007,Bug,Inconsistent behavior of 'Save' and 'Submit' buttons across different modules,Active,3,"[
+  ""Customer: Users are confused between 'Save' and 'Submit' — in some modules 'Save' finalizes the form, while in others it just drafts it. This inconsistency is leading to incorrect submissions."",
+  ""UX Designer: That's valid feedback. The button labels and behaviors should follow a consistent pattern throughout the product."",
+  ""Developer: We've implemented these differently across modules based on earlier requirements, but I agree it's not intuitive now."",
+  ""Product Manager: This needs immediate attention. We're getting repeated support tickets, and it's impacting user confidence."",
+  ""QA: I'll start compiling a list of modules where this behavior is inconsistent and validate the current UI flow."",
+  ""UX Designer: Suggest we unify 'Save' for drafts and use 'Submit' only when the action is final. We should also add tooltips for clarity."",
+  ""Developer: That works. It's a low-code change but will need regression testing across all major modules."",
+  ""Support Lead: Please prioritize this fix for the next sprint. Our team is fielding multiple complaints daily on this issue."",
+  ""Product Manager: Agreed. Let's close this loop before the next release. UX team to provide updated guidelines today."",
+  ""QA: We'll update our regression suite and confirm behavior consistency post-deployment.""
+]",,1129,UI/UX Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+sanjay.singh@contoso.com,2025-04-29 23:21:13,1008,Story,Approval page takes more time to load,Active,3,"[
+  ""Customer: The approval page is taking over 10 seconds to load. It's slowing down our workflow significantly."",
+  ""Support Lead: We've logged multiple tickets on this in the past week. Seems to be affecting users across all regions."",
+  ""Developer: Initial profiling shows that the page is pulling too many records and attachments at once. The data fetch isn't paginated."",
+  ""UX Designer: From a design standpoint, we can introduce lazy loading or pagination. Also reduce default visible content."",
+  ""Product Manager: This delay is unacceptable for a critical workflow page. We need both a short-term fix and a long-term improvement."",
+  ""Developer: I'll implement pagination and defer loading of attachments. That should bring load time under 3 seconds."",
+  ""SRE: We've also noticed backend latency spikes during high traffic windows. Increasing DB connection pool may help temporarily."",
+  ""QA: Please ensure we cover edge cases during testing, especially for approval bulk actions and filters."",
+  ""Customer: Please share an ETA. This is impacting SLAs."",
+  ""Engineering Manager: Hotfix will be deployed by tomorrow EOD. A full redesign for performance will be included in the next sprint cycle.""
+]",,1186,SRE Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+amjosh@contoso.com,2025-04-04 17:47:14,1009,Story,Tooltip overlap on dashboard widgets,Active,3,"[
+  ""Customer: On the main dashboard, tooltips are overlapping with adjacent widgets, making it hard to view both."",
+  ""UX Designer: That's not ideal — tooltips should dynamically adjust their position to avoid visual clutter."",
+  ""Developer: The current tooltip logic uses a fixed position. I'll update it to use dynamic placement using the available viewport space."",
+  ""QA: Noted. Also saw this issue in the browser zoomed-in view (125%). We should test across different resolutions and zoom levels."",
+  ""Product Manager: This dashboard is high-visibility. Let's ensure the fix is prioritized and consistent across all widgets."",
+  ""Developer: Switching to Popper.js for smarter placement logic. Will also add hover-delay to reduce flicker."",
+  ""Support Lead: We've received user complaints especially from tablet users. Might be worth checking responsiveness too."",
+  ""UX Designer: Agreed. Also recommending a visual tweak — maybe reduce tooltip opacity and use a smaller font size to reduce intrusiveness."",
+  ""QA: Updated test cases with browser/device matrix. Will validate in staging tomorrow."",
+  ""Engineering Manager: Let's finalize this by the week. Include it in the UI polish checklist for future widgets too.""
+]",,1051,SRE Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+neha.reddy@contoso.com,2025-04-02 17:40:30,1010,Bug,Tooltip text clipped on smaller screens,Active,3,"[
+  ""Customer: Tooltips get cut off on smaller screens or when the elements are near the edge of the viewport."",
+  ""UX Designer: We should refactor the tooltip positioning logic to be responsive. Tooltip should auto-adjust left/right/top as needed."",
+  ""Developer: We're currently using a static positioning method. I'll switch to a dynamic popper-style library."",
+  ""QA: Make sure it also works well on landscape orientation. Some users access via tablets."",
+  ""Product Manager: Add this to the design backlog as well — tooltips are widely used and this issue breaks the experience."",
+  ""Developer: Integrated Popper.js with fallback logic. Pushed to test environment."",
+  ""QA: Works as expected. Tooltips reposition dynamically based on available space. Ready for release.""
+]",,1133,UI/UX Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+divya.rao@contoso.com,2025-04-07 13:17:54,1011,Story,App crashes when SSO token is expired during login,Resolved,3,"[
+  ""Customer: The application crashes when a user's SSO session expires. Instead of redirecting to re-authenticate, it just closes."",
+  ""QA Engineer: Reproduced the issue. Happens consistently when the token has expired before app launch."",
+  ""Developer: This is due to a missing null check in the token validation flow. The app tries to parse a nil token response."",
+  ""SRE: We don't see any fallback handling in the auth middleware. The crash logs show a fatal exception from the auth module."",
+  ""Product Manager: This affects enterprise users logging in after idle sessions. It's high priority for customer trust."",
+  ""Developer: Fixing by adding a token validation check and redirect logic to the login flow. Will also add telemetry."",
+  ""UX Designer: Can we show a friendly message when the session expires instead of a blank crash?"",
+  ""Developer: Yes — adding a ‘Session expired, please log in again' message with redirect."",
+  ""QA Engineer: Will validate across different token expiry states (immediate, near-expiry, valid)."",
+  ""Customer: Just tested the updated build — it now gracefully redirects to login. No crash observed. Much better!""
+]
+``",This was fixed as part of release 2.0.0.2000,,Mobile Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+neha.reddy@contoso.com,2025-04-07 19:52:06,1012,Story,Button states not updating on form submission,Active,3,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1037,UI/UX Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+neha.reddy@contoso.com,2025-04-16 00:16:55,1013,Story,Delayed response from login endpoint under peak load.,Active,3,"[
+  ""Customer: During peak hours, it takes up to 15 seconds to log in. This delay is frustrating for users trying to access the system quickly."",
+  ""Support Lead: We've seen a spike in complaints between 9 AM and 11 AM. Latency seems consistently high during that window."",
+  ""SRE: Confirmed. The login API latency jumps from ~500ms to over 10s under concurrent load. Possible thread pool exhaustion."",
+  ""Developer: The login service currently handles sessions and audit logging synchronously. We can move non-critical operations to async."",
+  ""Product Manager: This directly affects the user experience. Let's prioritize a short-term performance patch and track the root cause separately."",
+  ""UX Designer: Any perceived delay at login affects trust. We should consider",,1196,Platform Team,v2.1.1,Edge Gateway Service,vikram.shah@contoso.com
+neha.reddy@contoso.com,2025-04-06 22:53:01,1014,Bug,Frequent container restarts observed in production,Active,3,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,UI/UX Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+arpat@contoso.com,2025-04-25 21:47:30,1015,Bug,OAuth2 refresh token flow intermittently fails.,Active,3,"[
+  ""Customer: Some users are getting logged out randomly — we suspect the session refresh isn't working consistently."",
+  ""QA Engineer: Able to reproduce this intermittently when the app is left idle for more than 30 minutes."",
+  ""Developer: Found a race condition in the token refresh logic. Retry handler isn't always invoked on network failure."",
+  ""SRE: We're also seeing spikes in token refresh failures on the metrics dashboard between 1 AM and 4 AM UTC."",
+  ""Product Manager: This affects user experience on both mobile and web. Prioritize a fix and monitor post-release."",
+  ""Developer: Pushed a patch that includes exponential backoff and logging for failed refresh attempts."",
+  ""QA Engineer: Fix validated — refresh now works consistently, even with poor network conditions."",
+  ""Customer: Haven't seen logouts in the last 24 hours. Looks stable now — thanks for the quick turnaround.""
+]",,,Analytics Team,v2.3.5,Reporting Engine,deepa.sinha@contoso.com
+amjosh@contoso.com,2025-04-25 18:16:53,1016,Bug,Incorrect error message shown for invalid login credentials,Resolved,3,"[
+  ""Customer: When users enter the wrong password, the error message says 'System error. Try again later' instead of indicating invalid credentials."",
+  ""Support Lead: This is misleading users and increasing support tickets. They think the system is down."",
+  ""UX Designer: The error messaging should be user-friendly and specific. It should say something like 'Invalid username or password'."",
+  ""Developer: Looks like the frontend is displaying a generic fallback message when the backend returns a 401. I'll check the error handling logic."",
+  ""Product Manager: This impacts user trust. Let's fix the messaging immediately and do a quick audit of other authentication flows."",
+  ""QA: We'll test scenarios like wrong password, wrong username, and empty fields. Need to confirm each has the correct error state."",
+  ""Developer: Updated the message mapping logic. Specific errors now show: 'Invalid credentials', 'Account locked', etc."",
+  ""Support Lead: That's perfect. Please share the build with our support team so they can validate against known cases."",
+  ""QA: Validated on staging. Messages are now accurate and align with expected behavior. Ready for deployment."",
+  ""Product Manager: Great. Let's include this as a patch in the next release and update the error message guidelines accordingly.""
+]",This was fixed as part of release 2.0.0.2000,,SRE Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+aarai@contoso.com,2025-04-14 13:01:15,1017,Story,Color contrast fails accessibility test on dark mode,Active,3,"[
+  ""Customer: Our internal accessibility audit flagged the UI — text on buttons in dark mode fails WCAG contrast standards."",
+  ""QA Engineer: Verified — the primary button text has a contrast ratio of 3.5:1. Minimum required is 4.5:1."",
+  ""UX Designer: We'll adjust the color palette for dark mode to ensure all text/background ratios are compliant."",
+  ""Developer: Updated the CSS tokens and added contrast check automation to CI pipeline."",
+  ""Product Manager: Make sure this fix rolls out with the next patch release — it's needed for compliance certification."",
+  ""QA Engineer: New dark mode renders validated with accessibility tools — all components pass now."",
+  ""Customer: Much better! Readability is improved. Thanks for addressing the issue promptly.""
+]",,,Analytics Team,v2.3.5,Edge Gateway Service,vikram.shah@contoso.com
+amjosh@contoso.com,2025-04-29 01:50:54,1018,Bug,Login audit logs are not generated for federated identities.,Resolved,3,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,"1033, 1167",UI/UX Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+amjosh@contoso.com,2025-04-07 10:21:00,1019,Story,Random crashes during peak hour,Active,3,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,UI/UX Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+divya.rao@contoso.com,2025-04-23 19:00:23,1020,Story,Platform configuration sync failures across regions,Active,3,"[
+  ""Platform Engineer: We've identified a sync failure in the platform configuration service between US-East and EU-West regions."",
+  ""Customer: We noticed feature flags are inconsistent — some users in Europe don't see the latest updates."",
+  ""SRE: The cross-region replication job failed silently due to a missing IAM permission after the last role update."",
+  ""Developer: We didn't receive alerts on the sync failure. Looks like the error was swallowed in the logging middleware."",
+  ""Engineering Manager: This is a high-priority reliability issue. We need proper observability on core platform services."",
+  ""Platform Engineer: Applying a patch to restore the missing permission. Also updating the replication job to fail loudly on permission errors."",
+  ""Product Manager: We need a full RCA on how this went undetected for days. This impacted multiple live features."",
+  ""SRE: Will add detailed metrics and alerts to the Prometheus dashboards. Setting thresholds for sync delay and consistency checks."",
+  ""Developer: Also adding a health check endpoint for the sync pipeline. Will expose last successful sync timestamp for ops visibility."",
+  ""Engineering Manager: Let's finalize all fixes within this sprint. Also create a checklist for cross-region deployment validation going forward.""
+]",,,Platform Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+karan.verma@contoso.com,2025-04-27 12:14:15,1021,Bug,Session duration shows inflated values,Active,2,"[
+  ""Customer: We've noticed session durations being unusually high — users idle for minutes are still shown as 'active'."",
+  ""Product Analyst: Confirmed. Some sessions report durations over 2 hours despite no interaction after initial login."",
+  ""Developer: This is likely due to missing heartbeat or inactivity timeout logic on the client-side."",
+  ""SRE: Checked backend logs — session end isn't being triggered reliably. Some sessions just stay open until token expiry."",
+  ""UX Designer: That could also skew funnel and drop-off data. The session should end when a user becomes inactive."",
+  ""Developer: I'll implement a 15-minute idle timeout and emit a session-close event. Also, add a periodic heartbeat."",
+  ""QA Engineer: We'll test scenarios like tab inactivity, minimized window, and logout without interaction."",
+  ""Product Manager: Please prioritize this fix. It's affecting all dashboards and business KPIs."",
+  ""Customer: Thanks for the update. Please confirm once the fix is deployed to production so we can validate again."",
+  ""Developer: Patch is live. Session duration now reflects active usage only. Let us know if the numbers look better.""
+]",,"1021, 1019",Mobile Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+arpat@contoso.com,2025-04-04 22:58:59,1022,Story,Report scheduler failed for campaign metrics,Active,2,"[
+  ""Customer: Our weekly campaign reports didn't get emailed this Monday — no reports were generated or sent."",
+  ""Support Engineer: Checked logs — scheduler job failed silently due to a database timeout on large data fetch."",
+  ""Developer: The query behind the job isn't optimized for new campaign structures introduced last month."",
+  ""SRE: Database CPU usage spikes during the job run. We'll tune query execution and add retry logic."",
+  ""Product Manager: This impacts all marketing teams. Let's set up alerts if scheduled reports don't complete."",
+  ""Developer: Rewrote the aggregation query and added monitoring hooks for job status and duration."",
+  ""QA Engineer: Simulated large data sets — new job runs successfully and completes within 5 minutes."",
+  ""Customer: Just got the latest campaign report. Everything looks back to normal — appreciate the quick fix!""
+]",,1101,Analytics Team,v2.1.1,Reporting Engine,deepa.sinha@contoso.com
+priya.menon@contoso.com,2025-04-18 13:59:46,1023,Bug,Modal windows not closing on mobile devices,Active,2,"[
+  ""Customer: On mobile, the modal windows aren't closing when users tap outside the modal. They have to explicitly use the 'X' button."",
+  ""UX Designer: That's a usability issue. Expected behavior is for modals to dismiss on outside tap."",
+  ""Developer: On it. This seems to be a missing event listener in the mobile viewport. Likely a quick fix."",
+  ""QA: We'll validate the fix across screen sizes. We've seen similar modal issues in the profile settings module too."",
+  ""Product Manager: Let's make this consistent across all modal implementations and add to the design guidelines going forward."",
+  ""Developer: Fix deployed to staging. Ready for testing."",
+  ""QA: Confirmed working across Android and iOS devices. Will include in the upcoming patch.""
+]",,"1039, 1065",UI/UX Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+karan.verma@contoso.com,2025-04-08 16:57:32,1024,Bug,Deployment pipeline stalled during artifact promotion,Active,3,"[
+  ""DevOps Engineer: The artifact promotion job is stuck in the staging-to-prod step since yesterday."",
+  ""Developer: Our latest build is ready but can't be promoted. This is blocking release timelines."",
+  ""SRE: Investigated and found that the runner node hit disk limits. Promotion step couldn't copy build artifacts."",
+  ""Engineering Manager: We need alerts in place for CI/CD runner health. We can't afford silent failures on release days."",
+  ""DevOps Engineer: Cleaning up temp directories and scaling runner volume. Also adding log rotation for build logs."",
+  ""QA: Please confirm if this will delay today's regression schedule. We'll need to adjust timelines."",
+  ""DevOps Engineer: Fix applied and pipeline unblocked. Adding retry logic for artifact transfers."",
+  ""Product Manager: Let's prioritize stabilization of the pipeline next sprint. Release reliability is critical.""
+]",,1189,Platform Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+meera.kapoor@contoso.com,2025-04-09 08:52:01,1025,Story,Description for issue 1025,Active,2,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,SRE Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+karan.verma@contoso.com,2025-04-05 14:27:27,1026,Story,Description for issue 1026,Resolved,3,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 1.0.0.1000,1088,SRE Team,v2.3.5,Edge Gateway Service,vikram.shah@contoso.com
+arpat@contoso.com,2025-04-02 02:20:51,1027,Story,Dropdown menus not accessible via keyboard navigation,Active,3,"[
+  ""Customer: Keyboard users are unable to navigate dropdown menus — the tab key skips over them entirely."",
+  ""UX Designer: That's an accessibility compliance issue. All interactive elements should be reachable by keyboard."",
+  ""Developer: Likely due to missing tabindex attributes or incorrect ARIA roles. I'll audit the dropdown component today."",
+  ""QA: Please verify on all major browsers, including Safari, which has shown issues with custom elements before."",
+  ""Product Manager: Accessibility gaps are critical. Let's treat this with urgency — it will reflect in the audit report."",
+  ""Developer: Updated the component with proper ARIA attributes and keyboard handlers. Committed to the dev branch."",
+  ""QA: Passed on Firefox, Chrome, and Safari. We'll push it in the next minor release.""
+]",,1113,UI/UX Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+neha.reddy@contoso.com,2025-05-03 13:55:49,1028,Story,Description for issue 1028,Resolved,3,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 1.0.0.1000,,SRE Team,v2.3.5,Mobile UI,anjali.nair@contoso.com
+amjosh@contoso.com,2025-04-07 21:46:03,1029,Bug,Configuration drift detected in containerized environments,Resolved,3,"[
+  ""Platform Engineer: Drift detected between staging and production container definitions. Memory limits differ."",
+  ""Developer: This explains the inconsistent behavior we're seeing during load testing in staging."",
+  ""SRE: This likely happened due to a manual override during hotfix deployment. We need drift detection tooling."",
+  ""Engineering Manager: Manual changes to platform configurations should be restricted and logged properly."",
+  ""Platform Engineer: Rolling out Open Policy Agent (OPA) checks to prevent unapproved config overrides."",
+  ""QA: Let's add a test step in our deployment workflow to validate environment parity before go-live."",
+  ""Product Manager: We need a postmortem and action plan. This could have led to a production outage."",
+  ""Platform Engineer: Documenting drift checks in the internal runbook and adding Slack alerts for any future mismatches.""
+]",This was fixed as part of release 1.0.0.1000,1194,Platform Team,v2.3.5,Edge Gateway Service,vikram.shah@contoso.com
+sanjay.singh@contoso.com,2025-05-04 03:05:23,1030,Story,Push notifications not received on some Android devices,Resolved,3,"[
+  ""Customer: We've observed that push notifications are not reaching some of our Android users, especially on Samsung and OnePlus devices."",
+  ""Support Engineer: Ticket logs show multiple complaints about this from users across different app versions."",
+  ""QA Engineer: We replicated the issue on Android 13 with battery optimization enabled. Notifications are being silently blocked."",
+  ""Mobile Developer: Looks like the Firebase messaging service is getting throttled by OS-level background restrictions."",
+  ""Product Manager: This impacts user engagement and time-sensitive alerts. Needs immediate attention."",
+  ""Developer: Adding logic to request exemption from battery optimization on first install. Also logging FCM delivery status."",
+  ""SRE: We can track delivery failures via Firebase dashboards. Will also monitor network reliability on affected devices."",
+  ""UX Designer: Let's show a warning to users if background restrictions are detected, prompting them to adjust settings."",
+  ""QA Engineer: Testing the updated app on different Android versions and OEMs to ensure broader coverage."",
+  ""Customer: Notifications are now coming through after enabling background activity. Message clarity helped — thank you!""
+]",This was fixed as part of release 4.0.0.4000,1119,Mobile Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+meera.kapoor@contoso.com,2025-04-12 23:02:19,1031,Story,Real-time dashboard shows stale data after 10 minutes,Resolved,3,"[
+  ""Customer: Our real-time sales dashboard stops updating after about 10 minutes. Data shown is outdated."",
+  ""Support Engineer: Confirmed with multiple users — charts freeze unless the page is refreshed."",
+  ""Developer: Investigating WebSocket connection. Logs show heartbeat failures after prolonged idle time."",
+  ""SRE: There was a recent firewall update that started terminating idle connections after 600 seconds."",
+  ""Developer: Will add a keep-alive mechanism to ensure the WebSocket remains active during long sessions."",
+  ""QA Engineer: Fix deployed to staging. Dashboard now continues updating even after 30 minutes."",
+  ""Product Manager: Let's ensure this is rolled into the next hotfix — this is critical for live campaign tracking."",
+  ""Customer: The dashboard is now refreshing as expected — thanks for resolving this quickly!""
+]",This was fixed as part of release 4.0.0.4000,1166,Analytics Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+arpat@contoso.com,2025-04-26 14:29:26,1032,Bug,Description for issue 1032,Resolved,3,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 2.0.0.2000,1083,SRE Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+sanjay.singh@contoso.com,2025-05-01 03:30:26,1033,Story,Description for issue 1033,Resolved,3,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 2.0.0.2000,,SRE Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+amjosh@contoso.com,2025-05-05 17:21:54,1034,Bug,Description for issue 1034,Active,3,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1134,Analytics Team,v2.1.1,Edge Gateway Service,vikram.shah@contoso.com
+sanjay.singh@contoso.com,2025-04-28 22:32:03,1035,Story,Platform monitoring agent crash on specific host OS version,Active,3,"[
+  ""SRE: Monitoring agent fails to start on nodes running Ubuntu 22.04. Logs show missing dependency."",
+  ""DevOps Engineer: Looks like the latest agent update didn't test compatibility with that OS version."",
+  ""Developer: We rely on metrics from that agent for deployment validation. This is a blocker."",
+  ""Platform Engineer: Rolling back the agent version temporarily while we prepare a patched release."",
+  ""Product Manager: Are other teams impacted by lack of telemetry? We need full visibility before the next release."",
+  ""SRE: Yes, the east region cluster is missing health metrics. Escalating to the observability vendor too."",
+  ""QA: We'll run compatibility tests on all supported OS versions as part of release sign-off moving forward."",
+  ""Engineering Manager: Good. Let's patch, validate across environments, and include platform agent tests in our CI pipeline.""
+]",,1099,Platform Team,v2.1.1,Edge Gateway Service,vikram.shah@contoso.com
+arpat@contoso.com,2025-04-29 08:57:09,1036,Story,Description for issue 1036,Active,3,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1054,SRE Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+sanjay.singh@contoso.com,2025-04-12 21:06:00,1037,Bug,Description for issue 1037,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1144,SRE Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+karan.verma@contoso.com,2025-04-14 00:08:54,1038,Story,Description for issue 1038,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Platform Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+meera.kapoor@contoso.com,2025-04-06 18:47:55,1039,Bug,Description for issue 1039,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1097,SRE Team,v2.1.1,Reporting Engine,deepa.sinha@contoso.com
+sanjay.singh@contoso.com,2025-04-13 04:36:15,1040,Story,Description for issue 1040,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,"1019, 1057",Platform Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+meera.kapoor@contoso.com,2025-04-28 18:14:07,1041,Story,Description for issue 1041,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1158,SRE Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+karan.verma@contoso.com,2025-04-11 19:35:54,1042,Story,Description for issue 1042,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1078,Platform Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+aarai@contoso.com,2025-04-01 13:45:53,1043,Bug,Description for issue 1043,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,,UI/UX Team,v2.1.1,Reporting Engine,deepa.sinha@contoso.com
+divya.rao@contoso.com,2025-04-14 23:26:24,1044,Story,Description for issue 1044,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1111,Mobile Team,v2.3.5,Mobile UI,anjali.nair@contoso.com
+karan.verma@contoso.com,2025-04-07 19:47:17,1045,Bug,Description for issue 1045,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Mobile Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+karan.verma@contoso.com,2025-04-05 02:50:53,1046,Story,Description for issue 1046,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1178,Analytics Team,v2.3.5,Edge Gateway Service,vikram.shah@contoso.com
+aarai@contoso.com,2025-04-13 21:14:23,1047,Bug,Description for issue 1047,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Platform Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+neha.reddy@contoso.com,2025-04-12 16:03:51,1048,Story,Description for issue 1048,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1121,SRE Team,v2.3.5,Reporting Engine,deepa.sinha@contoso.com
+aarai@contoso.com,2025-04-10 10:27:07,1049,Bug,Description for issue 1049,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1067,UI/UX Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+arpat@contoso.com,2025-04-09 23:20:37,1050,Story,Description for issue 1050,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1124,SRE Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+arpat@contoso.com,2025-04-23 09:41:49,1051,Story,Description for issue 1051,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1106,SRE Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+ravi.nair@contoso.com,2025-04-24 20:06:58,1052,Bug,Description for issue 1052,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Analytics Team,v2.1.1,Edge Gateway Service,vikram.shah@contoso.com
+meera.kapoor@contoso.com,2025-04-19 05:39:40,1053,Bug,Description for issue 1053,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1128,SRE Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+neha.reddy@contoso.com,2025-04-27 05:59:04,1054,Bug,Description for issue 1054,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1151,Analytics Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+divya.rao@contoso.com,2025-05-02 10:24:16,1055,Bug,Description for issue 1055,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1156,Mobile Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+sanjay.singh@contoso.com,2025-05-05 04:32:40,1056,Bug,Description for issue 1056,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1082,Analytics Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+sanjay.singh@contoso.com,2025-04-09 11:09:51,1057,Bug,Description for issue 1057,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1087,Platform Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+sanjay.singh@contoso.com,2025-04-05 07:35:30,1058,Story,Description for issue 1058,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Analytics Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+neha.reddy@contoso.com,2025-04-09 21:13:52,1059,Bug,Description for issue 1059,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1154,SRE Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+karan.verma@contoso.com,2025-04-09 06:19:30,1060,Bug,Description for issue 1060,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1172,UI/UX Team,v3.0.0,Mobile UI,anjali.nair@contoso.com
+meera.kapoor@contoso.com,2025-04-10 14:55:05,1061,Story,Description for issue 1061,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1113,Analytics Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+aarai@contoso.com,2025-04-03 04:32:38,1062,Bug,Description for issue 1062,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1084,Analytics Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+amjosh@contoso.com,2025-05-04 11:58:29,1063,Bug,Description for issue 1063,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1152,UI/UX Team,v2.3.5,Mobile UI,anjali.nair@contoso.com
+karan.verma@contoso.com,2025-04-30 10:37:26,1064,Bug,Description for issue 1064,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1079,Mobile Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+meera.kapoor@contoso.com,2025-04-13 12:00:58,1065,Bug,Description for issue 1065,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1182,Platform Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-04-15 21:56:52,1066,Bug,Description for issue 1066,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1084,UI/UX Team,v3.0.0,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-04-29 01:15:47,1067,Bug,Description for issue 1067,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1118,Mobile Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+neha.reddy@contoso.com,2025-04-12 19:56:58,1068,Story,Description for issue 1068,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1131,Platform Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+meera.kapoor@contoso.com,2025-04-15 09:51:07,1069,Story,Description for issue 1069,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1156,Analytics Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+priya.menon@contoso.com,2025-04-28 17:56:26,1070,Bug,Description for issue 1070,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Analytics Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+ravi.nair@contoso.com,2025-04-20 09:48:32,1071,Story,Description for issue 1071,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1136,Analytics Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+divya.rao@contoso.com,2025-04-25 03:03:26,1072,Bug,Description for issue 1072,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1130,SRE Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+aarai@contoso.com,2025-04-09 16:47:53,1073,Story,Description for issue 1073,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1159,Mobile Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+ravi.nair@contoso.com,2025-04-20 15:52:56,1074,Bug,Description for issue 1074,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1089,Platform Team,v2.1.1,Reporting Engine,deepa.sinha@contoso.com
+aarai@contoso.com,2025-04-16 15:54:08,1075,Story,Description for issue 1075,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1130,UI/UX Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+arpat@contoso.com,2025-04-15 22:27:40,1076,Story,Description for issue 1076,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1089,Analytics Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+neha.reddy@contoso.com,2025-04-01 04:52:23,1077,Bug,Description for issue 1077,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,SRE Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+divya.rao@contoso.com,2025-04-05 01:50:38,1078,Bug,Description for issue 1078,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,SRE Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+neha.reddy@contoso.com,2025-04-22 20:44:56,1079,Story,Description for issue 1079,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Mobile Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+sanjay.singh@contoso.com,2025-04-21 04:36:17,1080,Bug,Description for issue 1080,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1146,Mobile Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+sanjay.singh@contoso.com,2025-04-12 01:47:38,1081,Story,Description for issue 1081,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,SRE Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+ravi.nair@contoso.com,2025-04-02 12:44:49,1082,Bug,Description for issue 1082,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1167,UI/UX Team,v2.1.1,Edge Gateway Service,vikram.shah@contoso.com
+amjosh@contoso.com,2025-05-05 03:02:37,1083,Bug,Description for issue 1083,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,UI/UX Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+amjosh@contoso.com,2025-04-28 07:48:05,1084,Story,Description for issue 1084,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1168,UI/UX Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+aarai@contoso.com,2025-04-09 20:34:52,1085,Story,Description for issue 1085,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Mobile Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+neha.reddy@contoso.com,2025-04-03 04:37:18,1086,Bug,Description for issue 1086,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1134,SRE Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+meera.kapoor@contoso.com,2025-04-08 02:00:21,1087,Bug,Description for issue 1087,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1050,Analytics Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+ravi.nair@contoso.com,2025-04-11 14:13:00,1088,Story,Description for issue 1088,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1129,Platform Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+karan.verma@contoso.com,2025-04-01 08:39:26,1089,Story,Description for issue 1089,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1072,Analytics Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+neha.reddy@contoso.com,2025-04-13 21:14:40,1090,Story,Description for issue 1090,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1147,Analytics Team,v2.1.1,Reporting Engine,deepa.sinha@contoso.com
+sanjay.singh@contoso.com,2025-04-02 23:40:38,1091,Bug,Description for issue 1091,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1077,UI/UX Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+aarai@contoso.com,2025-04-03 16:38:58,1092,Bug,Description for issue 1092,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1109,SRE Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+karan.verma@contoso.com,2025-05-04 21:10:07,1093,Bug,Description for issue 1093,Resolved,4,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 2.0.0.2000,1092,Platform Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+meera.kapoor@contoso.com,2025-04-12 10:07:03,1094,Bug,Description for issue 1094,Resolved,4,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 2.0.0.2000,,Mobile Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+divya.rao@contoso.com,2025-04-19 13:35:13,1095,Bug,Description for issue 1095,Resolved,4,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 2.0.0.2000,1077,UI/UX Team,v2.1.1,Edge Gateway Service,vikram.shah@contoso.com
+meera.kapoor@contoso.com,2025-04-21 10:05:30,1096,Story,Description for issue 1096,Resolved,4,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 2.0.0.2000,1153,Mobile Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+divya.rao@contoso.com,2025-04-11 15:05:17,1097,Bug,Description for issue 1097,Resolved,4,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 2.0.0.2000,1082,SRE Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+priya.menon@contoso.com,2025-04-22 19:02:44,1098,Bug,Description for issue 1098,Resolved,4,"Customer: ""Sessions > 12h showing up in reports.""
+Dev: ""Missing timeout check. Max cap added to backend logic.""",This was fixed as part of release 2.0.0.2000,1119,UI/UX Team,v2.1.1,Edge Gateway Service,vikram.shah@contoso.com
+sanjay.singh@contoso.com,2025-05-03 12:10:33,1099,Bug,Description for issue 1099,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,,Mobile Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+amjosh@contoso.com,2025-04-27 18:19:30,1100,Story,Description for issue 1100,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1117,UI/UX Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+neha.reddy@contoso.com,2025-04-14 10:59:34,1101,Story,Description for issue 1101,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,,Platform Team,v2.0.0,Mobile UI,anjali.nair@contoso.com
+amjosh@contoso.com,2025-04-22 07:39:39,1102,Bug,Description for issue 1102,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,,Mobile Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+amjosh@contoso.com,2025-05-02 11:17:12,1103,Bug,Description for issue 1103,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1053,SRE Team,v2.3.5,Mobile UI,anjali.nair@contoso.com
+neha.reddy@contoso.com,2025-04-17 06:16:48,1104,Story,Description for issue 1104,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1056,UI/UX Team,v3.0.0,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-05-03 12:40:28,1105,Story,Description for issue 1105,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,,Analytics Team,v2.3.5,Edge Gateway Service,vikram.shah@contoso.com
+priya.menon@contoso.com,2025-05-05 23:55:48,1106,Story,Description for issue 1106,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Platform Team,v2.1.1,Edge Gateway Service,vikram.shah@contoso.com
+meera.kapoor@contoso.com,2025-04-22 07:54:26,1107,Story,Description for issue 1107,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,UI/UX Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+karan.verma@contoso.com,2025-05-02 23:33:33,1108,Story,Description for issue 1108,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1081,SRE Team,v2.0.0,Mobile UI,anjali.nair@contoso.com
+priya.menon@contoso.com,2025-04-20 01:20:42,1109,Story,Description for issue 1109,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,UI/UX Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+sanjay.singh@contoso.com,2025-04-07 06:20:04,1110,Bug,Description for issue 1110,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1145,Analytics Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+amjosh@contoso.com,2025-04-10 22:32:20,1111,Bug,Description for issue 1111,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,1107,SRE Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+divya.rao@contoso.com,2025-04-17 12:01:14,1112,Bug,Description for issue 1112,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1145,SRE Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+sanjay.singh@contoso.com,2025-04-29 01:08:33,1113,Story,Description for issue 1113,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 4.0.0.4000,,SRE Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+ravi.nair@contoso.com,2025-04-30 13:54:15,1114,Story,Description for issue 1114,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,SRE Team,v3.0.0,Mobile UI,anjali.nair@contoso.com
+karan.verma@contoso.com,2025-04-29 01:10:22,1115,Bug,Description for issue 1115,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1074,Platform Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+karan.verma@contoso.com,2025-04-17 12:49:05,1116,Story,Description for issue 1116,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1101,SRE Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+sanjay.singh@contoso.com,2025-05-01 12:10:18,1117,Story,Description for issue 1117,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Platform Team,v3.0.0,Mobile UI,anjali.nair@contoso.com
+ravi.nair@contoso.com,2025-04-04 23:49:43,1118,Story,Description for issue 1118,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Platform Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+priya.menon@contoso.com,2025-05-01 03:29:54,1119,Story,Description for issue 1119,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Platform Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+aarai@contoso.com,2025-04-22 19:46:06,1120,Story,Description for issue 1120,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1052,Analytics Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+priya.menon@contoso.com,2025-04-17 18:41:32,1121,Bug,Description for issue 1121,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1124,Analytics Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+neha.reddy@contoso.com,2025-04-14 08:49:11,1122,Bug,Description for issue 1122,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1084,Mobile Team,v2.3.5,Reporting Engine,deepa.sinha@contoso.com
+aarai@contoso.com,2025-05-03 01:27:49,1123,Story,Description for issue 1123,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Mobile Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+priya.menon@contoso.com,2025-04-21 02:11:59,1124,Bug,Description for issue 1124,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Mobile Team,v3.0.0,Mobile UI,anjali.nair@contoso.com
+ravi.nair@contoso.com,2025-04-26 19:17:50,1125,Bug,Description for issue 1125,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1160,Platform Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+ravi.nair@contoso.com,2025-04-10 19:12:26,1126,Story,Description for issue 1126,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,UI/UX Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+ravi.nair@contoso.com,2025-04-24 21:49:39,1127,Story,Description for issue 1127,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1161,Analytics Team,v2.0.0,Mobile UI,anjali.nair@contoso.com
+ravi.nair@contoso.com,2025-04-24 15:12:23,1128,Bug,Description for issue 1128,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1109,Platform Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+karan.verma@contoso.com,2025-04-20 00:49:11,1129,Story,Description for issue 1129,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1081,UI/UX Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+aarai@contoso.com,2025-04-10 16:01:19,1130,Story,Description for issue 1130,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Analytics Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+karan.verma@contoso.com,2025-04-25 23:08:16,1131,Bug,Description for issue 1131,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Mobile Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+arpat@contoso.com,2025-04-01 00:14:03,1132,Bug,Description for issue 1132,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1152,Mobile Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+meera.kapoor@contoso.com,2025-04-13 07:37:06,1133,Bug,Description for issue 1133,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1131,UI/UX Team,v2.0.0,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-04-16 01:21:50,1134,Bug,Description for issue 1134,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Mobile Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+meera.kapoor@contoso.com,2025-05-02 16:39:49,1135,Story,Description for issue 1135,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1070,Analytics Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+amjosh@contoso.com,2025-04-01 16:40:07,1136,Story,Description for issue 1136,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1087,Mobile Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+meera.kapoor@contoso.com,2025-04-23 11:26:20,1137,Bug,Description for issue 1137,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1075,UI/UX Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+meera.kapoor@contoso.com,2025-04-16 22:28:59,1138,Bug,Description for issue 1138,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1119,SRE Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+karan.verma@contoso.com,2025-04-14 03:35:36,1139,Story,Description for issue 1139,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1181,SRE Team,v3.0.0,Mobile UI,anjali.nair@contoso.com
+aarai@contoso.com,2025-04-13 14:39:52,1140,Bug,Description for issue 1140,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Mobile Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+meera.kapoor@contoso.com,2025-04-13 12:36:29,1141,Story,Description for issue 1141,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1138,Mobile Team,v2.3.5,Reporting Engine,deepa.sinha@contoso.com
+karan.verma@contoso.com,2025-04-14 01:25:34,1142,Bug,Description for issue 1142,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1134,Mobile Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-04-17 23:40:30,1143,Bug,Description for issue 1143,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1125,Mobile Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+priya.menon@contoso.com,2025-04-07 19:58:09,1144,Bug,Description for issue 1144,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1120,Platform Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+sanjay.singh@contoso.com,2025-04-05 05:31:28,1145,Story,Description for issue 1145,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1134,SRE Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+karan.verma@contoso.com,2025-04-06 11:30:01,1146,Bug,Description for issue 1146,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1167,UI/UX Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+divya.rao@contoso.com,2025-04-11 21:12:25,1147,Bug,Description for issue 1147,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Platform Team,v2.0.0,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-04-10 00:29:22,1148,Story,Description for issue 1148,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1195,Mobile Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+amjosh@contoso.com,2025-04-29 11:42:44,1149,Bug,Description for issue 1149,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Analytics Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+amjosh@contoso.com,2025-04-07 09:06:24,1150,Story,Description for issue 1150,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,UI/UX Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-04-28 12:14:13,1151,Story,Description for issue 1151,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Platform Team,v2.3.5,Reporting Engine,deepa.sinha@contoso.com
+amjosh@contoso.com,2025-05-02 00:20:54,1152,Story,Description for issue 1152,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1052,UI/UX Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+amjosh@contoso.com,2025-04-13 15:16:42,1153,Story,Description for issue 1153,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1130,Mobile Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+sanjay.singh@contoso.com,2025-05-05 23:18:14,1154,Bug,Description for issue 1154,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Analytics Team,v2.3.5,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-04-08 06:10:01,1155,Bug,Description for issue 1155,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1139,UI/UX Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+ravi.nair@contoso.com,2025-04-11 10:26:34,1156,Bug,Description for issue 1156,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1098,Platform Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+ravi.nair@contoso.com,2025-04-19 16:38:09,1157,Bug,Description for issue 1157,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1063,Platform Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+arpat@contoso.com,2025-05-01 23:48:05,1158,Bug,Description for issue 1158,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1146,Platform Team,v2.0.0,Mobile UI,anjali.nair@contoso.com
+aarai@contoso.com,2025-04-02 12:38:06,1159,Story,Description for issue 1159,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Analytics Team,v2.3.5,Authentication API,ramesh.iyer@contoso.com
+amjosh@contoso.com,2025-04-25 22:56:44,1160,Bug,Description for issue 1160,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1158,UI/UX Team,v2.0.0,Mobile UI,anjali.nair@contoso.com
+ravi.nair@contoso.com,2025-04-15 10:46:00,1161,Bug,Description for issue 1161,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Analytics Team,v2.3.5,Mobile UI,anjali.nair@contoso.com
+amjosh@contoso.com,2025-04-25 08:06:22,1162,Story,Description for issue 1162,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,UI/UX Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+arpat@contoso.com,2025-04-11 03:29:18,1163,Story,Description for issue 1163,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1092,Platform Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+aarai@contoso.com,2025-04-29 10:41:26,1164,Bug,Description for issue 1164,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1180,UI/UX Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+meera.kapoor@contoso.com,2025-04-23 14:15:03,1165,Story,Description for issue 1165,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1115,Mobile Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+arpat@contoso.com,2025-04-24 11:54:12,1166,Bug,Description for issue 1166,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,UI/UX Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+ravi.nair@contoso.com,2025-04-09 13:41:34,1167,Bug,Description for issue 1167,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,UI/UX Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+amjosh@contoso.com,2025-04-15 22:22:56,1168,Story,Description for issue 1168,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1110,Platform Team,v2.3.5,Edge Gateway Service,vikram.shah@contoso.com
+sanjay.singh@contoso.com,2025-05-05 04:22:24,1169,Bug,Description for issue 1169,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Platform Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+neha.reddy@contoso.com,2025-05-03 11:20:05,1170,Story,Description for issue 1170,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1130,Mobile Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+neha.reddy@contoso.com,2025-04-01 07:27:23,1171,Bug,Description for issue 1171,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Platform Team,v2.3.5,Mobile UI,anjali.nair@contoso.com
+meera.kapoor@contoso.com,2025-04-08 01:19:21,1172,Story,Description for issue 1172,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1158,Analytics Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+arpat@contoso.com,2025-04-11 22:35:38,1173,Bug,Description for issue 1173,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1197,Platform Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+sanjay.singh@contoso.com,2025-04-17 05:18:48,1174,Story,Description for issue 1174,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1134,SRE Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+ravi.nair@contoso.com,2025-04-20 10:10:23,1175,Story,Description for issue 1175,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1174,Platform Team,v2.3.5,Reporting Engine,deepa.sinha@contoso.com
+amjosh@contoso.com,2025-04-02 03:04:30,1176,Bug,Description for issue 1176,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1109,SRE Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+amjosh@contoso.com,2025-05-04 03:14:47,1177,Bug,Description for issue 1177,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1079,Mobile Team,v2.1.1,Data Layer,sandeep.rao@contoso.com
+arpat@contoso.com,2025-04-03 00:01:28,1178,Story,Description for issue 1178,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1184,UI/UX Team,v2.3.5,Data Layer,sandeep.rao@contoso.com
+priya.menon@contoso.com,2025-04-27 22:48:50,1179,Story,Description for issue 1179,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1130,UI/UX Team,v2.0.0,Edge Gateway Service,vikram.shah@contoso.com
+amjosh@contoso.com,2025-04-15 16:28:20,1180,Story,Description for issue 1180,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Analytics Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+arpat@contoso.com,2025-05-01 22:32:08,1181,Bug,Description for issue 1181,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1146,UI/UX Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+priya.menon@contoso.com,2025-04-29 07:03:35,1182,Story,Description for issue 1182,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1067,Platform Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+meera.kapoor@contoso.com,2025-05-02 10:00:40,1183,Story,Description for issue 1183,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Mobile Team,v2.0.0,Reporting Engine,deepa.sinha@contoso.com
+aarai@contoso.com,2025-04-05 13:02:33,1184,Story,Description for issue 1184,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1110,SRE Team,v2.3.5,Mobile UI,anjali.nair@contoso.com
+arpat@contoso.com,2025-04-04 17:31:22,1185,Story,Description for issue 1185,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,Analytics Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+divya.rao@contoso.com,2025-04-03 13:54:52,1186,Story,Description for issue 1186,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Mobile Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+arpat@contoso.com,2025-05-01 11:08:28,1187,Story,Description for issue 1187,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1157,UI/UX Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+meera.kapoor@contoso.com,2025-04-20 05:26:28,1188,Story,Description for issue 1188,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,SRE Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+neha.reddy@contoso.com,2025-04-25 15:48:15,1189,Bug,Description for issue 1189,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1076,SRE Team,v2.0.0,Mobile UI,anjali.nair@contoso.com
+meera.kapoor@contoso.com,2025-04-06 08:53:47,1190,Story,Description for issue 1190,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1052,Mobile Team,v3.0.0,Authentication API,ramesh.iyer@contoso.com
+aarai@contoso.com,2025-04-29 12:40:38,1191,Bug,Description for issue 1191,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1167,UI/UX Team,v2.1.1,Authentication API,ramesh.iyer@contoso.com
+meera.kapoor@contoso.com,2025-04-02 02:26:28,1192,Bug,Description for issue 1192,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,UI/UX Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+priya.menon@contoso.com,2025-04-24 03:55:06,1193,Bug,Description for issue 1193,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,UI/UX Team,v2.0.0,Authentication API,ramesh.iyer@contoso.com
+arpat@contoso.com,2025-04-01 20:12:10,1194,Bug,Description for issue 1194,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,1182,Platform Team,v2.1.1,Reporting Engine,deepa.sinha@contoso.com
+priya.menon@contoso.com,2025-04-05 07:39:29,1195,Story,Description for issue 1195,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,,SRE Team,v3.0.0,Data Layer,sandeep.rao@contoso.com
+ravi.nair@contoso.com,2025-05-05 02:58:23,1196,Bug,Description for issue 1196,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Mobile Team,v3.0.0,Reporting Engine,deepa.sinha@contoso.com
+divya.rao@contoso.com,2025-04-03 15:38:46,1197,Bug,Description for issue 1197,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1193,Platform Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
+divya.rao@contoso.com,2025-04-02 18:09:30,1198,Bug,Description for issue 1198,Active,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",,,Platform Team,v2.0.0,Data Layer,sandeep.rao@contoso.com
+karan.verma@contoso.com,2025-04-28 18:43:38,1199,Story,Description for issue 1199,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,"1079, 1061",Analytics Team,v3.0.0,Edge Gateway Service,vikram.shah@contoso.com
+divya.rao@contoso.com,2025-04-03 15:38:46,1200,Bug,Description for issue 1200,Resolved,4,"[
+  ""Customer: """"Client demo failed when changing date filters."" , Developer: ""Reactivity bug. State not updating correctly. Investigating this.""
+
+]",This was fixed as part of release 2.0.0.2000,1062,Platform Team,v2.1.1,Mobile UI,anjali.nair@contoso.com
