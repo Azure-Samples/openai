@@ -159,6 +159,7 @@ async def run_agent_orchestration(request_payload: str, message_handler: RedisMe
         error = Error(error_str=str(e), retry=False)
         response = Response(
             session_id=request.session_id,
+            dialog_id=request.dialog_id,
             thread_id=request.thread_id,
             user_id=request.user_id,
             answer=Answer(is_final=True),
