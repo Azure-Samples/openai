@@ -1,0 +1,104 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Start redis container",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "if (!(docker ps -q -f name=my-redis)) { if (docker ps -aq -f status=exited -f name=my-redis) { docker start my-redis } else { docker run -d --name my-redis -p 6379:6379 -e REDIS_PASSWORD=redis_password redis --requirepass redis_password } }"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Session Manager[Foundry Resource]: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./services/session_manager_foundry_resource",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Session Manager[Foundry Resource]: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./services/session_manager_foundry_resource/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./services/session_manager_foundry_resource/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./services/session_manager_foundry_resource/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./services/session_manager_foundry_resource/.venv/Scripts/python.exe -m pip install -r services/session_manager_foundry_resource/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Start redis container",
+                "Session Manager[Foundry Resource]: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Sales Analyst: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/sales_analyst/orchestrator",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Sales Analyst: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe -m pip install -r solution_accelerators/sales_analyst/orchestrator/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Start redis container",
+                "Sales Analyst: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Sales Analyst: Build and Run in Docker",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "SalesAnalyst",
+                "-DockerfilePaths", "services/session_manager_foundry_resource/Dockerfile solution_accelerators/sales_analyst/orchestrator/Dockerfile",
+                "-ServiceNames", "session_manager_foundry_resource sales_analyst_orchestrator",
+                "-ServicePorts", "5000 5102",
+                "-SubscriptionId", "",
+                "-TenantId", ""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Sales Analyst: Build and Run Docker Images [FORCE INSTALL]",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "SalesAnalyst",
+                "-DockerfilePaths", "services/session_manager_foundry_resource/Dockerfile solution_accelerators/sales_analyst/orchestrator/Dockerfile",
+                "-ServiceNames", "session_manager_foundry_resource sales_analyst_orchestrator",
+                "-ServicePorts", "5000 5102",
+                "-SubscriptionId", "",
+                "-TenantId", "",
+                "-Recreate"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        }
+    ]
+}

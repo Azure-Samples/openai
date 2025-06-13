@@ -1,0 +1,44 @@
+# .dockerignore
+# Ignore Python cache and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+*.whl
+*.log
+*.sqlite3
+*.db
+
+# Ignore virtual environments
+.venv/
+venv/
+ENV/
+
+# Ignore build and dist directories
+build/
+dist/
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore test and coverage files
+.coverage
+.tox/
+.pytest_cache/
+
+# Ignore documentation builds
+/docs/_build/
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore node modules (if any frontend)
+node_modules/
+
+# Ignore Docker-related files
+Dockerfile*
+docker-compose*

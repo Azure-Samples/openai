@@ -1,0 +1,61 @@
+Month,MonthID,CountryName,CountryCode,RegionName,RegionCode,ProductSKUID,ProductCategory,ProductName,ProductCostPrice,RegularRetailPrice,DiscountRetailPrice,RegularUnitSold,DiscountUnitSold,SumRegularSales,SumDiscountSales,TotalSales,TotalMargin
+Jan2025,202501,United States,12,US North,121,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,267,83,2670,664,3334,1759
+Jan2025,202501,United States,12,US North,121,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,274,95,3425,950,4375,2677.6
+Jan2025,202501,United States,12,US North,121,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,97,21,1455,252,1707,759.46
+Jan2025,202501,United States,12,US North,121,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,213,134,2343,1206,3549,911.8
+Jan2025,202501,United States,12,US North,121,100005,Clothing,Men's Formal Trousers,12,28,23,351,152,9828,3496,13324,7288
+Jan2025,202501,United States,12,US South,125,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,121,46,1210,368,1578,826.5
+Jan2025,202501,United States,12,US South,125,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,231,112,2887.5,1120,4007.5,2429.7
+Jan2025,202501,United States,12,US South,125,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,142,78,2130,936,3066,1299.4
+Jan2025,202501,United States,12,US South,125,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,154,43,1694,387,2081,583.8
+Jan2025,202501,United States,12,US South,125,100006,Clothing,Women's Jacket,15,30,25,247,98,7410,2450,9860,4685
+Jan2025,202501,India,15,India North,153,500001,Home Decor,Scented Soy Candle,5.96,10,8,125,82,1250,656,1906,672.28
+Jan2025,202501,India,15,India North,153,500002,Home Decor,Mini Succulent Plant Pot,1.32,5,4,172,89,860,356,1216,871.48
+Jan2025,202501,India,15,India North,153,500003,Electronics Accessories,USB-C Charging Cable (2-pack),6.9,15,12,817,6,12255,72,12327,6648.3
+Jan2025,202501,India,15,India North,153,500004,Electronics Accessories,Wireless Mouse,5,12,10,280,96,3360,960,4320,2440
+Jan2025,202501,India,15,India North,153,500005,Toys & Games,Classic Jigsaw Puzzle (500 pcs),7.56,20,15,527,64,10540,960,11500,7032.04
+Jan2025,202501,India,15,India South,157,500006,Toys & Games,Card Game,6.27,20,14,117,7,2340,98,2438,1660.52
+Jan2025,202501,India,15,India South,157,500007,Pet Supplies,Dog Chew Toy,4.71,15,12,452,51,6780,612,7392,5022.87
+Jan2025,202501,India,15,India South,157,500008,Pet Supplies,Cat Plush Mouse Toy,4.82,14,10,182,27,2548,270,2818,1810.62
+Jan2025,202501,India,15,India South,157,500009,Snacks & Beverages,Gourmet Popcorn Tin,7.11,20,15,65,49,1300,735,2035,1224.46
+Jan2025,202501,India,15,India South,157,500010,Snacks & Beverages,Herbal Tea Sampler Pack,1.87,5,4,915,57,4575,228,4803,2985.36
+Feb2025,202502,United States,12,US North,121,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,578,54,5780,432,6212,3368
+Feb2025,202502,United States,12,US North,121,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,227,98,2837.5,980,3817.5,2322.5
+Feb2025,202502,United States,12,US North,121,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,246,112,3690,1344,5034,2159.26
+Feb2025,202502,United States,12,US North,121,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,460,47,5060,423,5483,1629.8
+Feb2025,202502,United States,12,US North,121,100005,Clothing,Men's Formal Trousers,12,28,23,213,90,5964,2070,8034,4398
+Feb2025,202502,United States,12,US South,125,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,257,80,2570,640,3210,1693.5
+Feb2025,202502,United States,12,US South,125,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,262,3,3275,30,3305,2086
+Feb2025,202502,United States,12,US South,125,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,274,112,4110,1344,5454,2354.42
+Feb2025,202502,United States,12,US South,125,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,312,142,3432,1278,4710,1259.6
+Feb2025,202502,United States,12,US South,125,100006,Clothing,Women's Jacket,15,30,25,152,60,4560,1500,6060,2880
+Feb2025,202502,India,15,India North,153,500001,Home Decor,Scented Soy Candle,5.96,10,8,271,132,2710,1056,3766,1364.12
+Feb2025,202502,India,15,India North,153,500002,Home Decor,Mini Succulent Plant Pot,1.32,5,4,213,154,1065,616,1681,1196.56
+Feb2025,202502,India,15,India North,153,500003,Electronics Accessories,USB-C Charging Cable (2-pack),6.9,15,12,458,39,6870,468,7338,3908.7
+Feb2025,202502,India,15,India North,153,500004,Electronics Accessories,Wireless Mouse,5,12,10,324,53,3888,530,4418,2533
+Feb2025,202502,India,15,India North,153,500005,Toys & Games,Classic Jigsaw Puzzle (500 pcs),7.56,20,15,158,45,3160,675,3835,2300.32
+Feb2025,202502,India,15,India South,157,500006,Toys & Games,Card Game,6.27,20,14,663,82,13260,1148,14408,9736.85
+Feb2025,202502,India,15,India South,157,500007,Pet Supplies,Dog Chew Toy,4.71,15,12,852,93,12780,1116,13896,9445.05
+Feb2025,202502,India,15,India South,157,500008,Pet Supplies,Cat Plush Mouse Toy,4.82,14,10,488,65,6832,650,7482,4816.54
+Feb2025,202502,India,15,India South,157,500009,Snacks & Beverages,Gourmet Popcorn Tin,7.11,20,15,336,31,6720,465,7185,4575.63
+Feb2025,202502,India,15,India South,157,500010,Snacks & Beverages,Herbal Tea Sampler Pack,1.87,5,4,855,67,4275,268,4543,2818.86
+Mar2025,202503,United States,12,US North,121,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,644,86,6440,688,7128,3843
+Mar2025,202503,United States,12,US North,121,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,548,40,6850,400,7250,4545.2
+Mar2025,202503,United States,12,US North,121,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,347,212,5205,2544,7749,3260.23
+Mar2025,202503,United States,12,US North,121,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,417,48,4587,432,5019,1485
+Mar2025,202503,United States,12,US North,121,100005,Clothing,Men's Formal Trousers,12,28,23,113,56,3164,1288,4452,2424
+Mar2025,202503,United States,12,US South,125,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,607,99,6070,792,6862,3685
+Mar2025,202503,United States,12,US South,125,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,734,20,9175,200,9375,5906.6
+Mar2025,202503,United States,12,US South,125,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,478,263,7170,3156,10326,4375.77
+Mar2025,202503,United States,12,US South,125,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,462,203,5082,1827,6909,1855
+Mar2025,202503,United States,12,US South,125,100006,Clothing,Women's Jacket,15,30,25,102,45,3060,1125,4185,1980
+Mar2025,202503,India,15,India North,153,500001,Home Decor,Scented Soy Candle,5.96,10,8,412,195,4120,1560,5680,2062.28
+Mar2025,202503,India,15,India North,153,500002,Home Decor,Mini Succulent Plant Pot,1.32,5,4,346,200,1730,800,2530,1809.28
+Mar2025,202503,India,15,India North,153,500003,Electronics Accessories,USB-C Charging Cable (2-pack),6.9,15,12,47,40,705,480,1185,584.7
+Mar2025,202503,India,15,India North,153,500004,Electronics Accessories,Wireless Mouse,5,12,10,761,39,9132,390,9522,5522
+Mar2025,202503,India,15,India North,153,500005,Toys & Games,Classic Jigsaw Puzzle (500 pcs),7.56,20,15,718,8,14360,120,14480,8991.44
+Mar2025,202503,India,15,India South,157,500006,Toys & Games,Card Game,6.27,20,14,724,84,14480,1176,15656,10589.84
+Mar2025,202503,India,15,India South,157,500007,Pet Supplies,Dog Chew Toy,4.71,15,12,781,52,11715,624,12339,8415.57
+Mar2025,202503,India,15,India South,157,500008,Pet Supplies,Cat Plush Mouse Toy,4.82,14,10,495,51,6930,510,7440,4808.28
+Mar2025,202503,India,15,India South,157,500009,Snacks & Beverages,Gourmet Popcorn Tin,7.11,20,15,835,59,16700,885,17585,11228.66
+Mar2025,202503,India,15,India South,157,500010,Snacks & Beverages,Herbal Tea Sampler Pack,1.87,5,4,342,96,1710,384,2094,1274.94

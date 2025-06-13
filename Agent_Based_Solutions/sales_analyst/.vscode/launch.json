@@ -1,0 +1,43 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "Session Manager[Foundry Resource]: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/services/session_manager_foundry_resource",
+            "python": "${workspaceFolder}/src/services/session_manager_foundry_resource/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".env",
+            "preLaunchTask": "Session Manager[Foundry Resource]: Setup Environment"
+        },
+        {
+            "name": "Sales Analyst Orchestrator: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/sales_analyst/orchestrator",
+            "python": "${workspaceFolder}/src/solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "envFile": ".env",
+            "preLaunchTask": "Sales Analyst: Setup Environment",
+            "justMyCode": false
+        },
+        {
+            "name": "Sales Analyst Orchestrator: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/sales_analyst/orchestrator",
+            "python": "${workspaceFolder}/src/solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "envFile": ".env",
+            "justMyCode": false
+        }
+    ]
+}
