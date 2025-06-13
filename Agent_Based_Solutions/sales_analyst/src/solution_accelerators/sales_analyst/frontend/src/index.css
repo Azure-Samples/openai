@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 19px; /* Increased from default */
+  line-height: 1.5; /* Improved line height for readability */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  font-size: 17px; /* Increased code font size */
+}
+
+/* Global accessibility improvements */
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%; /* Respects the user's font size settings */
+}
+
+/* Ensure focus states are visible for accessibility */
+:focus {
+  outline: 3px solid #0078d4;
+  outline-offset: 2px;
+}
+
+/* Improve readability with better contrast */
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.3;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+}
+
+h1 { font-size: 2.2em; } /* ~15% larger than typical 2em */
+h2 { font-size: 1.8em; } /* ~15% larger than typical 1.5em */
+h3 { font-size: 1.5em; } /* ~15% larger than typical 1.3em */
+h4 { font-size: 1.25em; }
+h5 { font-size: 1.1em; }
+h6 { font-size: 1em; }
+
+p, li, td, th {
+  margin-bottom: 1em;
+}

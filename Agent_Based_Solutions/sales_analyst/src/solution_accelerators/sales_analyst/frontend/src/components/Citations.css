@@ -1,0 +1,241 @@
+/* Citations component styles */
+.citations-container {
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.citations-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bing-logo {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Search Queries Section */
+.search-queries-section {
+  margin-bottom: 16px;
+}
+
+.search-queries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.search-query-pill {
+  background: var(--primary-light);
+  color: #4db8ff;
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(77, 184, 255, 0.3);
+  line-height: 1.2;
+}
+
+.search-query-pill.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.search-query-pill.clickable:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(77, 184, 255, 0.4);
+}
+
+/* Sources Section */
+.sources-section {
+  margin-top: 8px;
+}
+
+.sources-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.source-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--background-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  max-width: 220px;
+  min-height: 36px;
+}
+
+.source-item:hover {
+  background: var(--background-secondary);
+  border-color: var(--primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.source-indicator {
+  background: var(--primary);
+  color: white;
+  padding: 3px 7px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 20px;
+  text-align: center;
+}
+
+.source-title {
+  font-size: 12px;
+  color: var(--text-primary);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  line-height: 1.3;
+}
+
+/* Tooltip */
+.source-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0px; /* Remove gap */
+  z-index: 1000;
+  pointer-events: auto;
+  /* Add padding to create bridge between source and tooltip */
+  padding-bottom: 8px;
+}
+
+/* Tooltip positioning variants */
+.source-tooltip.tooltip-left {
+  left: 0;
+  transform: translateX(0);
+}
+
+.source-tooltip.tooltip-right {
+  left: auto;
+  right: 0;
+  transform: translateX(0);
+}
+
+.tooltip-content {
+  background: var(--background-primary);
+  color: var(--text-primary);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  position: relative;
+  min-width: 400px;
+  max-width: 500px;
+  /* Ensure tooltip stays within viewport */
+  max-width: min(500px, calc(100vw - 40px));
+  /* Add margin to offset the padding-bottom on parent */
+  margin-top: 8px;
+}
+
+.tooltip-content::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--background-primary);
+}
+
+/* Arrow positioning for different tooltip positions */
+.source-tooltip.tooltip-left .tooltip-content::after {
+  left: 20px;
+  transform: translateX(0);
+}
+
+.source-tooltip.tooltip-right .tooltip-content::after {
+  left: auto;
+  right: 20px;
+  transform: translateX(0);
+}
+
+.tooltip-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  white-space: normal;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.tooltip-url {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  word-break: break-all;
+  white-space: normal;
+  line-height: 1.3;
+}
+
+.tooltip-action {
+  font-size: 12px;
+  color: var(--primary);
+  font-style: normal;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .source-item {
+    max-width: 150px;
+  }
+
+  .tooltip-content {
+    min-width: 300px;
+    max-width: min(350px, calc(100vw - 20px));
+  }
+
+  .search-queries {
+    gap: 4px;
+  }
+  .search-query-pill {
+    font-size: 11px;
+    padding: 5px 10px;
+  }
+}
+
+/* Additional small screen handling */
+@media (max-width: 480px) {
+  .tooltip-content {
+    min-width: 280px;
+    max-width: calc(100vw - 20px);
+    padding: 12px;
+  }
+
+  .source-tooltip.tooltip-left .tooltip-content::after,
+  .source-tooltip.tooltip-right .tooltip-content::after {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+}

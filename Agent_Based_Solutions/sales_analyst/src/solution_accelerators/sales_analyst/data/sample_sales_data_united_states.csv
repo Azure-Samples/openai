@@ -1,0 +1,31 @@
+Month,MonthID,CountryName,CountryCode,RegionName,RegionCode,ProductSKUID,ProductCategory,ProductName,ProductCostPrice,RegularRetailPrice,DiscountRetailPrice,RegularUnitSold,DiscountUnitSold,SumRegularSales,SumDiscountSales,TotalSales,TotalMargin
+Jan2025,202501,United States,12,US North,121,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,267,83,2670,664,3334,1759
+Jan2025,202501,United States,12,US North,121,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,274,95,3425,950,4375,2677.6
+Jan2025,202501,United States,12,US North,121,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,97,21,1455,252,1707,759.46
+Jan2025,202501,United States,12,US North,121,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,213,134,2343,1206,3549,911.8
+Jan2025,202501,United States,12,US North,121,100005,Clothing,Men's Formal Trousers,12,28,23,351,152,9828,3496,13324,7288
+Jan2025,202501,United States,12,US South,125,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,121,46,1210,368,1578,826.5
+Jan2025,202501,United States,12,US South,125,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,231,112,2887.5,1120,4007.5,2429.7
+Jan2025,202501,United States,12,US South,125,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,142,78,2130,936,3066,1299.4
+Jan2025,202501,United States,12,US South,125,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,154,43,1694,387,2081,583.8
+Jan2025,202501,United States,12,US South,125,100006,Clothing,Women's Jacket,15,30,25,247,98,7410,2450,9860,4685
+Feb2025,202502,United States,12,US North,121,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,578,54,5780,432,6212,3368
+Feb2025,202502,United States,12,US North,121,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,227,98,2837.5,980,3817.5,2322.5
+Feb2025,202502,United States,12,US North,121,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,246,112,3690,1344,5034,2159.26
+Feb2025,202502,United States,12,US North,121,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,460,47,5060,423,5483,1629.8
+Feb2025,202502,United States,12,US North,121,100005,Clothing,Men's Formal Trousers,12,28,23,213,90,5964,2070,8034,4398
+Feb2025,202502,United States,12,US South,125,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,257,80,2570,640,3210,1693.5
+Feb2025,202502,United States,12,US South,125,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,262,3,3275,30,3305,2086
+Feb2025,202502,United States,12,US South,125,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,274,112,4110,1344,5454,2354.42
+Feb2025,202502,United States,12,US South,125,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,312,142,3432,1278,4710,1259.6
+Feb2025,202502,United States,12,US South,125,100006,Clothing,Women's Jacket,15,30,25,152,60,4560,1500,6060,2880
+Mar2025,202503,United States,12,US North,121,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,644,86,6440,688,7128,3843
+Mar2025,202503,United States,12,US North,121,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,548,40,6850,400,7250,4545.2
+Mar2025,202503,United States,12,US North,121,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,347,212,5205,2544,7749,3260.23
+Mar2025,202503,United States,12,US North,121,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,417,48,4587,432,5019,1485
+Mar2025,202503,United States,12,US North,121,100005,Clothing,Men's Formal Trousers,12,28,23,113,56,3164,1288,4452,2424
+Mar2025,202503,United States,12,US South,125,100001,Kitchen Essentials,Stainless Steel Measuring Cups,4.5,10,8,607,99,6070,792,6862,3685
+Mar2025,202503,United States,12,US South,125,100002,Kitchen Essentials,Silicone Spatula Set,4.6,12.5,10,734,20,9175,200,9375,5906.6
+Mar2025,202503,United States,12,US South,125,100003,Personal Care,Aloe Face Moisturizer,8.03,15,12,478,263,7170,3156,10326,4375.77
+Mar2025,202503,United States,12,US South,125,100004,Personal Care,Natural Deodorant Stick,7.6,11,9,462,203,5082,1827,6909,1855
+Mar2025,202503,United States,12,US South,125,100006,Clothing,Women's Jacket,15,30,25,102,45,3060,1125,4185,1980
