@@ -67,12 +67,12 @@ Use Azure AI Content Safety to build robust guardrails for generative AI. Create
 | **Lakehouse Intelligence** | Databricks Genie |
 
 ### Architecture Diagram
-![Sales Analyst Architecture](src\solution_accelerators\sales_analyst\docs\images\sales_analyst_architecture_diagram.png)
+![Sales Analyst Architecture](src/solution_accelerators/sales_analyst/docs/images/sales_analyst_architecture_diagram.png)
 
 
 ## 🔧 Getting Started
 
-Ready to deploy Sales Analyst? Follow our comprehensive [Setup Guide](src\solution_accelerators\sales_analyst\SETUP.md) for detailed instructions.
+Ready to deploy Sales Analyst? Follow our comprehensive [Setup Guide](src/solution_accelerators/sales_analyst/SETUP.md) for detailed instructions.
 
 ## 📚 Resources
 
