@@ -1,8 +1,8 @@
 <div align="center">
   <h1>
-    Sales Analyst AI Agent
+    Sales Analyst AI Agent with Enterprise Security
   </h1>
-  <p><strong>Run Agent on behalf of the user to get personalized data from Azure Databricks Genie and use Bing Grounding to get global context</strong></p>
+  <p><strong>Analyze sales and revenue trends to identify prescriptive insights & sales improvement opportunities.</strong></p>
   <br>
   <p><a href="https://placeholder-for-demo-video.com">▶️ Watch the Overview and Architecture Video</a></p>
 </div>
@@ -39,20 +39,20 @@ This AI agent is built using Semantic Kernel and enabled with Enterprise Securit
 
 ## ✨ Solution Features
 
-1. Azure Databricks (Genie) Integration:
-Connect your agent to a Azure Databricks for secure, real-time access to structured and unstructured data. Leverage Role-Based Access Control (RBAC) to ensure data security and compliance.
+1. **Semantic Kernel and Bring Your Own Azure AI Model:** <br>
+Explore the Semantic Kernel Agentic framework to use any Azure AI model tailored for your needs. Allocate tasks to specialized models while optimizing for cost, performance and latency.
 
-2. World knowledge and internet insights:
-Use Bing Grounding to enhance your agent's knowledge with real-time internet insights. This allows the agent to provide up-to-date information and context for better decision-making.
+2. **World knowledge and internet insights:** <br>
+Use Grounding with Bing Search to enhance your agent's knowledge with access to real-time internet insights. This allows the agent to provide up-to-date information and context for better decision-making.
 
-3. Bring Your Own LLM:
-Use any language model tailored to your needs. Allocate tasks to specialized models while optimizing for cost and performance.
+3. **Secure access with Azure Databricks (Genie) Integration:** <br>
+Connect your agent to an Azure Databricks workspace for secure, real-time access to structured and unstructured data. Leverage Role-Based Access Control (RBAC) to ensure data security and compliance.
 
-4. Agent Observability:
-Analyze usage, performance, and quality against operational benchmarks.
-
-5. Responsible AI:
+4. **Responsible AI:** <br>
 Use Azure AI Content Safety to build robust guardrails for generative AI. Create custom filters for your AI agent which block harmful inputs and outputs.
+
+5. **Agent Observability:** <br>
+Analyze usage, performance, and quality against operational Agent benchmarks.
 
 
 ### 🛠️ Technology Stack
@@ -60,11 +60,11 @@ Use Azure AI Content Safety to build robust guardrails for generative AI. Create
 | Capability | Technology |
 |------------|------------|
 | **Orchestration** | Microsoft Semantic Kernel Agent Framework |
-| **Observability** | Azure Application Insights, Custom Telemetry |
 | **AI Models** | Azure OpenAI Service (GPT-4o) |
-| **Safety** | Azure Content Safety |
+| **Responsible AI** | Azure Content Safety |
 | **Internet Insights** | Grounding with Bing Search |
-| **Lakehouse Intelligence** | Databricks Genie |
+| **Data Security & Lakehouse Intelligence** | Azure Databricks Genie |
+| **Observability** | Azure Application Insights, Custom Telemetry |
 
 ### Architecture Diagram
 ![Sales Analyst Architecture](src/solution_accelerators/sales_analyst/docs/images/sales_analyst_architecture_diagram.png)
