@@ -4,7 +4,11 @@
   </h1>
   <p><strong>Analyze sales and revenue trends to identify prescriptive insights & sales improvement opportunities.</strong></p>
   <br>
-  <p><a href="https://placeholder-for-demo-video.com">▶️ Watch the Overview and Architecture Video</a></p>
+  
+
+https://github.com/user-attachments/assets/4a03cbd5-0fdc-4191-88b2-335da9ef8e1b
+
+
 </div>
 
 ## 🚀 Overview
@@ -35,7 +39,11 @@ This AI agent is built using Semantic Kernel and enabled with Enterprise Securit
 
 ## 🎥 Demo Video
 
-<p><a href="https://placeholder-for-demo-video.com">▶️ Watch Sales Analyst Demo Video</a></p>
+
+
+https://github.com/user-attachments/assets/307dd026-3281-4641-92c6-5a38ae997e5b
+
+
 
 ## ✨ Solution Features
 
