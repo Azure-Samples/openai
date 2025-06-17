@@ -59,11 +59,11 @@ Monitor agent behavior and system health in real time. Analyze usage, performanc
 | Capability | Technology |
 |------------|------------|
 | **Orchestration** | Microsoft Semantic Kernel Process Framework |
-| **Multi-Modal** | Azure Content Understanding, Azure Text-to-Speech, Azure Speech-To-Text |
+| **Multimodality** | Azure AI Services: Content Understanding, Text-to-Speech, Speech-To-Text  |
 | **Observability** | Azure Application Insights, Custom Telemetry |
 | **Evaluations** | Azure AI Evaluation SDK |
-| **AI Models** | Azure OpenAI Service (GPT-4o), Azure AI Inference (DeepSeek) |
-| **Safety** | Azure Content Safety |
+| **Models** | Azure OpenAI (GPT-4o), and DeepSeek in Azure AI Foundry Models |
+| **Safety** | Azure AI Content Safety |
 | **Knowledge** | Azure AI Search |
 
 

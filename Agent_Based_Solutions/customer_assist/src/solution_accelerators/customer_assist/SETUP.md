@@ -4,8 +4,7 @@
 
 The Customer Assist solution is designed to facilitate customer service interactions through an intelligent advisor system that integrates multiple agents and services. By the end of this setup, you should be able to replicate the functionality demonstrated in the following demo video.
 
-https://github.com/user-attachments/assets/3d2d387c-6345-42a5-96ea-b5cd97ce14df
-
+https://github.com/user-attachments/assets/aa5abf8f-d49b-4db7-9390-2adb92507af9
 
 
 ## Architecture Diagram
