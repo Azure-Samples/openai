@@ -115,6 +115,10 @@ For detailed setup instructions, please follow the guide here: [SETUP INSTRUCTIO
 
 ---
 
+## Dataset License
+
+The [dataset](data/) in this project is released under the Community Data License Agreement – Permissive, Version 2.0 - CDLA, see the [LICENSE-DATA](LICENSE-DATA.md) file.
+
 ## 📄 License
 
 This project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.

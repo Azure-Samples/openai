@@ -80,6 +80,10 @@ Ready to deploy Customer Assist? Follow our comprehensive [Setup Guide](src/solu
 - [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
 - [Azure Content Understanding](https://learn.microsoft.com/en-us/azure/ai-services/content-understanding/)
 
+## Dataset License
+
+The datasets ([dataset-1](src/solution_accelerators/customer_assist/data) and [dataset-2](src/solution_accelerators/customer_assist/conversation_simulator/data/)) in this project are released under the Community Data License Agreement – Permissive, Version 2.0 - CDLA, see the [LICENSE-DATA](LICENSE-DATA.md) file.
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
