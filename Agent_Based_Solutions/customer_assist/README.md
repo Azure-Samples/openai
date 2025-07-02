@@ -86,7 +86,7 @@ The datasets ([dataset-1](src/solution_accelerators/customer_assist/data) and [d
 
 ## 📄 License
 
-The code in this project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 

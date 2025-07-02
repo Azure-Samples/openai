@@ -121,7 +121,7 @@ The [dataset](data/) in this project is released under the Community Data Licens
 
 ## 📄 License
 
-The code in this project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
 
 ---
 
