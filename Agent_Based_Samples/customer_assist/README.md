@@ -59,11 +59,11 @@ Monitor agent behavior and system health in real time. Analyze usage, performanc
 | Capability | Technology |
 |------------|------------|
 | **Orchestration** | Microsoft Semantic Kernel Process Framework |
-| **Multi-Modal** | Azure Content Understanding, Azure Text-to-Speech, Azure Speech-To-Text |
+| **Multimodality** | Azure AI Services: Content Understanding, Text-to-Speech, Speech-To-Text  |
 | **Observability** | Azure Application Insights, Custom Telemetry |
 | **Evaluations** | Azure AI Evaluation SDK |
-| **AI Models** | Azure OpenAI Service (GPT-4o), Azure AI Inference (DeepSeek) |
-| **Safety** | Azure Content Safety |
+| **Models** | Azure OpenAI (GPT-4o), and DeepSeek in Azure AI Foundry Models |
+| **Safety** | Azure AI Content Safety |
 | **Knowledge** | Azure AI Search |
 
 
@@ -79,6 +79,10 @@ Ready to deploy Customer Assist? Follow our comprehensive [Setup Guide](src/solu
 - [Azure AI Foundry](https://ai.azure.com/)
 - [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/)
 - [Azure Content Understanding](https://learn.microsoft.com/en-us/azure/ai-services/content-understanding/)
+
+## Dataset License
+
+The datasets ([dataset-1](src/solution_accelerators/customer_assist/data) and [dataset-2](src/solution_accelerators/customer_assist/conversation_simulator/data/)) in this project are released under the Community Data License Agreement – Permissive, Version 2.0 - CDLA, see the [LICENSE-DATA](LICENSE-DATA.md) file.
 
 ## 📄 License
 

@@ -4,15 +4,15 @@
 import json
 import asyncio
 import os
-import random
 
 import aiohttp_cors
 from aiohttp import web
-from common.utilities.files import load_file
 from redis.asyncio import Redis
 from opentelemetry import trace
 
-from common.telemetry.app_logger import AppLogger
+from agent_orchestrator import AgentOrchestrator
+
+from common.utilities.files import load_file
 from common.telemetry.trace_context import extract_and_attach_trace_context
 from common.contracts.common.answer import Answer
 from common.contracts.common.error import Error
@@ -21,10 +21,10 @@ from common.contracts.orchestrator.response import Response
 from common.utilities.thread_safe_cache import ThreadSafeCache
 
 from config.default_config import DefaultConfig
-from customer_assist_orchestrator import ProcessOrchestrator
 from common.utilities.runtime_config import get_orchestrator_runtime_config
 from common.utilities.redis_message_handler import RedisMessageHandler
-from models.content_understanding_settings import ContentUnderstandingSettings
+from models.visualization_settings import VisualizationSettings
+from models.error import InvalidConsentError
 
 DefaultConfig.initialize()
 
@@ -52,22 +52,13 @@ redis_messaging_client = Redis(
 )
 
 # Thread-safe cache to handle session to orchestrator mapping
-orchestrators = ThreadSafeCache[ProcessOrchestrator](logger)
-
-# Initialize the update messages to be displayed to the user
-update_messages = [
-    "Orchestrating insights request...",
-    "Aggregating relevant information...",
-    "Processing conversation, please hold on...",
-    "Compiling data for this conversation...",
-    "Generating plan to provide accurate insights...",
-]
+orchestrators = ThreadSafeCache[AgentOrchestrator](logger)
 
 default_runtime_config = load_file(
     os.path.join(
         os.path.dirname(__file__),
         "static",
-        "customer_assist_config.yaml",
+        "sales_analyst_config.yaml",
     ),
     "yaml",
 )
@@ -90,11 +81,9 @@ async def run_agent_orchestration(request_payload: str, message_handler: RedisMe
         response = Response(answer=Answer(is_final=True), error=error)
         await message_handler.send_final_response(response)
         return
-    update_message = random.choice(update_messages)
-    await message_handler.send_update(update_message, dialog_id=request.dialog_id)
 
     # Validate request payload
-    if not request.session_id or not request.thread_id or not request.user_id:
+    if not request.session_id or not request.thread_id or not request.user_id or not request.authorization:
         logger.error(f"Invalid request payload: {request_payload}")
         error = Error(error_str="Invalid request payload", retry=False)
         response = Response(answer=Answer(is_final=True), error=error)
@@ -112,16 +101,16 @@ async def run_agent_orchestration(request_payload: str, message_handler: RedisMe
     logger.info(f"Received orchestration request: {request_payload} for session: {request.session_id}")
 
     try:
-        # Lookup process orchestrator for given session id
+        # Lookup agent orchestrator for given session id
         # If not found, create one just in time
         try:
-            process_orchestrator = await orchestrators.get_async(request.session_id)
+            agent_orchestrator = await orchestrators.get_async(request.session_id)
             logger.info(f"Agent orchestrator found for session {request.session_id}. Reusing existing one..")
         except KeyError:
             logger.info(f"Agent orchestrator not found for session {request.session_id}. Creating new one..")
-            process_orchestrator = None
+            agent_orchestrator = None
 
-        if not process_orchestrator:
+        if not agent_orchestrator:
             # TODO: Should a new logger be created for each session?
             logger.info(f"Agent orchestrator not found for session {request.session_id}. Creating..")
 
@@ -134,26 +123,39 @@ async def run_agent_orchestration(request_payload: str, message_handler: RedisMe
             )
 
             logger.debug(f"Resolved orchestrator runtime config: {orchestrator_runtime_config}")
-            process_orchestrator = ProcessOrchestrator(
+            agent_orchestrator = AgentOrchestrator(
                 logger=logger,
                 configuration=orchestrator_runtime_config,
-                content_understanding_settings=ContentUnderstandingSettings(
-                    endpoint=DefaultConfig.AZURE_CONTENT_UNDERSTANDING_ENDPOINT,
-                    subscription_key=DefaultConfig.AZURE_CONTENT_UNDERSTANDING_API_KEY,
+                message_handler=message_handler,
+                visualization_settings=VisualizationSettings(
+                    storage_account_name=DefaultConfig.STORAGE_ACCOUNT_NAME,
+                    visualization_data_blob_container=DefaultConfig.VISUALIZATION_DATA_CONTAINER,
                 ),
             )
 
             # Initialize workflow
-            await process_orchestrator.initialize_process(request=request)
+            await agent_orchestrator.initialize_agent(thread_id=request.thread_id, user_token=request.authorization)
 
             # Add to cache
-            await orchestrators.add_async(request.session_id, process_orchestrator)
+            await orchestrators.add_async(request.session_id, agent_orchestrator)
             logger.info(f"Agent orchestrator created successfully for session {request.session_id}")
 
         # Invoke process
-        response = await process_orchestrator.run_process(request)
+        response = await agent_orchestrator.run_agent(request)
         await message_handler.send_final_response(response)
         logger.info(f"Orchestration completed successfully for session {request.session_id}")
+    except InvalidConsentError as e:
+        logger.error(f"Invalid consent error in /run_agent_orchestration: {e}")
+        error = Error(error_str="consent_required", retry=False, status_code=403)
+        response = Response(
+            session_id=request.session_id,
+            dialog_id=request.dialog_id,
+            thread_id=request.thread_id,
+            user_id=request.user_id,
+            answer=Answer(is_final=True),
+            error=error,
+        )
+        await message_handler.send_final_response(response)
     except Exception as e:
         logger.exception(f"Exception in /run_agent_orchestration: {e}")
         error = Error(error_str=str(e), retry=False)
@@ -186,7 +188,7 @@ async def worker():
                 logger.error(f"Failed to parse task data: {e}")
                 continue
             with tracer.start_as_current_span("process_task_at_orchestrator") as span:
-                trace_id = format(span.get_span_context().trace_id, '032x')
+                trace_id = format(span.get_span_context().trace_id, "032x")
                 logger.info(f"started session with trace_id: {trace_id}, session_id: {session_id}")
                 logger.info(f"Received task data: {task_data}")
                 message_handler = RedisMessageHandler(
