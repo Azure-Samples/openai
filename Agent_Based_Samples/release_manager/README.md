@@ -131,3 +131,9 @@ This project is licensed under the MIT License. See [LICENSE](./LICENSE) for det
 - [Semantic Kernel Agent Framework](https://learn.microsoft.com/en-us/semantic-kernel/frameworks/agent/?pivots=programming-language-python)
 - [Semantic Kernel Memory](https://learn.microsoft.com/en-us/semantic-kernel/concepts/vector-store-connectors/?pivots=programming-language-python)
 - [Azure AI Foundry - Code Interpreter](https://learn.microsoft.com/en-us/azure/ai-services/agents/how-to/tools/code-interpreter)
+
+---
+
+<div align="center">
+  <p>Developed with ❤️ by Microsoft</p>
+</div>

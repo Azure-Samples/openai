@@ -4,7 +4,7 @@
   </h1>
   <p><strong>Analyze sales and revenue trends to identify prescriptive insights & sales improvement opportunities.</strong></p>
   <br>
-  
+
 
 https://github.com/user-attachments/assets/4a03cbd5-0fdc-4191-88b2-335da9ef8e1b
 
@@ -88,17 +88,17 @@ Ready to deploy Sales Analyst? Follow our comprehensive [Setup Guide](src/soluti
 - [Azure AI Foundry](https://ai.azure.com/)
 
 ## Sample Datasets
-Our solution uses role-based access control (RBAC) to ensure that users have the appropriate level of access to data. 
+Our solution uses role-based access control (RBAC) to ensure that users have the appropriate level of access to data.
 Let's introduce two of our demo user personas: Global Sales Manager (GSM) and Country Sales Manager (CSM):
- 
-Global Sales Manager (GSM): 
-Responsible for overseeing global sales operations across multiple countries and making strategic decisions based on comprehensive data insights. 
+
+Global Sales Manager (GSM):
+Responsible for overseeing global sales operations across multiple countries and making strategic decisions based on comprehensive data insights.
 Sample Dataset: **sample_sales_data_global.csv**. Access to sample sales data for United States and India.
- 
-Country Sales Manager (CSM): 
+
+Country Sales Manager (CSM):
 Focuses on managing sales operations within one specific country and optimizing its local performance.
 Sample Dataset: **sample_sales_data_united_states.csv**. Access to sample sales data for only United States.
- 
+
 Both the sample datasets mentioned above are using synthetic data.
 License: Released under CDLA-2.0 (https://cdla.dev/permissive-2-0/).
 

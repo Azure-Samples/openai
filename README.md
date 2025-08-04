@@ -1,4 +1,4 @@
-> **Note:**  
+> **Note:**
 > This repository is a work in progress and will be updated frequently.
 
 # Azure AI Foundry, Agents, and Azure OpenAI Service Samples
@@ -15,25 +15,31 @@ This repository provides practical resources and code samples for building solut
 - **Model Deployments** - Deploy models like GPT-4, GPT-3.5 Turbo, DALL-E, and Whisper. See the documentation for [deploying models](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource?pivots=web-portal) and [model availability](https://learn.microsoft.com/azure/ai-services/openai/concepts/models).
 
 ### Project Setup
+
 Each solution folder contains detailed setup and installation instructions. Follow the instructions provided with these solutions to get going.
 
 ## 📂 Solutions
 
 ### 🤖 Agent-Based Solutions *(Recommended)*
-- [**Customer Assist Solution**](./Agent_Based_Solutions/customer_assist/README.md): Modern multi-agent based architecture for customer support scenarios.
-- [**Release Management Solution**](./Agent_Based_Solutions/release_management/README.md): Streamline and automate release management using agents to bring data from multiple sources.
+
+- [**Customer Assist Solution**](./Agent_Based_Samples/customer_assist/README.md): Modern multi-agent based architecture for customer support scenarios.
+- [**Release Management Solution**](./Agent_Based_Samples/release_manager/README.md): Streamline and automate release management using agents to bring data from multiple sources.
+- [**Sales Analyst**](./Agent_Based_Samples/sales_analyst/README.md): Analyze sales and revenue trends to identify prescriptive insights & sales improvement opportunities.
 
 ### 🚀 Solution Accelerators
+
 - [**eCommerce Solution Accelerator**](./Solution_Accelerators/Retail/README.md): Build a multimodal, AI-powered shopping experience with Azure OpenAI and Azure AI Search.
 - [**Advanced RAG for Financial Domain**](./Solution_Accelerators/Advanced_RAG/README.md): Advanced Retrieval-Augmented Generation (RAG) techniques for financial data with improved accuracy and performance.
 
 ### 📚 Additional Resources *(Legacy)*
+
 - [**Basic Samples**](./Basic_Samples/README.md): Small code samples and snippets for integration into your applications.
 - [**End-to-End Solutions**](./End_to_end_Solutions/README.md): Complete solutions for specific use cases and industry scenarios.
 
 ## 📚 Resources
 
 ### Documentation
+
 - [Azure AI Foundry Documentation](https://learn.microsoft.com/en-us/azure/ai-services/azure-ai-foundry/)
 - [Azure OpenAI Service Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 - [Model Overview](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/concepts/models)
@@ -41,6 +47,7 @@ Each solution folder contains detailed setup and installation instructions. Foll
 - [Apply for access to Azure OpenAI Service](https://aka.ms/oaiapply)
 
 ### Getting Started Guides
+
 - [Azure AI Foundry Quickstart](https://learn.microsoft.com/en-us/azure/ai-services/azure-ai-foundry/quickstart)
 - [Azure OpenAI Quickstart](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/quickstart?pivots=programming-language-studi)
 
