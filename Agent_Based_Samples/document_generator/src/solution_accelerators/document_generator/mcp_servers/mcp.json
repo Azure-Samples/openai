@@ -1,0 +1,30 @@
+{  
+  "servers": {
+    "ado-server": {
+      "type": "stdio",
+      "command": "${workspaceFolder}\\src\\solution_accelerators\\document_generator\\.venv\\Scripts\\python",
+      "args": ["${workspaceFolder}\\src\\solution_accelerators\\document_generator\\mcp_servers\\azure_devops_mcp_server.py"]
+    },
+    "sharepoint-server": {
+      "type": "stdio",
+      "command": "${workspaceFolder}\\src\\solution_accelerators\\document_generator\\.venv\\Scripts\\python",
+      "args": ["${workspaceFolder}\\src\\solution_accelerators\\document_generator\\mcp_servers\\sharepoint_mcp_server.py"]
+    },
+    "mcp-foundry-server": {
+        "type": "stdio",
+        "command": "${workspaceFolder}\\src\\solution_accelerators\\document_generator\\.venv\\Scripts\\uvx",
+        "args": [
+            "--prerelease=allow",
+            "--from",
+            "git+https://github.com/azure-ai-foundry/mcp-foundry.git",
+            "run-azure-ai-foundry-mcp",
+            "--envFile",
+            "${workspaceFolder}\\src\\solution_accelerators\\document_generator\\.env"
+        ]
+    },
+    "microsoft-docs-mcp": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    }
+  }
+}
