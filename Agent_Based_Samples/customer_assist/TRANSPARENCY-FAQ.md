@@ -1,10 +1,10 @@
 # Customer Assist Solution Accelerator: Responsible AI FAQ 
 
-## What is Customer Support Solution Accelerator? 
+## What is Customer Assist Solution Accelerator? 
 
-The Customer Support Solution Accelerator (also called "Customer Assist") is an enterprise-grade AI-powered solution that demonstrates how intelligent agent orchestration can transform customer service operations. It leverages the Microsoft Semantic Kernel Process Framework and Azure AI Foundry to empower customer service representatives with real-time insights, contextual assistance, and automated workflows. 
+The Customer Assist Solution Accelerator (also called "Customer Assist") is an enterprise-grade AI-powered solution that demonstrates how intelligent agent orchestration can transform customer service operations. It leverages the Microsoft Semantic Kernel Process Framework and Azure AI Foundry to empower customer service representatives with real-time insights, contextual assistance, and automated workflows. 
 
-## What can the Customer Support Solution Accelerator do? 
+## What can the Customer Assist Solution Accelerator do? 
 
 The solution provides several key capabilities: 
 
@@ -23,7 +23,7 @@ The solution provides several key capabilities:
 - **Reduced Training Requirements**: Enables new representatives to operate with expert-level knowledge from day one 
 - **Increased First-Contact Resolution**: Addresses customer needs faster and more effectively 
 
-## What is Customer Support Solution Accelerator intended use(s)? 
+## What is Customer Assist Solution Accelerator intended use(s)? 
 
 The solution is designed for multiple industry verticals: 
 
@@ -33,7 +33,7 @@ The solution is designed for multiple industry verticals:
 - **Telecom & Utilities**: Guide agents through technical troubleshooting, plan recommendations, and outage communication 
 - **Travel & Hospitality**: Support booking changes, handle complaints sensitively, and personalize loyalty program engagement 
 
-## How was Customer Support Accelerator evaluated? What metrics are used to measure performance? 
+## How was Customer Assist Accelerator evaluated? What metrics are used to measure performance? 
 
 The solution incorporates a comprehensive evaluation framework powered by the Azure AI Evaluation SDK, enabling performance evaluations across agents. 
 
@@ -51,7 +51,7 @@ For safety evaluations, we've used the Azure AI Foundry Red Teaming Agent, which
 - **Text and Image Moderators**: All user inputs are first screened by dedicated moderation layers leveraging Azure AI Content Safety Service.
 - **Azure OpenAI Content Filters**: Every agent uses Azure OpenAI service with content filters enabled at the model deployment level.
 
-## What are the limitations of Customer Support Solution Accelerator?  
+## What are the limitations of Customer Assist Solution Accelerator?  
 
 ### Performance Dependencies: 
 
