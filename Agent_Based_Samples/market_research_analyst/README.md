@@ -4,7 +4,8 @@
   </h1>
   <p><strong>Compare. Compete. Win — with AI-driven market research</strong></p>
   <br>
-  <p><a href="https://placeholder-for-demo-video.com">▶️ Watch Demo Video</a></p>
+  <p><a href="https://github.com/user-attachments/assets/77d8cf9d-ae3b-41ae-93ee-a00e3250027c">▶️ Watch Demo Video</a></p>
+
 </div>
 
 > ⚠️ **IMPORTANT NOTE** ⚠️
@@ -32,7 +33,9 @@ At the core of this solution are four key capabilities:
 - **📊 Comparative Analysis**:
   Identifies progress or changes by comparing new research data against previously generated reports—highlighting what's new, what's shifted, and what remains constant.
 
-Together, these capabilities streamline research workflows and elevate insight accuracy - empowering users to make better-informed, faster decisions.
+Together, these capabilities streamline research workflows and elevate insight accuracy - empowering users to make better-informed, faster decisions. Let's watch a quick demo below:
+
+https://github.com/user-attachments/assets/78177efb-6f50-42b5-8aba-10ff8cb23633
 
 ---
 
