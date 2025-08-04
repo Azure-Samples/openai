@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Market Research Analyst</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+
+    <style>
+        em {
+            font-size: 0.875rem;
+            color: #3d8a66;
+        }
+
+        ol>li+li {
+            margin-top: 1.5rem;
+        }
+
+        #savedReportsList li.ring-2 {
+            border-color: #3b82f6 !important;
+            /* Tailwind blue-500 */
+        }
+
+        /* CSS additions for better spacing if needed */
+        sup {
+            font-size: 0.7rem;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 h-screen flex flex-col font-sans">
+    <header class="bg-indigo-700 text-white text-2xl font-semibold py-4 text-center shadow-md">
+        Market Research Analyst
+    </header>
+
+    <main class="flex flex-1 overflow-hidden">
+
+        <!-- Left Pane -->
+        <aside class="w-1/4 bg-white border-r p-6 overflow-y-auto flex flex-col justify-between">
+            <div>
+                <h2 class="text-lg font-bold mb-4 text-indigo-700">What is a Market Research Analyst?</h2>
+                <p class="text-sm text-gray-700 mb-6">
+                    A Market Research Analyst helps you gain insights into competitors, customer needs, and industry
+                    trends.
+                    Whether you're a Product Manager evaluating new features, a Developer exploring tech stacks, or a
+                    Sales leader crafting pitches—get tailored reports for your needs.
+                </p>
+
+                <h2 class="text-lg font-bold mb-3 text-indigo-700">Persona Breakdown</h2>
+                <ul class="text-sm text-gray-700 mb-6 space-y-2">
+                    <li><b>Product Manager:</b> Product strategy, roadmap signals, feature differentiation, pricing
+                        shifts, market positioning.</li>
+                    <li><b>Developer:</b> Technical specifications, API updates, performance benchmarks, SDKs,
+                        integration points.</li>
+                    <li><b>Sales:</b> GTM strategy, pricing models, partnership announcements, sales enablement
+                        insights.</li>
+                </ul>
+
+                <h2 class="text-lg font-bold mb-2 text-indigo-700">Report Levels</h2>
+                <ul class="text-sm text-gray-700 space-y-2">
+                    <li><b>Concise:</b> Quick summary, bullet points.</li>
+                    <li><b>Insightful:</b> Contextual insights, key takeaways.</li>
+                    <li><b>Comprehensive:</b> In-depth analysis, visualizations, citations.</li>
+                </ul>
+            </div>
+
+            <div class="mt-8">
+                <h3 class="text-md font-semibold text-gray-800 mb-3">Powered By:</h3>
+                <div class="space-y-4 flex flex-col items-center">
+                    <div class="flex flex-col items-center">
+                        <img src="azure-ai-foundry.png" alt="Azure AI Foundry" class="w-24 h-24 object-contain" />
+                        <span class="text-sm font-medium text-gray-700 mt-1">Azure AI Foundry</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="semantic-kernel.png" alt="Semantic Kernel" class="w-24 h-24 object-contain" />
+                        <span class="text-sm font-medium text-gray-700 mt-1">Semantic Kernel</span>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <img src="bing.webp" alt="Grounding with Bing" class="w-24 h-24 object-contain" />
+                        <span class="text-sm font-medium text-gray-700 mt-1">Grounding with Bing</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center Pane -->
+        <section class="w-1/2 bg-gray-100 p-6 flex flex-col space-y-4">
+            <h2 class="text-xl font-semibold text-gray-800">Enter Your Research Query</h2>
+            <textarea id="researchQuery" rows="2" placeholder="e.g., Market trends in AI productivity tools"
+                class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full resize-y min-h-[48px] max-h-60"></textarea>
+
+            <div class="flex space-x-4">
+                <div class="flex-1">
+                    <label for="persona" class="block mb-1 font-medium text-gray-700">Select Persona</label>
+                    <select id="persona"
+                        class="w-full border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500">
+                        <option>Product Manager</option>
+                        <option>Developer</option>
+                        <option>Sales</option>
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <label for="reportLevel" class="block mb-1 font-medium text-gray-700">Select Report Level</label>
+                    <select id="reportLevel"
+                        class="w-full border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500">
+                        <option>Concise</option>
+                        <option>Insightful</option>
+                        <option>Comprehensive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-2">
+                <button onclick="sendMessage()"
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg px-6 py-2 transition">
+                    Generate Report
+                </button>
+            </div>
+
+            <div id="messages" class="flex-1 overflow-y-auto mt-4 space-y-4 pr-2"></div>
+
+            <div id="saveReportContainer" class="mt-4 hidden flex space-x-4">
+                <button onclick="saveReport()"
+                    class="flex-1 bg-green-200 hover:bg-green-300 text-green-900 font-semibold rounded-lg py-2">
+                    Save Report
+                </button>
+                <button onclick="clearReport()"
+                    class="flex-1 bg-red-200 hover:bg-red-300 text-red-900 font-semibold rounded-lg py-2">
+                    Clear Report
+                </button>
+                <button id="compareButton" onclick="compareReport()" disabled
+                    class="flex-1 bg-gray-200 text-gray-500 font-semibold rounded-lg py-2 cursor-not-allowed">
+                    Compare
+                </button>
+            </div>
+        </section>
+
+        <!-- Right Pane -->
+        <aside class="w-1/4 bg-white border-l p-6 overflow-y-auto">
+            <h2 class="text-lg font-bold mb-4 text-indigo-700">Saved Reports</h2>
+            <ul id="savedReportsList" class="text-sm text-gray-800 space-y-3"></ul>
+        </aside>
+    </main>
+
+    <script>
+        let socket = null;
+        let interimMessageId = null;
+        const md = window.markdownit({ linkify: true }).use(md => {
+            const defaultRender = md.renderer.rules.link_open || ((tokens, idx, options, env, self) => self.renderToken(tokens, idx, options));
+            md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+                tokens[idx].attrPush(['target', '_blank']);
+                tokens[idx].attrPush(['rel', 'noopener noreferrer']);
+                tokens[idx].attrPush(['class', 'text-blue-600 underline hover:text-blue-800']);
+                return defaultRender(tokens, idx, options, env, self);
+            };
+        });
+
+        function addMessage(text, sender = 'bot', isFinal = true) {
+            const container = document.getElementById('messages');
+            const wrapper = document.createElement('div');
+            wrapper.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'max-w-full w-full bg-white border border-gray-200 rounded-lg p-4 shadow-md text-gray-800 leading-snug space-y-5';
+
+            bubble.innerHTML = md.render(text);
+            wrapper.appendChild(bubble);
+            container.appendChild(wrapper);
+            container.scrollTop = container.scrollHeight;
+
+            // Find all sources in the text and add superscript numbers
+            const sourceMatches = [...text.matchAll(/https:\/\/[^\s)]+/g)];
+            // Add superscripts after rendering (so HTML is not escaped)
+            const links = bubble.querySelectorAll('a[href^="http"]');
+            links.forEach((link, index) => {
+                const match = sourceMatches[index];
+                if (!match) return; // safeguard
+
+                const sup = document.createElement('sup');
+                sup.innerText = `[${index + 1}]`;
+                link.after(sup);
+            });
+
+            // Add source list at the bottom (below current message)
+            if (sourceMatches.length > 0) {
+                const sourcesWrapper = document.createElement('div');
+                sourcesWrapper.className = 'flex justify-start mt-2';
+
+                const sourcesBox = document.createElement('div');
+                sourcesBox.className = 'bg-white border border-gray-200 rounded-lg p-4 shadow-md text-gray-800 text-sm flex flex-col gap-1';
+
+                const heading = document.createElement('div');
+                heading.textContent = "Sources";
+                heading.className = "font-semibold text-sm text-indigo-700 mb-1";
+                sourcesBox.appendChild(heading);
+
+                sourceMatches.forEach((match, index) => {
+                    const sourceLink = document.createElement('a');
+                    sourceLink.href = match;
+                    sourceLink.target = '_blank';
+                    sourceLink.rel = 'noopener noreferrer';
+                    sourceLink.className = 'text-blue-600 hover:underline';
+                    sourceLink.innerHTML = `[${index + 1}] ${match}`;
+                    sourcesBox.appendChild(sourceLink);
+                });
+
+                sourcesWrapper.appendChild(sourcesBox);
+                container.appendChild(sourcesWrapper);
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+
+        function renderBingAnnotations(annotations) {
+            if (!Array.isArray(annotations)) return;
+            const container = document.getElementById('messages');
+            const wrapper = document.createElement('div');
+            wrapper.className = 'flex justify-start mt-2';
+
+            const box = document.createElement('div');
+            box.className = 'bg-white border border-gray-200 rounded-lg p-4 shadow-md text-gray-800 text-sm w-full';
+
+            const heading = document.createElement('div');
+            heading.textContent = "Bing Search References";
+            heading.className = "font-semibold text-sm text-indigo-700 mb-1";
+            box.appendChild(heading);
+
+            annotations.forEach(item => {
+                const row = document.createElement('div');
+                row.className = 'flex items-center gap-2 mb-1';
+                const icon = document.createElement('img');
+                icon.src = 'bing_result.png';
+                icon.alt = 'Bing';
+                icon.className = 'w-4 h-4';
+                const link = document.createElement('a');
+                link.href = item.url;
+                link.target = '_blank';
+                link.className = 'text-blue-600 hover:underline text-sm';
+                link.textContent = item.title || item.url;
+                row.appendChild(icon);
+                row.appendChild(link);
+                box.appendChild(row);
+            });
+
+            wrapper.appendChild(box);
+            container.appendChild(wrapper);
+        }
+
+        function startSocket(message) {
+            if (!socket || socket.readyState !== WebSocket.OPEN) {
+                socket = new WebSocket(`ws://127.0.0.1:5000/api/query?session_id=${crypto.randomUUID()}`);
+                socket.onopen = () => socket.send(JSON.stringify(message));
+            } else {
+                socket.send(JSON.stringify(message));
+            }
+
+            socket.onmessage = e => {
+                const data = JSON.parse(e.data);
+
+                if (data.answer?.answer_string) {
+                    if (data.answer.is_final) {
+                        if (interimMessageId) {
+                            const interimEl = document.getElementById(interimMessageId);
+                            if (interimEl) interimEl.remove();
+                            interimMessageId = null;
+                        }
+                        addMessage(data.answer.answer_string);
+                        document.getElementById('saveReportContainer').classList.remove('hidden');
+                        document.querySelector('button[onclick="sendMessage()"]').disabled = true;
+                        window.lastReport = data.answer.answer_string;
+
+                        // Only clear and reload saved reports if not a save or compare action
+                        const action = data.answer.additional_metadata?.action;
+                        if (!action) {
+                            const savedReportsList = document.getElementById('savedReportsList');
+                            savedReportsList.innerHTML = '';
+
+                            const savedReports = data.answer.additional_metadata?.saved_reports;
+                            if (Array.isArray(savedReports)) {
+                                savedReports.forEach(report => {
+                                    const timestamp = report.created_at || new Date().toISOString();
+                                    addSavedReportItem(report.query, report.report_content, timestamp, report.persona, report.report_level, true);
+                                });
+                            }
+                        }
+
+                        renderBingAnnotations(data.answer.additional_metadata?.bing_search_queries);
+                    } else {
+                        if (!interimMessageId) {
+                            interimMessageId = 'interim-msg';
+                            const interimWrapper = document.createElement('div');
+                            interimWrapper.className = 'flex justify-start';
+                            interimWrapper.id = interimMessageId;
+
+                            const bubble = document.createElement('div');
+                            bubble.className = 'max-w-full bg-yellow-50 text-yellow-800 text-sm italic px-4 py-2 rounded-lg border border-yellow-200';
+                            bubble.innerHTML = marked.parse(data.answer.answer_string);
+
+                            interimWrapper.appendChild(bubble);
+                            document.getElementById('messages').appendChild(interimWrapper);
+                        } else {
+                            const interimEl = document.getElementById(interimMessageId);
+                            if (interimEl) {
+                                const bubble = interimEl.querySelector('div');
+                                bubble.innerHTML = marked.parse(data.answer.answer_string);
+                            }
+                        }
+
+                        document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+                    }
+                }
+            };
+        }
+
+
+        function sendMessage() {
+            const query = document.getElementById('researchQuery').value.trim();
+            const persona = document.getElementById('persona').value;
+            const reportLevel = document.getElementById('reportLevel').value;
+            if (!query) return;
+            const message = {
+                dialog_id: "dialog1",
+                message: { payload: [{ type: "text", value: query }] },
+                additional_metadata: {
+                    research_query: query,
+                    persona,
+                    report_level: { "Concise": "1", "Insightful": "2", "Comprehensive": "3" }[reportLevel]
+                }
+            };
+            startSocket(message);
+        }
+
+
+        function saveReport() {
+            const content = window.lastReport;
+            const query = document.getElementById('researchQuery').value;
+            const persona = document.getElementById('persona').value;
+            const reportLevel = document.getElementById('reportLevel').value;
+            const timestamp = new Date().toLocaleString();
+            const saveMessage = {
+                dialog_id: "dialog1",
+                message: { payload: [{ type: "text", value: content }] },
+                additional_metadata: {
+                    action: "save",
+                    report_content: content,
+                    research_query: query,
+                    created_at: timestamp,
+                    persona: persona,
+                    report_level: reportLevel
+                }
+            };
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify(saveMessage));
+                addSavedReportItem(query, content, timestamp, persona, reportLevel, true);
+            }
+        }
+
+
+        function addSavedReportItem(query, content, timestamp, persona, reportLevel, append = false) {
+            const list = document.getElementById('savedReportsList');
+            const item = document.createElement('li');
+            item.className = 'border border-gray-300 rounded-md p-4 shadow-sm bg-gray-50 space-y-2';
+
+            const date = new Date(timestamp);
+            const formattedDate = date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const formattedTime = date.toLocaleTimeString('en-US');
+
+            item.innerHTML = `
+                <div class="text-indigo-700 font-semibold text-sm">${query}</div>
+                <div class="flex flex-wrap gap-2 mt-1">
+                    <span class="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full">${persona}</span>
+                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full">${reportLevel}</span>
+                </div>
+                <div class="text-gray-500 text-xs mt-2">${formattedDate}, ${formattedTime}</div>
+            `;
+
+            item.addEventListener('click', () => {
+                // Deselect all
+                document.querySelectorAll('#savedReportsList li').forEach(el => el.classList.remove('ring-2', 'ring-blue-500'));
+                item.classList.add('ring-2', 'ring-blue-500');
+
+                // Store the selected report content
+                window.selectedBaseReport = {
+                    query: query,
+                    persona: persona,
+                    report_level: reportLevel,
+                    timestamp: timestamp,
+                    content: content
+                };
+
+                // Enable the compare button
+                const compareBtn = document.getElementById('compareButton');
+                compareBtn.disabled = false;
+                compareBtn.classList.remove('bg-gray-200', 'text-gray-500', 'cursor-not-allowed');
+                compareBtn.classList.add('bg-blue-200', 'text-blue-900', 'hover:bg-blue-300', 'cursor-pointer');
+            });
+
+            append ? list.appendChild(item) : list.prepend(item);
+        }
+
+        function compareReport() {
+            const report = window.selectedBaseReport;
+            const query = document.getElementById('researchQuery').value.trim();
+            const persona = document.getElementById('persona').value;
+            const reportLevel = document.getElementById('reportLevel').value;
+            if (!query || !report) return;
+            const message = {
+                dialog_id: "dialog1",
+                message: { payload: [{ type: "text", value: query }] },
+                additional_metadata: {
+                    action: "compare",
+                    research_query: query,
+                    report_content: report.content,
+                    created_at: report.timestamp,
+                    persona,
+                    report_level: { "Concise": "1", "Insightful": "2", "Comprehensive": "3" }[reportLevel]
+                }
+            };
+            startSocket(message);
+        }
+
+        function clearReport() {
+            document.getElementById('messages').innerHTML = '';
+            document.getElementById('saveReportContainer').classList.add('hidden');
+            document.querySelector('button[onclick="sendMessage()"]').disabled = false;
+            window.lastReport = null;
+        }
+    </script>
+</body>
+
+</html>
