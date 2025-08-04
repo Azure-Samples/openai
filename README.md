@@ -3,7 +3,7 @@
 
 # Azure AI Foundry, Agents, and Azure OpenAI Service Samples
 
-This repository provides practical resources and code samples for building solutions with [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service/), [Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-services/azure-ai-foundry/), and advanced agent-based architectures. These samples help accelerate your adoption of Azure's latest AI capabilities for language, vision, and agentic workflows.
+This repository provides practical resources and code samples for building solutions with [Azure OpenAI Service](https://azure.microsoft.com/en-us/products/ai-services/openai-service/), [Azure AI Foundry](https://learn.microsoft.com/en-us/azure/ai-foundry/what-is-azure-ai-foundry), and advanced agent-based architectures. These samples help accelerate your adoption of Azure's latest AI capabilities for language, vision, and agentic workflows.
 
 ## 🚀 Get Started
 
