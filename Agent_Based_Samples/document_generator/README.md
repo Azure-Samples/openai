@@ -112,7 +112,7 @@ For detailed setup instructions, please follow the guide here: [SETUP INSTRUCTIO
 ---
 
 ## Responsible AI Transparency FAQ
-Please refer to [Transparency FAQ](./src/solution_accelerators/document_generator/docs/TRANSPARENCY_FAQ%20-%20Doc%20Gen%20Solution%20Accelerator.docx) for responsible AI transparency details of this solution accelerator.
+Please refer to [Transparency FAQ](./src/solution_accelerators/document_generator/docs/TRANSPARENCY_FAQ.md) for responsible AI transparency details of this solution accelerator.
 
 ---
 
