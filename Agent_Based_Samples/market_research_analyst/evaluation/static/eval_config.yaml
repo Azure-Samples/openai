@@ -1,0 +1,13 @@
+evaluation_jobs:
+  evaluation_1:
+    config_body:
+      type: "EndToEndEvaluation"
+      local_dataset: ""
+      metric_config:
+        relevance:
+          name: "relevance"
+          type: "BuiltInMetricsConfig"
+          service:
+            llm_service:  "AzureOpenAI"
+            deployment_name: ""
+
