@@ -5,7 +5,8 @@
   <p><strong>This solution enables users to leverage intelligent agents and tools for document generation throughout key phases of the system lifecycle, from designing solutions based on best practices or predefined frameworks to developing content for end-user workshops. All of this is seamlessly integrated through the Model Context Protocol (MCP) within VSCode Copilot.
  </strong></p>
   <br>
-  <p><a href="https://placeholder-for-demo-video.com">▶️ Watch Demo Video</a></p>
+  <p><a href="https://github.com/user-attachments/assets/870a3510-6f37-439b-8987-159b03d60cee
+"></a></p>
 </div>
 
 ## 🚀 Overview
@@ -36,6 +37,11 @@ Identify reusable components, patterns, and solutions across similar projects to
 
 4. **Enterprise Knowledge Synthesis**: 
 Transform static documentation into interactive, queryable resources that deliver context-rich suggestions by synthesizing insights from SharePoint sites, Azure DevOps boards, code repositories, and Microsoft documentation.
+
+---
+
+## 🎥 Demo Video
+<p><a href="https://github.com/user-attachments/assets/66509767-57fc-447d-842c-aa490ef11c4a"></a></p>
 
 ---
 
@@ -112,7 +118,7 @@ For detailed setup instructions, please follow the guide here: [SETUP INSTRUCTIO
 ---
 
 ## Responsible AI Transparency FAQ
-Please refer to [Transparency FAQ](./src/solution_accelerators/document_generator/docs/TRANSPARENCY_FAQ%20-%20Doc%20Gen%20Solution%20Accelerator.docx) for responsible AI transparency details of this solution accelerator.
+Please refer to [Transparency FAQ](./src/solution_accelerators/document_generator/docs/TRANSPARENCY_FAQ.md) for responsible AI transparency details of this solution accelerator.
 
 ---
 
