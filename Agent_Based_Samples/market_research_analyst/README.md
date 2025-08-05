@@ -71,7 +71,7 @@ The architecture is built on a modular and secure AI-native design leveraging:
 
 This diagram provides a visual representation of how the **Search Query Generator Agent**, **Researcher Agent**, **Report Generator Agent**, and **Report Comparator Agent** collaborate to generate persona-aware reports.
 
-![Market Research Analyst Solution Architecture](MarketResearchAnalyst_Architecture.png)
+![Market Research Analyst Solution Architecture](src/solution_accelerators/market_research_analyst/MarketResearchAnalyst_Architecture.png)
 
 *Diagram above highlights components in the end-to-end system run that run locally (highlighted in green) and components that run in the cloud (highlighted in blue).*
 
@@ -81,7 +81,7 @@ This diagram provides a visual representation of how the **Search Query Generato
 
 > **Note**: This solution accelerator is designed to be adaptable. You can customize integrations and workflows based on your internal tooling landscape.
 
-For detailed setup instructions, please follow the guide here: [SETUP INSTRUCTIONS](SETUP.md)
+For detailed setup instructions, please follow the guide here: [SETUP INSTRUCTIONS](src/solution_accelerators/market_research_analyst/SETUP.md)
 
 ### Prerequisites
 
@@ -89,7 +89,7 @@ For detailed setup instructions, please follow the guide here: [SETUP INSTRUCTIO
 - Access to Azure OpenAI and Azure AI Foundry
 - Azure AI Search resource in subscription
 - python >= 3.12
-- Docker runtime for running service containers locally (For more information on local execution, refer to this guide: [LOCAL EXECUTION IN DOCKER](../../DOCKER.README.md))
+- Docker runtime for running service containers locally (For more information on local execution, refer to this guide: [LOCAL EXECUTION IN DOCKER](src/DOCKER.README.md))
 
 ## 📄 License
 
