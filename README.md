@@ -26,8 +26,7 @@ Each solution folder contains detailed setup and installation instructions. Foll
 - [**Release Management Solution**](./Agent_Based_Samples/release_manager/README.md): Streamline and automate release management using agents to bring data from multiple sources.
 - [**Sales Analyst**](./Agent_Based_Samples/sales_analyst/README.md): Analyze sales and revenue trends to identify prescriptive insights & sales improvement opportunities.
 - [**Market Research Analyst**](./Agent_Based_Samples/market_research_analyst/README.md): Powerful end-to-end research solution designed to deliver timely, relevant, and structured market intelligence.
-
-- [**Document Generator**](./Agent_Based_Samples/document_generator/): Bridges the gap between GitHub Copilot and your organization’s knowledge ecosystem.
+- [**Document Generator**](./Agent_Based_Samples/document_generator/README.md): Bridges the gap between GitHub Copilot and your organization’s knowledge ecosystem.
 
 ### 🚀 Solution Accelerators
 
