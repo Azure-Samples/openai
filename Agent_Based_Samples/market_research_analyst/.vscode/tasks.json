@@ -1,0 +1,491 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Configuration service: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./services/configuration",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Configuration service: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./services/configuration/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./services/configuration/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./services/configuration/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./services/configuration/.venv/Scripts/python.exe -m pip install -r services/configuration/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Configuration service: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Start redis container",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "if (!(docker ps -q -f name=my-redis)) { if (docker ps -aq -f status=exited -f name=my-redis) { docker start my-redis } else { docker run -d --name my-redis -p 6379:6379 -e REDIS_PASSWORD=redis_password redis --requirepass redis_password } }"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Session Manager: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./services/session_manager",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Session Manager: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./services/session_manager/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./services/session_manager/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./services/session_manager/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./services/session_manager/.venv/Scripts/python.exe -m pip install -r services/session_manager/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Start redis container",
+                "Session Manager: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Session Manager[Foundry Resource]: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./services/session_manager_foundry_resource",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Session Manager[Foundry Resource]: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./services/session_manager_foundry_resource/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./services/session_manager_foundry_resource/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./services/session_manager_foundry_resource/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./services/session_manager_foundry_resource/.venv/Scripts/python.exe -m pip install -r services/session_manager_foundry_resource/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Start redis container",
+                "Session Manager[Foundry Resource]: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Release Manager: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/release_manager",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Release Manager: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/release_manager/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/release_manager/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/release_manager/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/release_manager/.venv/Scripts/python.exe -m pip install -r solution_accelerators/release_manager/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Start redis container",
+                "Release Manager: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Customer Assist: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/customer_assist/orchestrator",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Customer Assist: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/customer_assist/orchestrator/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/customer_assist/orchestrator/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/customer_assist/orchestrator/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/customer_assist/orchestrator/.venv/Scripts/python.exe -m pip install -r solution_accelerators/customer_assist/orchestrator/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Start redis container",
+                "Customer Assist: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Customer Assist Evals: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/customer_assist/evaluation",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Customer Assist Evals: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/customer_assist/evaluation/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/customer_assist/evaluation/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/customer_assist/evaluation/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/customer_assist/evaluation/.venv/Scripts/python.exe -m pip install -r solution_accelerators/customer_assist/evaluation/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Customer Assist Evals: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Market Research Analyst: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/market_research_analyst",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Market Research Analyst: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/market_research_analyst/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/market_research_analyst/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/market_research_analyst/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/market_research_analyst/.venv/Scripts/python.exe -m pip install -r solution_accelerators/market_research_analyst/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Start redis container",
+                "Market Research Analyst: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Market Research Analyst Evals: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/market_research_analyst/evaluation",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Market Research Analyst Evals: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/market_research_analyst/evaluation/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/market_research_analyst/evaluation/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/market_research_analyst/evaluation/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/market_research_analyst/evaluation/.venv/Scripts/python.exe -m pip install -r solution_accelerators/market_research_analyst/evaluation/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Market Research Analyst Evals: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Release Manager Evals: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/release_manager/evaluation/",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Copy Static Files",
+            "type": "shell",
+            "command": [
+                "cp ./solution_accelerators/release_manager/static/devops_table_column_metadata.json ./solution_accelerators/release_manager/evaluation/static",
+                "&& cp ./solution_accelerators/release_manager/static/jira_customfield_description.json ./solution_accelerators/release_manager/evaluation/static",
+                "&& cp ./solution_accelerators/release_manager/static/jql_cheatsheet.md ./solution_accelerators/release_manager/evaluation/static"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "Release Manager Evals: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/release_manager/evaluation/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/release_manager/evaluation/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/release_manager/evaluation/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/release_manager/evaluation/.venv/Scripts/python.exe -m pip install -r solution_accelerators/release_manager/evaluation/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Copy Static Files",
+                "Release Manager Evals: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Release Manager: Build and Run in Docker",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "ReleaseManager",
+                "-DockerfilePaths", "services/session_manager/Dockerfile solution_accelerators/release_manager/Dockerfile",
+                "-ServiceNames", "session_manager release_manager",
+                "-ServicePorts", "5000 6000",
+                "-SubscriptionId", "",
+                "-TenantId", ""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Release Manager: Build and Run Docker Images [FORCE INSTALL]",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "ReleaseManager",
+                "-DockerfilePaths", "services/session_manager/Dockerfile solution_accelerators/release_manager/Dockerfile",
+                "-ServiceNames", "session_manager release_manager",
+                "-ServicePorts", "5000 6000",
+                "-SubscriptionId", "",
+                "-TenantId", "",
+                "-Recreate"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Customer Assist: Build and Run in Docker",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "CustomerAssist",
+                "-DockerfilePaths", "services/session_manager/Dockerfile solution_accelerators/customer_assist/orchestrator/Dockerfile solution_accelerators/customer_assist/conversation_simulator/Dockerfile",
+                "-ServiceNames", "session_manager customer_assist_orchestrator customer_assist_conversation_simulator",
+                "-ServicePorts", "5000 5102 6001",
+                "-SubscriptionId", "",
+                "-TenantId", ""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Customer Assist: Build and Run Docker Images [FORCE INSTALL]",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "CustomerAssist",
+                "-DockerfilePaths", "services/session_manager/Dockerfile solution_accelerators/customer_assist/orchestrator/Dockerfile solution_accelerators/customer_assist/conversation_simulator/Dockerfile",
+                "-ServiceNames", "session_manager customer_assist_orchestrator customer_assist_conversation_simulator",
+                "-ServicePorts", "5000 5102 6001",
+                "-SubscriptionId", "",
+                "-TenantId", "",
+                "-Recreate"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Market Research Analyst: Build and Run in Docker",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "MarketResearchAnalyst",
+                "-DockerfilePaths", "services/session_manager/Dockerfile solution_accelerators/market_research_analyst/Dockerfile",
+                "-ServiceNames", "session_manager market_research_analyst",
+                "-ServicePorts", "5000 6003",
+                "-SubscriptionId", "",
+                "-TenantId", ""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Market Research Analyst: Build and Run Docker Images [FORCE INSTALL]",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "MarketResearchAnalyst",
+                "-DockerfilePaths", "services/session_manager/Dockerfile solution_accelerators/market_research_analyst/Dockerfile",
+                "-ServiceNames", "session_manager market_research_analyst",
+                "-ServicePorts", "5000 6003",
+                "-SubscriptionId", "",
+                "-TenantId", "",
+                "-Recreate"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Conversation Simulator: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/customer_assist/conversation_simulator",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Conversation Simulator: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/customer_assist/conversation_simulator/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/customer_assist/conversation_simulator/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/customer_assist/conversation_simulator/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/customer_assist/conversation_simulator/.venv/Scripts/python.exe -m pip install -r solution_accelerators/customer_assist/conversation_simulator/requirements.txt"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Conversation Simulator: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Sales Analyst: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/sales_analyst/orchestrator",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Sales Analyst: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe -m pip install -r solution_accelerators/sales_analyst/orchestrator/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Start redis container",
+                "Sales Analyst: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Sales Analyst: Build and Run in Docker",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "SalesAnalyst",
+                "-DockerfilePaths", "services/session_manager_foundry_resource/Dockerfile solution_accelerators/sales_analyst/orchestrator/Dockerfile",
+                "-ServiceNames", "session_manager_foundry_resource sales_analyst_orchestrator",
+                "-ServicePorts", "5000 5102",
+                "-SubscriptionId", "",
+                "-TenantId", ""
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Sales Analyst: Build and Run Docker Images [FORCE INSTALL]",
+            "type": "shell",
+            "command": "../src/Run-SolutionAcceleratorInDocker.ps1",
+            "args": [
+                "-SolutionName", "SalesAnalyst",
+                "-DockerfilePaths", "services/session_manager_foundry_resource/Dockerfile solution_accelerators/sales_analyst/orchestrator/Dockerfile",
+                "-ServiceNames", "session_manager_foundry_resource sales_analyst_orchestrator",
+                "-ServicePorts", "5000 5102",
+                "-SubscriptionId", "",
+                "-TenantId", "",
+                "-Recreate"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "DocumentGenerator: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/document_generator",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "DocumentGenerator: Setup Environment",
+
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/document_generator/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/document_generator/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/document_generator/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/document_generator/.venv/Scripts/python.exe -m pip install -r solution_accelerators/document_generator/requirements.txt"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "DocumentGenerator: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Document Generator Evals: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/document_generator/evaluation",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Document Generator Evals: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe -m pip install -r solution_accelerators/document_generator/evaluation/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Document Generator Evals: Create python virtual environment"
+            ]
+        },
+    ]
+}

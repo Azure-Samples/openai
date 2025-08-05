@@ -1,0 +1,185 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "Configuration service: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/services/configuration",
+            "python": "${workspaceFolder}/src/services/configuration/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env",
+            "preLaunchTask": "Configuration service: Setup Environment"
+        },
+        {
+            "name": "Configuration service: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/services/configuration",
+            "python": "${workspaceFolder}/src/services/configuration/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".debug.env"
+        },
+        {
+            "name": "Session Manager: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/services/session_manager",
+            "python": "${workspaceFolder}/src/services/session_manager/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".env",
+            "preLaunchTask": "Session Manager: Setup Environment"
+        },
+        {
+            "name": "Session Manager[Foundry Resource]: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/services/session_manager_foundry_resource",
+            "python": "${workspaceFolder}/src/services/session_manager_foundry_resource/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".env",
+            "preLaunchTask": "Session Manager[Foundry Resource]: Setup Environment"
+        },
+        {
+            "name": "Release Manager: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/release_manager",
+            "python": "${workspaceFolder}/src/solution_accelerators/release_manager/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "envFile": ".env",
+            "preLaunchTask": "Release Manager: Setup Environment",
+            "justMyCode": false
+        },
+        {
+            "name": "Customer Assist Workflow: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/customer_assist/orchestrator",
+            "python": "${workspaceFolder}/src/solution_accelerators/customer_assist/orchestrator/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "envFile": ".env",
+            "preLaunchTask": "Customer Assist: Setup Environment",
+            "justMyCode": false
+        },
+        {
+            "name": "Customer Assist Workflow: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/customer_assist/orchestrator",
+            "python": "${workspaceFolder}/src/solution_accelerators/customer_assist/orchestrator/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "envFile": ".env",
+            "justMyCode": false
+        },
+        {
+            "name": "Customer Assist Conversation Simulator: Run Service",
+            "request": "launch",
+            "type": "debugpy",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/customer_assist/conversation_simulator",
+            "python": "${workspaceFolder}/src/solution_accelerators/customer_assist/conversation_simulator/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".env",
+            "preLaunchTask": "Conversation Simulator: Setup Environment"
+        },
+        {
+            "name": "Market Research Analyst: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/market_research_analyst",
+            "python": "${workspaceFolder}/src/solution_accelerators/market_research_analyst/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "envFile": ".env",
+            "preLaunchTask": "Market Research Analyst: Setup Environment",
+            "justMyCode": false
+        },
+        {
+            "name": "Market Research Analyst Evals: Launch",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/market_research_analyst/evaluation",
+            "python": "${workspaceFolder}/src/solution_accelerators/market_research_analyst/evaluation/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".env",
+            "preLaunchTask": "Market Research Analyst Evals: Setup Environment"
+        },
+        {
+            "name": "Customer Assist Evals: Launch",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/customer_assist/evaluation",
+            "python": "${workspaceFolder}/src/solution_accelerators/customer_assist/evaluation/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".env",
+            "preLaunchTask": "Customer Assist Evals: Setup Environment"
+        },
+        {
+            "name": "Release Manager Evals: Launch",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/release_manager/evaluation",
+            "python": "${workspaceFolder}/src/solution_accelerators/release_manager/evaluation/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".env",
+            "preLaunchTask": "Release Manager Evals: Setup Environment"
+        },
+        {
+            "name": "Sales Analyst Orchestrator: Launch & Attach server",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/sales_analyst/orchestrator",
+            "python": "${workspaceFolder}/src/solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "envFile": ".env",
+            "preLaunchTask": "Sales Analyst: Setup Environment",
+            "justMyCode": false
+        },
+        {
+            "name": "Sales Analyst Orchestrator: Launch & Attach server [NO INSTALL]",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/sales_analyst/orchestrator",
+            "python": "${workspaceFolder}/src/solution_accelerators/sales_analyst/orchestrator/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "envFile": ".env",
+            "justMyCode": false
+        },
+        {
+            "name": "Document Generator Evals: Launch",
+            "type": "debugpy",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/src/solution_accelerators/document_generator/evaluation",
+            "python": "${workspaceFolder}/src/solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe",
+            "program": "app.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": ".env",
+            "preLaunchTask": "Document Generator Evals: Setup Environment"
+        }
+    ]
+}

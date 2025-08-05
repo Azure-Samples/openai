@@ -1,0 +1,154 @@
+###
+# check service is running
+GET {{configuration_service_url}}/configuration-service
+
+
+###
+# Get service configuration settings
+GET {{configuration_service_url}}/configuration-service/configs/metadata/service
+
+###
+# Get agent configuration settings
+GET {{configuration_service_url}}/configuration-service/configs/metadata/agent
+
+###
+# Get orchestrator configuration settings
+GET {{configuration_service_url}}/configuration-service/configs/metadata/orchestrator
+
+###
+# Get session manager configuration settings
+GET {{configuration_service_url}}/configuration-service/configs/metadata/session-manager
+
+###
+# create a new service configuration
+POST {{configuration_service_url}}/configuration-service/configs/service
+Accept: application/json
+Content-Type: application/json
+
+{
+    "config_body": {
+        "service_id": "default",
+        "deployment_name": "gpt-4o"
+    }
+}
+
+###
+# Get existing service configuration(s)
+GET {{configuration_service_url}}/configuration-service/configs/service
+
+### 
+# Get existing service configuration by service_id
+GET {{configuration_service_url}}/configuration-service/configs/service/service_20250408_764666
+
+
+###
+# Create a new Azure AI Agent configuration
+POST {{configuration_service_url}}/configuration-service/configs/agent
+Accept: application/json
+Content-Type: application/json
+
+{
+    "config_body": {
+        "type": "AzureAIAgentConfig",
+        "agent_name": "example-agent",
+        "azure_ai_agent_config": {
+            "model": "gpt-4",
+            "content_type": "application/json",
+            "name": "AzureAI Summarizer",
+            "description": "Summarization agent",
+            "instructions": "Summarize the input text concisely.",
+            "temperature": 0.7,
+            "top_p": 0.9
+        },
+        "search_tool_config": {
+            "index_name": "example-index"
+        }
+    }
+}
+
+###
+# Create a new SK Agent configuration
+POST {{configuration_service_url}}/configuration-service/configs/agent
+Accept: application/json
+Content-Type: application/json
+
+{
+    "config_body": {
+        "type": "ChatCompletionAgentConfig",
+        "agent_name": "example-sk-agent",
+        "prompt": "You are a helpful assistant specialized in providing technical information.",
+        "description": "Technical support agent for development questions",
+        "sk_prompt_execution_settings": {
+            "service_id": "default",
+            "extension_data": {
+                "temperature": 0.5,
+                "top_p": 0.8,
+                "max_tokens": 1500,
+                "frequency_penalty": 0.5,
+                "presence_penalty": 0.5
+            }
+        }
+    }
+}
+
+###
+# Get existing agent configuration(s)
+GET {{configuration_service_url}}/configuration-service/configs/agent
+
+### 
+# Get existing agent configuration by agent_id
+GET {{configuration_service_url}}/configuration-service/configs/agent/agent_20250408_170644
+
+###
+# Create a new System Configuration
+POST {{configuration_service_url}}/configuration-service/configs/system
+Accept: application/json
+Content-Type: application/json
+
+{
+    "config_body": {
+        "app_name": "example-app"
+    }
+}
+
+###
+# Create a new session manager configuration
+POST {{configuration_service_url}}/configuration-service/configs/session-manager
+Accept: application/json
+Content-Type: application/json
+
+{
+    "config_body": {
+        "orchestrator_service_uri": "{{orchestrator_service_url}}"
+    }
+}
+
+###
+# Create a new orchestrator configuration
+# Step 1: Create service configuration(s) or GET existing service configuration(s)
+# Step 2: Create agent configuration(s) or GET existing agent configuration(s)
+# Step 3: Create orchestrator configuration using the service and agent configurations from steps 1 and 2
+POST {{configuration_service_url}}/configuration-service/configs/orchestrator
+Accept: application/json
+Content-Type: application/json
+
+{
+    "config_body": {
+        "agents_config": {
+            "image_describer": "agent_20250409_080274",
+            "summarizer": "agent_20250408_170644"
+        },
+        "services_config": [
+            "service_20250408_764666",
+            "service_20250408_053218"
+        ]
+    }
+}
+
+###
+# Get existing orchestrator configuration
+GET {{configuration_service_url}}/configuration-service/configs/orchestrator/orchestrator_20250409_088524
+
+###
+# Get resolved orchestrator configuration, this will be used by the Orchestrator service
+GET {{configuration_service_url}}/configuration-service/configs/orchestrator/orchestrator_20250409_088524/resolved
