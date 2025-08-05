@@ -1,0 +1,54 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "DocumentGenerator: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/document_generator",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "DocumentGenerator: Setup Environment",
+
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/document_generator/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/document_generator/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/document_generator/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/document_generator/.venv/Scripts/python.exe -m pip install -r solution_accelerators/document_generator/requirements.txt"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "DocumentGenerator: Create python virtual environment"
+            ]
+        },
+        {
+            "label": "Document Generator Evals: Create python virtual environment",
+            "type": "shell",
+            "command": "../scripts/createEnv.ps1 -Path ./solution_accelerators/document_generator/evaluation",
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            }
+        },
+        {
+            "label": "Document Generator Evals: Setup Environment",
+            "type": "shell",
+            "command": [
+                "./solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe -m pip install wheel",
+                "&& ./solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe ./common/setup.py bdist_wheel",
+                "&& ./solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe -m pip install --force-reinstall ./dist/common-0.1.0-py3-none-any.whl",
+                "&& ./solution_accelerators/document_generator/evaluation/.venv/Scripts/python.exe -m pip install -r solution_accelerators/document_generator/evaluation/requirements.txt"
+                ],
+            "options": {
+                "cwd": "${workspaceFolder}/src"
+            },
+            "dependsOn": [
+                "Document Generator Evals: Create python virtual environment"
+            ]
+        },
+    ]
+}
