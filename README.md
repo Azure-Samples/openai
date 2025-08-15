@@ -20,6 +20,10 @@ Each solution folder contains detailed setup and installation instructions. Foll
 
 ## 📂 Solutions
 
+> ⚠️ **IMPORTANT NOTE** ⚠️
+> Starter templates, instructions, code samples and resources under Agent_Based_Samples are designed to assist in accelerating development of agents for specific scenarios. It is important that you review all provided resources and carefully test Agent behavior in the context of your use case: Learn more: [AI Foundry Agent Service](https://learn.microsoft.com/en-us/azure/ai-foundry/agents/overview).
+Certain Agent offerings may be subject to legal and regulatory requirements, may require licenses, or may not be suitable for all industries, scenarios, or use cases. By using any sample, you are acknowledging that Agents or other output created using that sample are solely your responsibility, and that you will comply with all applicable laws, regulations, and relevant safety standards, terms of service, and codes of conduct.
+
 ### 🤖 Agent-Based Solutions *(Recommended)*
 
 - [**Customer Assist Solution**](./Agent_Based_Samples/customer_assist/README.md): Modern multi-agent based architecture for customer support scenarios.
