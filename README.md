@@ -57,6 +57,10 @@ Certain Agent offerings may be subject to legal and regulatory requirements, may
 - [Azure AI Foundry Quickstart](https://learn.microsoft.com/en-us/azure/ai-services/azure-ai-foundry/quickstart)
 - [Azure OpenAI Quickstart](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/quickstart?pivots=programming-language-studi)
 
+### External Resources
+
+- [God Tier Prompts](https://www.godtierprompts.com) - a community-driven leaderboard showcasing the best prompts.
+
 ## ⚠️ Responsible AI
 
 Microsoft is committed to responsible AI. Please review the [Responsible AI guidelines](https://learn.microsoft.com/en-us/legal/cognitive-services/openai/transparency-note?context=/azure/cognitive-services/openai/context/context) and [Microsoft's principles for responsible AI use](https://www.microsoft.com/ai/responsible-ai?activetab=pivot1:primaryr6) before deploying solutions.
