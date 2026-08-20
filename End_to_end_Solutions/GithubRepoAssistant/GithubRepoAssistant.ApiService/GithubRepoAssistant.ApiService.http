@@ -1,6 +1,0 @@
-﻿@GithubRepoAssistant_ApiService_HostAddress = https://localhost:7010
-
-POST {{GithubRepoAssistant_ApiService_HostAddress}}/chat
-Content-Type: application/json
-
-"Hello World"

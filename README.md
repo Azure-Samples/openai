@@ -34,9 +34,6 @@ Certain Agent offerings may be subject to legal and regulatory requirements, may
 
 ### 🚀 Solution Accelerators
 
-- [**eCommerce Solution Accelerator**](./Solution_Accelerators/Retail/README.md): Build a multimodal, AI-powered shopping experience with Azure OpenAI and Azure AI Search.
-- [**Advanced RAG for Financial Domain**](./Solution_Accelerators/Advanced_RAG/README.md): Advanced Retrieval-Augmented Generation (RAG) techniques for financial data with improved accuracy and performance.
-
 ### 📚 Additional Resources *(Legacy)*
 
 - [**Basic Samples**](./Basic_Samples/README.md): Small code samples and snippets for integration into your applications.
