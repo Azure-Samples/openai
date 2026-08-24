@@ -88,6 +88,9 @@ The datasets ([dataset-1](src/solution_accelerators/customer_assist/data) and [d
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+# Responsible AI Transparency FAQ
+Please refer to [Transparency FAQ](TRANSPARENCY-FAQ.md) for responsible AI transparency details of this solution accelerator.
+
 ---
 
 <div align="center">

@@ -32,13 +32,6 @@ if (-Not (Test-Path -Path "$Path/.venv/pip.ini")) {
     
     # now create the pip.ini file
     Write-Host "Creating pip.ini file in directory $Path/.venv and set up the index-url"
-    $pipIniContent = @"
-[global]
-index-url=https://pkgs.dev.azure.com/AIP-CXE-Eng/Engineering/_packaging/CustomerEng/pypi/simple/
-"@
-
-  $pipIniPath = Join-Path -Path "$Path/.venv" -ChildPath "pip.ini"
-  $pipIniContent | Out-File -FilePath $pipIniPath -Encoding UTF8
 
   Write-Host "Python virtual environment setup completed successfully."
 
