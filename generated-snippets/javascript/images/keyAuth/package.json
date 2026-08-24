@@ -1,0 +1,7 @@
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "openai": "5.19.1",    "@azure/identity": "4.11.1"  }
+}
